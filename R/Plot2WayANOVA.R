@@ -6,10 +6,10 @@ Plot2WayANOVAf <- function(formula, dataframe = NULL, confidence=.95, plottype =
     stop("Can't continue can't load ggplot2")
   }
   theme_set(theme_bw())
-  if (!require(dplyr)) {
+  if (!requireNamespace(dplyr)) {
     stop("Can't continue can't load dplyr")
   }
-  if (!require(rlang)) {
+  if (!requireNamespace(rlang)) {
     stop("Can't continue can't load dplyr")
   }
   if (!exists("neweta")) {
