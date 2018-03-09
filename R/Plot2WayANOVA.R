@@ -2,25 +2,24 @@
 Plot2WayANOVAf <- function(formula, dataframe = NULL, confidence=.95, plottype = "bar")
 {
   # error checking
-  if (!requireNamespace(ggplot2)) {
+  if (!requireNamespace("ggplot2")) {
     stop("Can't continue can't load ggplot2")
   }
   theme_set(theme_bw())
-  if (!requireNamespace(dplyr)) {
+  if (!requireNamespace("dplyr")) {
     stop("Can't continue can't load dplyr")
   }
-  if (!requireNamespace(rlang)) {
-    stop("Can't continue can't load dplyr")
+  if (!requireNamespace("rlang")) {
+    stop("Can't continue can't load rlang")
   }
-  if (!exists("neweta")) {
-    if (file.exists("moreate.R")) {
-      message("\nLoading the neweta function \n")
-      source("moreate.R")}
-    else {
-      stop("Can't continue until you load the neweta function")
-    }
-    
-  }
+#  if (!exists("neweta")) {
+#    if (file.exists("moreate.R")) {
+#      message("\nLoading the neweta function \n")
+#      source("moreate.R")}
+#    else {
+#      stop("Can't continue until you load the neweta function")
+#    }
+#  }
   if (length(match.call())-1 <= 1) {
     stop("Not enough arguments passed... requires at least a formula with a DV and 2 IV plus a dataframe")
   }
