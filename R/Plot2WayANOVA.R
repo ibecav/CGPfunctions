@@ -2,7 +2,7 @@
 Plot2WayANOVAf <- function(formula, dataframe = NULL, confidence=.95, plottype = "bar")
 {
   # error checking
-  if (!require(ggplot2)) {
+  if (!requireNamespace(ggplot2)) {
     stop("Can't continue can't load ggplot2")
   }
   theme_set(theme_bw())
