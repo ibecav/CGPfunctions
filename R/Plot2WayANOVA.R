@@ -1,3 +1,4 @@
+# works march 9, 2018
 # Formula version 1.0
 Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = "bar")
 {
