@@ -8,7 +8,7 @@ Calculates eta squared for an AOV model using the Type II method
 Takes an aov object and returns a standard AOV table with eta squared computed
 }
 \usage{
-Plot2WayANOVA(MyAOV)
+neweta(MyAOV)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
