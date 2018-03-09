@@ -1,10 +1,10 @@
-Package: myfunctions
+Package: CGPfunctions
 Title: Miscellaneous files for teaching and learning
 Version: 0.1
 Authors@R: person("Chuck", "Powell", email = "ibecav@gmail.com", role = c("aut", "cre"))
 Description: Miscellaneous files for teaching and learning.
 Depends: R (>= 3.4.3)
-License: This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+License: MIT
 Encoding: UTF-8
 LazyData: true
 Imports:
