@@ -1,5 +1,5 @@
 # Formula version 1.0
-Plot2WayANOVAf <- function(formula, dataframe = NULL, confidence=.95, plottype = "bar")
+Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = "bar")
 {
   # error checking
   if (!requireNamespace("ggplot2")) {
