@@ -100,6 +100,7 @@ Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = 
 
   MyAOV <- aov(formula, dataframe)
   WithETA <- neweta(MyAOV)
+  BFTest <- car::leveneTest(MyAOV)
 
 # save the plot common items as a list to be used
   cipercent <- round(confidence*100,2)
@@ -135,6 +136,8 @@ Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = 
 
   message("\nTable of group means\n")
   print(newdata)
+  message("\nTesting Homogeneity of Variance with Brown-Forsythe \n")
+  print(BFTest)
   message("\nInteraction graph plotted...")
   return(p)
   #  return(as.data.frame(newdata))

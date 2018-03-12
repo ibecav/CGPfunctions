@@ -22,7 +22,7 @@ Plot2WayANOVA(formula, dataframe = NULL, confidence=.95, plottype = "bar")
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-An object of class 'ggplot' which can be saved for future use.  The most interesting sub element in the list is $data whuch contains the means table for the dependent variable grouped by independent variables.
+An object of class 'ggplot' which can be saved for future use.  The most interesting sub element in the list is $data which contains the means table for the dependent variable grouped by independent variables.
 }
 \references{
 %% ~put references to the literature/web site here ~
