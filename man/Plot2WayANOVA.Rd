@@ -5,7 +5,7 @@
 Plot a 2 Way ANOVA using dplyr and ggplot2
 }
 \description{
-Takes a formula and a dataframe as input, conducts an analysis of variance and produces the results (AOV summary table and table of means) to the console and as a plotted interaction graph using ggplot2.
+Takes a formula and a dataframe as input, conducts an analysis of variance using the base R aov command and produces the results (AOV summary table and table of means) to the console and as a plotted interaction graph (line or bar) using ggplot2.
 }
 \usage{
 Plot2WayANOVA(formula, dataframe = NULL, confidence=.95, plottype = "bar")
@@ -22,7 +22,7 @@ Plot2WayANOVA(formula, dataframe = NULL, confidence=.95, plottype = "bar")
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-An object of class 'ggplot' which can be saved for futre use.  The most interesting sub element in the list is $data whuch contains the means table for the dependent variable grouped by independent variables.
+An object of class 'ggplot' which can be saved for future use.  The most interesting sub element in the list is $data whuch contains the means table for the dependent variable grouped by independent variables.
 }
 \references{
 %% ~put references to the literature/web site here ~

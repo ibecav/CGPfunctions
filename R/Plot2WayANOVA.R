@@ -2,6 +2,12 @@
 # Formula version 1.0
 Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = "bar")
 {
+  # to appease R CMD Check?
+  TheMean <- NULL
+  TheSEM <- NULL
+  CIMuliplier <- NULL
+  LowerBound <- NULL
+  UpperBound <- NULL
   # error checking
   if (!requireNamespace("ggplot2")) {
     stop("Can't continue can't load ggplot2")
