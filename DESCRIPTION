@@ -11,4 +11,5 @@ Imports:
     dplyr,
     ggplot2,
     methods,
-    rlang
+    rlang,
+    tibble
