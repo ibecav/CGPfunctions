@@ -5,7 +5,7 @@
 Plot a 2 Way ANOVA using dplyr and ggplot2
 }
 \description{
-Takes a formula and a dataframe as input, conducts an analysis of variance using the base R aov command and produces the results (AOV summary table and table of means) to the console and as a plotted interaction graph (line or bar) using ggplot2.
+Takes a formula and a dataframe as input, conducts an analysis of variance using the base R aov command and produces the results (AOV summary table and table of means) to the console and as a plotted interaction graph (line or bar) using ggplot2.  Also uses Brown-Forsythe test for homogeneity of variance.
 }
 \usage{
 Plot2WayANOVA(formula, dataframe = NULL, confidence=.95, plottype = "bar")

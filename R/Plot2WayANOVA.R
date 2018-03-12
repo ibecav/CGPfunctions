@@ -101,6 +101,8 @@ Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = 
   MyAOV <- aov(formula, dataframe)
   WithETA <- neweta(MyAOV)
   BFTest <- car::leveneTest(MyAOV)
+  MyAOV_residuals <- residuals( object = MyAOV )
+  SWTest <- shapiro.test( x = MyAOV_residuals ) # run Shapiro-Wilk test
 
 # save the plot common items as a list to be used
   cipercent <- round(confidence*100,2)
@@ -137,10 +139,15 @@ Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = 
   message("\nTable of group means\n")
   print(newdata)
   message("\nTesting Homogeneity of Variance with Brown-Forsythe \n")
-  if (BFTest$`Pr(>F)` <= .05) {
-    message("\nPossible violation of the assumption")
+  if (BFTest$`Pr(>F)`[[1]] <= .05) {
+    message("   *** Possible violation of the assumption ***")
   }
   print(BFTest)
+  message("\nTesting Normality Assumption with Shapiro Wilk \n")
+  if (SWTest$p.value <= .05) {
+    message("   *** Possible violation of the assumption.  You may want to plot the residuals to see how they vary from normal ***")
+  }
+  print(SWTest)
   message("\nInteraction graph plotted...")
   return(p)
   #  return(as.data.frame(newdata))
