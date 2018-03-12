@@ -149,6 +149,8 @@ Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = 
   }
   print(SWTest)
   message("\nInteraction graph plotted...")
+#  print(p)
+#  return(as.list(c(MyPlot=p$data,ANOVE=WithETA)))
   return(p)
   #  return(as.data.frame(newdata))
 }
