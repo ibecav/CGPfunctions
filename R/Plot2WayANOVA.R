@@ -137,6 +137,9 @@ Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = 
   message("\nTable of group means\n")
   print(newdata)
   message("\nTesting Homogeneity of Variance with Brown-Forsythe \n")
+  if (BFTest$`Pr(>F)` <= .05) {
+    message("\nPossible violation of the assumption")
+  }
   print(BFTest)
   message("\nInteraction graph plotted...")
   return(p)
