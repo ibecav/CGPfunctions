@@ -143,7 +143,7 @@ Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = 
     message("   *** Possible violation of the assumption ***")
   }
   print(BFTest)
-  message("\nTesting Normality Assumption with Shapiro Wilk \n")
+  message("\nTesting Normality Assumption with Shapiro-Wilk \n")
   if (SWTest$p.value <= .05) {
     message("   *** Possible violation of the assumption.  You may want to plot the residuals to see how they vary from normal ***")
   }
