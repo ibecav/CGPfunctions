@@ -24,18 +24,9 @@ Plot2WayANOVA(formula, dataframe = NULL, confidence=.95, plottype = "bar")
 \value{
 An object of class 'ggplot' which can be saved for future use.  The most interesting sub element in the list is $data which contains the means table for the dependent variable grouped by independent variables.
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
 \author{
 Chuck Powell
 }
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
 \seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
