@@ -19,12 +19,18 @@ Plot2WayANOVA(formula, dataframe = NULL, confidence=.95, plottype = "bar")
   }
 
 \details{
-Details about how it works go here.
+Details about how the function works in order of steps taken.
 \enumerate{
-   \item Some basic error checking to ensure a valid formula and dataframe
-   \item Ensure the dependent (outcome) variable is numeric and that the two independent (predictor variables can be coerced to factors) user warned on the console
-   \item Remove missing cases user warned on the console
-   \item Ensure the dependent (outcome) variable is numeric and that the two independent (predictor variables can be coerced to factors)
+   \item Some basic error checking to ensure a valid formula and dataframe. Only accepts fully crossed formula to check for interaction term
+   \item Ensure the dependent (outcome) variable is numeric and that the two independent (predictor) variables are or can be coerced to factors -- user warned on the console
+   \item Remove missing cases -- user warned on the console
+   \item Use \code{dplyr} to calculate a summarized table of means, sds, standard errors of the means, confidence intervals, and group sizes.
+   \item Use the \code{aov} function to execute an Analysis of Variance (ANOVA)
+   \item Use the \code{\link{neweta}} function to calculate eta squared values.  If the design is unbalanced warn the user and use Type II sums of squares
+   \item Produce a standard ANOVA table with a column for eta-squared appended
+   \item Use the \code{leveneTest} for testing Homogeneity of Variance assumption with Brown-Forsythe
+   \item Use the \code{shapiro.test} for testing normality assumption with Shapiro-Wilk
+   \item Use \code{ggplot2} to plot an interaction plot of the type the user specified
  }
 }
 \value{
