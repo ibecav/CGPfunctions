@@ -19,7 +19,7 @@ neweta(MyAOV)
 There are three ways to compute eta squared this function only uses Type II
 }
 \value{
-Returns a tibble containing the AOV output similar to summary(aov(MyAOV)) but with eta squared computed
+Returns a tibble containing the AOV output similar to \code{summary(aov(MyAOV))} but with eta squared computed and appended as an additional column
 }
 \references{
 neweta function is a shortened and simplified verion of Dani Navarro's \code{\link[lsr]{etaSquared}}
