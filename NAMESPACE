@@ -7,3 +7,4 @@ importFrom("methods", "is")
 importFrom("stats", "anova", "aov", "lm", "pf", "qt", "replications", "sd", "symnum", "residuals", "shapiro.test")
 importFrom("tibble", "as_tibble")
 importFrom("car", "leveneTest")
+
