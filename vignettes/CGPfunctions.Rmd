@@ -18,8 +18,8 @@ knitr::opts_chunk$set(
 
 A package that includes functions that I find useful for teaching statistics as well as actually practicing the art.  They typically are not "new" methods but rather wrappers around either base R or other packages and concepts I'm trying to master.  Currently contains:
 
-- Plot2WayANOVA which as the name implies conducts a 2 way ANOVA and plots the results using ggplot2
-- neweta which is a helper function that appends the results of a Type II eta squared calculation onto a classic ANOVA table
+- `Plot2WayANOVA` which as the name implies conducts a 2 way ANOVA and plots the results using `ggplot2`
+- `neweta` which is a helper function that appends the results of a Type II eta squared calculation onto a classic ANOVA table
 
 ## Vignette Info
 
@@ -28,7 +28,7 @@ I need more text here.
 
 ## Examples
 
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+$$\eta^2 = \frac{SS_{factor(term)}}{SS_{total}}$$.
 
 ```{r, echo=FALSE, results='asis'}
 knitr::kable(CGPfunctions::neweta(aov(mpg~am*cyl, mtcars)))
