@@ -43,7 +43,7 @@ xxx<-CGPfunctions::Plot2WayANOVA(mpg~am*cyl, mtcars)
 
 ## Credits
 
-Many thanks to Dani Navarro and the book Learning Statistics wigth R > ([LSR](http://www.compcogscisydney.com/learning-statistics-with-r.html)) whose etaSquared function  was the genesis of `neweta`.
+Many thanks to Dani Navarro and the book  > ([Learning Statistics with R](http://www.compcogscisydney.com/learning-statistics-with-r.html)) whose etaSquared function  was the genesis of `neweta`.
 
 
 > "He who gives up [code] safety for [code] speed deserves neither."
