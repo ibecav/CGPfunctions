@@ -28,7 +28,7 @@ An object of class 'ggplot' which can be saved for future use.  The most interes
 Chuck Powell
 }
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{aov}}, text here
 }
 \examples{
 Plot2WayANOVA(mpg~am*cyl, mtcars, plottype = "line")
