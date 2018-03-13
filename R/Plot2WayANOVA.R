@@ -19,14 +19,6 @@ Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = 
   if (!requireNamespace("rlang")) {
     stop("Can't continue can't load rlang")
   }
-#  if (!exists("neweta")) {
-#    if (file.exists("moreate.R")) {
-#      message("\nLoading the neweta function \n")
-#      source("moreate.R")}
-#    else {
-#      stop("Can't continue until you load the neweta function")
-#    }
-#  }
   if (length(match.call())-1 <= 1) {
     stop("Not enough arguments passed... requires at least a formula with a DV and 2 IV plus a dataframe")
   }
