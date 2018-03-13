@@ -12,14 +12,20 @@ Plot2WayANOVA(formula, dataframe = NULL, confidence=.95, plottype = "bar")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{formula}{a valid R formula with a numeric dependent (outcome) variable, and two independent (predictor) variables e.g. mpg~am*vs. The independent variables are forced to factors (with warning) if possible.}
-  \item{dataframe}{a valid R dataframe}
+  \item{formula}{a valid R formula with a numeric dependent (outcome) variable, and two independent (predictor) variables e.g. \code{mpg~am*vs}. The independent variables are forced to factors (with warning) if possible.}
+  \item{dataframe}{a dataframe or an object that can be coerced to a dataframe}
   \item{confidence}{what confidence level for confidence intervals}
   \item{plottype}{bar or line (quoted)}
   }
 
 \details{
-Details about how it works go here
+Details about how it works go here.
+\enumerate{
+   \item Some basic error checking to ensure a valid formula and dataframe
+   \item Ensure the dependent (outcome) variable is numeric and that the two independent (predictor variables can be coerced to factors) user warned on the console
+   \item Remove missing cases user warned on the console
+   \item Ensure the dependent (outcome) variable is numeric and that the two independent (predictor variables can be coerced to factors)
+ }
 }
 \value{
 An object of class 'ggplot' which can be saved for future use.  The most interesting sub element in the list is $data which contains the means table for the dependent variable grouped by independent variables.
@@ -28,7 +34,7 @@ An object of class 'ggplot' which can be saved for future use.  The most interes
 Chuck Powell
 }
 \seealso{
-Text here \code{\link[stats]{aov}}:, text here
+Text here \code{\link[stats]{aov}}, \code{\link[car]{leveneTest}}, \code{\link{neweta}}, \code{\link[stats]{replications}}, \code{\link[stats]{shapiro.test}}
 }
 \examples{
 Plot2WayANOVA(mpg~am*cyl, mtcars, plottype = "line")
