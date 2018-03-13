@@ -1,5 +1,5 @@
 # works March 12, 2018
-# Formula version 1.0
+# Formula version 0.1
 Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = "bar")
 {
   # to appease R CMD Check?
