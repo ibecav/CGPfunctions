@@ -2,7 +2,7 @@
 title: "CGPfunctions"
 author: "Chuck Powell"
 date: "`r Sys.Date()`"
-output: github_document 
+output: rmarkdown::html_vignette 
 vignette: >
   %\VignetteIndexEntry{CGPfunctions}
   %\VignetteEngine{knitr::rmarkdown}
