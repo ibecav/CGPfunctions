@@ -2,7 +2,7 @@
 title: "CGPfunctions"
 author: "Chuck Powell"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: github_document 
 vignette: >
   %\VignetteIndexEntry{CGPfunctions}
   %\VignetteEngine{knitr::rmarkdown}
@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+
 
 A package that includes functions that I find useful for teaching statistics as well as actually practicing the art.  They typically are not "new" methods but rather wrappers around either base R or other packages and concepts I'm trying to master.  Currently contains:
 
