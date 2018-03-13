@@ -25,8 +25,9 @@ A package that includes functions that I find useful for teaching statistics as 
 
 I need more text here.
 
-
 ## Examples
+
+`neweta(aov(mpg~am*cyl, mtcars))`
 
 $$\eta^2 = \frac{SS_{factor(term)}}{SS_{total}}$$.
 
@@ -34,7 +35,17 @@ $$\eta^2 = \frac{SS_{factor(term)}}{SS_{total}}$$.
 knitr::kable(CGPfunctions::neweta(aov(mpg~am*cyl, mtcars)))
 ```
 
-Also a quote using `>`:
+`Plot2WayANOVA(mpg~am*cyl, mtcars)`
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+xxx<-CGPfunctions::Plot2WayANOVA(mpg~am*cyl, mtcars)
+```
+
+## Credits
+
+Many thanks to Dani Navarro and the book Learning Statistics wigth R > ([LSR](http://www.compcogscisydney.com/learning-statistics-with-r.html)) whose etaSquared function  was the genesis of `neweta`.
+
 
 > "He who gives up [code] safety for [code] speed deserves neither."
 ([via](https://twitter.com/hadleywickham/status/504368538874703872))
+
