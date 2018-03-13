@@ -19,7 +19,7 @@ Plot2WayANOVA(formula, dataframe = NULL, confidence=.95, plottype = "bar")
   }
 
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+Details about how it works go here
 }
 \value{
 An object of class 'ggplot' which can be saved for future use.  The most interesting sub element in the list is $data which contains the means table for the dependent variable grouped by independent variables.
@@ -28,7 +28,7 @@ An object of class 'ggplot' which can be saved for future use.  The most interes
 Chuck Powell
 }
 \seealso{
-\code{\link{aov}}, text here
+Text here \code{\link[stats]{aov}}:, text here
 }
 \examples{
 Plot2WayANOVA(mpg~am*cyl, mtcars, plottype = "line")
