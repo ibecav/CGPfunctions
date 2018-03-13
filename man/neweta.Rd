@@ -16,25 +16,20 @@ neweta(MyAOV)
   }
 
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+There are three ways to compute eta squared this function only uses Type II
 }
 \value{
-Returns a tibble containing the AOV output similar to summary(aov(MyAOV)) but with eta squared conputed
+Returns a tibble containing the AOV output similar to summary(aov(MyAOV)) but with eta squared computed
 }
 \references{
-%% ~put references to the literature/web site here ~
+neweta function is a shortened and simplified verion of Dani Navarro's \code{\link[lsr]{etaSquared}}
 }
 \author{
 Chuck Powell
 }
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{Plot2WayANOVA}}
 }
 \examples{
 neweta(aov(mpg~am*cyl, mtcars))
