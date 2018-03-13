@@ -12,7 +12,7 @@ neweta(MyAOV)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{MyAOV}{a valid aov object such as those produced by aov(dv~iv*iv)}
+  \item{MyAOV}{a valid aov object such as those produced by \code{aov(dv~iv1*iv2)}}
   }
 
 \details{
