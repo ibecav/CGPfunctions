@@ -1,5 +1,5 @@
 Package: CGPfunctions
-Title: Miscellaneous files for teaching and learning
+Title: Miscellaneous Files for Teaching and Learning
 Version: 0.1
 Authors@R: person("Chuck", "Powell", email = "ibecav@gmail.com", role = c("aut", "cre"))
 Description: Miscellaneous files for teaching and learning.
