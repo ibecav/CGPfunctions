@@ -21,10 +21,26 @@ A package that includes functions that I find useful for teaching statistics as 
 
 - `Plot2WayANOVA` which as the name implies conducts a 2 way ANOVA and plots the results using `ggplot2`
 - `neweta` which is a helper function that appends the results of a Type II eta squared calculation onto a classic ANOVA table
+- `Mode` which finds the modal value in a vector of data
 
 ## Vignette Info
 
-I need more text here.
+The ANOVA family of statistical techniques that allow us to compare mean differences of one outcome (dependent) variable across two or more groups (levels) of one or independent variables (factor). It is also true that ANOVA is a special case of the GLM or regression models so as the number of levels increase it might make more sense to try one of those approaches.  The 2 Way ANOVA allows for comparisons of mean differences across 2 independent variables `factors` and varying numbers of levels.
+
+The `Plot2WayANOVA` function conducts a classic analysis using existing R functions and packages in a sane and defensible manner not necessarily in the one and only manner.
+
+### Example scenario and data
+
+Imagine that you are interested in understanding whether a car's fuel efficiency (mpg) varies based upon the type of transmission (automatic or manual) and the number of cylinders the engine has. Let's imagine that the `mtcars` data set is actually a random sample of 32 cars from different manufacturers and use the mean `mpg` by `am` and `cyl` to help inform our thinking.  While we expect variation across our sample we're interested in whether the differences between the means by grouping of transmission type and cylinders is significantly different than what we would expect in random variation across the data.  
+
+In simplistic terms we want to know whether `am` matters, `cyl` matters or if it depends on the interaction of the two.  It's this interaction term that typically confuses novices or is difficult to "see".  That's where a good interaction graph can hopefully play a key role, and that's what the `Plot2WayANOVA` focuses on.
+
+There's no lack or tools or capabilities in base R or in the many packages to do this task. What this function tries to do is pull together the disparate pieces with a set of sane defaults and a simple interface to work with it.  At its simplest you would require the library and then enter this command:
+
+`Plot2WayANOVA(mpg~am*cyl, mtcars)` which lays our question out in R's vernacular with a formula and a dataframe.  Optionally we can specify a different confidence level and choose a line or a bar graph. 
+
+Our research or testable hypothesis is then described $$\mu_{Apollo} \ne \mu_{Bridgestone} \ne \mu_{CEAT} \ne \mu_{Falken}$$ as at least one of the tire brand populations is different than the other three.  Our null is basically "nope, brand doesn't matter in predicting tire mileage -- all brands are the same".
+
 
 ## Examples
 
