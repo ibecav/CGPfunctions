@@ -43,6 +43,14 @@
 #' Plot2WayANOVA(mpg~am*cyl, mtcars, plottype = "line")
 #' Plot2WayANOVA(mpg~am*vs, mtcars, confidence = .99)
 #' 
+#' @import dplyr
+#' @import ggplot2
+#' @import rlang
+#' @importFrom methods is
+#' @importFrom stats anova aov lm pf qt replications sd symnum residuals shapiro.test
+#' @importFrom tibble as_tibble
+#' @importFrom car leveneTest
+#' 
 # works March 12, 2018
 # Formula version 0.1
 Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = "bar")
