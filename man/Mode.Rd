@@ -7,16 +7,17 @@
 Mode(x)
 }
 \arguments{
-\item{x}{}
+\item{x}{a vector}
 }
 \value{
-a list
+a vector containing one or more modal values for the input vector
 }
 \description{
-This function takes a set of numeric data and returns one or mode values
+This function takes a vector and returns one or mode values
 that represent the mode point of the data
 }
 \examples{
+Mode(sample(1:100,1000,replace=TRUE))
 Mode(mtcars$hp)
 Mode(iris$Sepal.Length)
 

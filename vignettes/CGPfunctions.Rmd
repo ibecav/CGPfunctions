@@ -42,7 +42,9 @@ knitr::kable(CGPfunctions::neweta(aov(mpg~am*cyl, mtcars)))
 xxx<-CGPfunctions::Plot2WayANOVA(mpg~am*cyl, mtcars)
 ```
 
-![Example Barplot](barplot.png)
+![Example Barplot output](barplot.png)
+
+![Example Lineplot output](lineplot.png)
 
 ## Credits
 
