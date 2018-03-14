@@ -18,6 +18,7 @@
 #' @examples
 #' 
 #' neweta(aov(mpg~am*cyl, mtcars))
+#' @export
 #' 
 neweta <- function (MyAOV)
 {

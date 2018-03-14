@@ -52,6 +52,7 @@
 #' @importFrom stats anova aov lm pf qt replications sd symnum residuals shapiro.test
 #' @importFrom tibble as_tibble
 #' @importFrom car leveneTest
+#' @export
 #' 
 # works March 14, 2018
 # Stable version 0.1
