@@ -16,6 +16,13 @@ a vector containing one or more modal values for the input vector
 This function takes a vector and returns one or mode values
 that represent the mode point of the data
 }
+\section{Warning}{
+
+Be careful the function does some basic error checking but the return to
+\code{Mode(NA)} is \code{NA} and a vector where the majority of entries
+are \code{NA} is also NA
+}
+
 \examples{
 Mode(sample(1:100,1000,replace=TRUE))
 Mode(mtcars$hp)

@@ -1,4 +1,3 @@
-######
 #' Derive the modal value(s) for a set of data
 #' 
 #' This function takes a vector and returns one or mode values
