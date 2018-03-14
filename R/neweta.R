@@ -1,3 +1,24 @@
+#' Calculates eta squared for an AOV model using the Type II method
+#' 
+#' Takes an aov object and returns a standard AOV table with eta squared
+#' computed
+#' 
+#' There are three ways to compute eta squared this function only uses Type II
+#' 
+#' @usage neweta(MyAOV)
+#' @param MyAOV a valid aov object such as those produced by
+#' \code{aov(dv~iv1*iv2)}
+#' @return Returns a tibble containing the AOV output similar to
+#' \code{summary(aov(MyAOV))} but with eta squared computed and appended as an
+#' additional column
+#' @author Chuck Powell
+#' @seealso \code{\link{Plot2WayANOVA}}
+#' @references neweta function is a shortened and simplified verion of Dani
+#' Navarro's \code{\link[lsr]{etaSquared}}
+#' @examples
+#' 
+#' neweta(aov(mpg~am*cyl, mtcars))
+#' 
 neweta <- function (MyAOV)
 {
   ss.tot <- sum((MyAOV$model[, 1] - mean(MyAOV$model[, 1]))^2)
