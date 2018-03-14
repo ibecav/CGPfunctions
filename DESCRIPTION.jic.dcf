@@ -1,0 +1,21 @@
+Package: CGPfunctions
+Title: Miscellaneous Files for Teaching and Learning
+Version: 0.1
+Authors@R: person("Chuck", "Powell", email = "ibecav@gmail.com", role = c("aut", "cre"))
+Description: Miscellaneous files for teaching and learning.
+Depends: R (>= 3.4.0)
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports:
+    car,
+    dplyr,
+    ggplot2,
+    methods,
+    rlang,
+    tibble
+Suggests:
+    lsr,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
