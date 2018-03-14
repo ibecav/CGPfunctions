@@ -42,6 +42,8 @@ knitr::kable(CGPfunctions::neweta(aov(mpg~am*cyl, mtcars)))
 xxx<-CGPfunctions::Plot2WayANOVA(mpg~am*cyl, mtcars)
 ```
 
+![Example Barplot](barplot.png)
+
 ## Credits
 
 Many thanks to Dani Navarro and the book  > ([Learning Statistics with R](http://www.compcogscisydney.com/learning-statistics-with-r.html)) whose etaSquared function  was the genesis of `neweta`.
