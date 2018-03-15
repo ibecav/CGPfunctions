@@ -20,6 +20,7 @@ from 1 to 3 plots and some information in the console about mean, median and mod
 See The Distribution
 }
 \examples{
+SeeDist(rnorm(100, mean=100, sd=20))
 SeeDist(mtcars$hp, whatvar = "Horsepower")
 SeeDist(iris$Sepal.Length, whatvar = "Sepal Length")
 

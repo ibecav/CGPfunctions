@@ -1,11 +1,15 @@
 #' See The Distribution
 #'
+#' This function takes a vector of numeric data and returns returns one or more ggplot2
+#' plots that help you visualize the data
+#'
 #' @param qqq the data to be visualized
 #' @param numbins the number of bins to use
 #' @param whatvar additional information about the variable
 #'
-#' @return from 1 to 3 plots and some information in the console about mean, median and mode
+#' @return from 1 to 3 plots depending on what the user specifies
 #' @export
+#' @import ggplot2
 #' @importFrom grDevices nclass.FD
 #' @importFrom stats dnorm dt median
 #'
@@ -83,8 +87,5 @@ SeeDist <- function (qqq, numbins = 0, whatvar = "Unspecified")
 #  print(ppp)
   rrr<-list(p,pp,ppp)
   print(rrr)
-  
-# display some info in the terminal
-  cat(xxx, whatvar, "\n The mean is", meanqqq, "\n", "The median is", medianqqq, "\n", "The mode is", modeqqq, "\n" )
 } # end function
 
