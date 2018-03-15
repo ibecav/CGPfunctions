@@ -83,40 +83,4 @@ SeeDist(MASS::geyser$duration, whatvar = "Geyser Duration")
 
 
 
-# add conditional
-geom_chuck <- function(se = "Box") {
-    if (se == "Box") {list(
-      geom_boxplot(aes(x = "", y = qqq), fill = "blue", outlier.color = "dark red"),
-      coord_flip(),
-      geom_point(aes(x = "", y = meanqqq), shape=21, size=4, color="white", fill="red"),
-      theme(axis.title.y=element_blank(),
-          axis.text.y=element_blank(),
-          axis.ticks.y=element_blank(),
-          axis.line.y=element_blank(),
-          panel.grid.major.y=element_blank()),
-      labs(y = paste0("N = ", length(qqq))) 
-    )} else if ( se == "Density") { 
-      list(
-          stat_function(aes(x=qqq),fun = dnorm, color="red", args=list(mean=mean(qqq), sd=sd(qqq))),
-          #    stat_function(fun = dt, color="pink", args = list(df = 8)) +
-          geom_density(),
-          geom_vline(aes(x=qqq),xintercept = mean(qqq), colour="dark green", linetype="dashed")
-#          geom_vline(xintercept = medianqqq, colour="yellow", linetype="dashed"),
-#          geom_vline(xintercept = modeqqq, colour="orange", linetype="dashed"),
-#          geom_rug(aes(y = 0), position = position_jitter(height = 0)),
-#          xlim(-3 * sd(qqq) + mean(qqq),3 * sd(qqq) + mean(qqq))
-      )
-    } else if ( test_expression3) {
-      statement3
-    } else {
-      statement4
-    } # if closing
-} # function closing
-
-
-custom <- function(x) {dt(x - 3, 3)}
-ggplot(data.frame(x = c(-4, 10)), aes(x = x)) +
-  stat_function(fun = custom)
-
-
 
