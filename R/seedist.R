@@ -3,9 +3,12 @@
 #' This function takes a vector of numeric data and returns one or more ggplot2
 #' plots that help you visualize the data
 #'
-#' @param qqq the data to be visualized
-#' @param numbins the number of bins to use
-#' @param whatvar additional information about the variable
+#' @param qqq the data to be visualized must be numeric.
+#' @param numbins the number of bins to use for any plots that bin. If nothing is
+#' specified the function will calculate a rational number using Freedman-Diaconis
+#' via the \code{nclass.FD} function
+#' @param whatvar additional contextual information about the variable as a string
+#' such as "Miles Per Gallon"
 #'
 #' @return from 1 to 3 plots depending on what the user specifies
 #' @export
@@ -13,6 +16,9 @@
 #' @importFrom grDevices nclass.FD
 #' @importFrom stats dnorm dt median
 #'
+#' @author Chuck Powell
+#' @seealso \code{\link[grDevices]{nclass}}
+#' 
 #' @examples
 #' SeeDist(rnorm(100, mean=100, sd=20))
 #' SeeDist(mtcars$hp, whatvar = "Horsepower")
