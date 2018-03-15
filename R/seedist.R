@@ -20,6 +20,11 @@
 #' 
 SeeDist <- function (qqq, numbins = 0, whatvar = "Unspecified")
 {
+  # error checking
+  if (!requireNamespace("ggplot2")) {
+    stop("Can't continue can't load ggplot2")
+  }
+  theme_set(theme_bw())
   if (!is.numeric(qqq)) {
       stop("Sorry the data must be numeric")
   }
