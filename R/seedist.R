@@ -11,7 +11,7 @@
 #'
 #' @examples
 #' SeeDist(mtcars$hp, whatvar = "Horsepower")
-#' SeeDist(MASS::geyser$duration, whatvar = "Geyser Duration")
+#' SeeDist(iris$Sepal.Length, whatvar = "Sepal Length")
 #' 
 SeeDist <- function (qqq, numbins = 0, whatvar = "Unspecified")
 {

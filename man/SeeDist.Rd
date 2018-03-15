@@ -4,7 +4,7 @@
 \alias{SeeDist}
 \title{See The Distribution}
 \usage{
-SeeDist(qqq = iris$Sepal.Length, numbins = 0, whatvar = "Unspecified")
+SeeDist(qqq, numbins = 0, whatvar = "Unspecified")
 }
 \arguments{
 \item{qqq}{the data to be visualized}
