@@ -61,7 +61,6 @@ SeeDist <- function (qqq = iris$Sepal.Length, numbins = 0, whatvar = "Unspecifie
          x = whatvar,
          caption = ("January 31, 2018")) +
     geom_histogram(bins=binnumber,color = "black",fill="blue") +
-#    geom_histogram(binwidth = bw, color = "black",fill="blue") +
     geom_vline(xintercept = meanqqq, colour="dark green", linetype="dashed", size=1.5) +
     geom_vline(xintercept = medianqqq, colour="yellow", linetype="dashed", size=1.5) +
     geom_vline(xintercept = modeqqq, colour="orange", linetype="dashed") 
