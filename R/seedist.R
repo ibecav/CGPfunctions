@@ -10,6 +10,7 @@
 #' @importFrom stats dnorm dt median
 #'
 #' @examples
+#' SeeDist(rnorm(100, mean=100, sd=20))
 #' SeeDist(mtcars$hp, whatvar = "Horsepower")
 #' SeeDist(iris$Sepal.Length, whatvar = "Sepal Length")
 #' 
