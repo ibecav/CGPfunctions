@@ -1,3 +1,16 @@
+#' See The Distribution
+#'
+#' @param qqq the data to be visualized
+#' @param numbins the number of bins to use
+#' @param whatvar additional information about the variable
+#'
+#' @return from 1 to 3 plots and some information in the console about mean, median and mode
+#' @export
+#'
+#' @examples
+#' SeeDist(mtcars$hp, whatvar = "Horsepower")
+#' SeeDist(MASS::geyser$duration, whatvar = "Geyser Duration")
+#' 
 SeeDist <- function (qqq = iris$Sepal.Length, numbins = 0, whatvar = "Unspecified")
 {
   if (!is.numeric(qqq)) {
