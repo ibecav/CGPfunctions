@@ -1,18 +1,8 @@
 SeeDist <- function (qqq = iris$Sepal.Length, numbins = 0, whatvar = "Unspecified")
 {
-# error checking
-  if (!require(ggplot2)) {
-    stop("Can't continue can't load ggplot2")
-  }
-  theme_set(theme_bw())
-  if (!exists("Mode")) {
-    stop("Can't continue until you load the Mode function")
-  }
   if (!is.numeric(qqq)) {
       stop("Sorry the data must be numeric")
   }
-# prep work
-#  rrr<-list(p,pp,ppp)
    xxx<- deparse(substitute(qqq)) # get the variable name
    meanqqq<-mean(qqq,na.rm = TRUE) # store the mean
    sdqqq<-sd(qqq,na.rm = TRUE) # store the sd
@@ -20,7 +10,6 @@ SeeDist <- function (qqq = iris$Sepal.Length, numbins = 0, whatvar = "Unspecifie
    modeqqq<-Mode(qqq)
    Skewqqq<-sum((qqq - mean(qqq,na.rm=TRUE))^3)/(length(qqq[!is.na(qqq)]) * sd(qqq,na.rm=TRUE)^3)
    Kurtosisqqq<-sum((qqq - mean(qqq, na.rm = TRUE))^4)/(length(qqq[!is.na(qqq)]) * sd(qqq, na.rm = TRUE)^4) - 3
-#   bw <- (2 * IQR(qqq) * length(qqq)^(-1/3))
    binnumber <- nclass.FD(qqq)
    binnumber <- ifelse(numbins == 0, binnumber, numbins)
    custom <- function(x) {dt((qqq - meanqqq), df =length(qqq))}
