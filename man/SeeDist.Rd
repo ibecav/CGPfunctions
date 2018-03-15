@@ -21,6 +21,6 @@ See The Distribution
 }
 \examples{
 SeeDist(mtcars$hp, whatvar = "Horsepower")
-SeeDist(MASS::geyser$duration, whatvar = "Geyser Duration")
+SeeDist(iris$Sepal.Length, whatvar = "Sepal Length")
 
 }

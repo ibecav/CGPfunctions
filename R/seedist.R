@@ -7,7 +7,7 @@
 #' @return from 1 to 3 plots and some information in the console about mean, median and mode
 #' @export
 #' @importFrom grDevices nclass.FD
-#' @importFrom stats anova aov lm pf qt replications sd symnum residuals shapiro.test dnorm dt median
+#' @importFrom stats dnorm dt median
 #'
 #' @examples
 #' SeeDist(mtcars$hp, whatvar = "Horsepower")
