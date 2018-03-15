@@ -33,6 +33,9 @@ SeeDist <- function (qqq, numbins = 0, whatvar = "Unspecified")
    sdqqq<-sd(qqq,na.rm = TRUE) # store the sd
    medianqqq<-median(qqq,na.rm = TRUE)
    modeqqq<-Mode(qqq)
+   if (length(modeqqq) >= 4) {
+     modeqqq <- modeqqq[c(1,2,3)]
+   }
    Skewqqq<-sum((qqq - mean(qqq,na.rm=TRUE))^3)/(length(qqq[!is.na(qqq)]) * sd(qqq,na.rm=TRUE)^3)
    Kurtosisqqq<-sum((qqq - mean(qqq, na.rm = TRUE))^4)/(length(qqq[!is.na(qqq)]) * sd(qqq, na.rm = TRUE)^4) - 3
    binnumber <- nclass.FD(qqq)
