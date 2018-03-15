@@ -16,13 +16,20 @@
 #' @importFrom grDevices nclass.FD
 #' @importFrom stats dnorm dt median
 #'
-#' @author Chuck Powell
+#' @section Warning:
+#' If the data has more than 3 modal values only three are plotted and the user is
+#' warned.
+#' \code{Mode(NA)} is \code{NA} and a vector where the majority of entries
+#' are \code{NA} is also NA
+#' 
 #' @seealso \code{\link[grDevices]{nclass}}
 #' 
 #' @examples
 #' SeeDist(rnorm(100, mean=100, sd=20))
 #' SeeDist(mtcars$hp, whatvar = "Horsepower")
 #' SeeDist(iris$Sepal.Length, whatvar = "Sepal Length")
+#' 
+#' @author Chuck Powell
 #' 
 SeeDist <- function (qqq, numbins = 0, whatvar = "Unspecified")
 {
@@ -48,9 +55,8 @@ SeeDist <- function (qqq, numbins = 0, whatvar = "Unspecified")
    binnumber <- nclass.FD(qqq)
    binnumber <- ifelse(numbins == 0, binnumber, numbins)
    custom <- function(x) {dt((qqq - meanqqq), df =length(qqq))}
-#   print(length(modeqqq))
-   
-# build the plot
+
+# build the first plot
   p<-ggplot() +
     aes(qqq) +
     stat_function(fun = dnorm, color="red", args=list(mean=meanqqq, sd=sdqqq)) +

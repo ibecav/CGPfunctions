@@ -7,11 +7,14 @@
 SeeDist(qqq, numbins = 0, whatvar = "Unspecified")
 }
 \arguments{
-\item{qqq}{the data to be visualized}
+\item{qqq}{the data to be visualized must be numeric.}
 
-\item{numbins}{the number of bins to use}
+\item{numbins}{the number of bins to use for any plots that bin. If nothing is
+specified the function will calculate a rational number using Freedman-Diaconis
+via the \code{nclass.FD} function}
 
-\item{whatvar}{additional information about the variable}
+\item{whatvar}{additional contextual information about the variable as a string
+such as "Miles Per Gallon"}
 }
 \value{
 from 1 to 3 plots depending on what the user specifies
@@ -25,4 +28,10 @@ SeeDist(rnorm(100, mean=100, sd=20))
 SeeDist(mtcars$hp, whatvar = "Horsepower")
 SeeDist(iris$Sepal.Length, whatvar = "Sepal Length")
 
+}
+\seealso{
+\code{\link[grDevices]{nclass}}
+}
+\author{
+Chuck Powell
 }
