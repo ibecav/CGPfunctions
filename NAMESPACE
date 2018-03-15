@@ -2,6 +2,7 @@
 
 export(Mode)
 export(Plot2WayANOVA)
+export(SeeDist)
 export(neweta)
 import(dplyr)
 import(ggplot2)
