@@ -1,6 +1,6 @@
 #' See The Distribution
 #'
-#' This function takes a vector of numeric data and returns returns one or more ggplot2
+#' This function takes a vector of numeric data and returns one or more ggplot2
 #' plots that help you visualize the data
 #'
 #' @param qqq the data to be visualized
@@ -38,6 +38,7 @@ SeeDist <- function (qqq, numbins = 0, whatvar = "Unspecified")
    binnumber <- nclass.FD(qqq)
    binnumber <- ifelse(numbins == 0, binnumber, numbins)
    custom <- function(x) {dt((qqq - meanqqq), df =length(qqq))}
+#   print(length(modeqqq))
    
 # build the plot
   p<-ggplot() +
@@ -59,8 +60,7 @@ SeeDist <- function (qqq, numbins = 0, whatvar = "Unspecified")
           axis.line.y=element_blank(),
           panel.grid.major.y=element_blank(),
           panel.grid.minor.y=element_blank())
-  readline("Hit enter to see the next plot")
-  # build the plot
+  # build the second plot
   pp<-ggplot() +
     aes(qqq) +
     labs(title = paste0("Distribution of the variable ", xxx, " (", whatvar, ")"),
@@ -75,10 +75,8 @@ SeeDist <- function (qqq, numbins = 0, whatvar = "Unspecified")
         axis.ticks.y=element_blank(),
         axis.line.y=element_blank(),
         panel.grid.major.y=element_blank())
-#  print(pp)
-
-  readline("Hit enter to see the next plot")
-  # build the plot
+  
+# build the third plot
   ppp<-ggplot() +
     aes(qqq) +
     labs(title = paste0("Distribution of the variable ", xxx, " (", whatvar, ")"),
@@ -89,8 +87,9 @@ SeeDist <- function (qqq, numbins = 0, whatvar = "Unspecified")
     geom_vline(xintercept = meanqqq, colour="dark green", linetype="dashed", size=1.5) +
     geom_vline(xintercept = medianqqq, colour="yellow", linetype="dashed", size=1.5) +
     geom_vline(xintercept = modeqqq, colour="orange", linetype="dashed") 
-#  print(ppp)
+
   rrr<-list(p,pp,ppp)
-  print(rrr)
+#  print(rrr)
+  return(rrr)
 } # end function
 

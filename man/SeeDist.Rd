@@ -14,10 +14,11 @@ SeeDist(qqq, numbins = 0, whatvar = "Unspecified")
 \item{whatvar}{additional information about the variable}
 }
 \value{
-from 1 to 3 plots and some information in the console about mean, median and mode
+from 1 to 3 plots depending on what the user specifies
 }
 \description{
-See The Distribution
+This function takes a vector of numeric data and returns one or more ggplot2
+plots that help you visualize the data
 }
 \examples{
 SeeDist(rnorm(100, mean=100, sd=20))
