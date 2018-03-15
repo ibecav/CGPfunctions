@@ -18,8 +18,6 @@ SeeDist <- function (qqq = iris$Sepal.Length, numbins = 0, whatvar = "Unspecifie
   p<-ggplot() +
     aes(qqq) +
     stat_function(fun = dnorm, color="red", args=list(mean=meanqqq, sd=sdqqq)) +
-#    stat_function(fun = dt+meanqqq, args = list(df = 8)) +
-#    stat_function(fun = custom) +
     geom_density() +
     geom_vline(xintercept = meanqqq, colour="dark green", linetype="dashed", size=1.5) +
     geom_vline(xintercept = medianqqq, colour="yellow", linetype="dashed", size=1.5) +
@@ -36,8 +34,6 @@ SeeDist <- function (qqq = iris$Sepal.Length, numbins = 0, whatvar = "Unspecifie
           axis.line.y=element_blank(),
           panel.grid.major.y=element_blank(),
           panel.grid.minor.y=element_blank())
-# print the plot
-#  print(p)
   readline("Hit enter to see the next plot")
   # build the plot
   pp<-ggplot() +
