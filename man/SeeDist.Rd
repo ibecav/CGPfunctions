@@ -33,7 +33,7 @@ are \code{NA} is also NA
 }
 
 \examples{
-SeeDist(rnorm(100, mean=100, sd=20))
+SeeDist(rnorm(100, mean=100, sd=20), numbins = 15, whatvar = "A Random Sample")
 SeeDist(mtcars$hp, whatvar = "Horsepower")
 SeeDist(iris$Sepal.Length, whatvar = "Sepal Length")
 

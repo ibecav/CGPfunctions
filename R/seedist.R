@@ -26,7 +26,7 @@
 #' @seealso \code{\link[grDevices]{nclass}}
 #' 
 #' @examples
-#' SeeDist(rnorm(100, mean=100, sd=20))
+#' SeeDist(rnorm(100, mean=100, sd=20), numbins = 15, whatvar = "A Random Sample")
 #' SeeDist(mtcars$hp, whatvar = "Horsepower")
 #' SeeDist(iris$Sepal.Length, whatvar = "Sepal Length")
 #' 
@@ -69,7 +69,7 @@ SeeDist <- function (qqq, numbins = 0, whatvar = "Unspecified")
     labs(title = paste0("Distribution of the variable ", xxx, " (", whatvar, ")"),
          subtitle = bquote("N ="~.(length(qqq))*","~bar(X)~"="~.(round(meanqqq,1))*", SD ="~.(round(sdqqq,2))*", Median ="~.(round(medianqqq,2))*", Skewness ="~.(round(Skewqqq,2))*", Kurtosis ="~.(round(Kurtosisqqq,2))),
          x = whatvar,
-         caption = ("January 31, 2018")) +
+         caption = (bquote(bar(X)~" is a green line, Median is a yellow line, Mode(s) as orange line(s), Black curve density plot, Red curve is normal"))) +
     xlim(-3 * sd(qqq) + mean(qqq),3 * sd(qqq) + mean(qqq)) +
     theme(axis.title.y=element_blank(),
           axis.text.y=element_blank(),
@@ -83,7 +83,7 @@ SeeDist <- function (qqq, numbins = 0, whatvar = "Unspecified")
     labs(title = paste0("Distribution of the variable ", xxx, " (", whatvar, ")"),
          subtitle = bquote("N ="~.(length(qqq))*","~bar(X)~"="~.(round(meanqqq,1))*", SD ="~.(round(sdqqq,2))*", Median ="~.(round(medianqqq,2))*", Skewness ="~.(round(Skewqqq,2))*", Kurtosis ="~.(round(Kurtosisqqq,2))),
          y = whatvar,
-         caption = ("January 31, 2018")) +
+         caption = (bquote(bar(X)~" displayed as a red dot, Median as a black line, and outlier(s) as small dark red dots"))) +
     geom_boxplot(aes(x = "", y = qqq), fill = "blue", outlier.color = "dark red") +
   coord_flip() +
   geom_point(aes(x = "", y = meanqqq), shape=21, size=4, color="white", fill="red") +
@@ -99,7 +99,7 @@ SeeDist <- function (qqq, numbins = 0, whatvar = "Unspecified")
     labs(title = paste0("Distribution of the variable ", xxx, " (", whatvar, ")"),
          subtitle = bquote("N ="~.(length(qqq))*","~bar(X)~"="~.(round(meanqqq,1))*", SD ="~.(round(sdqqq,2))*", Median ="~.(round(medianqqq,2))*", Skewness ="~.(round(Skewqqq,2))*", Kurtosis ="~.(round(Kurtosisqqq,2))),
          x = whatvar,
-         caption = ("January 31, 2018")) +
+         caption = (bquote(bar(X)~" displayed as a green line, Median as a yellow line, and Mode(s) as orange line(s)"))) +
     geom_histogram(bins=binnumber,color = "black",fill="blue") +
     geom_vline(xintercept = meanqqq, colour="dark green", linetype="dashed", size=1.5) +
     geom_vline(xintercept = medianqqq, colour="yellow", linetype="dashed", size=1.5) +
