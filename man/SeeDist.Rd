@@ -23,6 +23,14 @@ from 1 to 3 plots depending on what the user specifies
 This function takes a vector of numeric data and returns one or more ggplot2
 plots that help you visualize the data
 }
+\section{Warning}{
+
+If the data has more than 3 modal values only three are plotted and the user is
+warned.
+\code{Mode(NA)} is \code{NA} and a vector where the majority of entries
+are \code{NA} is also NA
+}
+
 \examples{
 SeeDist(rnorm(100, mean=100, sd=20))
 SeeDist(mtcars$hp, whatvar = "Horsepower")
