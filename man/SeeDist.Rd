@@ -25,8 +25,9 @@ plots that help you visualize the data
 }
 \section{Warning}{
 
-If the data has more than 3 modal values only three are plotted and the user is
-warned.
+If the data has more than 3 modal values only the first three of them are plotted.
+The rest are ignored and the user is warned on the console.
+
 \code{Mode(NA)} is \code{NA} and a vector where the majority of entries
 are \code{NA} is also NA
 }
