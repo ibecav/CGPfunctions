@@ -47,7 +47,7 @@ SeeDist <- function (qqq, numbins = 0, whatvar = "Unspecified")
    medianqqq<-median(qqq,na.rm = TRUE)
    modeqqq<-Mode(qqq)
    if (length(modeqqq) >= 4) {
-     warning(paste("There are ", length(modeqqq)), " modal values using just the first 3")
+     warning(paste("There are", length(modeqqq)), " modal values displaying just the first 3")
      modeqqq <- modeqqq[c(1,2,3)]
    }
    Skewqqq<-sum((qqq - mean(qqq,na.rm=TRUE))^3)/(length(qqq[!is.na(qqq)]) * sd(qqq,na.rm=TRUE)^3)
