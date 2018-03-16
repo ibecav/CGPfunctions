@@ -100,7 +100,7 @@ SeeDist <- function (qqq, numbins = 0, whatvar = "Unspecified")
          subtitle = bquote("N ="~.(length(qqq))*","~bar(X)~"="~.(round(meanqqq,1))*", SD ="~.(round(sdqqq,2))*", Median ="~.(round(medianqqq,2))*", Skewness ="~.(round(Skewqqq,2))*", Kurtosis ="~.(round(Kurtosisqqq,2))),
          x = whatvar,
          caption = (bquote(bar(X)~" displayed as a green line, Median as a yellow line, and Mode(s) as orange line(s)"))) +
-    geom_histogram(bins=binnumber,color = "black",fill="blue") +
+    geom_histogram(bins=binnumber,color = "black",fill="deepskyblue") +
     geom_vline(xintercept = meanqqq, colour="dark green", linetype="dashed", size=1.5) +
     geom_vline(xintercept = medianqqq, colour="yellow", linetype="dashed", size=1.5) +
     geom_vline(xintercept = modeqqq, colour="orange", linetype="dashed") 
