@@ -105,8 +105,9 @@ SeeDist <- function (qqq, numbins = 0, whatvar = "Unspecified")
     geom_vline(xintercept = medianqqq, colour="yellow", linetype="dashed", size=1.5) +
     geom_vline(xintercept = modeqqq, colour="orange", linetype="dashed") 
 
-  rrr<-list(p,pp,ppp)
-#  print(rrr)
-  return(rrr)
+  print(p)
+  print(pp)
+  print(ppp)
+  return(summary(qqq))
 } # end function
 
