@@ -32,9 +32,12 @@
 #' @param dataframe a dataframe or an object that can be coerced to a dataframe
 #' @param confidence what confidence level for confidence intervals
 #' @param plottype bar or line (quoted)
-#' @return An object of class 'ggplot' which can be saved for future use.  The
-#' most interesting sub element in the list is $data which contains the means
-#' table for the dependent variable grouped by independent variables.
+#' @return A list with 4 elements which is returned invisibly. The items are always sent 
+#' to the console for display  The plot is always sent to the default plot device
+#' but for user convenience the function also returns a named list with the following items
+#' in case the user desires to save them or further process them. \code{$ANOVATable}, 
+#' \code{$MeansTable}, \code{$BFTest}, and \code{$SWTest}. 
+#'
 #' @author Chuck Powell
 #' @seealso \code{\link[stats]{aov}}, \code{\link[car]{leveneTest}},
 #' \code{\link{neweta}}, \code{\link[stats]{replications}},
@@ -96,6 +99,7 @@ Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = 
   depvar <- vars[1]
   iv1 <- vars[2]
   iv2 <- vars[3]
+  potentialfname <- paste0(depvar,"by",iv1,"and",iv2,".png")
   if (missing(dataframe))
     stop("You didn't specify a data frame to use")
   if (!exists(deparse(substitute(dataframe))))
@@ -199,8 +203,10 @@ Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = 
   print(SWTest)
   message("\nInteraction graph plotted...")
   print(p)
+  ggsave(potentialfname,device = "png")
+  
 #  return(as.list(c(MyPlot=p$data,ANOVE=WithETA)))
-  whattoreturn <- list(ANOVATable = WithETA, MeansTable = newdata, BFTest = BFTest, SWTest = SWTest)
+  whattoreturn <- list(ANOVATable = WithETA, MeansTable = newdata, BFTest = BFTest, SWTest = SWTest, pFileName = potentialfname)
   return(invisible(whattoreturn))
   #  return(as.data.frame(newdata))
 }

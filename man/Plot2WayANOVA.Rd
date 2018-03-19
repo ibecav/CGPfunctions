@@ -18,9 +18,11 @@ The independent variables are forced to factors (with warning) if possible.}
 \item{plottype}{bar or line (quoted)}
 }
 \value{
-An object of class 'ggplot' which can be saved for future use.  The
-most interesting sub element in the list is $data which contains the means
-table for the dependent variable grouped by independent variables.
+A list with 4 elements which is returned invisibly. The items are always sent 
+to the console for display  The plot is always sent to the default plot device
+but for user convenience the function also returns a named list with the following items
+in case the user desires to save them or further process them. \code{$ANOVATable}, 
+\code{$MeansTable}, \code{$BFTest}, and \code{$SWTest}.
 }
 \description{
 Takes a formula and a dataframe as input, conducts an analysis of variance
