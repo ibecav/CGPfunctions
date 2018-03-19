@@ -91,6 +91,8 @@ Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = 
     stop("invalid value for \"formula\" argument")
   if ("+" %in% chkinter)
     stop("Sorry you need to use an asterisk not a plus sign in the formula so the interaction can be plotted")
+  if ("~" == chkinter[2])
+    stop("Sorry you can only have one dependent variable so only one ~ you have two or more")
   depvar <- vars[1]
   iv1 <- vars[2]
   iv2 <- vars[3]
@@ -196,9 +198,10 @@ Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = 
   }
   print(SWTest)
   message("\nInteraction graph plotted...")
-#  print(p)
+  print(p)
 #  return(as.list(c(MyPlot=p$data,ANOVE=WithETA)))
-  return(p)
+  whattoreturn <- list(ANOVATable = WithETA, MeansTable = newdata, BFTest = BFTest, SWTest = SWTest)
+  return(invisible(whattoreturn))
   #  return(as.data.frame(newdata))
 }
 
