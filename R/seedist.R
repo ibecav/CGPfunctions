@@ -70,7 +70,7 @@ SeeDist <- function (qqq, numbins = 0, whatvar = "Unspecified", whatplots = c("d
     aes(qqq) +
     geom_density(fill = "deepskyblue") +
     stat_function(fun = dnorm, color="red", args=list(mean=meanqqq, sd=sdqqq)) +
-    geom_vline(xintercept = meanqqq, colour="dark green", linetype="dashed", size=1.5) +
+    geom_vline(xintercept = meanqqq, colour="dark green", linetype="longdash", size=1.5) +
     geom_vline(xintercept = medianqqq, colour="yellow", linetype="dashed", size=1.5) +
     geom_vline(xintercept = modeqqq, colour="orange", linetype="dashed") +
     geom_rug(aes(y = 0)) +
