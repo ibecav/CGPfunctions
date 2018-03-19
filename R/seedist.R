@@ -24,8 +24,7 @@
 #' If the data has more than 3 modal values only the first three of them are plotted.
 #' The rest are ignored and the user is warned on the console.
 #'
-#' \code{Mode(NA)} is \code{NA} and a vector where the majority of entries
-#' are \code{NA} is also NA
+#' Missing values are removed with a warning to the user
 #' 
 #' @seealso \code{\link[grDevices]{nclass}}
 #' 
@@ -69,8 +68,8 @@ SeeDist <- function (qqq, numbins = 0, whatvar = "Unspecified", whatplots = c("d
    if("d" %in% tolower(whatplots)){
   p<-ggplot() +
     aes(qqq) +
+    geom_density(fill = "deepskyblue") +
     stat_function(fun = dnorm, color="red", args=list(mean=meanqqq, sd=sdqqq)) +
-    geom_density() +
     geom_vline(xintercept = meanqqq, colour="dark green", linetype="dashed", size=1.5) +
     geom_vline(xintercept = medianqqq, colour="yellow", linetype="dashed", size=1.5) +
     geom_vline(xintercept = modeqqq, colour="orange", linetype="dashed") +
