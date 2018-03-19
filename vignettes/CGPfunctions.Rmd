@@ -2,7 +2,7 @@
 title: "CGPfunctions"
 author: "Chuck Powell"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette 
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{CGPfunctions}
   %\VignetteEngine{knitr::rmarkdown}
@@ -22,6 +22,7 @@ A package that includes functions that I find useful for teaching statistics as 
 - `Plot2WayANOVA` which as the name implies conducts a 2 way ANOVA and plots the results using `ggplot2`
 - `neweta` which is a helper function that appends the results of a Type II eta squared calculation onto a classic ANOVA table
 - `Mode` which finds the modal value in a vector of data
+- `SeeDist` which wraps around ggplot2 to provide visualizations of univariate data.
 
 ## Vignette Info
 
@@ -60,18 +61,6 @@ xxx<-CGPfunctions::Plot2WayANOVA(mpg~am*cyl, mtcars)
 ![Example Barplot output](barplot.png)
 
 ![Example Lineplot output](lineplot.png)
-
-## About the output
-
-We can reject the null hypothesis at the $\alpha$ = 0.01 significance level (99% confidence). The F statistic is calculated as $$F = \frac{MS_{between}}{MS_{within}}$$ and the table gives us the precise p value and the common asterisks to show "success". 
-
-In published results format that probably looks like "a Oneway ANOVA showed a significant effect for brand on tire mileage, F(3,56)=17.94, p<.01". In other words, we can reject the null hypothesis that these data came from brand tire populations where the average tire mileage life was the same!  Making it a prediction statement, we can see that brand type helps predict mileage life.
-
-That's exciting news, but leaves us with some other unanswered questions. 
-
-The data provide support for the hypothesis that the means aren't all equal -- that's called the omnibus test. We have support for rejecting $$\mu_{Apollo} = \mu_{Bridgestone} = \mu_{CEAT} = \mu_{Falken}$$ but at this point we can't state with any authority which specific pairs are different, all we can say is that at least one is different! When we look at the graph we made earlier we can guess we know but let's do better than that. How can we use confidence intervals to help us understand whether the data are indicating simple random variation or whether the underlying population is different.  We just need to compute the confidence interval for each brand's mean and then see which brand means lie inside or outside the confidence interval of the others. We would expect that if we ran our experiment 100 times with our sample size numbers for each brand the mileage mean would lie *inside* the upper and lower limit of our confidence interval 99 times (with $\alpha$ = 0.01) out of those 100 times.  If our data shows it outside the confidence interval that is evidence of a statistically significant difference for that specific pairing.
-
-But we don't have to rely on our graph, we can be more precise and test it in a very controlled fashion.
 
 
 ## Credits
