@@ -77,7 +77,7 @@ SeeDist <- function (qqq, numbins = 0, whatvar = "Unspecified", whatplots = c("d
     labs(title = paste0("Distribution of the variable ", xxx, " (", whatvar, ")"),
          subtitle = bquote("N ="~.(length(qqq))*","~bar(X)~"="~.(round(meanqqq,1))*", SD ="~.(round(sdqqq,2))*", Median ="~.(round(medianqqq,2))*", Skewness ="~.(round(Skewqqq,2))*", Kurtosis ="~.(round(Kurtosisqqq,2))),
          x = whatvar,
-         caption = (bquote(bar(X)~" = green, Median = yellow, Mode(s) = orange, Black = density plot, Red = theoretical normal"))) +
+         caption = (bquote(bar(X)~" = green, Median = yellow, Mode(s) = orange, Blue = density plot, Red = theoretical normal"))) +
     xlim(-3 * sd(qqq) + mean(qqq),3 * sd(qqq) + mean(qqq)) +
     theme(axis.title.y=element_blank(),
           axis.text.y=element_blank(),
