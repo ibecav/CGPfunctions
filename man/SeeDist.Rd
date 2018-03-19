@@ -4,7 +4,8 @@
 \alias{SeeDist}
 \title{See The Distribution}
 \usage{
-SeeDist(qqq, numbins = 0, whatvar = "Unspecified")
+SeeDist(qqq, numbins = 0, whatvar = "Unspecified", whatplots = c("d", "b",
+  "h"))
 }
 \arguments{
 \item{qqq}{the data to be visualized must be numeric.}
@@ -15,9 +16,13 @@ via the \code{nclass.FD} function}
 
 \item{whatvar}{additional contextual information about the variable as a string
 such as "Miles Per Gallon"}
+
+\item{whatplots}{what type of plots?  The default is whatplots = c("d","b","h")
+for a density, a boxplot, and a histogram}
 }
 \value{
-from 1 to 3 plots depending on what the user specifies
+from 1 to 3 plots depending on what the user specifies as well as a 
+base R summary printed to the console
 }
 \description{
 This function takes a vector of numeric data and returns one or more ggplot2

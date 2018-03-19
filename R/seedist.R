@@ -9,8 +9,12 @@
 #' via the \code{nclass.FD} function
 #' @param whatvar additional contextual information about the variable as a string
 #' such as "Miles Per Gallon"
+#' @param whatplots what type of plots?  The default is whatplots = c("d","b","h")
+#' for a density, a boxplot, and a histogram
 #'
-#' @return from 1 to 3 plots depending on what the user specifies
+#' @return from 1 to 3 plots depending on what the user specifies as well as a 
+#' base R summary printed to the console
+#' 
 #' @export
 #' @import ggplot2
 #' @importFrom grDevices nclass.FD
@@ -32,7 +36,7 @@
 #' 
 #' @author Chuck Powell
 #' 
-SeeDist <- function (qqq, numbins = 0, whatvar = "Unspecified")
+SeeDist <- function (qqq, numbins = 0, whatvar = "Unspecified", whatplots = c("d","b","h"))
 {
   # error checking
   if (!requireNamespace("ggplot2")) {
@@ -43,12 +47,16 @@ SeeDist <- function (qqq, numbins = 0, whatvar = "Unspecified")
       stop("Sorry the data must be numeric")
   }
    xxx<- deparse(substitute(qqq)) # get the variable name
+   if (sum(is.na(qqq)) != 0) {
+     warning("Removing one or more missing values", call. = FALSE)
+     qqq <- qqq[!is.na(qqq)]
+   }
    meanqqq<-mean(qqq,na.rm = TRUE) # store the mean
    sdqqq<-sd(qqq,na.rm = TRUE) # store the sd
    medianqqq<-median(qqq,na.rm = TRUE)
    modeqqq<-Mode(qqq)
    if (length(modeqqq) >= 4) {
-     warning(paste("There are", length(modeqqq)), " modal values displaying just the first 3")
+     warning(paste("There are", length(modeqqq)), " modal values displaying just the first 3", call. = FALSE)
      modeqqq <- modeqqq[c(1,2,3)]
    }
    Skewqqq<-sum((qqq - mean(qqq,na.rm=TRUE))^3)/(length(qqq[!is.na(qqq)]) * sd(qqq,na.rm=TRUE)^3)
@@ -58,6 +66,7 @@ SeeDist <- function (qqq, numbins = 0, whatvar = "Unspecified")
    custom <- function(x) {dt((qqq - meanqqq), df =length(qqq))}
 
 # build the first plot
+   if("d" %in% tolower(whatplots)){
   p<-ggplot() +
     aes(qqq) +
     stat_function(fun = dnorm, color="red", args=list(mean=meanqqq, sd=sdqqq)) +
@@ -77,14 +86,18 @@ SeeDist <- function (qqq, numbins = 0, whatvar = "Unspecified")
           axis.line.y=element_blank(),
           panel.grid.major.y=element_blank(),
           panel.grid.minor.y=element_blank())
+  print(p)
+   }
+
   # build the second plot
+   if("b" %in% tolower(whatplots)){
   pp<-ggplot() +
     aes(qqq) +
     labs(title = paste0("Distribution of the variable ", xxx, " (", whatvar, ")"),
          subtitle = bquote("N ="~.(length(qqq))*","~bar(X)~"="~.(round(meanqqq,1))*", SD ="~.(round(sdqqq,2))*", Median ="~.(round(medianqqq,2))*", Skewness ="~.(round(Skewqqq,2))*", Kurtosis ="~.(round(Kurtosisqqq,2))),
          y = whatvar,
          caption = (bquote(bar(X)~" displayed as a red dot, Median as a black line, and outlier(s) as small dark red dots"))) +
-    geom_boxplot(aes(x = "", y = qqq), fill = "blue", outlier.color = "dark red") +
+    geom_boxplot(aes(x = "", y = qqq), fill = "deepskyblue", outlier.color = "dark red") +
   coord_flip() +
   geom_point(aes(x = "", y = meanqqq), shape=21, size=4, color="white", fill="red") +
   theme(axis.title.y=element_blank(),
@@ -92,9 +105,11 @@ SeeDist <- function (qqq, numbins = 0, whatvar = "Unspecified")
         axis.ticks.y=element_blank(),
         axis.line.y=element_blank(),
         panel.grid.major.y=element_blank())
-  
+  print(pp)
+   }
 # build the third plot
-  ppp<-ggplot() +
+   if("h" %in% tolower(whatplots)){
+     ppp<-ggplot() +
     aes(qqq) +
     labs(title = paste0("Distribution of the variable ", xxx, " (", whatvar, ")"),
          subtitle = bquote("N ="~.(length(qqq))*","~bar(X)~"="~.(round(meanqqq,1))*", SD ="~.(round(sdqqq,2))*", Median ="~.(round(medianqqq,2))*", Skewness ="~.(round(Skewqqq,2))*", Kurtosis ="~.(round(Kurtosisqqq,2))),
@@ -104,10 +119,8 @@ SeeDist <- function (qqq, numbins = 0, whatvar = "Unspecified")
     geom_vline(xintercept = meanqqq, colour="dark green", linetype="dashed", size=1.5) +
     geom_vline(xintercept = medianqqq, colour="yellow", linetype="dashed", size=1.5) +
     geom_vline(xintercept = modeqqq, colour="orange", linetype="dashed") 
-
-  print(p)
-  print(pp)
-  print(ppp)
+    print(ppp)
+   }  
   return(summary(qqq))
 } # end function
 
