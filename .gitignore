@@ -3,6 +3,5 @@
 .RData
 .Ruserdata
 .DS_Store
-inst/doc
 Rplots.pdf
 myfunctions.Rproj
