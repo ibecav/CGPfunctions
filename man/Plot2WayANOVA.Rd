@@ -4,7 +4,8 @@
 \alias{Plot2WayANOVA}
 \title{Plot a 2 Way ANOVA using dplyr and ggplot2}
 \usage{
-Plot2WayANOVA(formula, dataframe = NULL, confidence=.95, plottype = "bar", PlotSave = FALSE)
+Plot2WayANOVA(formula, dataframe = NULL, confidence=.95, 
+plottype = "bar", PlotSave = FALSE)
 }
 \arguments{
 \item{formula}{a valid R formula with a numeric dependent (outcome)
