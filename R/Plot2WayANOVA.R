@@ -32,6 +32,7 @@
 #' @param dataframe a dataframe or an object that can be coerced to a dataframe
 #' @param confidence what confidence level for confidence intervals
 #' @param plottype bar or line (quoted)
+#' @param PlotSave a logical indicating whether the user wants to save the plot as a png file
 #' @return A list with 4 elements which is returned invisibly. The items are always sent 
 #' to the console for display  The plot is always sent to the default plot device
 #' but for user convenience the function also returns a named list with the following items
@@ -58,7 +59,7 @@
 #' 
 # works March 14, 2018
 # Stable version 0.1
-Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = "bar")
+Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = "bar", PlotSave = FALSE)
 {
   # to appease R CMD Check?
   TheMean <- NULL
@@ -203,12 +204,12 @@ Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = 
   print(SWTest)
   message("\nInteraction graph plotted...")
   print(p)
-  ggsave(potentialfname,device = "png")
-  
-#  return(as.list(c(MyPlot=p$data,ANOVE=WithETA)))
-  whattoreturn <- list(ANOVATable = WithETA, MeansTable = newdata, BFTest = BFTest, SWTest = SWTest, pFileName = potentialfname)
+  whattoreturn <- list(ANOVATable = WithETA, MeansTable = newdata, BFTest = BFTest, SWTest = SWTest)
+  if (PlotSave) {
+    ggsave(potentialfname,device = "png")
+    whattoreturn <- list(ANOVATable = WithETA, MeansTable = newdata, BFTest = BFTest, SWTest = SWTest, pFileName = potentialfname)
+  }
   return(invisible(whattoreturn))
-  #  return(as.data.frame(newdata))
 }
 
 

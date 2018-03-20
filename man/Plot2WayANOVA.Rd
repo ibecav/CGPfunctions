@@ -16,6 +16,8 @@ The independent variables are forced to factors (with warning) if possible.}
 \item{confidence}{what confidence level for confidence intervals}
 
 \item{plottype}{bar or line (quoted)}
+
+\item{PlotSave}{a logical indicating whether the user wants to save the plot as a png file}
 }
 \value{
 A list with 4 elements which is returned invisibly. The items are always sent 
