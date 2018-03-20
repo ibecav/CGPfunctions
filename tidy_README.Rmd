@@ -13,23 +13,18 @@ knitr::opts_chunk$set(
 
 # tidyverse <img src="man/figures/logo.png" align="right" />
 
-[![Travis-CI Build Status](https://travis-ci.org/tidyverse/tidyverse.svg?branch=master)](https://travis-ci.org/tidyverse/tidyverse)
-
 ## Overview
 
-The tidyverse is a set of packages that work in harmony because they share common data representations and API design. The __tidyverse__ package is designed to make it easy to install and load core packages from the tidyverse in a single command.
-
-If you'd like to learn how to use the tidyverse effectively, the best place to start is [R for data science](http://r4ds.had.co.nz).
 
 ## Installation
 
 ```{r eval = FALSE}
 # Install from CRAN
-install.packages("tidyverse")
+install.packages("CGPfunctions")
 
 # Or the development version from GitHub
 # install.packages("devtools")
-devtools::install_github("hadley/tidyverse")
+devtools::install_github("ibecav/CGPfunctions")
 ```
 
 ## Usage
