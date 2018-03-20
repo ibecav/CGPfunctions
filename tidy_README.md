@@ -1,27 +1,19 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-tidyverse <img src="man/figures/logo.png" align="right" />
-==========================================================
-
-[![Travis-CI Build Status](https://travis-ci.org/tidyverse/tidyverse.svg?branch=master)](https://travis-ci.org/tidyverse/tidyverse)
-
+<!--  #' tidyverse <img src="man/figures/logo.png" align="right" />  -->
 Overview
 --------
-
-The tidyverse is a set of packages that work in harmony because they share common data representations and API design. The **tidyverse** package is designed to make it easy to install and load core packages from the tidyverse in a single command.
-
-If you'd like to learn how to use the tidyverse effectively, the best place to start is [R for data science](http://r4ds.had.co.nz).
 
 Installation
 ------------
 
 ``` r
 # Install from CRAN
-install.packages("tidyverse")
+install.packages("CGPfunctions")
 
 # Or the development version from GitHub
 # install.packages("devtools")
-devtools::install_github("hadley/tidyverse")
+devtools::install_github("ibecav/CGPfunctions")
 ```
 
 Usage
@@ -40,15 +32,14 @@ You also get a condensed summary of conflicts with other packages you have loade
 
 ``` r
 library(tidyverse)
-#> Loading tidyverse: ggplot2
-#> Loading tidyverse: tibble
-#> Loading tidyverse: tidyr
-#> Loading tidyverse: readr
-#> Loading tidyverse: purrr
-#> Loading tidyverse: dplyr
-#> Conflicts with tidy packages ----------------------------------------------
-#> filter(): dplyr, stats
-#> lag():    dplyr, stats
+#> ── Attaching packages ────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──
+#> ✔ ggplot2 2.2.1.9000     ✔ purrr   0.2.4     
+#> ✔ tibble  1.4.2          ✔ dplyr   0.7.4     
+#> ✔ tidyr   0.8.0          ✔ stringr 1.3.0     
+#> ✔ readr   1.1.1          ✔ forcats 0.3.0
+#> ── Conflicts ───────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+#> ✖ dplyr::filter() masks stats::filter()
+#> ✖ dplyr::lag()    masks stats::lag()
 ```
 
 You can see conflicts created later with `tidyverse_conflicts()`:
@@ -61,10 +52,10 @@ library(MASS)
 #> 
 #>     select
 tidyverse_conflicts()
-#> Conflicts with tidy packages ----------------------------------------------
-#> filter(): dplyr, stats
-#> lag():    dplyr, stats
-#> select(): dplyr, MASS
+#> ── Conflicts ───────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+#> ✖ dplyr::filter() masks stats::filter()
+#> ✖ dplyr::lag()    masks stats::lag()
+#> ✖ MASS::select()  masks dplyr::select()
 ```
 
 And you can check that all tidyverse packages are up-to-date with `tidyverse_update()`:
@@ -92,6 +83,7 @@ As well as the core tidyverse, installing this package also installs a selection
     -   [stringr](https://github.com/tidyverse/stringr), for strings.
     -   [lubridate](https://github.com/hadley/lubridate), for date/times.
     -   [forcats](https://github.com/hadley/forcats), for factors.
+
 -   Importing other types of data:
 
     -   [feather](http://github.com/wesm/feather), for sharing with Python and other languages.
@@ -101,6 +93,7 @@ As well as the core tidyverse, installing this package also installs a selection
     -   [readxl](https://github.com/hadley/readxl), for `.xls` and `.xlsx` files.
     -   [rvest](https://github.com/hadley/rvest), for web scraping.
     -   [xml2](https://github.com/hadley/xml2), for XML.
+
 -   Modelling
 
     -   [modelr](https://github.com/hadley/modelr), for modelling within a pipeline
