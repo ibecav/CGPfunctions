@@ -58,8 +58,7 @@
 #' @importFrom car leveneTest
 #' @export
 #' 
-# works March 14, 2018
-# Stable version 0.1
+# Stable version 0.2
 Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = "bar", PlotSave = FALSE)
 {
   # to appease R CMD Check?
