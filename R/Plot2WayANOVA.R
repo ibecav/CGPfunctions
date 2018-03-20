@@ -26,7 +26,7 @@
 #' \item Use \code{ggplot2} to plot an interaction plot of the type the user specified }
 #' 
 #' @usage Plot2WayANOVA(formula, dataframe = NULL, confidence=.95, 
-#' plottype = "bar", PlotSave = FALSE)
+#'     plottype = "bar", PlotSave = FALSE)
 #' @param formula a valid R formula with a numeric dependent (outcome)
 #' variable, and two independent (predictor) variables e.g. \code{mpg~am*vs}.
 #' The independent variables are forced to factors (with warning) if possible.
