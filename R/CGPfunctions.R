@@ -1,4 +1,4 @@
-#' CGPfunctions: A package for of miscellaneous functions for teaching statistics.
+#' CGPfunctions: A package of miscellaneous functions for teaching statistics.
 #'
 #' A package that includes miscellaneous functions useful for teaching statistics as well as actually practicing the art. They typically are not “new” methods but rather wrappers around either base R or other packages.
 #' 
