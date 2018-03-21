@@ -1,7 +1,7 @@
 ---
 output: github_document
 ---
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- README.md is generated from this README.Rmd. Please edit this file not the .md file -->
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -78,3 +78,18 @@ Many thanks to Dani Navarro and the book &gt; ([Learning Statistics with R](http
 * [readr](http://readr.tidyverse.org), for data import.
 * [purrr](http://purrr.tidyverse.org), for functional programming.
 * [tibble](http://tibble.tidyverse.org), for tibbles, a modern re-imagining of data frames.
+
+## Leaving Feedback
+
+If you like **CGPfunctions**, please consider leaving [feedback or a
+testimonial here](https://github.com/ibecav/CGPfunctions/issues).
+
+## Contributing
+
+Contributions in the form of feedback, comments, code, and bug reports
+are most welcome. How to contribute:
+
+  - Issues, bug reports, and wish lists: [File a GitHub
+    issue](https://github.com/ibecav/CGPfunctions/issues).
+  - Contact the maintainer ibecav at gmail.com by email.
+
