@@ -135,6 +135,8 @@ whose etaSquared function was the genesis of `neweta`.
 “He who gives up safety for speed deserves neither.”
 ([via](https://twitter.com/hadleywickham/status/504368538874703872))
 
+#### A shoutout to some other packages I find essential.
+
   - [stringr](https://github.com/tidyverse/stringr), for strings.
   - [lubridate](https://github.com/hadley/lubridate), for date/times.
   - [forcats](https://github.com/hadley/forcats), for factors.
