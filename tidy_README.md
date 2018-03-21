@@ -1,8 +1,15 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- README.md is generated from this README.Rmd. Please edit this file not the .md file -->
 <!--  #' tidyverse <img src="man/figures/logo.png" align="right" />  -->
 Overview
 --------
+
+A package that includes functions that I find useful for teaching statistics as well as actually practicing the art. They typically are not "new" methods but rather wrappers around either base R or other packages and concepts I'm trying to master. Currently contains:
+
+-   `Plot2WayANOVA` which as the name implies conducts a 2 way ANOVA and plots the results using `ggplot2`
+-   `neweta` which is a helper function that appends the results of a Type II eta squared calculation onto a classic ANOVA table
+-   `Mode` which finds the modal value in a vector of data
+-   `SeeDist` which wraps around ggplot2 to provide visualizations of univariate data.
 
 Installation
 ------------
@@ -19,49 +26,19 @@ devtools::install_github("ibecav/CGPfunctions")
 Usage
 -----
 
-`library(tidyverse)` will load the core tidyverse packages:
-
--   [ggplot2](http://ggplot2.tidyverse.org), for data visualisation.
--   [dplyr](http://dplyr.tidyverse.org), for data manipulation.
--   [tidyr](http://tidyr.tidyverse.org), for data tidying.
--   [readr](http://readr.tidyverse.org), for data import.
--   [purrr](http://purrr.tidyverse.org), for functional programming.
--   [tibble](http://tibble.tidyverse.org), for tibbles, a modern re-imagining of data frames.
-
-You also get a condensed summary of conflicts with other packages you have loaded:
-
-``` r
-library(tidyverse)
-#> ── Attaching packages ────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──
-#> ✔ ggplot2 2.2.1.9000     ✔ purrr   0.2.4     
-#> ✔ tibble  1.4.2          ✔ dplyr   0.7.4     
-#> ✔ tidyr   0.8.0          ✔ stringr 1.3.0     
-#> ✔ readr   1.1.1          ✔ forcats 0.3.0
-#> ── Conflicts ───────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-#> ✖ dplyr::filter() masks stats::filter()
-#> ✖ dplyr::lag()    masks stats::lag()
-```
+`library(CGPfunctions)` will load the package which contains:
 
 You can see conflicts created later with `tidyverse_conflicts()`:
 
 ``` r
 library(MASS)
-#> 
-#> Attaching package: 'MASS'
-#> The following object is masked from 'package:dplyr':
-#> 
-#>     select
-tidyverse_conflicts()
-#> ── Conflicts ───────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-#> ✖ dplyr::filter() masks stats::filter()
-#> ✖ dplyr::lag()    masks stats::lag()
-#> ✖ MASS::select()  masks dplyr::select()
+# tidyverse_conflicts()
 ```
 
 And you can check that all tidyverse packages are up-to-date with `tidyverse_update()`:
 
 ``` r
-tidyverse_update()
+# tidyverse_update()
 #> The following packages are out of date:
 #>  * broom (0.4.0 -> 0.4.1)
 #>  * DBI   (0.4.1 -> 0.5)
@@ -72,29 +49,36 @@ tidyverse_update()
 #> 2: No
 ```
 
-Packages
---------
+Credits
+-------
 
-As well as the core tidyverse, installing this package also installs a selection of other packages that you're likely to use frequently, but probably not in every analysis. This includes packages for:
+Many thanks to Dani Navarro and the book &gt; ([Learning Statistics with R](http://www.compcogscisydney.com/learning-statistics-with-r.html)) whose etaSquared function was the genesis of `neweta`.
 
--   Working with specific types of vectors:
+"He who gives up safety for speed deserves neither." ([via](https://twitter.com/hadleywickham/status/504368538874703872))
 
-    -   [hms](https://github.com/rstats-db/hms), for times.
-    -   [stringr](https://github.com/tidyverse/stringr), for strings.
-    -   [lubridate](https://github.com/hadley/lubridate), for date/times.
-    -   [forcats](https://github.com/hadley/forcats), for factors.
+-   [stringr](https://github.com/tidyverse/stringr), for strings.
+-   [lubridate](https://github.com/hadley/lubridate), for date/times.
+-   [forcats](https://github.com/hadley/forcats), for factors.
+-   [haven](https://github.com/hadley/haven), for SPSS, SAS and Stata files.
+-   [readxl](https://github.com/hadley/readxl), for `.xls` and `.xlsx` files.
+-   [modelr](https://github.com/hadley/modelr), for modelling within a pipeline
+-   [broom](https://github.com/dgrtwo/broom), for turning models into tidy data
+-   [ggplot2](http://ggplot2.tidyverse.org), for data visualisation.
+-   [dplyr](http://dplyr.tidyverse.org), for data manipulation.
+-   [tidyr](http://tidyr.tidyverse.org), for data tidying.
+-   [readr](http://readr.tidyverse.org), for data import.
+-   [purrr](http://purrr.tidyverse.org), for functional programming.
+-   [tibble](http://tibble.tidyverse.org), for tibbles, a modern re-imagining of data frames.
 
--   Importing other types of data:
+Leaving Feedback
+----------------
 
-    -   [feather](http://github.com/wesm/feather), for sharing with Python and other languages.
-    -   [haven](https://github.com/hadley/haven), for SPSS, SAS and Stata files.
-    -   [httr](https://github.com/hadley/httr), for web apis.
-    -   [jsonlite](https://github.com/jeroenooms/jsonlite) for JSON.
-    -   [readxl](https://github.com/hadley/readxl), for `.xls` and `.xlsx` files.
-    -   [rvest](https://github.com/hadley/rvest), for web scraping.
-    -   [xml2](https://github.com/hadley/xml2), for XML.
+If you like **CGPfunctions**, please consider leaving [feedback or a testimonial here](https://github.com/ibecav/CGPfunctions/issues).
 
--   Modelling
+Contributing
+------------
 
-    -   [modelr](https://github.com/hadley/modelr), for modelling within a pipeline
-    -   [broom](https://github.com/dgrtwo/broom), for turning models into tidy data
+Contributions in the form of feedback, comments, code, and bug reports are most welcome. How to contribute:
+
+-   Issues, bug reports, and wish lists: [File a GitHub issue](https://github.com/ibecav/CGPfunctions/issues).
+-   Contact the maintainer ibecav at gmail.com by email.
