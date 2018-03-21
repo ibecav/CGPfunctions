@@ -20,9 +20,6 @@
 #'
 OurConf <- function (samples = 100, n = 30, mu = 0, sigma = 1, conf.level = 0.95) 
 {
-  if (!require(ggplot2)) {
-    stop("Can't continue can't load ggplot2")
-  }
   alpha <- 1 - conf.level
   CL <- conf.level * 100
   n <- round(n)
@@ -70,10 +67,3 @@ OurConf <- function (samples = 100, n = 30, mu = 0, sigma = 1, conf.level = 0.95
   print(p)
   cat(percentage, "% of the confidence intervals contain Mu =", mu, ".", "\n")
 }
-
-OurConf(samples = 100, n = 30, mu = 0, sigma = 1, conf.level = 0.95)
-OurConf(samples = 2, n =5)
-OurConf()
-OurConf(sigma = 0)
-
-
