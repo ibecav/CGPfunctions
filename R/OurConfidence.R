@@ -1,16 +1,23 @@
 # modified from https://www.rdocumentation.org/packages/BSDA/versions/1.2.0/topics/CIsim
-#' Title
+#' OurConfidence
 #'
-#' @param samples 
-#' @param n 
-#' @param mu 
-#' @param sigma 
-#' @param conf.level 
+#' This function takes some parameters and simulates random samples and
+#' their confidence intervals
 #'
-#' @return
+#' @param samples The number of times to draw random samples
+#' @param n The sample size we draw each time
+#' @param mu The population mean mu
+#' @param sigma The population standard deviation
+#' @param conf.level What confidence level to compute 1 - alpha (significance level)
+#'
+#' @return A ggplot2 object
 #' @export
 #'
 #' @examples
+#' OurConf(samples = 100, n = 30, mu = 0, sigma = 1, conf.level = 0.95)
+#' OurConf(samples = 2, n =5)
+#' OurConf(samples = 25, n = 25, mu = 100, sigma = 20, conf.level = 0.99)
+#'
 OurConf <- function (samples = 100, n = 30, mu = 0, sigma = 1, conf.level = 0.95) 
 {
   if (!require(ggplot2)) {
