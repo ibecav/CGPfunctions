@@ -50,19 +50,14 @@ SeeDist(mtcars$hp,whatvar="Horsepower",whatplots="d")
 Mode(mtcars$hp)
 ```
 
-
-
-```{r update, eval = FALSE}
-# tidyverse_update()
-#> The following packages are out of date:
-#>  * broom (0.4.0 -> 0.4.1)
-#>  * DBI   (0.4.1 -> 0.5)
-#>  * Rcpp  (0.12.6 -> 0.12.7)
-#> Update now?
-#> 
-#> 1: Yes
-#> 2: No
+`neweta` is a helper function which returns a tibble containing AOV output similar to summary(aov(MyAOV)) but with eta squared computed and appended as an additional column
+```{r neweta}
+MyAOV <- aov(mpg~am*cyl, mtcars)
+neweta(MyAOV)
 ```
+
+
+
 
 ## Credits
 

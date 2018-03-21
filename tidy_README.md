@@ -57,6 +57,22 @@ Mode(mtcars$hp)
 #> [1] 110 175 180
 ```
 
+`neweta` is a helper function which returns a tibble containing AOV
+output similar to summary(aov(MyAOV)) but with eta squared computed and
+appended as an additional column
+
+``` r
+MyAOV <- aov(mpg~am*cyl, mtcars)
+neweta(MyAOV)
+#> # A tibble: 4 x 8
+#>   Source       Df `Sum Sq` `Mean Sq` `F value`       p sigstars `eta sq`
+#>   <fct>     <int>    <dbl>     <dbl>     <dbl>   <dbl> <chr>       <dbl>
+#> 1 am            1     37.0     37.0       4.30  0.0480 *          0.0330
+#> 2 cyl           1    450.     450.       52.0   0.     ***        0.399 
+#> 3 am:cyl        1     29.4     29.4       3.40  0.0760 .          0.0260
+#> 4 Residuals    28    242.       8.64     NA    NA      <NA>       0.215
+```
+
 ``` r
 # tidyverse_update()
 #> The following packages are out of date:
