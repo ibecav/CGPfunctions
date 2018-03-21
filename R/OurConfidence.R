@@ -14,7 +14,7 @@
 #' @return A ggplot2 object
 #' @export
 #' @importFrom stats qnorm rnorm
-#' @seealso \code{\link[stats]{qnorm}}, \code{\link[stats]{rnorm}}
+#' @seealso \code{\link[stats]{qnorm}}, \code{\link[stats]{rnorm}}, \code{\link[BSDA]{CIsim}}
 #'
 #' @author Chuck Powell
 #'
@@ -69,7 +69,7 @@ OurConf <- function (samples = 100, n = 30, mu = 0, sigma = 1, conf.level = 0.95
          subtitle = bquote("Note:"~.(percentage)*"% of the confidence intervals contain"~mu~"="~.(mu)), 
          y = expression("Sample mean"~(bar(X))), 
          x = paste0("Random samples of size = ", n),
-         caption = ("modified from https://www.rdocumentation.org/packages/BSDA/versions/1.2.0/topics/CIsim")) +
+         caption = ("modified from the CIsim function in package BSDA")) +
     bestfit() +
     guides(color=guide_legend(title=NULL)) +
     theme_bw()
