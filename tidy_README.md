@@ -34,17 +34,28 @@ devtools::install_github("ibecav/CGPfunctions")
 
 ## Usage
 
-`library(CGPfunctions)` will load the package which contains:
+`library(CGPfunctions)` will load the package which contains 4
+functions:
 
-You can see conflicts created later with `tidyverse_conflicts()`:
+`SeeDist` will give you some plots of the distribution of a variable
+using `ggplot2`
 
 ``` r
-library(MASS)
-# tidyverse_conflicts()
+library(CGPfunctions)
+SeeDist(mtcars$hp,whatvar="Horsepower",whatplots="d")
 ```
 
-And you can check that all tidyverse packages are up-to-date with
-`tidyverse_update()`:
+![](README-SeeDist-1.png)<!-- -->
+
+    #>    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+    #>    52.0    96.5   123.0   146.7   180.0   335.0
+
+`Mode` is a helper function that simply returns one or more modal values
+
+``` r
+Mode(mtcars$hp)
+#> [1] 110 175 180
+```
 
 ``` r
 # tidyverse_update()
