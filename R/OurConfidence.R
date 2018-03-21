@@ -1,3 +1,4 @@
+# stable
 # modified from https://www.rdocumentation.org/packages/BSDA/versions/1.2.0/topics/CIsim
 #' OurConfidence
 #'
