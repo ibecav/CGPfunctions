@@ -15,6 +15,7 @@ A package that includes miscellaneous functions useful for teaching statistics a
   \item \code{neweta} which is a helper function that appends the results of a Type II eta squared calculation onto a classic ANOVA table
   \item \code{Mode} which finds the modal value in a vector of data
   \item \code{SeeDist} which wraps around ggplot2 to provide visualizations of univariate data.
+  \item \code{OurConf} which wraps around ggplot2 to provide visualizations of sampling confidence intervals.
 }
 }
 
