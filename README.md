@@ -20,6 +20,8 @@ packages and concepts I’m trying to master. Currently contains:
   - `Mode` which finds the modal value in a vector of data
   - `SeeDist` which wraps around ggplot2 to provide visualizations of
     univariate data.
+  - `OurConf` is a simulation function that helps you learn about
+    confidence intervals
 
 ## Installation
 
@@ -135,7 +137,7 @@ OurConf(samples = 20, n = 15, mu = 100, sigma = 20, conf.level = 0.90)
 
 ![](README-OurConf-1.png)<!-- -->
 
-    #> 90 % of the confidence intervals contain Mu = 100 .
+    #> 100 % of the confidence intervals contain Mu = 100 .
 
 ## Credits
 

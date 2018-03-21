@@ -23,6 +23,7 @@ A package that includes functions that I find useful for teaching statistics as 
 - `neweta` which is a helper function that appends the results of a Type II eta squared calculation onto a classic ANOVA table
 - `Mode` which finds the modal value in a vector of data
 - `SeeDist` which wraps around ggplot2 to provide visualizations of univariate data.
+- `OurConf` is a simulation function that helps you learn about confidence intervals
 
 ## Installation
 
