@@ -126,6 +126,17 @@ Plot2WayANOVA(mpg~am*cyl, mtcars)
 
 ![](README-Plot2WayANOVA-1.png)<!-- -->
 
+`OurConf` is a simulation function that helps you learn about confidence
+intervals
+
+``` r
+OurConf(samples = 20, n = 15, mu = 100, sigma = 20, conf.level = 0.90)
+```
+
+![](README-OurConf-1.png)<!-- -->
+
+    #> 90 % of the confidence intervals contain Mu = 100 .
+
 ## Credits
 
 Many thanks to Dani Navarro and the book \> ([Learning Statistics with

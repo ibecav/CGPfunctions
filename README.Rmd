@@ -63,6 +63,11 @@ The `Plot2WayANOVA` function conducts a classic analysis using existing R functi
 Plot2WayANOVA(mpg~am*cyl, mtcars)
 ```
 
+`OurConf` is a simulation function that helps you learn about confidence intervals
+```{r OurConf}
+OurConf(samples = 20, n = 15, mu = 100, sigma = 20, conf.level = 0.90)
+```
+
 
 ## Credits
 
