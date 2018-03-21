@@ -12,6 +12,7 @@
 #'
 #' @return A ggplot2 object
 #' @export
+#' @importFrom stats qnorm rnorm
 #'
 #' @examples
 #' OurConf(samples = 100, n = 30, mu = 0, sigma = 1, conf.level = 0.95)
