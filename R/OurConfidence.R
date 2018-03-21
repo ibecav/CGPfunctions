@@ -1,9 +1,4 @@
 # modified from https://www.rdocumentation.org/packages/BSDA/versions/1.2.0/topics/CIsim
-OurConf(samples = 100, n = 30, mu = 0, sigma = 1, conf.level = 0.95)
-OurConf(samples = 2, n =5)
-OurConf()
-OurConf(sigma = 0)
-
 OurConf <- function (samples = 100, n = 30, mu = 0, sigma = 1, conf.level = 0.95) 
 {
   if (!require(ggplot2)) {
@@ -11,10 +6,8 @@ OurConf <- function (samples = 100, n = 30, mu = 0, sigma = 1, conf.level = 0.95
   }
   alpha <- 1 - conf.level
   CL <- conf.level * 100
-  # round n and N in case user entered a non integer
   n <- round(n)
   N <- round(samples)
-  # check for nonsense input
   if (N <= 0 || n <= 1) 
     stop("Number of random samples and sample size must both be at least 2")
   if (!missing(conf.level) && (length(conf.level) != 1 || !is.finite(conf.level) || 
@@ -47,16 +40,21 @@ OurConf <- function (samples = 100, n = 30, mu = 0, sigma = 1, conf.level = 0.95
     geom_point() + 
     geom_hline(yintercept = mu) +
     geom_errorbar(aes(ymin = ll, ymax = ul,color=correct), width = 0.3) +
-    #    scale_y_continuous(limits = c((mu - 2*sigma), (mu + 2*sigma))) +
     labs(title = bquote(.(N)~"random samples with"~.(CL)*"% confidence intervals where"~mu~"="~.(mu)~"and"~sigma~"="~.(sigma)),
          subtitle = bquote("Note:"~.(percentage)*"% of the confidence intervals contain"~mu~"="~.(mu)), 
          y = expression("Sample mean"~(bar(X))), 
          x = paste0("Random samples of size = ", n),
          caption = ("modified from https://www.rdocumentation.org/packages/BSDA/versions/1.2.0/topics/CIsim")) +
     bestfit() +
-    #        scale_x_discrete(breaks=seq(0,500,10)) +
     guides(color=guide_legend(title=NULL)) +
     theme_bw()
   print(p)
   cat(percentage, "% of the confidence intervals contain Mu =", mu, ".", "\n")
 }
+
+OurConf(samples = 100, n = 30, mu = 0, sigma = 1, conf.level = 0.95)
+OurConf(samples = 2, n =5)
+OurConf()
+OurConf(sigma = 0)
+
+
