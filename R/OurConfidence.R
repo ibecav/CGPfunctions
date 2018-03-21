@@ -14,6 +14,9 @@
 #' @return A ggplot2 object
 #' @export
 #' @importFrom stats qnorm rnorm
+#' @seealso \code{\link[stats]{qnorm}}, \code{\link[stats]{rnorm}}
+#'
+#' @author Chuck Powell
 #'
 #' @examples
 #' OurConf(samples = 100, n = 30, mu = 0, sigma = 1, conf.level = 0.95)
