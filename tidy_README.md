@@ -1,5 +1,5 @@
 
-<!-- README.md is generated from this README.Rmd. Please edit this file not the .md file -->
+<!-- README.md is generated from this README.Rmd. Please edit the .rmd file not the .md file -->
 <!--  #' tidyverse <img src="man/figures/logo.png" align="right" />  -->
 Overview
 --------
