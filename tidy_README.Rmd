@@ -57,6 +57,11 @@ neweta(MyAOV)
 ```
 
 
+The `Plot2WayANOVA` function conducts a classic analysis using existing R functions and packages in a sane and defensible manner not necessarily in the one and only manner.
+
+```{r Plot2WayANOVA, echo=TRUE, message=TRUE, warning=FALSE, paged.print=TRUE}
+Plot2WayANOVA(mpg~am*cyl, mtcars)
+```
 
 
 ## Credits
