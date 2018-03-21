@@ -1,4 +1,16 @@
 # modified from https://www.rdocumentation.org/packages/BSDA/versions/1.2.0/topics/CIsim
+#' Title
+#'
+#' @param samples 
+#' @param n 
+#' @param mu 
+#' @param sigma 
+#' @param conf.level 
+#'
+#' @return
+#' @export
+#'
+#' @examples
 OurConf <- function (samples = 100, n = 30, mu = 0, sigma = 1, conf.level = 0.95) 
 {
   if (!require(ggplot2)) {
