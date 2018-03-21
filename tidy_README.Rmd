@@ -2,6 +2,8 @@
 output: github_document
 ---
 <!-- README.md is generated from this README.Rmd. Please edit the .rmd file not the .md file -->
+[![CRAN Version](http://www.r-pkg.org/badges/version/CGPfunctions)](http://CRAN.R-project.org/package=CGPfunctions) 
+
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -81,8 +83,7 @@ Many thanks to Dani Navarro and the book &gt; ([Learning Statistics with R](http
 
 ## Leaving Feedback
 
-If you like **CGPfunctions**, please consider leaving [feedback or a
-testimonial here](https://github.com/ibecav/CGPfunctions/issues).
+If you like **CGPfunctions**, please consider leaving [feedback here](https://github.com/ibecav/CGPfunctions/issues).
 
 ## Contributing
 
