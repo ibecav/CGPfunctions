@@ -3,6 +3,21 @@ CGPfunctions
 Chuck Powell
 2018-03-19
 
+
+Installation
+------------
+
+``` r
+# Install from CRAN
+install.packages("CGPfunctions")
+
+# Or the development version from GitHub
+# install.packages("devtools")
+devtools::install_github("ibecav/CGPfunctions")
+```
+
+Overview
+--------
 A package that includes functions that I find useful for teaching statistics as well as actually practicing the art.  They typically are not "new" methods but rather wrappers around either base R or other packages and concepts I'm trying to master.  Currently contains:
 
 - `Plot2WayANOVA` which as the name implies conducts a 2 way ANOVA and plots the results using `ggplot2`
