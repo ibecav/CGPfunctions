@@ -4,7 +4,7 @@ author: "Chuck Powell"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{CGPfunctions}
+  %\VignetteIndexEntry{Plot2WayAnova}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
