@@ -25,9 +25,9 @@ The CGPfunctions package includes functions that I find useful for teaching stat
 
 ## Vignette Info
 
-The ANOVA family of statistical techniques that allow us to compare mean differences of one outcome (dependent) variable across two or more groups (levels) of one or independent variables (factor). It is also true that ANOVA is a special case of the GLM or regression models so as the number of levels increase it might make more sense to try one of those approaches.  The 2 Way ANOVA allows for comparisons of mean differences across 2 independent variables `factors` and varying numbers of levels.
+The ANOVA family of statistical techniques allow us to compare mean differences of one outcome (dependent) variable across two or more groups (levels) of one or more independent variables (factor). It is also true that ANOVA is a special case of the GLM or regression models so as the number of levels increase it might make more sense to try one of those approaches.  The 2 Way ANOVA allows for comparisons of mean differences across 2 independent variables `factors` with a varying numbers of `levels` in each `factor`.
 
-The `Plot2WayANOVA` function conducts a classic analysis using existing R functions and packages in a sane and defensible manner not necessarily in the one and only manner.
+The `Plot2WayANOVA` function conducts a classic analysis of variance (ANOVA) using existing R functions and packages in a sane and defensible manner not necessarily in the one and only manner.
 
 ## Scenario and data
 
