@@ -1,5 +1,5 @@
 ---
-title: "CGPfunctions"
+title: "Using Plot2WayAnova "
 author: "Chuck Powell"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
