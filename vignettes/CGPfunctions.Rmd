@@ -13,7 +13,7 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "\vignettes"
+  fig.path = "P2A-"
 )
 ```
 
