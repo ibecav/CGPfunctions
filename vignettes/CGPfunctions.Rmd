@@ -13,7 +13,8 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "P2A-"
+  fig.path = "P2A-",
+  fig.dim = c(6, 4)
 )
 ```
 
@@ -56,10 +57,6 @@ There's no lack or tools or capabilities in base R or in the many packages to do
 ```{r Plot2WayANOVA, echo=TRUE, message=TRUE, warning=FALSE, paged.print=TRUE}
 CGPfunctions::Plot2WayANOVA(mpg~am*cyl, mtcars)
 ```
-
-![Example Barplot output](barplot.png)
-
-![Example Lineplot output](lineplot.png)
 
 
 ## Credits
