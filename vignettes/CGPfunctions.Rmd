@@ -50,12 +50,30 @@ There's no lack or tools or capabilities in base R or in the many packages to do
 1. The Homogeneity of Variance assumption is tested with Brown-Forsythe
 1. The normality assumption is tested with Shapiro-Wilk
 
+## Installation
+
+```{r eval = FALSE}
+# Install from CRAN
+install.packages("CGPfunctions")
+
+# Or the development version from GitHub
+# install.packages("devtools")
+devtools::install_github("ibecav/CGPfunctions")
+```
+
+then load the library.
+
+```{r LoadLibrary}
+library(CGPfunctions)
+```
+
+
 ## Example of using the function
 
-`Plot2WayANOVA(mpg~am*cyl, mtcars)`
+The only two required parameters are a formula and a dataframe (like) object. If we run the function in its simplest form here's what we get.
 
 ```{r Plot2WayANOVA, echo=TRUE, message=TRUE, warning=FALSE, paged.print=TRUE}
-CGPfunctions::Plot2WayANOVA(mpg~am*cyl, mtcars)
+Plot2WayANOVA(mpg~am*cyl, mtcars)
 ```
 
 
