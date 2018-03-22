@@ -1,6 +1,6 @@
 # stable
 # modified from https://www.rdocumentation.org/packages/BSDA/versions/1.2.0/topics/CIsim
-#' OurConfidence
+#' Plotting random samples of confidence intervals around the mean
 #'
 #' This function takes some parameters and simulates random samples and
 #' their confidence intervals
