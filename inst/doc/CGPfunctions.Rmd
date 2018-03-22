@@ -1,10 +1,10 @@
 ---
-title: "Using Plot2WayAnova "
+title: "Using Plot2WayAnova"
 author: "Chuck Powell"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{CGPfunctions}
+  %\VignetteIndexEntry{Plot2WayAnova}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -12,23 +12,23 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.path = "P2A-",
+  fig.dim = c(6, 4)
 )
 ```
 
-
-A package that includes functions that I find useful for teaching statistics as well as actually practicing the art.  They typically are not "new" methods but rather wrappers around either base R or other packages and concepts I'm trying to master.  Currently contains:
+## Background
+The CGPfunctions package includes functions that I find useful for teaching statistics especially to novices (as well as an opportunity to sharpen my own R skills).  I only write functions when I have a real need -- no theory -- just help for actually practicing the art.  They typically are not "new" methods but rather wrappers around either base R or other packages and are very task focused.  This vignette covers two functions from the pack that try and help users (especially students) do one thing well by pulling together pieces from a variety of places. They are:
 
 - `Plot2WayANOVA` which as the name implies conducts a 2 way ANOVA and plots the results using `ggplot2`
 - `neweta` which is a helper function that appends the results of a Type II eta squared calculation onto a classic ANOVA table
-- `Mode` which finds the modal value in a vector of data
-- `SeeDist` which wraps around ggplot2 to provide visualizations of univariate data.
 
 ## Vignette Info
 
-The ANOVA family of statistical techniques that allow us to compare mean differences of one outcome (dependent) variable across two or more groups (levels) of one or independent variables (factor). It is also true that ANOVA is a special case of the GLM or regression models so as the number of levels increase it might make more sense to try one of those approaches.  The 2 Way ANOVA allows for comparisons of mean differences across 2 independent variables `factors` and varying numbers of levels.
+The ANOVA family of statistical techniques allow us to compare mean differences of one outcome (dependent) variable across two or more groups (levels) of one or more independent variables (factor). It is also true that ANOVA is a special case of the GLM or regression models so as the number of levels increase it might make more sense to try one of those approaches.  The 2 Way ANOVA allows for comparisons of mean differences across 2 independent variables `factors` with a varying numbers of `levels` in each `factor`.
 
-The `Plot2WayANOVA` function conducts a classic analysis using existing R functions and packages in a sane and defensible manner not necessarily in the one and only manner.
+The `Plot2WayANOVA` function conducts a classic analysis of variance (ANOVA) using existing R functions and packages in a sane and defensible manner not necessarily in the one and only manner.
 
 ## Scenario and data
 
@@ -50,17 +50,31 @@ There's no lack or tools or capabilities in base R or in the many packages to do
 1. The Homogeneity of Variance assumption is tested with Brown-Forsythe
 1. The normality assumption is tested with Shapiro-Wilk
 
-## Example of using the function
+## Installation
 
-`Plot2WayANOVA(mpg~am*cyl, mtcars)`
+```{r eval = FALSE}
+# Install from CRAN
+install.packages("CGPfunctions")
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
-xxx<-CGPfunctions::Plot2WayANOVA(mpg~am*cyl, mtcars)
+# Or the development version from GitHub
+# install.packages("devtools")
+devtools::install_github("ibecav/CGPfunctions")
 ```
 
-![Example Barplot output](barplot.png)
+then load the library.
 
-![Example Lineplot output](lineplot.png)
+```{r LoadLibrary}
+library(CGPfunctions)
+```
+
+
+## Example of using the function
+
+The only two required parameters are a formula and a dataframe (like) object. If we run the function in its simplest form here's what we get.
+
+```{r Plot2WayANOVA, echo=TRUE, message=TRUE, warning=FALSE, paged.print=TRUE}
+Plot2WayANOVA(mpg~am*cyl, mtcars)
+```
 
 
 ## Credits
