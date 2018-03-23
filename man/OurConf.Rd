@@ -2,7 +2,7 @@
 % Please edit documentation in R/OurConfidence.R
 \name{OurConf}
 \alias{OurConf}
-\title{OurConfidence}
+\title{Plotting random samples of confidence intervals around the mean}
 \usage{
 OurConf(samples = 100, n = 30, mu = 0, sigma = 1, conf.level = 0.95)
 }
