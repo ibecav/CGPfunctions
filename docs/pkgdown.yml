@@ -4,3 +4,6 @@ pkgdown_sha: cc081c30e20c69ad54a4f9fc9d4d42faba0bf1e5
 articles:
   CGPfunctions: CGPfunctions.html
 
+template:  
+  params:  
+    bootswatch: cosmo  
