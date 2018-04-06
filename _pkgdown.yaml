@@ -2,4 +2,5 @@ title: CGPfunctions
 url: http://ibecav.github.io/CGPfunctions
 template:  
   params:  
-    bootswatch: cosmo  
+    bootswatch: cosmo
+    ganalytics: UA-117082388-1
