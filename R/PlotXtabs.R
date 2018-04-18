@@ -24,7 +24,7 @@
 #' @export
 #'
 #' @author Chuck Powell
-#' @seealso \code{\link[janitor]{tabyls}}
+#' @seealso \code{\link[janitor]{janitor}}
 #'
 #' @examples
 #' PlotXTabs(mtcars, am, vs)
