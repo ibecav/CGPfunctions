@@ -3,6 +3,7 @@
 export(Mode)
 export(OurConf)
 export(Plot2WayANOVA)
+export(PlotXTabs)
 export(SeeDist)
 export(neweta)
 import(dplyr)
