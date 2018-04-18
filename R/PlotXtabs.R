@@ -6,7 +6,7 @@
 #' using ggplot2.  The function accepts either bare variable names or 
 #' column numbers as input (see examples for the possibilities)
 #' 
-#' @usage PlotXTabs(dataframe, which, ywhich, plottype = "side")
+#' @usage PlotXTabs(dataframe, xwhich, ywhich, plottype = "side")
 #' @param dataframe an object that is of class dataframe
 #' @param xwhich either a bare variable name that is valid in the 
 #' dataframe or one or more column numbers. An attempt will be
@@ -35,6 +35,15 @@
 #' PlotXTabs(mtcars, am, c(8,10), "percent")
 #' PlotXTabs(mtcars, c(10,8), am)
 #' PlotXTabs(mtcars, c(2,9), c(10,8), "mispelled")
+#'\dontrun{
+#' PlotXTabs(happy,happy,sex) # baseline
+#' PlotXTabs(happy,2,5,"stack") # same thing using column numbers
+#' PlotXTabs(happy, 2, c(5:9), plottype = "percent") # multiple columns RHS
+#' PlotXTabs(happy, c(2,5), 9, plottype = "side") # multiple columns LHS
+#' PlotXTabs(happy, c(2,5), c(6:9), plottype = "percent")
+#' PlotXTabs(happy, happy, c(6,7,9), plottype = "percent")
+#' PlotXTabs(happy, c(6,7,9), happy, plottype = "percent")
+#' }
 #' 
 PlotXTabs <- function(dataframe, xwhich, ywhich, plottype = "side"){
 # error checking
@@ -170,11 +179,13 @@ PlotXTabs <- function(dataframe, xwhich, ywhich, plottype = "side"){
 # } else {
 #  stop("Can't load productplots can't use the following examples")
 # }
-# PlotXTabs(happy,happy,sex) # baseline
-# PlotXTabs(happy,2,5,"stack") # same thing using column numbers
-# PlotXTabs(happy, 2, c(5:9), plottype = "percent") # multiple columns RHS
-# PlotXTabs(happy, c(2,5), 9, plottype = "side") # multiple columns LHS
-# PlotXTabs(happy, c(2,5), c(6:9), plottype = "percent")
-# PlotXTabs(happy, happy, c(6,7,9), plottype = "percent")
-# PlotXTabs(happy, c(6,7,9), happy, plottype = "percent")
+#'\dontrun{
+#' PlotXTabs(happy,happy,sex) # baseline
+#' PlotXTabs(happy,2,5,"stack") # same thing using column numbers
+#' PlotXTabs(happy, 2, c(5:9), plottype = "percent") # multiple columns RHS
+#' PlotXTabs(happy, c(2,5), 9, plottype = "side") # multiple columns LHS
+#' PlotXTabs(happy, c(2,5), c(6:9), plottype = "percent")
+#' PlotXTabs(happy, happy, c(6,7,9), plottype = "percent")
+#' PlotXTabs(happy, c(6,7,9), happy, plottype = "percent")
+#' }
 
