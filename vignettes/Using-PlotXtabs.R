@@ -1,15 +1,4 @@
----
-title: "Using PlotXtabs"
-author: "Chuck Powell"
-date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Using PlotXtabs}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
-
-```{r setup, echo = FALSE, warning=FALSE, message=FALSE}
+## ----setup, echo = FALSE, warning=FALSE, message=FALSE-------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -146,36 +135,8 @@ PlotXtabs <- function(dataframe, xwhich, ywhich, plottype = "side"){
         return(message("Plotting complete"))
   } # end of if case where all are numeric
 } # end of function
-```
 
-This function is designed to automate and make efficient a relatively common task in some branches of science.  The task of cross tabulating and displaying certain types of variables. It makes use of `dplyr` and `ggplot2` to achieve those ends. 
-
-Imagine that you want to take two of the `mtcars` variables, for example `am` and `cyl`, and conduct a cross tabulation and then plot it.  Since it's the sort of thing I'm likely to do often seemed like a good candidate to write a function for.  Then I decided that I might very well want the function to allow me to input more than two variables at a time.  It would be very tedious to execute the command 25 times if I had 5 dependent variables and 5 independent variables and needed to fully cross them.
-
-It provides visually appealing and sensibly labelled charts quickly and efficiently. It does some basic error checking and allows the user some choice as to exact style without having to know any underlying syntax.
-
-## Possible cases
-
-The function is designed to handle four possible scenarios.
-
-Take the user's input and parse it into one of four known possibilities and then take appropriate action.  The possibilities are:
-
-1.  If both are `bare` variables and found in the dataframe immediately print the plot
-2.  At least one of the variables is `bare` and found in the dataframe (variable x) and the other is one or more column numbers (variable y)
-3.  At least one of the variables is `bare` and found in the dataframe (variable y) and the other is one or more column numbers (variable x)
-4.  Both the variables were passed to us as numbers.  Could be one or more numbers for either variable.
-
-## Example scenario ... What makes us happy?
-
-The documentation examples use the `mtcars` built-in dataset.  It's handy, convenient, and it's installed by default. To actually show the function in action, however, I'm going to use a different dataset.  Something that should allow you to better see the value of making plots of the crosstabs rather than simple tables.  It also has the happy property of being much much larger than `mtcars` so we can see if there are lags in performance due to the number of rows.
-
-Rather than provide my own or make anyone work too hard I selected that `happy` dataset that comes bundled with several `R` packages including `productplots` and `GGally`.   From the description:
-
-> The data is a small sample of variables related to happiness from the general social survey (GSS). The GSS is a yearly cross-sectional survey of Americans, run from 1976. We combine data for 25 years to yield 51,020 observations, and of the over 5,000 variables, we select nine related to happiness. 
-
-We'll be focusing on the non numeric variables.  I certainly can't claim to do a detailed analysis here but at least the questions will be fun I hope...
-
-```{r vignette1, fig.width=6.0, fig.height=2}
+## ----vignette1, fig.width=6.0, fig.height=2------------------------------
 # PackageList <- .packages(all.available = TRUE)
 # if ("productplots" %in% PackageList) {
 #   data("happy",package = "productplots")
@@ -194,14 +155,4 @@ PlotXtabs(happy, c(2,5), 9, plottype = "side")
 PlotXtabs(happy, c(2,5), c(6:9), plottype = "percent")
 PlotXtabs(happy, happy, c(6,7,9), plottype = "percent")
 PlotXtabs(happy, c(6,7,9), happy, plottype = "percent")
-```
 
-I hope you've found this useful.  I am always open to comments, corrections and suggestions.
-
-Chuck (ibecav at gmail dot com)
-
-### License
-<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
