@@ -1,4 +1,20 @@
-# Fully moved passes basic checks no doco.
+#' Plot a Cross Tabulation of two variables using dplyr and ggplot2
+#' 
+#' Takes a dataframe and at least two variables as input, conducts a 
+#' crosstabulation of the variables using dplyr removes NAs and then
+#' plots the results as anyone of threee types of bar (column) graphs
+#' using ggplot2.  The functions accepts either bare variable names or 
+#' column numbers as input
+#' 
+#' @param dataframe an object that is of class dataframe
+#' @param xwhich either a bare variable name that is valid in the dataframe or one or more column numbers
+#' @param ywhich  either a bare variable name that is valid in the dataframe or one or more column numbers
+#' @param plottype one of three options "side", "stack" or "percent"
+#'
+#' @return one or more ggplots to the default graphics devise as well as advisory information in the console
+#' @export
+#'
+#' @examples
 PlotXTabs <- function(dataframe, xwhich, ywhich, plottype = "side"){
 # error checking
 #  if (!require(ggplot2)) {
