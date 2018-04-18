@@ -176,12 +176,6 @@ Rather than provide my own or make anyone work too hard I selected that `happy` 
 We'll be focusing on the non numeric variables.  I certainly can't claim to do a detailed analysis here but at least the questions will be fun I hope...
 
 ```{r vignette1, fig.width=6.0, fig.height=2}
-# PackageList <- .packages(all.available = TRUE)
-# if ("productplots" %in% PackageList) {
-#   data("happy",package = "productplots")
-# } else {
-#   stop("Can't load productplots can't use the following examples")
-# }
 # who's happier by gender
 PlotXtabs(happy,happy,sex)
 # same thing using column numbers and a stacked bar
