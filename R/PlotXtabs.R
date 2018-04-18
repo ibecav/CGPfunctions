@@ -1,26 +1,38 @@
 #' Plot a Cross Tabulation of two variables using dplyr and ggplot2
 #' 
 #' Takes a dataframe and at least two variables as input, conducts a 
-#' crosstabulation of the variables using dplyr removes NAs and then
-#' plots the results as anyone of threee types of bar (column) graphs
-#' using ggplot2.  The functions accepts either bare variable names or 
-#' column numbers as input
+#' crosstabulation of the variables using dplyr. Removes NAs and then
+#' plots the results as one of three types of bar (column) graphs
+#' using ggplot2.  The function accepts either bare variable names or 
+#' column numbers as input (see examples for the possibilities)
 #' 
+#' @usage PlotXTabs(dataframe, which, ywhich, plottype = "side")
 #' @param dataframe an object that is of class dataframe
-#' @param xwhich either a bare variable name that is valid in the dataframe or one or more column numbers
-#' @param ywhich  either a bare variable name that is valid in the dataframe or one or more column numbers
+#' @param xwhich either a bare variable name that is valid in the 
+#' dataframe or one or more column numbers. An attempt will be
+#' made to coerce the variable to a factor but odd plots will occur
+#' if you pass it a variable that is by rights continuous in nature.
+#' @param ywhich either a bare variable name that is valid in the 
+#' dataframe or one or more column numbers that exist in the dataframe.
+#' An attempt will be
+#' made to coerce the variable to a factor but odd plots will occur
+#' if you pass it a variable that is by rights continuous in nature. 
 #' @param plottype one of three options "side", "stack" or "percent"
 #'
-#' @return one or more ggplots to the default graphics devise as well as advisory information in the console
+#' @return One or more ggplots to the default graphics device as well as 
+#' advisory information in the console
 #' @export
 #'
+#' @author Chuck Powell
+#' @seealso \code{\link[janitor]{tabyls}}
+#'
 #' @examples
-#' PlotXTabs(mtcars,am,vs)
-#' PlotXTabs(mtcars,am,vs, "stack")
-#' PlotXTabs(mtcars,am,vs, "percent")
-#' PlotXTabs(mtcars,am,8, "side")
-#' PlotXTabs(mtcars,8,am, "stack")
-#' PlotXTabs(mtcars,am,c(8,10), "percent")
+#' PlotXTabs(mtcars, am, vs)
+#' PlotXTabs(mtcars, am, vs, "stack")
+#' PlotXTabs(mtcars, am, vs, "percent")
+#' PlotXTabs(mtcars, am, 8, "side")
+#' PlotXTabs(mtcars, 8, am, "stack")
+#' PlotXTabs(mtcars, am, c(8,10), "percent")
 #' PlotXTabs(mtcars, c(10,8), am)
 #' PlotXTabs(mtcars, c(2,9), c(10,8), "mispelled")
 #' 
