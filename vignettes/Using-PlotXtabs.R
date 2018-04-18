@@ -137,12 +137,6 @@ PlotXtabs <- function(dataframe, xwhich, ywhich, plottype = "side"){
 } # end of function
 
 ## ----vignette1, fig.width=6.0, fig.height=2------------------------------
-# PackageList <- .packages(all.available = TRUE)
-# if ("productplots" %in% PackageList) {
-#   data("happy",package = "productplots")
-# } else {
-#   stop("Can't load productplots can't use the following examples")
-# }
 # who's happier by gender
 PlotXtabs(happy,happy,sex)
 # same thing using column numbers and a stacked bar
