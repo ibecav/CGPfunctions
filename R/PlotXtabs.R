@@ -15,6 +15,15 @@
 #' @export
 #'
 #' @examples
+#' PlotXTabs(mtcars,am,vs)
+#' PlotXTabs(mtcars,am,vs, "stack")
+#' PlotXTabs(mtcars,am,vs, "percent")
+#' PlotXTabs(mtcars,am,8, "side")
+#' PlotXTabs(mtcars,8,am, "stack")
+#' PlotXTabs(mtcars,am,c(8,10), "percent")
+#' PlotXTabs(mtcars, c(10,8), am)
+#' PlotXTabs(mtcars, c(2,9), c(10,8), "mispelled")
+#' 
 PlotXTabs <- function(dataframe, xwhich, ywhich, plottype = "side"){
 # error checking
 #  if (!require(ggplot2)) {
