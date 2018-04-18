@@ -128,14 +128,14 @@ PlotXTabs <- function(dataframe, xwhich, ywhich, plottype = "side"){
   } # end of if case where all are numeric
 } # end of function
 
-PlotMeX(mtcars,am,vs)
-PlotMeX(mtcars,am,vs, "stack")
-PlotMeX(mtcars,am,vs, "percent")
-PlotMeX(mtcars,am,8, "side")
-PlotMeX(mtcars,8,am, "stack")
-PlotMeX(mtcars,am,c(8,10), "percent")
-PlotMeX(mtcars, c(10,8), am)
-PlotMeX(mtcars, c(2,9), c(10,8), "mispelled")
+PlotXTabs(mtcars,am,vs)
+PlotXTabs(mtcars,am,vs, "stack")
+PlotXTabs(mtcars,am,vs, "percent")
+PlotXTabs(mtcars,am,8, "side")
+PlotXTabs(mtcars,8,am, "stack")
+PlotXTabs(mtcars,am,c(8,10), "percent")
+PlotXTabs(mtcars, c(10,8), am)
+PlotXTabs(mtcars, c(2,9), c(10,8), "mispelled")
 
 
 PackageList <- .packages(all.available = TRUE)
@@ -144,11 +144,11 @@ if ("productplots" %in% PackageList) {
 } else {
   stop("Can't load productplots can't use the following examples")
 }
-PlotMeX(happy,happy,sex) # baseline
-PlotMeX(happy,2,5,"stack") # same thing using column numbers
-PlotMeX(happy, 2, c(5:9), plottype = "percent") # multiple columns RHS
-PlotMeX(happy, c(2,5), 9, plottype = "side") # multiple columns LHS
-PlotMeX(happy, c(2,5), c(6:9), plottype = "percent")
-PlotMeX(happy, happy, c(6,7,9), plottype = "percent")
-PlotMeX(happy, c(6,7,9), happy, plottype = "percent")
+PlotXTabs(happy,happy,sex) # baseline
+PlotXTabs(happy,2,5,"stack") # same thing using column numbers
+PlotXTabs(happy, 2, c(5:9), plottype = "percent") # multiple columns RHS
+PlotXTabs(happy, c(2,5), 9, plottype = "side") # multiple columns LHS
+PlotXTabs(happy, c(2,5), c(6:9), plottype = "percent")
+PlotXTabs(happy, happy, c(6,7,9), plottype = "percent")
+PlotXTabs(happy, c(6,7,9), happy, plottype = "percent")
 
