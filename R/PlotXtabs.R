@@ -1,4 +1,4 @@
-# Fully working... maybe?
+# Fully moved passes basic checks no doco.
 PlotXTabs <- function(dataframe, xwhich, ywhich, plottype = "side"){
 # error checking
 #  if (!require(ggplot2)) {
