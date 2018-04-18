@@ -1,13 +1,13 @@
 # Fully working... maybe?
 PlotXTabs <- function(dataframe, xwhich, ywhich, plottype = "side"){
 # error checking
-  if (!require(ggplot2)) {
-    stop("Can't continue can't load ggplot2")
-  }
+#  if (!require(ggplot2)) {
+#    stop("Can't continue can't load ggplot2")
+#  }
   theme_set(theme_bw())
-  if (!require(dplyr)) {
-    stop("Can't continue can't load dplyr")
-  }
+#  if (!require(dplyr)) {
+#    stop("Can't continue can't load dplyr")
+#  }
   if (length(match.call()) <= 3) {
     stop("Not enough arguments passed... requires a dataframe, plus at least two variables")
   }
@@ -138,17 +138,17 @@ PlotXTabs(mtcars, c(10,8), am)
 PlotXTabs(mtcars, c(2,9), c(10,8), "mispelled")
 
 
-PackageList <- .packages(all.available = TRUE)
-if ("productplots" %in% PackageList) {
-  data("happy",package = "productplots")
-} else {
-  stop("Can't load productplots can't use the following examples")
-}
-PlotXTabs(happy,happy,sex) # baseline
-PlotXTabs(happy,2,5,"stack") # same thing using column numbers
-PlotXTabs(happy, 2, c(5:9), plottype = "percent") # multiple columns RHS
-PlotXTabs(happy, c(2,5), 9, plottype = "side") # multiple columns LHS
-PlotXTabs(happy, c(2,5), c(6:9), plottype = "percent")
-PlotXTabs(happy, happy, c(6,7,9), plottype = "percent")
-PlotXTabs(happy, c(6,7,9), happy, plottype = "percent")
+# PackageList <- .packages(all.available = TRUE)
+# if ("productplots" %in% PackageList) {
+#  data("happy",package = "productplots")
+# } else {
+#  stop("Can't load productplots can't use the following examples")
+# }
+# PlotXTabs(happy,happy,sex) # baseline
+# PlotXTabs(happy,2,5,"stack") # same thing using column numbers
+# PlotXTabs(happy, 2, c(5:9), plottype = "percent") # multiple columns RHS
+# PlotXTabs(happy, c(2,5), 9, plottype = "side") # multiple columns LHS
+# PlotXTabs(happy, c(2,5), c(6:9), plottype = "percent")
+# PlotXTabs(happy, happy, c(6,7,9), plottype = "percent")
+# PlotXTabs(happy, c(6,7,9), happy, plottype = "percent")
 
