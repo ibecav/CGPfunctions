@@ -1,9 +1,7 @@
 ## ----setup, include = FALSE----------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  fig.path = "P2A-",
-  fig.dim = c(6, 4)
+  comment = "#>"
 )
 
 ## ----eval = FALSE--------------------------------------------------------
@@ -17,6 +15,6 @@ knitr::opts_chunk$set(
 ## ----LoadLibrary---------------------------------------------------------
 library(CGPfunctions)
 
-## ----Plot2WayANOVA, echo=TRUE, message=TRUE, warning=FALSE, paged.print=TRUE----
+## ----Plot2WayANOVA, echo=TRUE, message=TRUE, warning=FALSE, fig.width=6.0, fig.height=3.5----
 Plot2WayANOVA(mpg~am*cyl, mtcars)
 
