@@ -46,14 +46,7 @@
 #' }
 #' 
 PlotXTabs <- function(dataframe, xwhich, ywhich, plottype = "side"){
-# error checking
-#  if (!require(ggplot2)) {
-#    stop("Can't continue can't load ggplot2")
-#  }
   theme_set(theme_bw())
-#  if (!require(dplyr)) {
-#    stop("Can't continue can't load dplyr")
-#  }
   if (length(match.call()) <= 3) {
     stop("Not enough arguments passed... requires a dataframe, plus at least two variables")
   }
