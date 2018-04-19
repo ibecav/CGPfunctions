@@ -2,7 +2,7 @@
 <!-- README.md is generated from this README.Rmd. Please edit the .rmd file not the .md file -->
 
 [![CRAN
-Version](http://www.r-pkg.org/badges/version/CGPfunctions)](http://CRAN.R-project.org/package=CGPfunctions)
+Version](https://www.r-pkg.org/badges/version/CGPfunctions)](https://CRAN.R-project.org/package=CGPfunctions)
 
 ## Overview
 
