@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 ```
 
 ## Background
-The CGPfunctions package includes functions that I find useful for teaching statistics especially to novices (as well as an opportunity to sharpen my own R skills).  I only write functions when I have a real need -- no theory -- just help for actually practicing the art.  They typically are not "new" methods but rather wrappers around either base R or other packages and are very task focused.  This vignette covers two functions from the package that try and help users (especially students) do one thing well by pulling together pieces from a variety of places. They are:
+The CGPfunctions package includes functions that I find useful for teaching statistics especially to novices (as well as an opportunity to sharpen my own R skills).  I only write functions when I have a real need -- no theory -- just help for actually practicing the art.  They typically are not "new" methods but rather wrappers around either base R or other packages and are very task focused.  This vignette covers two functions from the package that try and help users (especially students) do one thing well by pulling together pieces from a variety of places. They are as follows:
 
 - `Plot2WayANOVA` which as the name implies conducts a 2 way ANOVA and plots the results using `ggplot2`
 - `neweta` which is a helper function that appends the results of a Type II eta squared calculation onto a classic ANOVA table
