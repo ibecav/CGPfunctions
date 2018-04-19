@@ -22,6 +22,7 @@
 #' @return One or more ggplots to the default graphics device as well as 
 #' advisory information in the console
 #' @export
+#' @import ggplot2
 #'
 #' @author Chuck Powell
 #' @seealso \code{\link[janitor]{janitor}}
