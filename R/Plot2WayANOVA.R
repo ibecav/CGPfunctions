@@ -49,7 +49,7 @@
 #' Plot2WayANOVA(mpg~am*cyl, mtcars, plottype = "line")
 #' Plot2WayANOVA(mpg~am*vs, mtcars, confidence = .99)
 #' 
-#' @import dplyr
+#' @importFrom dplyr group_by summarise %>% n
 #' @import ggplot2
 #' @import rlang
 #' @importFrom methods is
