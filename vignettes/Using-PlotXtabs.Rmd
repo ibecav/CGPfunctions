@@ -1,10 +1,10 @@
 ---
-title: "Using PlotXtabs"
+title: "Using PlotXTabs"
 author: "Chuck Powell"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Using PlotXtabs}
+  %\VignetteIndexEntry{Using PlotXTabs}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -18,7 +18,7 @@ library(dplyr)
 library(ggplot2)
 library(productplots)
 theme_set(theme_bw()) # set theme to my personal preference
-PlotXtabs <- function(dataframe, xwhich, ywhich, plottype = "side"){
+PlotXTabs <- function(dataframe, xwhich, ywhich, plottype = "side"){
   if (length(match.call()) <= 3) {
     stop("Not enough arguments passed... requires a dataframe, plus at least two variables")
   }
@@ -169,17 +169,17 @@ We'll be focusing on the non numeric variables.  I certainly can't claim to do a
 
 ```{r vignette1, fig.width=6.0, fig.height=2}
 # who's happier by gender
-PlotXtabs(happy,happy,sex)
+PlotXTabs(happy,happy,sex)
 # same thing using column numbers and a stacked bar
-PlotXtabs(happy,2,5,"stack")
+PlotXTabs(happy,2,5,"stack")
 # happiness by a variety of possible factors as a percent
-PlotXtabs(happy, 2, c(5:9), plottype = "percent")
+PlotXTabs(happy, 2, c(5:9), plottype = "percent")
 # turn the numbers around and change them up basically just showing all
 # the permutations
-PlotXtabs(happy, c(2,5), 9, plottype = "side")
-PlotXtabs(happy, c(2,5), c(6:9), plottype = "percent")
-PlotXtabs(happy, happy, c(6,7,9), plottype = "percent")
-PlotXtabs(happy, c(6,7,9), happy, plottype = "percent")
+PlotXTabs(happy, c(2,5), 9, plottype = "side")
+PlotXTabs(happy, c(2,5), c(6:9), plottype = "percent")
+PlotXTabs(happy, happy, c(6,7,9), plottype = "percent")
+PlotXTabs(happy, c(6,7,9), happy, plottype = "percent")
 ```
 
 I hope you've found this useful.  I am always open to comments, corrections and suggestions.
