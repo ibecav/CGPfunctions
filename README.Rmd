@@ -13,8 +13,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-<!--  #' tidyverse <img src="man/figures/logo.png" align="right" />  -->
-
 ## Overview
 
 A package that includes functions that I find useful for teaching statistics as well as actually practicing the art.  They typically are not "new" methods but rather wrappers around either base R or other packages and concepts I'm trying to master.  Currently contains:
@@ -41,33 +39,14 @@ devtools::install_github("ibecav/CGPfunctions")
 `library(CGPfunctions)` will load the package which contains 4 functions: 
 
 `SeeDist` will give you some plots of the distribution of a variable using `ggplot2`
-```{r SeeDist}
-library(CGPfunctions)
-SeeDist(mtcars$hp,whatvar="Horsepower",whatplots="d")
-```
 
 `Mode` is a helper function that simply returns one or more modal values
-```{r Mode}
-Mode(mtcars$hp)
-```
 
 `neweta` is a helper function which returns a tibble containing AOV output similar to summary(aov(MyAOV)) but with eta squared computed and appended as an additional column
-```{r neweta}
-MyAOV <- aov(mpg~am*cyl, mtcars)
-neweta(MyAOV)
-```
-
 
 The `Plot2WayANOVA` function conducts a classic analysis using existing R functions and packages in a sane and defensible manner not necessarily in the one and only manner.
 
-```{r Plot2WayANOVA, echo=TRUE, message=TRUE, warning=FALSE, paged.print=TRUE}
-Plot2WayANOVA(mpg~am*cyl, mtcars)
-```
-
 `OurConf` is a simulation function that helps you learn about confidence intervals
-```{r OurConf}
-OurConf(samples = 20, n = 15, mu = 100, sigma = 20, conf.level = 0.90)
-```
 
 
 ## Credits
