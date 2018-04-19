@@ -12,9 +12,7 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  fig.path = "P2A-",
-  fig.dim = c(6, 4)
+  comment = "#>"
 )
 ```
 
@@ -72,7 +70,7 @@ library(CGPfunctions)
 
 The only two required parameters are a formula and a dataframe (like) object. If we run the function in its simplest form here's what we get.
 
-```{r Plot2WayANOVA, echo=TRUE, message=TRUE, warning=FALSE, paged.print=TRUE}
+```{r Plot2WayANOVA, echo=TRUE, message=TRUE, warning=FALSE, fig.width=6.0, fig.height=3.5}
 Plot2WayANOVA(mpg~am*cyl, mtcars)
 ```
 
