@@ -5,6 +5,7 @@
 #' @section Functions included:
 #' \itemize{
 #'   \item \code{\link{Plot2WayANOVA}} which as the name implies conducts a 2 way ANOVA and plots the results using `ggplot2`
+#'   \item \code{\link{PlotXTabs}} which as the name implies plots cross tabulated variables using `ggplot2`
 #'   \item \code{\link{neweta}} which is a helper function that appends the results of a Type II eta squared calculation onto a classic ANOVA table
 #'   \item \code{\link{Mode}} which finds the modal value in a vector of data
 #'   \item \code{\link{SeeDist}} which wraps around ggplot2 to provide visualizations of univariate data.
