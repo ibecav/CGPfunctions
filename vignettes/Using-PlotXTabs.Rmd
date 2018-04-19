@@ -21,7 +21,7 @@ This function is designed to automate and make efficient a relatively common tas
 
 Imagine that you want to take two of the `mtcars` variables, for example `am` and `cyl`, and conduct a cross tabulation and then plot it.  Since it's the sort of thing I'm likely to do often seemed like a good candidate to write a function for.  Then I decided that I might very well want the function to allow me to input more than two variables at a time.  It would be very tedious to execute the command 25 times if I had 5 dependent variables and 5 independent variables and needed to fully cross them.
 
-It provides visually appealing and sensibly labelled charts quickly and efficiently. It does some basic error checking and allows the user some choice as to exact style without having to know any underlying syntax.
+It provides visually appealing and sensibly labelled charts quickly and efficiently. It does some basic error checking and allows the user some choice as to exact style without having to know any underlying syntax or semantics.
 
 ## Possible cases
 
