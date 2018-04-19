@@ -5,11 +5,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Using PlotXtabs • CGPfunctions</title>
+<title>Using PlotXTabs • CGPfunctions</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><meta property="og:title" content="Using PlotXtabs">
+<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><meta property="og:title" content="Using PlotXTabs">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -64,7 +64,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Using-PlotXtabs.html">Using PlotXtabs</a>
+      <a href="../articles/Using-PlotXTabs.html">Using PlotXTabs</a>
     </li>
   </ul>
 </li>
@@ -91,13 +91,13 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Using PlotXtabs</h1>
+      <h1>Using PlotXTabs</h1>
                         <h4 class="author">Chuck Powell</h4>
             
-            <h4 class="date">2018-04-18</h4>
+            <h4 class="date">2018-04-19</h4>
       
-      <small>Source: <a href="https://github.com/ibecav/CGPfunctions/blob/master/vignettes/Using-PlotXtabs.Rmd"><code>vignettes/Using-PlotXtabs.Rmd</code></a></small>
-      <p class="hidden name"><code>Using-PlotXtabs.Rmd</code></p>
+      <small>Source: <a href="https://github.com/ibecav/CGPfunctions/blob/master/vignettes/Using-PlotXTabs.Rmd"><code>vignettes/Using-PlotXTabs.Rmd</code></a></small>
+      <p class="hidden name"><code>Using-PlotXTabs.Rmd</code></p>
 
     </div>
 
@@ -127,20 +127,20 @@
 <p>The data is a small sample of variables related to happiness from the general social survey (GSS). The GSS is a yearly cross-sectional survey of Americans, run from 1976. We combine data for 25 years to yield 51,020 observations, and of the over 5,000 variables, we select nine related to happiness.</p>
 </blockquote>
 <p>We’ll be focusing on the non numeric variables. I certainly can’t claim to do a detailed analysis here but at least the questions will be fun I hope…</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># who's happier by gender</span>
-<span class="kw">PlotXtabs</span>(happy,happy,sex)
-<span class="co">#&gt; Plotted dataset happy variables happy by sex</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># who's happier by gender</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="../reference/PlotXTabs.html">PlotXTabs</a></span>(happy,happy,sex)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co">#&gt; Plotted dataset happy variables happy by sex</span></a></code></pre></div>
 <p><img src="Using-PlotXtabs_files/figure-html/vignette1-1.png" width="576"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># same thing using column numbers and a stacked bar</span>
-<span class="kw">PlotXtabs</span>(happy,<span class="dv">2</span>,<span class="dv">5</span>,<span class="st">"stack"</span>)
-<span class="co">#&gt; Creating the variable pairings from dataframe happy</span>
-<span class="co">#&gt; Plot #1 happy with sex</span>
-<span class="co">#&gt; Plotting complete</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># same thing using column numbers and a stacked bar</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="../reference/PlotXTabs.html">PlotXTabs</a></span>(happy,<span class="dv">2</span>,<span class="dv">5</span>,<span class="st">"stack"</span>)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt; Creating the variable pairings from dataframe happy</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt; Plot #1 happy with sex</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt; Plotting complete</span></a></code></pre></div>
 <p><img src="Using-PlotXtabs_files/figure-html/vignette1-2.png" width="576"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># happiness by a variety of possible factors as a percent</span>
-<span class="kw">PlotXtabs</span>(happy, <span class="dv">2</span>, <span class="kw">c</span>(<span class="dv">5</span><span class="op">:</span><span class="dv">9</span>), <span class="dt">plottype =</span> <span class="st">"percent"</span>)
-<span class="co">#&gt; Creating the variable pairings from dataframe happy</span>
-<span class="co">#&gt; Plot #1 happy with sex</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># happiness by a variety of possible factors as a percent</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="../reference/PlotXTabs.html">PlotXTabs</a></span>(happy, <span class="dv">2</span>, <span class="kw">c</span>(<span class="dv">5</span><span class="op">:</span><span class="dv">9</span>), <span class="dt">plottype =</span> <span class="st">"percent"</span>)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; Creating the variable pairings from dataframe happy</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; Plot #1 happy with sex</span></a></code></pre></div>
 <p><img src="Using-PlotXtabs_files/figure-html/vignette1-3.png" width="576"></p>
 <pre><code>#&gt; Plot #2 happy with marital</code></pre>
 <p><img src="Using-PlotXtabs_files/figure-html/vignette1-4.png" width="576"></p>
@@ -151,18 +151,18 @@
 <pre><code>#&gt; Plot #5 happy with health
 #&gt; Plotting complete</code></pre>
 <p><img src="Using-PlotXtabs_files/figure-html/vignette1-7.png" width="576"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># turn the numbers around and change them up basically just showing all</span>
-<span class="co"># the permutations</span>
-<span class="kw">PlotXtabs</span>(happy, <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">5</span>), <span class="dv">9</span>, <span class="dt">plottype =</span> <span class="st">"side"</span>)
-<span class="co">#&gt; Creating the variable pairings from dataframe happy</span>
-<span class="co">#&gt; Plot #1 happy with health</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># turn the numbers around and change them up basically just showing all</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co"># the permutations</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw"><a href="../reference/PlotXTabs.html">PlotXTabs</a></span>(happy, <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">5</span>), <span class="dv">9</span>, <span class="dt">plottype =</span> <span class="st">"side"</span>)</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; Creating the variable pairings from dataframe happy</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; Plot #1 happy with health</span></a></code></pre></div>
 <p><img src="Using-PlotXtabs_files/figure-html/vignette1-8.png" width="576"></p>
 <pre><code>#&gt; Plot #2 sex with health
 #&gt; Plotting complete</code></pre>
 <p><img src="Using-PlotXtabs_files/figure-html/vignette1-9.png" width="576"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">PlotXtabs</span>(happy, <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">5</span>), <span class="kw">c</span>(<span class="dv">6</span><span class="op">:</span><span class="dv">9</span>), <span class="dt">plottype =</span> <span class="st">"percent"</span>)
-<span class="co">#&gt; Creating the variable pairings from dataframe happy</span>
-<span class="co">#&gt; Plot #1 happy with marital</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="../reference/PlotXTabs.html">PlotXTabs</a></span>(happy, <span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">5</span>), <span class="kw">c</span>(<span class="dv">6</span><span class="op">:</span><span class="dv">9</span>), <span class="dt">plottype =</span> <span class="st">"percent"</span>)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; Creating the variable pairings from dataframe happy</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co">#&gt; Plot #1 happy with marital</span></a></code></pre></div>
 <p><img src="Using-PlotXtabs_files/figure-html/vignette1-10.png" width="576"></p>
 <pre><code>#&gt; Plot #2 happy with degree</code></pre>
 <p><img src="Using-PlotXtabs_files/figure-html/vignette1-11.png" width="576"></p>
@@ -179,18 +179,18 @@
 <pre><code>#&gt; Plot #8 sex with health
 #&gt; Plotting complete</code></pre>
 <p><img src="Using-PlotXtabs_files/figure-html/vignette1-17.png" width="576"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">PlotXtabs</span>(happy, happy, <span class="kw">c</span>(<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">9</span>), <span class="dt">plottype =</span> <span class="st">"percent"</span>)
-<span class="co">#&gt; Creating the variable pairings from dataframe happy</span>
-<span class="co">#&gt; Plot #1 happy with marital</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw"><a href="../reference/PlotXTabs.html">PlotXTabs</a></span>(happy, happy, <span class="kw">c</span>(<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">9</span>), <span class="dt">plottype =</span> <span class="st">"percent"</span>)</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="co">#&gt; Creating the variable pairings from dataframe happy</span></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="co">#&gt; Plot #1 happy with marital</span></a></code></pre></div>
 <p><img src="Using-PlotXtabs_files/figure-html/vignette1-18.png" width="576"></p>
 <pre><code>#&gt; Plot #2 happy with degree</code></pre>
 <p><img src="Using-PlotXtabs_files/figure-html/vignette1-19.png" width="576"></p>
 <pre><code>#&gt; Plot #3 happy with health
 #&gt; Plotting complete</code></pre>
 <p><img src="Using-PlotXtabs_files/figure-html/vignette1-20.png" width="576"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">PlotXtabs</span>(happy, <span class="kw">c</span>(<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">9</span>), happy, <span class="dt">plottype =</span> <span class="st">"percent"</span>)
-<span class="co">#&gt; Creating the variable pairings from dataframe happy</span>
-<span class="co">#&gt; Plot #1 marital with happy</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw"><a href="../reference/PlotXTabs.html">PlotXTabs</a></span>(happy, <span class="kw">c</span>(<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">9</span>), happy, <span class="dt">plottype =</span> <span class="st">"percent"</span>)</a>
+<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="co">#&gt; Creating the variable pairings from dataframe happy</span></a>
+<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="co">#&gt; Plot #1 marital with happy</span></a></code></pre></div>
 <p><img src="Using-PlotXtabs_files/figure-html/vignette1-21.png" width="576"></p>
 <pre><code>#&gt; Plot #2 degree with happy</code></pre>
 <p><img src="Using-PlotXtabs_files/figure-html/vignette1-22.png" width="576"></p>

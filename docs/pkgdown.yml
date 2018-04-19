@@ -1,9 +1,9 @@
-pandoc: 1.19.2.1
+pandoc: 2.1.3
 pkgdown: 0.1.0.9000
 pkgdown_sha: cc081c30e20c69ad54a4f9fc9d4d42faba0bf1e5
 articles:
   CGPfunctions: CGPfunctions.html
-  Using-PlotXtabs: Using-PlotXtabs.html
+  Using-PlotXTabs: Using-PlotXTabs.html
 urls:
   reference: http://ibecav.github.io/CGPfunctions/reference
   article: http://ibecav.github.io/CGPfunctions/articles
