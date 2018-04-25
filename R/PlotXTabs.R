@@ -22,7 +22,7 @@
 #' @return One or more ggplots to the default graphics device as well as 
 #' advisory information in the console
 #' @export
-#' @import ggplot2
+#' @import ggplot2 scales
 #' @importFrom dplyr group_by summarise %>% count filter mutate
 #'
 #' @author Chuck Powell
@@ -69,7 +69,8 @@ PlotXTabs <- function(dataframe, xwhich, ywhich, plottype = "side"){
          stack = list(geom_bar(stat="identity"),
                       ylab("Count")) -> whichbar,
          percent = list(geom_bar(stat="identity", position="fill"),
-                        ylab("Percent")) -> whichbar,
+                        ylab("Percent"),
+                        scale_y_continuous(labels = scales::percent, breaks = seq(0, 1, by = 0.10))) -> whichbar,
          list(geom_bar(position="dodge", stat="identity"),
               ylab("Count")) -> whichbar
   )
@@ -80,10 +81,14 @@ PlotXTabs <- function(dataframe, xwhich, ywhich, plottype = "side"){
       mutate(!!quo_name(aaa) := factor(!!aaa), !!quo_name(bbb) := factor(!!bbb)) %>%
       group_by(!! aaa,!! bbb) %>%
       count() -> tempdf
+    originalcount <- nrow(dataframe)
+    newcount <- sum(tempdf$n)
+    missingcount <- originalcount - newcount
     tempdf %>%
       ggplot(aes_(fill=aaa, y=~n, x=bbb)) +
       whichbar +
-      ggtitle(bquote("Crosstabs dataset = "*.(dfname)*" and variables = "*.(xname)~"by "*.(yname))) -> p
+      ggtitle(sprintf("Crosstab of %s N = %i after removing %i missing cases", dfname, newcount, missingcount),
+              subtitle = sprintf("Variables %s by %s ", yname, xname)) -> p
     print(p)
   }
   
