@@ -1,19 +1,8 @@
 # https://github.com/leeper/slopegraph
 # https://ibecav.github.io/slopegraph/
 # https://rpubs.com/hadley/97970
-
-cancer <- structure(list(Year.5 = c(99, 96, 95, 89, 86, 85, 84, 82, 71, 69, 63, 62, 62, 58, 57, 55, 43, 32, 30, 24, 15, 14, 8, 4),
-                         Year.10 = c(95, 96, 94, 87, 78, 80, 83, 76, 64, 57, 55, 54, 55, 46, 46, 49, 32, 29, 13, 19, 11, 8, 6, 3),
-                         Year.15 = c(87, 94, 91, 84, 71, 74,  81, 70, 63, 46, 52, 50, 54, 38, 38, 50, 30, 28, 7, 19, 7, 8, 6, 3),
-                         Year.20 = c(81, 95, 88, 83, 75, 67, 79, 68, 60, 38, 49, 47, 52, 34, 33, 50, 26, 26, 5, 15, 6, 5, 8, 3)),
-                    class = "data.frame",
-                    row.names = c("Prostate", "Thyroid", "Testis", "Melanomas", "Breast", "Hodgkin's", "Uterus", "Urinary", "Cervix", "Larynx", "Rectum", "Kidney", "Colon", "Non-Hodgkin's", "Oral", "Ovary", "Leukemia", "Brain", "Multiple myeloma", "Stomach", "Lung", "Esophagus", "Liver", "Pancreas")
-)
-str(cancer)
-newcancer <- reshape2::melt(broom::fix_data_frame(t(cancer),newcol = "Year"),variable.name="Type",value.name = "Survival")
-newcancer$Year <- factor(newcancer$Year, levels = c("Year.5", "Year.10", "Year.15", "Year.20") , labels = c("5 Year","10 Year","15 Year","20 Year"), ordered = TRUE)
-newcancer$Type <- forcats::fct_recode(newcancer$Type, "Hodgkin's" = "Hodgkin.s", "Non-Hodgkin's" = "Non.Hodgkin.s", "Multiple myeloma" = "Multiple.myeloma")
-head(newcancer)
+# load(newcancer.rda)
+# head(newcancer)
 
 #' Plot a Slopegraph a la Tufte using dplyr and ggplot2
 #'
