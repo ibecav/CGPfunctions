@@ -8,20 +8,30 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+This function is designed to automate the process of producing a [Tufte style slopegraph](https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0003nk) using `ggplot2`. 
 
-```{r setup, echo = FALSE, warning=FALSE, message=FALSE}
+I've been aware of slopegraphs and bumpcharts for quite some time, and I certainly am aware of [Tufte's work](https://www.edwardtufte.com/tufte/). As an amateur military historian I've always loved, for example, [his poster](https://www.edwardtufte.com/tufte/posters) depicting Napoleon's Russian Campaign. So when I saw the article from [Murtaza Haider](https://www.r-bloggers.com/author/murtaza-haider/) titled *"Edward Tufte’s Slopegraphs and political fortunes in Ontario"* I just had to take a shot at writing a function.
+
+To make it a little easier to get started with the function I have taken the libefty of providing the cancer data in a format where it is immediately useable.  Please see `?newcancer`.
+
+## Installation and setup
+
+Long term I'll try and ensure the version on `CRAN` is well maintained but for now you're better served by grabbing the current version from GITHUB.
+
+```{r setup}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+# Install from CRAN
+# install.packages("CGPfunctions")
+
+# Or the development version from GitHub
+# install.packages("devtools")
+devtools::install_github("ibecav/CGPfunctions")
 library(CGPfunctions)
 ```
 
-This function is designed to automate and make efficient a relatively common task in some branches of science.  The task of cross tabulating and displaying certain types of variables. It makes use of `dplyr` and `ggplot2` to achieve those ends. 
-
-Imagine that you want to take two of the `mtcars` variables, for example `am` and `cyl`, and conduct a cross tabulation and then plot it.  Since it's the sort of thing I'm likely to do often seemed like a good candidate to write a function for.  Then I decided that I might very well want the function to allow me to input more than two variables at a time.  It would be very tedious to execute the command 25 times if I had 5 dependent variables and 5 independent variables and needed to fully cross them.
-
-It provides visually appealing and sensibly labelled charts quickly and efficiently. It does some basic error checking and allows the user some choice as to exact style without having to know any underlying syntax or semantics.
 
 ## Possible cases
 
@@ -42,28 +52,11 @@ Rather than provide my own or make anyone work too hard I selected that `happy` 
 
 > The data is a small sample of variables related to happiness from the general social survey (GSS). The GSS is a yearly cross-sectional survey of Americans, run from 1976. We combine data for 25 years to yield 51,020 observations, and of the over 5,000 variables, we select nine related to happiness. 
 
-We'll load the library and take a quick look at the structure of the data.
-
-```{r LoadLibrary}
-library(productplots)
-str(happy)
-```
 
 We'll be focusing on the non numeric variables.  I certainly can't claim to do a detailed analysis here but at least the questions will be fun I hope...
 
-```{r vignette1, fig.width=6.0, fig.height=2.5}
-# who's happier by gender
-PlotXTabs(happy,happy,sex)
-# same thing using column numbers and a stacked bar
-PlotXTabs(happy,2,5,"stack")
-# happiness by a variety of possible factors as a percent
-PlotXTabs(happy, 2, c(5:9), plottype = "percent")
-# turn the numbers around and change them up basically just showing all
-# the permutations
-PlotXTabs(happy, c(2,5), 9, plottype = "side")
-PlotXTabs(happy, c(2,5), c(6:9), plottype = "percent")
-PlotXTabs(happy, happy, c(6,7,9), plottype = "percent")
-PlotXTabs(happy, c(6,7,9), happy, plottype = "percent")
+```{r ggslope1}
+newggslopegraph(newcancer,Year,Survival,Type)
 ```
 
 I hope you've found this useful.  I am always open to comments, corrections and suggestions.
