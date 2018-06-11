@@ -42,7 +42,7 @@ newggslopegraph(newcancer,Year,Survival,Type)
 
 Optionally you can provide important label information through `Title`, `Subtitle`, and `Caption` arguments.  You can suppress them all together by setting them `= NULL` but since I think they are very important the default is to gently remind you, that you have not tpovidecd any information.  Let's provide a title and sub-title but skip the caption.
 
-```{r ggslope2, , fig.height=10, fig.width=7}
+```{r ggslope2, fig.height=10, fig.width=7}
 newggslopegraph(dataframe = newcancer,
                 Times = Year,
                 Measurement = Survival,
@@ -63,22 +63,33 @@ You'll need a dataframe with at least three columns.  The function will do some 
 2.  `Measurement` is the column that has the actual numbers you want to display along the y axis. Frequently that's a percentage but it could just as easily be any number.  Watch out for scaling issues here you'll want to ensure that its not disparate. In our case `newcancer$Survival` is the percentage of patients surviving at that point in time, so the maximum scale is 0 to 100.
 3.  `Grouping` is what controls how many individual lines are portrayed. Every attempt is made to color them and label them in ways that lead to clarity but eventually you can have too many. In our example case the column is `newcancer$Type` for the type of cancer or location.
 
-The documentation examples use the `mtcars` built-in dataset.  It's handy, convenient, and it's installed by default. To actually show the function in action, however, I'm going to use a different dataset.  Something that should allow you to better see the value of making plots of the crosstabs rather than simple tables.  It also has the happy property of being much much larger than `mtcars` so we can see if there are lags in performance due to the number of rows.
+## Another quick example
 
-Rather than provide my own or make anyone work too hard I selected that `happy` dataset that comes bundled with several `R` packages including `productplots` and `GGally`.   From the description:
+This is loosely based off a blog post from [Murtaza Haider titled “Edward Tufte’s Slopegraphs and political fortunes in Ontario”](https://www.r-bloggers.com/author/murtaza-haider/) that led to my developing this function [chronicled here](https://ibecav.github.io/slopegraph/).
 
-> The data is a small sample of variables related to happiness from the general social survey (GSS). The GSS is a yearly cross-sectional survey of Americans, run from 1976. We combine data for 25 years to yield 51,020 observations, and of the over 5,000 variables, we select nine related to happiness. 
+In this case we're going to plot the percent of the vote captured by some Canadian political parties. 
 
+> The data is loosely based on real data but is not actually accurate. 
 
-We'll be focusing on the non numeric variables.  I certainly can't claim to do a detailed analysis here but at least the questions will be fun I hope...
+`moredata$Date` is the hypothetical polling date as a factor (in this case `character` would work equally well). `moredata$Party` is the various political parties and `moredata$Pct` is the percentage of the vote they are estimated to have.
 
-```{r ggslope2}
-
+```{r ggslope3, fig.height=5, fig.width=5}
+moredata <- structure(list(Date = structure(c(1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 3L, 3L, 3L, 3L, 3L), 
+                                            .Label = c("11-May-18", "18-May-18", "25-May-18"), 
+                                            class = "factor"), 
+                           Party = structure(c(5L, 3L, 2L, 1L, 4L, 5L, 3L, 2L, 1L, 4L, 5L, 3L, 2L, 1L, 4L), 
+                                             .Label = c("Green", "Liberal", "NDP", "Others", "PC"), 
+                                             class = "factor"), 
+                           Pct = c(42.3, 28.4, 22.1, 5.4, 1.8, 41.9, 29.3, 22.3, 5, 1.4, 41.9, 26.8, 26.8, 5, 1.4)), 
+                      class = "data.frame", 
+                      row.names = c(NA, -15L))
+#tail(moredata)
+newggslopegraph(moredata,Date,Pct,Party, Title = "Notional data", SubTitle = NULL, Caption = NULL)
 ```
 
-I hope you've found this useful.  I am always open to comments, corrections and suggestions.
+### Leaving Feedback
+If you like CGPfunctions, please consider Filing a GitHub issue by [leaving feedback here](https://github.com/ibecav/CGPfunctions/issues), or by contacting me at ibecav at gmail.com by email.
 
-Chuck (ibecav at gmail dot com)
 
 ### License
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
