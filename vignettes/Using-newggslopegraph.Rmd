@@ -32,7 +32,7 @@ devtools::install_github("ibecav/CGPfunctions")
 library(CGPfunctions)
 ```
 
-## Simple example
+## Simple examples
 
 If you're unfamiliar with slopegraphs or just want to see what the display is all about the dataset I've provided can get you started in one line
 
@@ -53,16 +53,15 @@ newggslopegraph(dataframe = newcancer,
                 )
 ```
 
+## How it all works
 
+It's all well and good to get the little demo to work, but it might be useful for you to understand how to extend it out to data you're interested in.
 
-Take the user's input and parse it into one of four known possibilities and then take appropriate action.  The possibilities are:
+You'll need a dataframe with at least three columns.  The function will do some basic error checking and complain if you don't hit the essentials.
 
-1.  If both are `bare` variables and found in the dataframe immediately print the plot
-2.  At least one of the variables is `bare` and found in the dataframe (variable x) and the other is one or more column numbers (variable y)
-3.  At least one of the variables is `bare` and found in the dataframe (variable y) and the other is one or more column numbers (variable x)
-4.  Both the variables were passed to us as numbers.  Could be one or more numbers for either variable.
-
-## Example scenario ... What makes us happy?
+1.  `Times` is the column in the dataframe that corresponds to the x axis of the plot and is normally a set of moments in time expressed as either characters, factors or ordered factors (in our case `newcancer$Year`.  If it is truly time series data (esepcially with a lot of dates you're much better off using an R function purpose built for that). In `newcancer` it's an ordered factor, mainly because if we fed the information in as character the sort order would be `Year 10, Year 15, Year 20, Year 5` which is very suboptimal. A command like `newcancer$Year <- factor(newcancer$Year,levels = c("Year.5", "Year.10", "Year.15", "Year.20"), labels = c("5 Year","10 Year","15 Year","20 Year"), ordered = TRUE)` would be the way to force things they way you want them.
+2.  `Measurement` is the column that has the actual numbers you want to display along the y axis. Frequently that's a percentage but it could just as easily be any number.  Watch out for scaling issues here you'll want to ensure that its not disparate. In our case `newcancer$Survival` is the percentage of patients surviving at that point in time, so the maximum scale is 0 to 100.
+3.  `Grouping` is what controls how many individual lines are portrayed. Every attempt is made to color them and label them in ways that lead to clarity but eventually you can have too many. In our example case the column is `newcancer$Type` for the type of cancer or location.
 
 The documentation examples use the `mtcars` built-in dataset.  It's handy, convenient, and it's installed by default. To actually show the function in action, however, I'm going to use a different dataset.  Something that should allow you to better see the value of making plots of the crosstabs rather than simple tables.  It also has the happy property of being much much larger than `mtcars` so we can see if there are lags in performance due to the number of rows.
 
@@ -74,7 +73,7 @@ Rather than provide my own or make anyone work too hard I selected that `happy` 
 We'll be focusing on the non numeric variables.  I certainly can't claim to do a detailed analysis here but at least the questions will be fun I hope...
 
 ```{r ggslope2}
-newggslopegraph(newcancer,Year,Survival,Type)
+
 ```
 
 I hope you've found this useful.  I am always open to comments, corrections and suggestions.
