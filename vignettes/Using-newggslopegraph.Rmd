@@ -32,10 +32,28 @@ devtools::install_github("ibecav/CGPfunctions")
 library(CGPfunctions)
 ```
 
+## Simple example
 
-## Possible cases
+If you're unfamiliar with slopegraphs or just want to see what the display is all about the dataset I've provided can get you started in one line
 
-The function is designed to handle four possible scenarios.
+```{r ggslope1, fig.height=10, fig.width=7}
+newggslopegraph(newcancer,Year,Survival,Type)
+```
+
+Optionally you can provide important label information through `Title`, `Subtitle`, and `Caption` arguments.  You can suppress them all together by setting them `= NULL` but since I think they are very important the default is to gently remind you, that you have not tpovidecd any information.  Let's provide a title and sub-title but skip the caption.
+
+```{r ggslope2, , fig.height=10, fig.width=7}
+newggslopegraph(dataframe = newcancer,
+                Times = Year,
+                Measurement = Survival,
+                Grouping = Type,
+                Title = "Estimates of Percent Survival Rates",
+                SubTitle = "Based on: Edward Tufte, Beautiful Evidence, 174, 176.",
+                Caption = NULL
+                )
+```
+
+
 
 Take the user's input and parse it into one of four known possibilities and then take appropriate action.  The possibilities are:
 
@@ -55,7 +73,7 @@ Rather than provide my own or make anyone work too hard I selected that `happy` 
 
 We'll be focusing on the non numeric variables.  I certainly can't claim to do a detailed analysis here but at least the questions will be fun I hope...
 
-```{r ggslope1}
+```{r ggslope2}
 newggslopegraph(newcancer,Year,Survival,Type)
 ```
 
