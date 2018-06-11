@@ -1,7 +1,7 @@
 #' Tufte dataset on cancer survival rates
 #'
-#' A dataset containing the prices and other attributes of almost 54,000
-#' diamonds.
+#' A dataset containing cancer survival rates for different types of cancer
+#' over a 20 year period.
 #'
 #' @format A data frame with 96 rows and 3 variables:
 #' \describe{

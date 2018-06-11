@@ -11,7 +11,7 @@ newggslopegraph(dataframe, Times, Measurement, Grouping,
 \arguments{
 \item{dataframe}{a dataframe or an object that can be coerced to a dataframe. Basic error checking is performed.}
 
-\item{Times}{a column inside the dataframe that will be plotted on the x axis. Traditionally this is some measure of time.  The function accepts a column of class ordered, factor or characther.}
+\item{Times}{a column inside the dataframe that will be plotted on the x axis. Traditionally this is some measure of time.  The function accepts a column of class ordered, factor or character.}
 
 \item{Measurement}{a column inside the dataframe that will be plotted on the y axis. Traditionally this is some measure such as a percentage.  Currently the function accepts a column of type integer or numeric.}
 
@@ -32,12 +32,14 @@ Makes the required adjustments to the ggplot2 parameters and returns the plot.
 }
 \examples{
 
-newggslopegraph(newcancer,Year,Survival,Type)
+newggslopegraph(newcancer, Year, Survival, Type)
+newggslopegraph(newcancer, Year, Survival, Type, 
+Title = "Estimates of Percent Survival Rates")
 
 
 }
 \seealso{
-\code{\link[stats]{aov}}, \code{\link[car]{leveneTest}},
+\code{\link{newcancer}}, \code{\link[car]{leveneTest}},
 }
 \author{
 Chuck Powell

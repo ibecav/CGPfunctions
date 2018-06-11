@@ -18,7 +18,7 @@
 newcancer
 }
 \description{
-A dataset containing the prices and other attributes of almost 54,000
-diamonds.
+A dataset containing cancer survival rates for different types of cancer
+over a 20 year period.
 }
 \keyword{datasets}

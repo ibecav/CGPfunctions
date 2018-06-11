@@ -27,7 +27,8 @@
 #' @seealso \code{\link{newcancer}}, \code{\link[car]{leveneTest}},
 #' @examples
 #'
-#' newggslopegraph(newcancer,Year,Survival,Type)
+#' newggslopegraph(newcancer, Year, Survival, Type)
+#' newggslopegraph(newcancer, Year, Survival, Type, Title = "Estimates of Percent Survival Rates")
 #'
 #'
 newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
