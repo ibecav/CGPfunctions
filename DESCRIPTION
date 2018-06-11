@@ -9,6 +9,7 @@ Encoding: UTF-8
 LazyData: true
 Imports:
     car,
+    devtools,
     dplyr,
     ggplot2 (>= 2.2.1),
     ggrepel,
