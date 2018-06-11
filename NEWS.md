@@ -1,6 +1,8 @@
-# CGPfunctions 0.3.1
+# CGPfunctions 0..4
 
-* Builds successfully in R 3.5.0 26 April 2018
+* Release 0.4 published on Github 11 June 2018
+  - Changed version # to .4
+  - Added new function newggslopegraph 
 * Release 0.3.1 (hotfix) published on Github 25 April 2018
   - Changed version # to 3.1
   - Added percent scales to percent plot using the scales package which necessitated changes in DESCRIPTION and NAMESPACE

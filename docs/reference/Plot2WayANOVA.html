@@ -21,10 +21,15 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="Plot a 2 Way ANOVA using dplyr and ggplot2 — Plot2WayANOVA" />
 
 <meta property="og:description" content="Takes a formula and a dataframe as input, conducts an analysis of variance
@@ -33,6 +38,7 @@ table of means) to the console and as a plotted interaction graph (line or
 bar) using ggplot2.  Also uses Brown-Forsythe test for homogeneity of
 variance." />
 <meta name="twitter:card" content="summary" />
+
 
 
 <!-- mathjax -->
@@ -44,19 +50,15 @@ variance." />
 <![endif]-->
 
 
-<!-- Google analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117082388-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-117082388-1', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', 'UA-117082388-1');
 </script>
-
-
 
   </head>
 
@@ -73,7 +75,7 @@ variance." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">CGPfunctions</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.4</span>
       </span>
     </div>
 
@@ -100,6 +102,9 @@ variance." />
     </li>
     <li>
       <a href="../articles/Using-PlotXTabs.html">Using PlotXTabs</a>
+    </li>
+    <li>
+      <a href="../articles/Using-newggslopegraph.html">Using newggslopegraph</a>
     </li>
   </ul>
 </li>
@@ -128,10 +133,11 @@ variance." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Plot a 2 Way ANOVA using dplyr and ggplot2</h1>
-    <small>Source: <a href='https://github.com/ibecav/CGPfunctions/blob/master/R/Plot2WayANOVA.R'><code>R/Plot2WayANOVA.R</code></a></small>
-    <p class="hidden name"><code>Plot2WayANOVA.Rd</code></p>
+    <small class="dont-index">Source: <a href='https://github.com/ibecav/CGPfunctions/blob/master/R/Plot2WayANOVA.R'><code>R/Plot2WayANOVA.R</code></a></small>
+    <div class="hidden name"><code>Plot2WayANOVA.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Takes a formula and a dataframe as input, conducts an analysis of variance
 using the base R aov command and produces the results (AOV summary table and
@@ -139,6 +145,7 @@ table of means) to the console and as a plotted interaction graph (line or
 bar) using ggplot2.  Also uses Brown-Forsythe test for homogeneity of
 variance.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>Plot2WayANOVA</span>(<span class='no'>formula</span>, <span class='kw'>dataframe</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>confidence</span><span class='kw'>=</span><span class='fl'>.95</span>,
     <span class='kw'>plottype</span> <span class='kw'>=</span> <span class='st'>"bar"</span>, <span class='kw'>PlotSave</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
@@ -212,14 +219,14 @@ assumption with Brown-Forsythe</p></li>
 #&gt; <span class='message'>Converting am to a factor --- check your results</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Converting cyl to a factor --- check your results</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>You have an unbalanced design. Using Type II sum of squares, eta squared may not sum to 1.0 </span></div><div class='output co'>#&gt; # A tibble: 4 x 8
-#&gt;   Source       Df `Sum Sq` `Mean Sq` `F value`       p sigstars `eta sq`
-#&gt;   &lt;fct&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;
-#&gt; 1 am            1     36.8     36.8       4.00  0.0560 .          0.0330
-#&gt; 2 cyl           2    456.     228.       24.8   0.     ***        0.405 
-#&gt; 3 am:cyl        2     25.4     12.7       1.40  0.269  ""         0.0230
-#&gt; 4 Residuals    26    239.       9.19     NA    NA      &lt;NA&gt;       0.212 </div><div class='output co'>#&gt; <span class='message'></span>
+#&gt;   Source       Df `Sum Sq` `Mean Sq` `F value`      p sigstars `eta sq`
+#&gt;   &lt;fct&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;
+#&gt; 1 am            1     36.8     36.8        4    0.056 .           0.033
+#&gt; 2 cyl           2    456.     228.        24.8  0     ***         0.405
+#&gt; 3 am:cyl        2     25.4     12.7        1.4  0.269 ""          0.023
+#&gt; 4 Residuals    26    239.       9.19      NA   NA     &lt;NA&gt;        0.212</div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Table of group means</span></div><div class='output co'>#&gt; # A tibble: 6 x 9
-#&gt; # Groups:   am [2]
+#&gt; # Groups:   am [?]
 #&gt;   am    cyl   TheMean TheSD TheSEM CIMuliplier LowerBound UpperBound     N
 #&gt;   &lt;fct&gt; &lt;fct&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt; &lt;int&gt;
 #&gt; 1 0     4        22.9 1.45   0.839        4.30       19.3       26.5     3
@@ -227,7 +234,7 @@ assumption with Brown-Forsythe</p></li>
 #&gt; 3 0     8        15.0 2.77   0.801        2.20       13.3       16.8    12
 #&gt; 4 1     4        28.1 4.48   1.59         2.36       24.3       31.8     8
 #&gt; 5 1     6        20.6 0.751  0.433        4.30       18.7       22.4     3
-#&gt; 6 1     8        15.4 0.566  0.400       12.7        10.3       20.5     2</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; 6 1     8        15.4 0.566  0.4         12.7        10.3       20.5     2</div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Testing Homogeneity of Variance with Brown-Forsythe </span></div><div class='output co'>#&gt; <span class='message'>   *** Possible violation of the assumption ***</span></div><div class='output co'>#&gt; Levene's Test for Homogeneity of Variance (center = median)
 #&gt;       Df F value  Pr(&gt;F)  
 #&gt; group  5   2.736 0.04086 *
@@ -246,12 +253,12 @@ assumption with Brown-Forsythe</p></li>
 #&gt; <span class='message'>You have an unbalanced design. Using Type II sum of squares, eta squared may not sum to 1.0 </span></div><div class='output co'>#&gt; # A tibble: 4 x 8
 #&gt;   Source       Df `Sum Sq` `Mean Sq` `F value`      p sigstars `eta sq`
 #&gt;   &lt;fct&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;
-#&gt; 1 am            1    276.      276.      22.9   0.    ***        0.245 
-#&gt; 2 vs            1    367.      367.      30.5   0.    ***        0.326 
-#&gt; 3 am:vs         1     16.0      16.0      1.30  0.259 ""         0.0140
-#&gt; 4 Residuals    28    337.       12.1     NA    NA     &lt;NA&gt;       0.300 </div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; 1 am            1    276.      276.       22.9  0     ***         0.245
+#&gt; 2 vs            1    367.      367.       30.5  0     ***         0.326
+#&gt; 3 am:vs         1     16.0      16.0       1.3  0.259 ""          0.014
+#&gt; 4 Residuals    28    337.       12.1      NA   NA     &lt;NA&gt;        0.3  </div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Table of group means</span></div><div class='output co'>#&gt; # A tibble: 4 x 9
-#&gt; # Groups:   am [2]
+#&gt; # Groups:   am [?]
 #&gt;   am    vs    TheMean TheSD TheSEM CIMuliplier LowerBound UpperBound     N
 #&gt;   &lt;fct&gt; &lt;fct&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt; &lt;int&gt;
 #&gt; 1 0     0        15.0  2.77  0.801        3.11       12.6       17.5    12

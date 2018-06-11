@@ -21,10 +21,15 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="Plot a Cross Tabulation of two variables using dplyr and ggplot2 — PlotXTabs" />
 
 <meta property="og:description" content="Takes a dataframe and at least two variables as input, conducts a 
@@ -33,6 +38,7 @@ plots the results as one of three types of bar (column) graphs
 using ggplot2.  The function accepts either bare variable names or 
 column numbers as input (see examples for the possibilities)" />
 <meta name="twitter:card" content="summary" />
+
 
 
 <!-- mathjax -->
@@ -44,19 +50,15 @@ column numbers as input (see examples for the possibilities)" />
 <![endif]-->
 
 
-<!-- Google analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117082388-1"></script>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-  ga('create', 'UA-117082388-1', 'auto');
-  ga('send', 'pageview');
-
+  gtag('config', 'UA-117082388-1');
 </script>
-
-
 
   </head>
 
@@ -73,7 +75,7 @@ column numbers as input (see examples for the possibilities)" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">CGPfunctions</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.4</span>
       </span>
     </div>
 
@@ -100,6 +102,9 @@ column numbers as input (see examples for the possibilities)" />
     </li>
     <li>
       <a href="../articles/Using-PlotXTabs.html">Using PlotXTabs</a>
+    </li>
+    <li>
+      <a href="../articles/Using-newggslopegraph.html">Using newggslopegraph</a>
     </li>
   </ul>
 </li>
@@ -128,10 +133,11 @@ column numbers as input (see examples for the possibilities)" />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Plot a Cross Tabulation of two variables using dplyr and ggplot2</h1>
-    <small>Source: <a href='https://github.com/ibecav/CGPfunctions/blob/master/R/PlotXTabs.R'><code>R/PlotXTabs.R</code></a></small>
-    <p class="hidden name"><code>PlotXTabs.Rd</code></p>
+    <small class="dont-index">Source: <a href='https://github.com/ibecav/CGPfunctions/blob/master/R/PlotXTabs.R'><code>R/PlotXTabs.R</code></a></small>
+    <div class="hidden name"><code>PlotXTabs.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Takes a dataframe and at least two variables as input, conducts a 
 crosstabulation of the variables using dplyr. Removes NAs and then
@@ -139,6 +145,7 @@ plots the results as one of three types of bar (column) graphs
 using ggplot2.  The function accepts either bare variable names or 
 column numbers as input (see examples for the possibilities)</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>PlotXTabs</span>(<span class='no'>dataframe</span>, <span class='no'>xwhich</span>, <span class='no'>ywhich</span>, <span class='kw'>plottype</span> <span class='kw'>=</span> <span class='st'>"side"</span>)</pre>
     
