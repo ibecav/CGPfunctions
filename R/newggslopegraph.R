@@ -10,7 +10,7 @@
 #' Makes the required adjustments to the ggplot2 parameters and returns the plot.
 #'
 #' @param dataframe a dataframe or an object that can be coerced to a dataframe. Basic error checking is performed.
-#' @param Times a column inside the dataframe that will be plotted on the x axis. Traditionally this is some measure of time.  The function accepts a column of class ordered, factor or characther.
+#' @param Times a column inside the dataframe that will be plotted on the x axis. Traditionally this is some measure of time.  The function accepts a column of class ordered, factor or character.
 #' @param Measurement a column inside the dataframe that will be plotted on the y axis. Traditionally this is some measure such as a percentage.  Currently the function accepts a column of type integer or numeric.
 #' @param Grouping a column inside the dataframe that will be used to group and distinguish measurements.
 #' @param Title Optionally the title to be displayed. Title = NULL will remove it entirely. Title = "" will provide and empty title but retain the sapcing.
@@ -120,7 +120,7 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
             )
 } # end of function
 
-newggslopegraph(newcancer,Year,Survival,Type)
+# newggslopegraph(newcancer,Year,Survival,Type)
 
 # title = "Estimates of Percent Survival Rates"
 # subtitle = "Based on: Edward Tufte, Beautiful Evidence, 174, 176."
