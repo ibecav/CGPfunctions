@@ -1,4 +1,4 @@
-# CGPfunctions 0..4
+# CGPfunctions 0.4
 
 * Release 0.4 published on Github 11 June 2018
   - Changed version # to .4
