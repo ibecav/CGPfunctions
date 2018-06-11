@@ -33,13 +33,12 @@ Makes the required adjustments to the ggplot2 parameters and returns the plot.
 \examples{
 
 newggslopegraph(newcancer, Year, Survival, Type)
-newggslopegraph(newcancer, Year, Survival, Type, 
-Title = "Estimates of Percent Survival Rates")
+newggslopegraph(newcancer, Year, Survival, Type, Title = "Estimates of Percent Survival Rates")
 
 
 }
 \seealso{
-\code{\link{newcancer}}, \code{\link[car]{leveneTest}},
+\code{\link{newcancer}}
 }
 \author{
 Chuck Powell

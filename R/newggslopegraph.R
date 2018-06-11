@@ -1,9 +1,3 @@
-# https://github.com/leeper/slopegraph
-# https://ibecav.github.io/slopegraph/
-# https://rpubs.com/hadley/97970
-# load(newcancer.rda)
-# head(newcancer)
-
 #' Plot a Slopegraph a la Tufte using dplyr and ggplot2
 #'
 #' Takes a dataframe as input, with three named columns being used to plot.
@@ -24,7 +18,7 @@
 #' @importFrom ggrepel geom_text_repel
 #'
 #' @author Chuck Powell
-#' @seealso \code{\link{newcancer}}, \code{\link[car]{leveneTest}},
+#' @seealso \code{\link{newcancer}}
 #' @examples
 #'
 #' newggslopegraph(newcancer, Year, Survival, Type)
