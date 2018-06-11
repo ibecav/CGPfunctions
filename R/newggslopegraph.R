@@ -24,7 +24,7 @@
 #' @importFrom ggrepel geom_text_repel
 #'
 #' @author Chuck Powell
-#' @seealso \code{\link[stats]{aov}}, \code{\link[car]{leveneTest}},
+#' @seealso \code{\link{newcancer}}, \code{\link[car]{leveneTest}},
 #' @examples
 #'
 #' newggslopegraph(newcancer,Year,Survival,Type)
