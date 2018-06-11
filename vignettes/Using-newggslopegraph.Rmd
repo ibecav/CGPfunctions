@@ -28,7 +28,7 @@ knitr::opts_chunk$set(
 
 # Or the development version from GitHub
 # install.packages("devtools")
-devtools::install_github("ibecav/CGPfunctions")
+# devtools::install_github("ibecav/CGPfunctions")
 library(CGPfunctions)
 ```
 

@@ -8,7 +8,7 @@ knitr::opts_chunk$set(
 
 # Or the development version from GitHub
 # install.packages("devtools")
-devtools::install_github("ibecav/CGPfunctions")
+# devtools::install_github("ibecav/CGPfunctions")
 library(CGPfunctions)
 
 ## ----ggslope1, fig.height=10, fig.width=7--------------------------------
