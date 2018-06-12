@@ -61,16 +61,16 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
     stop(paste0("'", deparse(substitute(dataframe)), "' does not appear to be a data frame"), call. = FALSE)
   }
   if (!deparse(substitute(Times)) %in% names(dataframe)) {
-    stop(paste0("'", deparse(substitute(Times)), "' is not the name of a variable in '", deparse(substitute(dataframe)), "'"),call. = FALSE)
+    stop(paste0("'", deparse(substitute(Times)), "' is not the name of a variable in '", deparse(substitute(dataframe)), "'"), call. = FALSE)
   }
   if (!deparse(substitute(Measurement)) %in% names(dataframe)) {
-    stop(paste0("'", deparse(substitute(Measurement)), "' is not the name of a variable in '", deparse(substitute(dataframe)), "'"),call. = FALSE)
+    stop(paste0("'", deparse(substitute(Measurement)), "' is not the name of a variable in '", deparse(substitute(dataframe)), "'"), call. = FALSE)
   }
   if (!deparse(substitute(Grouping)) %in% names(dataframe)) {
-    stop(paste0("'", deparse(substitute(Grouping)), "' is not the name of a variable in '", deparse(substitute(dataframe)), "'"),call. = FALSE)
+    stop(paste0("'", deparse(substitute(Grouping)), "' is not the name of a variable in '", deparse(substitute(dataframe)), "'"), call. = FALSE)
   }
   if (!class(dataframe[[deparse(substitute(Measurement))]]) %in% c("integer","numeric")) {
-    stop(paste0("Sorry I need the measured variable '", deparse(substitute(Times)), "' to be a number"),call. = FALSE)
+    stop(paste0("Sorry I need the measured variable '", deparse(substitute(Measurement)), "' to be a number"), call. = FALSE)
   }
   if (!"ordered" %in% class(dataframe[[deparse(substitute(Times))]])) { # keep checking
     if (!"character" %in% class(dataframe[[deparse(substitute(Times))]])) { # keep checking
@@ -78,7 +78,7 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
         warning("Converting to an ordered factor", call. = FALSE)
         dataframe[[deparse(substitute(Times))]] <- factor(dataframe[[deparse(substitute(Times))]], ordered = TRUE)
       } else {
-        stop("Sorry I need the Times variable to be of class character, factor or ordered")
+        stop(paste0("Sorry I need the variable '", deparse(substitute(Times)), "' to be of class character, factor or ordered"), call. = FALSE)
       }
     }
   }
