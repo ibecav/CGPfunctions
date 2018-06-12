@@ -59,31 +59,31 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
     stop("Not enough arguments passed... requires a dataframe, plus at least three variables")
   }
   argList <-  as.list(match.call()[-1])
-  if (!exists(deparse(substitute(dataframe)))) {
-    stop("The first object in your list '", deparse(substitute(dataframe)) ,"' does not exist. It should be a dataframe", call. = FALSE)
+  if (!exists(Ndataframe)) {
+    stop("The first object in your list '", Ndataframe ,"' does not exist. It should be a dataframe", call. = FALSE)
   }
   if (!is(dataframe, "data.frame")) {
-    stop(paste0("'", deparse(substitute(dataframe)), "' does not appear to be a data frame"), call. = FALSE)
+    stop(paste0("'", Ndataframe, "' does not appear to be a data frame"), call. = FALSE)
   }
-  if (!deparse(substitute(Times)) %in% names(dataframe)) {
-    stop(paste0("'", deparse(substitute(Times)), "' is not the name of a variable in '", deparse(substitute(dataframe)), "'"), call. = FALSE)
+  if (!NTimes %in% names(dataframe)) {
+    stop(paste0("'", NTimes, "' is not the name of a variable in '", Ndataframe, "'"), call. = FALSE)
   }
-  if (!deparse(substitute(Measurement)) %in% names(dataframe)) {
-    stop(paste0("'", deparse(substitute(Measurement)), "' is not the name of a variable in '", deparse(substitute(dataframe)), "'"), call. = FALSE)
+  if (!NMeasurement %in% names(dataframe)) {
+    stop(paste0("'", NMeasurement, "' is not the name of a variable in '", Ndataframe, "'"), call. = FALSE)
   }
   if (!deparse(substitute(Grouping)) %in% names(dataframe)) {
-    stop(paste0("'", deparse(substitute(Grouping)), "' is not the name of a variable in '", deparse(substitute(dataframe)), "'"), call. = FALSE)
+    stop(paste0("'", deparse(substitute(Grouping)), "' is not the name of a variable in '", Ndataframe, "'"), call. = FALSE)
   }
-  if (!class(dataframe[[deparse(substitute(Measurement))]]) %in% c("integer","numeric")) {
-    stop(paste0("Sorry I need the measured variable '", deparse(substitute(Measurement)), "' to be a number"), call. = FALSE)
+  if (!class(dataframe[[NMeasurement]]) %in% c("integer","numeric")) {
+    stop(paste0("Sorry I need the measured variable '", NMeasurement, "' to be a number"), call. = FALSE)
   }
-  if (!"ordered" %in% class(dataframe[[deparse(substitute(Times))]])) { # keep checking
-    if (!"character" %in% class(dataframe[[deparse(substitute(Times))]])) { # keep checking
-      if ("factor" %in% class(dataframe[[deparse(substitute(Times))]])) { # impose order
+  if (!"ordered" %in% class(dataframe[[NTimes]])) { # keep checking
+    if (!"character" %in% class(dataframe[[NTimes]])) { # keep checking
+      if ("factor" %in% class(dataframe[[NTimes]])) { # impose order
         warning("Converting to an ordered factor", call. = FALSE)
-        dataframe[[deparse(substitute(Times))]] <- factor(dataframe[[deparse(substitute(Times))]], ordered = TRUE)
+        dataframe[[NTimes]] <- factor(dataframe[[NTimes]], ordered = TRUE)
       } else {
-        stop(paste0("Sorry I need the variable '", deparse(substitute(Times)), "' to be of class character, factor or ordered"), call. = FALSE)
+        stop(paste0("Sorry I need the variable '", NTimes, "' to be of class character, factor or ordered"), call. = FALSE)
       }
     }
   }
