@@ -143,7 +143,9 @@ Makes the required adjustments to the ggplot2 parameters and returns the plot.</
 
     <pre class="usage"><span class='fu'>newggslopegraph</span>(<span class='no'>dataframe</span>, <span class='no'>Times</span>, <span class='no'>Measurement</span>, <span class='no'>Grouping</span>,
   <span class='kw'>Title</span> <span class='kw'>=</span> <span class='st'>"No title given"</span>, <span class='kw'>SubTitle</span> <span class='kw'>=</span> <span class='st'>"No subtitle given"</span>,
-  <span class='kw'>Caption</span> <span class='kw'>=</span> <span class='st'>"No caption given"</span>)</pre>
+  <span class='kw'>Caption</span> <span class='kw'>=</span> <span class='st'>"No caption given"</span>, <span class='kw'>XTextSize</span> <span class='kw'>=</span> <span class='fl'>12</span>, <span class='kw'>YTextSize</span> <span class='kw'>=</span> <span class='fl'>3</span>,
+  <span class='kw'>TitleTextSize</span> <span class='kw'>=</span> <span class='fl'>14</span>, <span class='kw'>LineThickness</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='st'>"ByGroup"</span>,
+  <span class='kw'>DataTextSize</span> <span class='kw'>=</span> <span class='fl'>2.5</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -175,6 +177,30 @@ Makes the required adjustments to the ggplot2 parameters and returns the plot.</
     <tr>
       <th>Caption</th>
       <td><p>Optionally the caption to be displayed. Caption = NULL will remove it entirely. Caption = "" will provide and empty title but retain the sapcing.</p></td>
+    </tr>
+    <tr>
+      <th>XTextSize</th>
+      <td><p>Optionally the font size for the X axis labels to be displayed. XTextSize = 12 is the default must be a numeric. Note that X &amp; Y axis text are on different scales</p></td>
+    </tr>
+    <tr>
+      <th>YTextSize</th>
+      <td><p>Optionally the font size for the Y axis labels to be displayed. YTextSize = 3 is the default must be a numeric. Note that X &amp; Y axis text are on different scales</p></td>
+    </tr>
+    <tr>
+      <th>TitleTextSize</th>
+      <td><p>Optionally the font size for the Title to be displayed. TitleTextSize = 14 is the default must be a numeric.</p></td>
+    </tr>
+    <tr>
+      <th>LineThickness</th>
+      <td><p>Optionally the thickness of the plotted lines. LineThickness = 1 is the default must be a numeric.</p></td>
+    </tr>
+    <tr>
+      <th>LineColor</th>
+      <td><p>Optionally the color the plotted lines. By default it will use the ggplot2 color palette for coloring by group. The user may override with one valid color of their choice e.g. "black" must be character.</p></td>
+    </tr>
+    <tr>
+      <th>DataTextSize</th>
+      <td><p>Optionally the font size of the plotted data points. DataTextSize = 2.5 is the default must be a numeric.</p></td>
     </tr>
     </table>
     
