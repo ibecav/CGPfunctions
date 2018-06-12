@@ -6,7 +6,9 @@
 \usage{
 newggslopegraph(dataframe, Times, Measurement, Grouping,
   Title = "No title given", SubTitle = "No subtitle given",
-  Caption = "No caption given", XTextSize = 12)
+  Caption = "No caption given", XTextSize = 12, YTextSize = 3,
+  TitleTextSize = 14, LineThickness = 1, LineColor = "ByGroup",
+  DataTextSize = 2.5)
 }
 \arguments{
 \item{dataframe}{a dataframe or an object that can be coerced to a dataframe. Basic error checking is performed.}
@@ -23,7 +25,17 @@ newggslopegraph(dataframe, Times, Measurement, Grouping,
 
 \item{Caption}{Optionally the caption to be displayed. Caption = NULL will remove it entirely. Caption = "" will provide and empty title but retain the sapcing.}
 
-\item{XTextSize}{Optionally the font size for the x axis labels to be displayed. XTextSize = 12 is the default must be a numeric.}
+\item{XTextSize}{Optionally the font size for the X axis labels to be displayed. XTextSize = 12 is the default must be a numeric. Note that X & Y axis text are on different scales}
+
+\item{YTextSize}{Optionally the font size for the Y axis labels to be displayed. YTextSize = 3 is the default must be a numeric. Note that X & Y axis text are on different scales}
+
+\item{TitleTextSize}{Optionally the font size for the Title to be displayed. TitleTextSize = 14 is the default must be a numeric.}
+
+\item{LineThickness}{Optionally the thickness of the plotted lines. LineThickness = 1 is the default must be a numeric.}
+
+\item{LineColor}{Optionally the color the plotted lines. By default it will use the ggplot2 color palette for coloring by group. The user may override with one valid color of their choice e.g. "black" must be character.}
+
+\item{DataTextSize}{Optionally the font size of the plotted data points. DataTextSize = 2.5 is the default must be a numeric.}
 }
 \value{
 a plot of type ggplot to the default plot device

@@ -10,9 +10,14 @@
 #' @param Title Optionally the title to be displayed. Title = NULL will remove it entirely. Title = "" will provide and empty title but retain the sapcing.
 #' @param SubTitle Optionally the sub-title to be displayed.  SubTitle = NULL will remove it entirely. SubTitle = "" will provide and empty title but retain the sapcing.
 #' @param Caption Optionally the caption to be displayed. Caption = NULL will remove it entirely. Caption = "" will provide and empty title but retain the sapcing.
-#' @param XTextSize Optionally the font size for the x axis labels to be displayed. XTextSize = 12 is the default must be a numeric.
+#' @param XTextSize Optionally the font size for the X axis labels to be displayed. XTextSize = 12 is the default must be a numeric. Note that X & Y axis text are on different scales
+#' @param YTextSize Optionally the font size for the Y axis labels to be displayed. YTextSize = 3 is the default must be a numeric. Note that X & Y axis text are on different scales
 #' @param TitleTextSize Optionally the font size for the Title to be displayed. TitleTextSize = 14 is the default must be a numeric.
-#'
+#' @param LineThickness Optionally the thickness of the plotted lines. LineThickness = 1 is the default must be a numeric.
+#' @param DataTextSize Optionally the font size of the plotted data points. DataTextSize = 2.5 is the default must be a numeric.
+#' @param LineColor Optionally the color the plotted lines. By default it will use the ggplot2 color palette for coloring by group. The user may override with one valid color of their choice e.g. "black" must be character.
+#' 
+#' 
 #' @return a plot of type ggplot to the default plot device
 #' @export
 #' @import ggplot2
@@ -32,7 +37,11 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
                             SubTitle = "No subtitle given",
                             Caption = "No caption given",
                             XTextSize = 12,
-                            TitleTextSize = 14)
+                            YTextSize = 3,
+                            TitleTextSize = 14,
+                            LineThickness = 1,
+                            LineColor = "ByGroup",
+                            DataTextSize = 2.5)
   {
   # Since ggplot2 objects are just regular R objects, put them in a list
   MySpecial <- list(
@@ -91,31 +100,39 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
       }
     }
   }
-
+  
   Times <- enquo(Times)
   Measurement <- enquo(Measurement)
   Grouping <- enquo(Grouping)
+
+  if (LineColor != "ByGroup" ) {
+    LineGeom <- list(geom_line(aes_(), size = LineThickness, color = LineColor))
+  } else {
+    LineGeom <- list(geom_line(aes_(color = Grouping, alpha = 1), size = LineThickness))
+  }
 
     dataframe %>%
       filter(!is.na(!! Times), !is.na(!! Measurement), !is.na(!! Grouping))  %>%
 #      mutate(!!quo_name(Times) := factor(!!Times), !!quo_name(Measurement) := factor(!!Measurement)) %>%
       ggplot(aes_(group=Grouping, y=Measurement, x=Times)) +
-        geom_line(aes_(color = Grouping, alpha = 1), size = 1) +
-        geom_text_repel(data = dataframe %>% filter(!! Times == min(!! Times)),
+      LineGeom +
+#      geom_line(aes_(), size = LineThickness, color = "black") +
+#      geom_line(aes_(color = Grouping, alpha = 1), size = LineThickness) +
+      geom_text_repel(data = dataframe %>% filter(!! Times == min(!! Times)),
                         aes_(label = Grouping) ,
                         hjust = "left",
                         fontface = "bold",
-                        size = 3,
+                        size = YTextSize,
                         nudge_x = -.45,
                         direction = "y") +
         geom_text_repel(data = dataframe %>% filter(!! Times == max(!! Times)),
                         aes_(label = Grouping),
                         hjust = "right",
                         fontface = "bold",
-                        size = 3,
+                        size = YTextSize,
                         nudge_x = .5,
                         direction = "y") +
-        geom_label(aes_(label = Measurement), size = 2.5, label.padding = unit(0.05, "lines"), label.size = 0.0) +
+        geom_label(aes_(label = Measurement), size = DataTextSize, label.padding = unit(0.05, "lines"), label.size = 0.0) +
         MySpecial +
         labs(
               title = Title,
