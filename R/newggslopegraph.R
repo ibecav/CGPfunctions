@@ -30,12 +30,11 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
                             SubTitle = "No subtitle given",
                             Caption = "No caption given")
   {
-  # error checking and setup
-  theme_set(theme_bw())
   # Since ggplot2 objects are just regular R objects, put them in a list
   MySpecial <- list(
     # Format tweaks
     scale_x_discrete(position = "top"), # move the x axis labels up top
+    theme_bw(),
     theme(legend.position  = "none"), # Remove the legend
     theme(panel.border     = element_blank()), # Remove the panel border
     theme(axis.title.y     = element_blank()), # Remove just about everything from the y axis
@@ -50,6 +49,7 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
     theme(plot.title       = element_text(hjust = 0.5)), # Center title & subtitle
     theme(plot.subtitle    = element_text(hjust = 0.5))
   )
+  # error checking and setup
   if (length(match.call()) <= 4) {
     stop("Not enough arguments passed... requires a dataframe, plus at least three variables")
   }
