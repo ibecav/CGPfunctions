@@ -49,6 +49,11 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
     theme(plot.title       = element_text(hjust = 0.5)), # Center title & subtitle
     theme(plot.subtitle    = element_text(hjust = 0.5))
   )
+  # for convenience store these
+  Ndataframe <- deparse(substitute(dataframe)) # name of dataframe
+  NTimes <- deparse(substitute(Times)) # name of Times variable
+  NMeasurement <- deparse(substitute(Measurement)) # name of Measurement variable
+  NGrouping <- deparse(substitute(Grouping)) # name of Grouping variable
   # error checking and setup
   if (length(match.call()) <= 4) {
     stop("Not enough arguments passed... requires a dataframe, plus at least three variables")
