@@ -6,7 +6,7 @@
 \usage{
 newggslopegraph(dataframe, Times, Measurement, Grouping,
   Title = "No title given", SubTitle = "No subtitle given",
-  Caption = "No caption given")
+  Caption = "No caption given", XTextSize = 12)
 }
 \arguments{
 \item{dataframe}{a dataframe or an object that can be coerced to a dataframe. Basic error checking is performed.}
@@ -22,6 +22,8 @@ newggslopegraph(dataframe, Times, Measurement, Grouping,
 \item{SubTitle}{Optionally the sub-title to be displayed.  SubTitle = NULL will remove it entirely. SubTitle = "" will provide and empty title but retain the sapcing.}
 
 \item{Caption}{Optionally the caption to be displayed. Caption = NULL will remove it entirely. Caption = "" will provide and empty title but retain the sapcing.}
+
+\item{XTextSize}{Optionally the font size for the x axis labels to be displayed. XTextSize = 12 is the default must be a numeric.}
 }
 \value{
 a plot of type ggplot to the default plot device

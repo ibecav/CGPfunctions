@@ -10,6 +10,7 @@
 #' @param Title Optionally the title to be displayed. Title = NULL will remove it entirely. Title = "" will provide and empty title but retain the sapcing.
 #' @param SubTitle Optionally the sub-title to be displayed.  SubTitle = NULL will remove it entirely. SubTitle = "" will provide and empty title but retain the sapcing.
 #' @param Caption Optionally the caption to be displayed. Caption = NULL will remove it entirely. Caption = "" will provide and empty title but retain the sapcing.
+#' @param XTextSize Optionally the font size for the x axis labels to be displayed. XTextSize = 12 is the default must be a numeric.
 #'
 #' @return a plot of type ggplot to the default plot device
 #' @export
@@ -28,7 +29,8 @@
 newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
                             Title = "No title given",
                             SubTitle = "No subtitle given",
-                            Caption = "No caption given")
+                            Caption = "No caption given",
+                            XTextSize = 12)
   {
   # Since ggplot2 objects are just regular R objects, put them in a list
   MySpecial <- list(
@@ -43,7 +45,7 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
     theme(panel.grid.minor.y = element_blank()),
     theme(axis.title.x     = element_blank()), # Remove a few things from the x axis
     theme(panel.grid.major.x = element_blank()),
-    theme(axis.text.x.top      = element_text(size=12)), # and increase font size
+    theme(axis.text.x.top      = element_text(size=XTextSize)), # and increase font size
     theme(axis.ticks       = element_blank()), # Remove x & y tick marks
     theme(plot.title       = element_text(size=14, face = "bold")), # Format title
     theme(plot.title       = element_text(hjust = 0.5)), # Center title & subtitle
