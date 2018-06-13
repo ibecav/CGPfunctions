@@ -94,8 +94,8 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
   if (!NMeasurement %in% names(dataframe)) {
     stop(paste0("'", NMeasurement, "' is not the name of a variable in '", Ndataframe, "'"), call. = FALSE)
   }
-  if (!deparse(substitute(Grouping)) %in% names(dataframe)) {
-    stop(paste0("'", deparse(substitute(Grouping)), "' is not the name of a variable in '", Ndataframe, "'"), call. = FALSE)
+  if (!NGrouping %in% names(dataframe)) {
+    stop(paste0("'", NGrouping, "' is not the name of a variable in '", Ndataframe, "'"), call. = FALSE)
   }
   if (!class(dataframe[[NMeasurement]]) %in% c("integer","numeric")) {
     stop(paste0("Sorry I need the measured variable '", NMeasurement, "' to be a number"), call. = FALSE)
