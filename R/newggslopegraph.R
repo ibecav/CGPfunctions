@@ -4,7 +4,7 @@
 #' Makes the required adjustments to the ggplot2 parameters and returns the plot.
 #'
 #' @param dataframe a dataframe or an object that can be coerced to a dataframe. Basic error checking is performed.
-#' @param Times a column inside the dataframe that will be plotted on the x axis. Traditionally this is some measure of time.  The function accepts a column of class ordered, factor or character.
+#' @param Times a column inside the dataframe that will be plotted on the x axis. Traditionally this is some measure of time.  The function accepts a column of class ordered, factor or character.  NOTE if your variable is currently a "date" class you can convert with as.character(variablename).
 #' @param Measurement a column inside the dataframe that will be plotted on the y axis. Traditionally this is some measure such as a percentage.  Currently the function accepts a column of type integer or numeric.
 #' @param Grouping a column inside the dataframe that will be used to group and distinguish measurements.
 #' @param Title Optionally the title to be displayed. Title = NULL will remove it entirely. Title = "" will provide and empty title but retain the sapcing.
@@ -17,7 +17,7 @@
 #' @param CaptionTextSize Optionally the font size for the Caption to be displayed. CaptionTextSize = 8 is the default must be a numeric.
 #' @param LineThickness Optionally the thickness of the plotted lines. LineThickness = 1 is the default must be a numeric.
 #' @param DataTextSize Optionally the font size of the plotted data points. DataTextSize = 2.5 is the default must be a numeric.
-#' @param LineColor Optionally the color of the plotted lines. By default it will use the ggplot2 color palette for coloring by group. The user may override with one valid color of their choice e.g. "black" or they may provide a vector of colors such as c("gray", "red", "green", "gray", "blue") or a named vector like c("Green" = "gray", "Liberal" = "red", "NDP" = "green", "Others" = "gray", "PC" = "blue") . Any input must be character. And the length of a vector must equal the number of levels in grouping.
+#' @param LineColor Optionally the color of the plotted lines. By default it will use the ggplot2 color palette for coloring by group. The user may override with one valid color of their choice e.g. "black" (see colors() for choices) or they may provide a vector of colors such as c("gray", "red", "green", "gray", "blue") or a named vector like c("Green" = "gray", "Liberal" = "red", "NDP" = "green", "Others" = "gray", "PC" = "blue"). Any input must be character. And the length of a vector must equal the number of levels in grouping.
 #' 
 #' 
 #' @return a plot of type ggplot to the default plot device
