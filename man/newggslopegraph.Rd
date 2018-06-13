@@ -37,7 +37,7 @@ newggslopegraph(dataframe, Times, Measurement, Grouping,
 
 \item{LineThickness}{Optionally the thickness of the plotted lines. LineThickness = 1 is the default must be a numeric.}
 
-\item{LineColor}{Optionally the color of the plotted lines. By default it will use the ggplot2 color palette for coloring by group. The user may override with one valid color of their choice e.g. "black" (see colors() for choices) or they may provide a vector of colors such as c("gray", "red", "green", "gray", "blue") or a named vector like c("Green" = "gray", "Liberal" = "red", "NDP" = "green", "Others" = "gray", "PC" = "blue"). Any input must be character. And the length of a vector must equal the number of levels in grouping.}
+\item{LineColor}{Optionally the color of the plotted lines. By default it will use the ggplot2 color palette for coloring by group. The user may override with one valid color of their choice e.g. "black" (see colors() for choices) or they may provide a vector of colors such as c("gray", "red", "green", "gray", "blue") or a named vector like c("Green" = "gray", "Liberal" = "red", "NDP" = "green", "Others" = "gray", "PC" = "blue"). Any input must be character, and the length of a vector must equal the number of levels in grouping.}
 
 \item{DataTextSize}{Optionally the font size of the plotted data points. DataTextSize = 2.5 is the default must be a numeric.}
 }
