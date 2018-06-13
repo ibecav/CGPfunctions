@@ -7,8 +7,8 @@
 newggslopegraph(dataframe, Times, Measurement, Grouping,
   Title = "No title given", SubTitle = "No subtitle given",
   Caption = "No caption given", XTextSize = 12, YTextSize = 3,
-  TitleTextSize = 14, LineThickness = 1, LineColor = "ByGroup",
-  DataTextSize = 2.5)
+  TitleTextSize = 14, SubTitleTextSize = 10, CaptionTextSize = 8,
+  LineThickness = 1, LineColor = "ByGroup", DataTextSize = 2.5)
 }
 \arguments{
 \item{dataframe}{a dataframe or an object that can be coerced to a dataframe. Basic error checking is performed.}
@@ -30,6 +30,10 @@ newggslopegraph(dataframe, Times, Measurement, Grouping,
 \item{YTextSize}{Optionally the font size for the Y axis labels to be displayed. YTextSize = 3 is the default must be a numeric. Note that X & Y axis text are on different scales}
 
 \item{TitleTextSize}{Optionally the font size for the Title to be displayed. TitleTextSize = 14 is the default must be a numeric.}
+
+\item{SubTitleTextSize}{Optionally the font size for the SubTitle to be displayed. SubTitleTextSize = 10 is the default must be a numeric.}
+
+\item{CaptionTextSize}{Optionally the font size for the Caption to be displayed. CaptionTextSize = 8 is the default must be a numeric.}
 
 \item{LineThickness}{Optionally the thickness of the plotted lines. LineThickness = 1 is the default must be a numeric.}
 

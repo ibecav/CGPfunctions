@@ -13,6 +13,8 @@
 #' @param XTextSize Optionally the font size for the X axis labels to be displayed. XTextSize = 12 is the default must be a numeric. Note that X & Y axis text are on different scales
 #' @param YTextSize Optionally the font size for the Y axis labels to be displayed. YTextSize = 3 is the default must be a numeric. Note that X & Y axis text are on different scales
 #' @param TitleTextSize Optionally the font size for the Title to be displayed. TitleTextSize = 14 is the default must be a numeric.
+#' @param SubTitleTextSize Optionally the font size for the SubTitle to be displayed. SubTitleTextSize = 10 is the default must be a numeric.
+#' @param CaptionTextSize Optionally the font size for the Caption to be displayed. CaptionTextSize = 8 is the default must be a numeric.
 #' @param LineThickness Optionally the thickness of the plotted lines. LineThickness = 1 is the default must be a numeric.
 #' @param DataTextSize Optionally the font size of the plotted data points. DataTextSize = 2.5 is the default must be a numeric.
 #' @param LineColor Optionally the color the plotted lines. By default it will use the ggplot2 color palette for coloring by group. The user may override with one valid color of their choice e.g. "black" must be character.
@@ -44,6 +46,8 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
                             XTextSize = 12,
                             YTextSize = 3,
                             TitleTextSize = 14,
+                            SubTitleTextSize = 10,
+                            CaptionTextSize = 8,
                             LineThickness = 1,
                             LineColor = "ByGroup",
                             DataTextSize = 2.5)
@@ -65,7 +69,8 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
     theme(axis.ticks       = element_blank()), # Remove x & y tick marks
     theme(plot.title       = element_text(size = TitleTextSize, face = "bold")), # Format title
     theme(plot.title       = element_text(hjust = 0.5)), # Center title & subtitle
-    theme(plot.subtitle    = element_text(hjust = 0.5))
+    theme(plot.subtitle    = element_text(hjust = 0.5, size = SubTitleTextSize)),
+    theme(plot.caption     = element_text(size = CaptionTextSize))
   )
   # for convenience store these
   Ndataframe <- deparse(substitute(dataframe)) # name of dataframe
