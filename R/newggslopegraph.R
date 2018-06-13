@@ -115,7 +115,11 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
   Measurement <- enquo(Measurement)
   Grouping <- enquo(Grouping)
 
-  if (length(LineColor) > 1) {
+  if (length(LineColor) > 1) { 
+    if (length(LineColor) < length(unique(dataframe[[NGrouping]]))) {
+      message(paste0("\nYou gave me ", length(LineColor), " colors I'm recycling because you have ", length(unique(dataframe[[NGrouping]])), " ", NGrouping, "\n"))
+      LineColor <- rep(LineColor, length.out = length(unique(dataframe[[NGrouping]])))
+    }
     LineGeom <- list(geom_line(aes_(color = Grouping), size = LineThickness), scale_color_manual(values = LineColor))
   } else {
     if (LineColor == "ByGroup") {
