@@ -17,7 +17,7 @@
 #' @param CaptionTextSize Optionally the font size for the Caption to be displayed. CaptionTextSize = 8 is the default must be a numeric.
 #' @param LineThickness Optionally the thickness of the plotted lines. LineThickness = 1 is the default must be a numeric.
 #' @param DataTextSize Optionally the font size of the plotted data points. DataTextSize = 2.5 is the default must be a numeric.
-#' @param LineColor Optionally the color the plotted lines. By default it will use the ggplot2 color palette for coloring by group. The user may override with one valid color of their choice e.g. "black" must be character.
+#' @param LineColor Optionally the color of the plotted lines. By default it will use the ggplot2 color palette for coloring by group. The user may override with one valid color of their choice e.g. "black" must be character.
 #' 
 #' 
 #' @return a plot of type ggplot to the default plot device
