@@ -144,8 +144,8 @@ Makes the required adjustments to the ggplot2 parameters and returns the plot.</
     <pre class="usage"><span class='fu'>newggslopegraph</span>(<span class='no'>dataframe</span>, <span class='no'>Times</span>, <span class='no'>Measurement</span>, <span class='no'>Grouping</span>,
   <span class='kw'>Title</span> <span class='kw'>=</span> <span class='st'>"No title given"</span>, <span class='kw'>SubTitle</span> <span class='kw'>=</span> <span class='st'>"No subtitle given"</span>,
   <span class='kw'>Caption</span> <span class='kw'>=</span> <span class='st'>"No caption given"</span>, <span class='kw'>XTextSize</span> <span class='kw'>=</span> <span class='fl'>12</span>, <span class='kw'>YTextSize</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>TitleTextSize</span> <span class='kw'>=</span> <span class='fl'>14</span>, <span class='kw'>LineThickness</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='st'>"ByGroup"</span>,
-  <span class='kw'>DataTextSize</span> <span class='kw'>=</span> <span class='fl'>2.5</span>)</pre>
+  <span class='kw'>TitleTextSize</span> <span class='kw'>=</span> <span class='fl'>14</span>, <span class='kw'>SubTitleTextSize</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>CaptionTextSize</span> <span class='kw'>=</span> <span class='fl'>8</span>,
+  <span class='kw'>LineThickness</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='st'>"ByGroup"</span>, <span class='kw'>DataTextSize</span> <span class='kw'>=</span> <span class='fl'>2.5</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -191,12 +191,20 @@ Makes the required adjustments to the ggplot2 parameters and returns the plot.</
       <td><p>Optionally the font size for the Title to be displayed. TitleTextSize = 14 is the default must be a numeric.</p></td>
     </tr>
     <tr>
+      <th>SubTitleTextSize</th>
+      <td><p>Optionally the font size for the SubTitle to be displayed. SubTitleTextSize = 10 is the default must be a numeric.</p></td>
+    </tr>
+    <tr>
+      <th>CaptionTextSize</th>
+      <td><p>Optionally the font size for the Caption to be displayed. CaptionTextSize = 8 is the default must be a numeric.</p></td>
+    </tr>
+    <tr>
       <th>LineThickness</th>
       <td><p>Optionally the thickness of the plotted lines. LineThickness = 1 is the default must be a numeric.</p></td>
     </tr>
     <tr>
       <th>LineColor</th>
-      <td><p>Optionally the color the plotted lines. By default it will use the ggplot2 color palette for coloring by group. The user may override with one valid color of their choice e.g. "black" must be character.</p></td>
+      <td><p>Optionally the color of the plotted lines. By default it will use the ggplot2 color palette for coloring by group. The user may override with one valid color of their choice e.g. "black" must be character.</p></td>
     </tr>
     <tr>
       <th>DataTextSize</th>
@@ -215,8 +223,12 @@ Makes the required adjustments to the ggplot2 parameters and returns the plot.</
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'>newggslopegraph</span>(<span class='no'>newcancer</span>, <span class='no'>Year</span>, <span class='no'>Survival</span>, <span class='no'>Type</span>)</div><div class='img'><img src='newggslopegraph-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>newggslopegraph</span>(<span class='no'>newcancer</span>, <span class='no'>Year</span>, <span class='no'>Survival</span>, <span class='no'>Type</span>, <span class='kw'>Title</span> <span class='kw'>=</span> <span class='st'>"Estimates of Percent Survival Rates"</span>)</div><div class='img'><img src='newggslopegraph-2.png' alt='' width='700' height='433' /></div><div class='input'>
-
+<span class='fu'>newggslopegraph</span>(<span class='no'>newcancer</span>, <span class='no'>Year</span>, <span class='no'>Survival</span>, <span class='no'>Type</span>)</div><div class='img'><img src='newggslopegraph-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>newggslopegraph</span>(<span class='no'>newcancer</span>, <span class='no'>Year</span>, <span class='no'>Survival</span>, <span class='no'>Type</span>, <span class='kw'>Title</span> <span class='kw'>=</span> <span class='st'>"Estimates of Percent Survival Rates"</span>)</div><div class='img'><img src='newggslopegraph-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>newggslopegraph</span>(<span class='no'>newcancer</span>, <span class='no'>Year</span>, <span class='no'>Survival</span>, <span class='no'>Type</span>,
+                <span class='kw'>Title</span> <span class='kw'>=</span> <span class='st'>"Estimates of Percent Survival Rates"</span>,
+                <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
+                <span class='kw'>LineThickness</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+                <span class='kw'>SubTitle</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+                <span class='kw'>Caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</div><div class='img'><img src='newggslopegraph-3.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
