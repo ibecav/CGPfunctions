@@ -17,7 +17,8 @@ newggslopegraph(dataframe, Times, Measurement, Grouping,
 
 \item{Measurement}{a column inside the dataframe that will be plotted on the y axis. Traditionally this is some measure such as a percentage.  Currently the function accepts a column of type integer or numeric.}
 
-\item{Grouping}{a column inside the dataframe that will be used to group and distinguish measurements.}
+\item{Grouping}{a column inside the dataframe that will be used to group and distinguish measurements.
+Coloring Optionally a column inside the dataframe that will be used to color the plot lines.}
 
 \item{Title}{Optionally the title to be displayed. Title = NULL will remove it entirely. Title = "" will provide and empty title but retain the sapcing.}
 

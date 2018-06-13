@@ -7,6 +7,7 @@
 #' @param Times a column inside the dataframe that will be plotted on the x axis. Traditionally this is some measure of time.  The function accepts a column of class ordered, factor or character.
 #' @param Measurement a column inside the dataframe that will be plotted on the y axis. Traditionally this is some measure such as a percentage.  Currently the function accepts a column of type integer or numeric.
 #' @param Grouping a column inside the dataframe that will be used to group and distinguish measurements.
+#' Coloring Optionally a column inside the dataframe that will be used to color the plot lines.
 #' @param Title Optionally the title to be displayed. Title = NULL will remove it entirely. Title = "" will provide and empty title but retain the sapcing.
 #' @param SubTitle Optionally the sub-title to be displayed.  SubTitle = NULL will remove it entirely. SubTitle = "" will provide and empty title but retain the sapcing.
 #' @param Caption Optionally the caption to be displayed. Caption = NULL will remove it entirely. Caption = "" will provide and empty title but retain the sapcing.
@@ -115,10 +116,14 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
   Measurement <- enquo(Measurement)
   Grouping <- enquo(Grouping)
 
-  if (LineColor != "ByGroup" ) {
-    LineGeom <- list(geom_line(aes_(), size = LineThickness, color = LineColor))
-  } else {
+  if (LineColor == "ByGroup" ) {
     LineGeom <- list(geom_line(aes_(color = Grouping, alpha = 1), size = LineThickness))
+  } else { 
+    if (length(LineColor) == 1) {
+          LineGeom <- list(geom_line(aes_(), size = LineThickness, color = LineColor))
+    } else {
+          LineGeom <- list(geom_line(aes_(color = Grouping), size = LineThickness), scale_color_manual(values = LineColor))
+    }
   }
 
     dataframe %>%
