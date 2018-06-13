@@ -48,7 +48,12 @@ Makes the required adjustments to the ggplot2 parameters and returns the plot.
 
 newggslopegraph(newcancer, Year, Survival, Type)
 newggslopegraph(newcancer, Year, Survival, Type, Title = "Estimates of Percent Survival Rates")
-
+newggslopegraph(newcancer, Year, Survival, Type, 
+                Title = "Estimates of Percent Survival Rates", 
+                LineColor = "black", 
+                LineThickness = 1, 
+                SubTitle = NULL, 
+                Caption = NULL)
 
 }
 \seealso{

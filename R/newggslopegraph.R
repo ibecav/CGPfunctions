@@ -30,7 +30,12 @@
 #'
 #' newggslopegraph(newcancer, Year, Survival, Type)
 #' newggslopegraph(newcancer, Year, Survival, Type, Title = "Estimates of Percent Survival Rates")
-#'
+#' newggslopegraph(newcancer, Year, Survival, Type, 
+#'                 Title = "Estimates of Percent Survival Rates", 
+#'                 LineColor = "black", 
+#'                 LineThickness = 1, 
+#'                 SubTitle = NULL, 
+#'                 Caption = NULL)
 #'
 newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
                             Title = "No title given",
