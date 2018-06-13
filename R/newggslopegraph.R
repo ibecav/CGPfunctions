@@ -7,7 +7,6 @@
 #' @param Times a column inside the dataframe that will be plotted on the x axis. Traditionally this is some measure of time.  The function accepts a column of class ordered, factor or character.
 #' @param Measurement a column inside the dataframe that will be plotted on the y axis. Traditionally this is some measure such as a percentage.  Currently the function accepts a column of type integer or numeric.
 #' @param Grouping a column inside the dataframe that will be used to group and distinguish measurements.
-#' Coloring Optionally a column inside the dataframe that will be used to color the plot lines.
 #' @param Title Optionally the title to be displayed. Title = NULL will remove it entirely. Title = "" will provide and empty title but retain the sapcing.
 #' @param SubTitle Optionally the sub-title to be displayed.  SubTitle = NULL will remove it entirely. SubTitle = "" will provide and empty title but retain the sapcing.
 #' @param Caption Optionally the caption to be displayed. Caption = NULL will remove it entirely. Caption = "" will provide and empty title but retain the sapcing.
@@ -18,7 +17,7 @@
 #' @param CaptionTextSize Optionally the font size for the Caption to be displayed. CaptionTextSize = 8 is the default must be a numeric.
 #' @param LineThickness Optionally the thickness of the plotted lines. LineThickness = 1 is the default must be a numeric.
 #' @param DataTextSize Optionally the font size of the plotted data points. DataTextSize = 2.5 is the default must be a numeric.
-#' @param LineColor Optionally the color of the plotted lines. By default it will use the ggplot2 color palette for coloring by group. The user may override with one valid color of their choice e.g. "black" must be character.
+#' @param LineColor Optionally the color of the plotted lines. By default it will use the ggplot2 color palette for coloring by group. The user may override with one valid color of their choice e.g. "black" or they may provide a vector of colors such as c("gray", "red", "green", "gray", "blue") any input must be character. And the length of a vector must equal the number of levels in grouping.
 #' 
 #' 
 #' @return a plot of type ggplot to the default plot device
@@ -104,7 +103,7 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
   if (!"ordered" %in% class(dataframe[[NTimes]])) { # keep checking
     if (!"character" %in% class(dataframe[[NTimes]])) { # keep checking
       if ("factor" %in% class(dataframe[[NTimes]])) { # impose order
-        warning("Converting to an ordered factor", call. = FALSE)
+        message(paste0("\nConverting '", NTimes, "' to an ordered factor\n"))
         dataframe[[NTimes]] <- factor(dataframe[[NTimes]], ordered = TRUE)
       } else {
         stop(paste0("Sorry I need the variable '", NTimes, "' to be of class character, factor or ordered"), call. = FALSE)
@@ -116,16 +115,16 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
   Measurement <- enquo(Measurement)
   Grouping <- enquo(Grouping)
 
-  if (LineColor == "ByGroup" ) {
-    LineGeom <- list(geom_line(aes_(color = Grouping, alpha = 1), size = LineThickness))
-  } else { 
-    if (length(LineColor) == 1) {
-          LineGeom <- list(geom_line(aes_(), size = LineThickness, color = LineColor))
+  if (length(LineColor) > 1) {
+    LineGeom <- list(geom_line(aes_(color = Grouping), size = LineThickness), scale_color_manual(values = LineColor))
+  } else {
+    if (LineColor == "ByGroup") {
+      LineGeom <- list(geom_line(aes_(color = Grouping, alpha = 1), size = LineThickness))
     } else {
-          LineGeom <- list(geom_line(aes_(color = Grouping), size = LineThickness), scale_color_manual(values = LineColor))
+      LineGeom <- list(geom_line(aes_(), size = LineThickness, color = LineColor))
     }
   }
-
+  
     dataframe %>%
       filter(!is.na(!! Times), !is.na(!! Measurement), !is.na(!! Grouping))  %>%
 #      mutate(!!quo_name(Times) := factor(!!Times), !!quo_name(Measurement) := factor(!!Measurement)) %>%

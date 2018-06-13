@@ -17,8 +17,7 @@ newggslopegraph(dataframe, Times, Measurement, Grouping,
 
 \item{Measurement}{a column inside the dataframe that will be plotted on the y axis. Traditionally this is some measure such as a percentage.  Currently the function accepts a column of type integer or numeric.}
 
-\item{Grouping}{a column inside the dataframe that will be used to group and distinguish measurements.
-Coloring Optionally a column inside the dataframe that will be used to color the plot lines.}
+\item{Grouping}{a column inside the dataframe that will be used to group and distinguish measurements.}
 
 \item{Title}{Optionally the title to be displayed. Title = NULL will remove it entirely. Title = "" will provide and empty title but retain the sapcing.}
 
@@ -38,7 +37,7 @@ Coloring Optionally a column inside the dataframe that will be used to color the
 
 \item{LineThickness}{Optionally the thickness of the plotted lines. LineThickness = 1 is the default must be a numeric.}
 
-\item{LineColor}{Optionally the color of the plotted lines. By default it will use the ggplot2 color palette for coloring by group. The user may override with one valid color of their choice e.g. "black" must be character.}
+\item{LineColor}{Optionally the color of the plotted lines. By default it will use the ggplot2 color palette for coloring by group. The user may override with one valid color of their choice e.g. "black" or they may provide a vector of colors such as c("gray", "red", "green", "gray", "blue") any input must be character. And the length of a vector must equal the number of levels in grouping.}
 
 \item{DataTextSize}{Optionally the font size of the plotted data points. DataTextSize = 2.5 is the default must be a numeric.}
 }
