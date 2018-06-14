@@ -28,13 +28,28 @@
 #' @param Caption Optionally the caption to be displayed. Caption = NULL will remove 
 #' it entirely. Caption = "" will provide and empty title but retain the spacing.
 #' @param XTextSize Optionally the font size for the X axis labels to be displayed. XTextSize = 12 is the default must be a numeric. Note that X & Y axis text are on different scales
-#' @param YTextSize Optionally the font size for the Y axis labels to be displayed. YTextSize = 3 is the default must be a numeric. Note that X & Y axis text are on different scales
-#' @param TitleTextSize Optionally the font size for the Title to be displayed. TitleTextSize = 14 is the default must be a numeric.
-#' @param SubTitleTextSize Optionally the font size for the SubTitle to be displayed. SubTitleTextSize = 10 is the default must be a numeric.
-#' @param CaptionTextSize Optionally the font size for the Caption to be displayed. CaptionTextSize = 8 is the default must be a numeric.
-#' @param LineThickness Optionally the thickness of the plotted lines. LineThickness = 1 is the default must be a numeric.
-#' @param DataTextSize Optionally the font size of the plotted data points. DataTextSize = 2.5 is the default must be a numeric.
-#' @param LineColor Optionally the color of the plotted lines. By default it will use the ggplot2 color palette for coloring by group. The user may override with one valid color of their choice e.g. "black" (see colors() for choices) or they may provide a vector of colors such as c("gray", "red", "green", "gray", "blue") or a named vector like c("Green" = "gray", "Liberal" = "red", "NDP" = "green", "Others" = "gray", "PC" = "blue"). Any input must be character, and the length of a vector must equal the number of levels in grouping.
+#' @param YTextSize Optionally the font size for the Y axis labels to be displayed. 
+#' YTextSize = 3 is the default must be a numeric. Note that X & Y axis text are on 
+#' different scales
+#' @param TitleTextSize Optionally the font size for the Title to be displayed. 
+#' TitleTextSize = 14 is the default must be a numeric.
+#' @param SubTitleTextSize Optionally the font size for the SubTitle to be displayed. 
+#' SubTitleTextSize = 10 is the default must be a numeric.
+#' @param CaptionTextSize Optionally the font size for the Caption to be displayed. 
+#' CaptionTextSize = 8 is the default must be a numeric.
+#' @param LineThickness Optionally the thickness of the plotted lines. LineThickness = 1 
+#' is the default must be a numeric.
+#' @param DataTextSize Optionally the font size of the plotted data points. DataTextSize = 2.5 
+#' is the default must be a numeric.
+#' @param LineColor Optionally the color of the plotted lines. By default it will use 
+#' the ggplot2 color palette for coloring by \code{Grouping}. The user may override 
+#' with \bold{one} valid color of their choice e.g. "black" (see colors() for choices) 
+#' \bold{OR} 
+#' they may provide a vector of colors such as c("gray", "red", "green", "gray", "blue") 
+#' \bold{OR} a named vector like c("Green" = "gray", "Liberal" = "red", "NDP" = "green", 
+#' "Others" = "gray", "PC" = "blue"). Any input must be character, and the length 
+#' of a vector \bold{should} equal the number of levels in \code{Grouping}. If the 
+#' user does not provide enough colors they will be recycled.
 #' 
 #' 
 #' @return a plot of type ggplot to the default plot device
