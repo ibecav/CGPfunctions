@@ -32,7 +32,10 @@
 
 <meta property="og:title" content="Plot a Slopegraph a la Tufte using dplyr and ggplot2 — newggslopegraph" />
 
-<meta property="og:description" content="Takes a dataframe as input, with three named columns being used to plot.
+<meta property="og:description" content="Creates a &quot;slopegraph&quot; as conceptualized by Edward Tufte. Slopegraphs are minimalist
+and efficient presentations of your data that can simultaneously convey the relative rankings, 
+the actual numeric values, and the changes and directionality of the data over time.
+Takes a dataframe as input, with three named columns being used to draw the plot.
 Makes the required adjustments to the ggplot2 parameters and returns the plot." />
 <meta name="twitter:card" content="summary" />
 
@@ -136,7 +139,10 @@ Makes the required adjustments to the ggplot2 parameters and returns the plot." 
 
     <div class="ref-description">
     
-    <p>Takes a dataframe as input, with three named columns being used to plot.
+    <p>Creates a "slopegraph" as conceptualized by Edward Tufte. Slopegraphs are minimalist
+and efficient presentations of your data that can simultaneously convey the relative rankings, 
+the actual numeric values, and the changes and directionality of the data over time.
+Takes a dataframe as input, with three named columns being used to draw the plot.
 Makes the required adjustments to the ggplot2 parameters and returns the plot.</p>
     
     </div>
@@ -152,31 +158,45 @@ Makes the required adjustments to the ggplot2 parameters and returns the plot.</
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>dataframe</th>
-      <td><p>a dataframe or an object that can be coerced to a dataframe. Basic error checking is performed.</p></td>
+      <td><p>a dataframe or an object that can be coerced to a dataframe. 
+Basic error checking is performed, to include ensuring that the named columns 
+exist in the dataframe. See the <code><a href='newcancer.html'>newcancer</a></code> dataset for an example of
+how the dataframe should be organized.</p></td>
     </tr>
     <tr>
       <th>Times</th>
-      <td><p>a column inside the dataframe that will be plotted on the x axis. Traditionally this is some measure of time.  The function accepts a column of class ordered, factor or character.  NOTE if your variable is currently a "date" class you can convert with as.character(variablename).</p></td>
+      <td><p>a column inside the dataframe that will be plotted on the x axis. 
+Traditionally this is some measure of time.  The function accepts a column of class
+ordered, factor or character.  NOTE if your variable is currently a "date" class 
+you must convert before using the function with <code>as.character(variablename)</code>.</p></td>
     </tr>
     <tr>
       <th>Measurement</th>
-      <td><p>a column inside the dataframe that will be plotted on the y axis. Traditionally this is some measure such as a percentage.  Currently the function accepts a column of type integer or numeric.</p></td>
+      <td><p>a column inside the dataframe that will be plotted on the y axis. 
+Traditionally this is some measure such as a percentage.  Currently the function 
+accepts a column of type integer or numeric.  The slopegraph will be most effective
+when the measurements are not too disparate.</p></td>
     </tr>
     <tr>
       <th>Grouping</th>
-      <td><p>a column inside the dataframe that will be used to group and distinguish measurements.</p></td>
+      <td><p>a column inside the dataframe that will be used to group and 
+distinguish measurements.</p></td>
     </tr>
     <tr>
       <th>Title</th>
-      <td><p>Optionally the title to be displayed. Title = NULL will remove it entirely. Title = "" will provide and empty title but retain the sapcing.</p></td>
+      <td><p>Optionally the title to be displayed. Title = NULL will remove it 
+entirely. Title = "" will provide an empty title but retain the spacing.</p></td>
     </tr>
     <tr>
       <th>SubTitle</th>
-      <td><p>Optionally the sub-title to be displayed.  SubTitle = NULL will remove it entirely. SubTitle = "" will provide and empty title but retain the sapcing.</p></td>
+      <td><p>Optionally the sub-title to be displayed.  SubTitle = NULL 
+will remove it entirely. SubTitle = "" will provide and empty title but retain 
+the spacing.</p></td>
     </tr>
     <tr>
       <th>Caption</th>
-      <td><p>Optionally the caption to be displayed. Caption = NULL will remove it entirely. Caption = "" will provide and empty title but retain the sapcing.</p></td>
+      <td><p>Optionally the caption to be displayed. Caption = NULL will remove 
+it entirely. Caption = "" will provide and empty title but retain the spacing.</p></td>
     </tr>
     <tr>
       <th>XTextSize</th>
@@ -184,37 +204,56 @@ Makes the required adjustments to the ggplot2 parameters and returns the plot.</
     </tr>
     <tr>
       <th>YTextSize</th>
-      <td><p>Optionally the font size for the Y axis labels to be displayed. YTextSize = 3 is the default must be a numeric. Note that X &amp; Y axis text are on different scales</p></td>
+      <td><p>Optionally the font size for the Y axis labels to be displayed. 
+YTextSize = 3 is the default must be a numeric. Note that X &amp; Y axis text are on 
+different scales</p></td>
     </tr>
     <tr>
       <th>TitleTextSize</th>
-      <td><p>Optionally the font size for the Title to be displayed. TitleTextSize = 14 is the default must be a numeric.</p></td>
+      <td><p>Optionally the font size for the Title to be displayed. 
+TitleTextSize = 14 is the default must be a numeric.</p></td>
     </tr>
     <tr>
       <th>SubTitleTextSize</th>
-      <td><p>Optionally the font size for the SubTitle to be displayed. SubTitleTextSize = 10 is the default must be a numeric.</p></td>
+      <td><p>Optionally the font size for the SubTitle to be displayed. 
+SubTitleTextSize = 10 is the default must be a numeric.</p></td>
     </tr>
     <tr>
       <th>CaptionTextSize</th>
-      <td><p>Optionally the font size for the Caption to be displayed. CaptionTextSize = 8 is the default must be a numeric.</p></td>
+      <td><p>Optionally the font size for the Caption to be displayed. 
+CaptionTextSize = 8 is the default must be a numeric.</p></td>
     </tr>
     <tr>
       <th>LineThickness</th>
-      <td><p>Optionally the thickness of the plotted lines. LineThickness = 1 is the default must be a numeric.</p></td>
+      <td><p>Optionally the thickness of the plotted lines. LineThickness = 1 
+is the default must be a numeric.</p></td>
     </tr>
     <tr>
       <th>LineColor</th>
-      <td><p>Optionally the color of the plotted lines. By default it will use the ggplot2 color palette for coloring by group. The user may override with one valid color of their choice e.g. "black" (see colors() for choices) or they may provide a vector of colors such as c("gray", "red", "green", "gray", "blue") or a named vector like c("Green" = "gray", "Liberal" = "red", "NDP" = "green", "Others" = "gray", "PC" = "blue"). Any input must be character. And the length of a vector must equal the number of levels in grouping.</p></td>
+      <td><p>Optionally the color of the plotted lines. By default it will use 
+the ggplot2 color palette for coloring by <code>Grouping</code>. The user may override 
+with <b>one</b> valid color of their choice e.g. "black" (see colors() for choices) 
+<b>OR</b> 
+they may provide a vector of colors such as c("gray", "red", "green", "gray", "blue") 
+<b>OR</b> a named vector like c("Green" = "gray", "Liberal" = "red", "NDP" = "green", 
+"Others" = "gray", "PC" = "blue"). Any input must be character, and the length 
+of a vector <b>should</b> equal the number of levels in <code>Grouping</code>. If the 
+user does not provide enough colors they will be recycled.</p></td>
     </tr>
     <tr>
       <th>DataTextSize</th>
-      <td><p>Optionally the font size of the plotted data points. DataTextSize = 2.5 is the default must be a numeric.</p></td>
+      <td><p>Optionally the font size of the plotted data points. DataTextSize = 2.5 
+is the default must be a numeric.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>a plot of type ggplot to the default plot device</p>
+    
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Based on: Edward Tufte, Beautiful Evidence (2006), pages 174-176.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -228,7 +267,14 @@ Makes the required adjustments to the ggplot2 parameters and returns the plot.</
                 <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
                 <span class='kw'>LineThickness</span> <span class='kw'>=</span> <span class='fl'>1</span>,
                 <span class='kw'>SubTitle</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-                <span class='kw'>Caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</div><div class='img'><img src='newggslopegraph-3.png' alt='' width='700' height='433' /></div><div class='input'>
+                <span class='kw'>Caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</div><div class='img'><img src='newggslopegraph-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>newggslopegraph</span>(<span class='no'>newcancer</span>, <span class='no'>Year</span>, <span class='no'>Survival</span>, <span class='no'>Type</span>,
+                <span class='kw'>Title</span> <span class='kw'>=</span> <span class='st'>"Estimates of Percent Survival Rates"</span>,
+                <span class='kw'>SubTitle</span> <span class='kw'>=</span> <span class='st'>"Based on: Edward Tufte, Beautiful Evidence, 174, 176."</span>,
+                <span class='kw'>Caption</span> <span class='kw'>=</span> <span class='st'>"https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0003nk"</span>,
+                <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"black"</span>, <span class='st'>"red"</span>, <span class='st'>"grey"</span>),
+                <span class='kw'>LineThickness</span> <span class='kw'>=</span> <span class='fl'>.5</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>You gave me 3 colors I'm recycling because you have 24 Type</span></div><div class='img'><img src='newggslopegraph-4.png' alt='' width='700' height='433' /></div><div class='input'>
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -237,6 +283,8 @@ Makes the required adjustments to the ggplot2 parameters and returns the plot.</
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#references">References</a></li>
 
       <li><a href="#see-also">See also</a></li>
       
