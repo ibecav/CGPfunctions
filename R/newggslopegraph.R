@@ -71,6 +71,13 @@
 #'                 LineThickness = 1, 
 #'                 SubTitle = NULL, 
 #'                 Caption = NULL)
+#' newggslopegraph(newcancer, Year, Survival, Type, 
+#'                 Title = "Estimates of Percent Survival Rates", 
+#'                 SubTitle = "Based on: Edward Tufte, Beautiful Evidence, 174, 176.",
+#'                 Caption = "https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0003nk",
+#'                 LineColor = c("black", "red", "grey"), 
+#'                 LineThickness = .5)
+#'
 #'
 newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
                             Title = "No title given",
@@ -164,12 +171,9 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
   
     dataframe %>%
       filter(!is.na(!! Times), !is.na(!! Measurement), !is.na(!! Grouping))  %>%
-#      mutate(!!quo_name(Times) := factor(!!Times), !!quo_name(Measurement) := factor(!!Measurement)) %>%
       ggplot(aes_(group=Grouping, y=Measurement, x=Times)) +
-      LineGeom +
-#      geom_line(aes_(), size = LineThickness, color = "black") +
-#      geom_line(aes_(color = Grouping, alpha = 1), size = LineThickness) +
-      geom_text_repel(data = dataframe %>% filter(!! Times == min(!! Times)),
+        LineGeom +
+        geom_text_repel(data = dataframe %>% filter(!! Times == min(!! Times)),
                         aes_(label = Grouping) ,
                         hjust = "left",
                         fontface = "bold",
@@ -191,7 +195,4 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
               caption = Caption
             )
 } # end of function
-# title = "Estimates of Percent Survival Rates"
-# subtitle = "Based on: Edward Tufte, Beautiful Evidence, 174, 176."
-# caption = "https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0003nk"
-# as of 0747 14 June
+
