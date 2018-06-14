@@ -11,17 +11,30 @@ newggslopegraph(dataframe, Times, Measurement, Grouping,
   LineThickness = 1, LineColor = "ByGroup", DataTextSize = 2.5)
 }
 \arguments{
-\item{dataframe}{a dataframe or an object that can be coerced to a dataframe. Basic error checking is performed.}
+\item{dataframe}{a dataframe or an object that can be coerced to a dataframe. 
+Basic error checking is performed, to include ensuring that the named columns 
+exist in the dataframe. See the \code{\link{newcancer}} dataset for an example of
+how the dataframe should be organized.}
 
-\item{Times}{a column inside the dataframe that will be plotted on the x axis. Traditionally this is some measure of time.  The function accepts a column of class ordered, factor or character.  NOTE if your variable is currently a "date" class you can convert with as.character(variablename).}
+\item{Times}{a column inside the dataframe that will be plotted on the x axis. 
+Traditionally this is some measure of time.  The function accepts a column of class
+ordered, factor or character.  NOTE if your variable is currently a "date" class 
+you must convert before using the function with \code{as.character(variablename)}.}
 
-\item{Measurement}{a column inside the dataframe that will be plotted on the y axis. Traditionally this is some measure such as a percentage.  Currently the function accepts a column of type integer or numeric.}
+\item{Measurement}{a column inside the dataframe that will be plotted on the y axis. 
+Traditionally this is some measure such as a percentage.  Currently the function 
+accepts a column of type integer or numeric.  The slopegraph will be most effective
+when the measurements are not too disparate.}
 
-\item{Grouping}{a column inside the dataframe that will be used to group and distinguish measurements.}
+\item{Grouping}{a column inside the dataframe that will be used to group and 
+distinguish measurements.}
 
-\item{Title}{Optionally the title to be displayed. Title = NULL will remove it entirely. Title = "" will provide and empty title but retain the sapcing.}
+\item{Title}{Optionally the title to be displayed. Title = NULL will remove it 
+entirely. Title = "" will provide an empty title but retain the spacing.}
 
-\item{SubTitle}{Optionally the sub-title to be displayed.  SubTitle = NULL will remove it entirely. SubTitle = "" will provide and empty title but retain the sapcing.}
+\item{SubTitle}{Optionally the sub-title to be displayed.  SubTitle = NULL 
+will remove it entirely. SubTitle = "" will provide and empty title but retain 
+the spacing.}
 
 \item{Caption}{Optionally the caption to be displayed. Caption = NULL will remove it entirely. Caption = "" will provide and empty title but retain the sapcing.}
 
@@ -45,7 +58,10 @@ newggslopegraph(dataframe, Times, Measurement, Grouping,
 a plot of type ggplot to the default plot device
 }
 \description{
-Takes a dataframe as input, with three named columns being used to plot.
+Creates a "slopegraph" as conceptualized by Edward Tufte. Slopegraphs are minimalist
+and efficient presentations of your data that can simultaneously convey the relative rankings, 
+the actual numeric values, and the changes and directionality of the data over time.
+Takes a dataframe as input, with three named columns being used to draw the plot.
 Makes the required adjustments to the ggplot2 parameters and returns the plot.
 }
 \examples{
@@ -59,6 +75,9 @@ newggslopegraph(newcancer, Year, Survival, Type,
                 SubTitle = NULL, 
                 Caption = NULL)
 
+}
+\references{
+Based on: Edward Tufte, Beautiful Evidence (2006), pages 174-176.
 }
 \seealso{
 \code{\link{newcancer}}

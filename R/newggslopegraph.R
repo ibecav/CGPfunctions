@@ -1,14 +1,30 @@
 #' Plot a Slopegraph a la Tufte using dplyr and ggplot2
 #'
-#' Takes a dataframe as input, with three named columns being used to plot.
+#' Creates a "slopegraph" as conceptualized by Edward Tufte. Slopegraphs are minimalist
+#' and efficient presentations of your data that can simultaneously convey the relative rankings, 
+#' the actual numeric values, and the changes and directionality of the data over time.
+#' Takes a dataframe as input, with three named columns being used to draw the plot.
 #' Makes the required adjustments to the ggplot2 parameters and returns the plot.
 #'
-#' @param dataframe a dataframe or an object that can be coerced to a dataframe. Basic error checking is performed.
-#' @param Times a column inside the dataframe that will be plotted on the x axis. Traditionally this is some measure of time.  The function accepts a column of class ordered, factor or character.  NOTE if your variable is currently a "date" class you can convert with as.character(variablename).
-#' @param Measurement a column inside the dataframe that will be plotted on the y axis. Traditionally this is some measure such as a percentage.  Currently the function accepts a column of type integer or numeric.
-#' @param Grouping a column inside the dataframe that will be used to group and distinguish measurements.
-#' @param Title Optionally the title to be displayed. Title = NULL will remove it entirely. Title = "" will provide and empty title but retain the sapcing.
-#' @param SubTitle Optionally the sub-title to be displayed.  SubTitle = NULL will remove it entirely. SubTitle = "" will provide and empty title but retain the sapcing.
+#' @param dataframe a dataframe or an object that can be coerced to a dataframe. 
+#' Basic error checking is performed, to include ensuring that the named columns 
+#' exist in the dataframe. See the \code{\link{newcancer}} dataset for an example of
+#' how the dataframe should be organized. 
+#' @param Times a column inside the dataframe that will be plotted on the x axis. 
+#' Traditionally this is some measure of time.  The function accepts a column of class
+#' ordered, factor or character.  NOTE if your variable is currently a "date" class 
+#' you must convert before using the function with \code{as.character(variablename)}.
+#' @param Measurement a column inside the dataframe that will be plotted on the y axis. 
+#' Traditionally this is some measure such as a percentage.  Currently the function 
+#' accepts a column of type integer or numeric.  The slopegraph will be most effective
+#' when the measurements are not too disparate.
+#' @param Grouping a column inside the dataframe that will be used to group and 
+#' distinguish measurements.
+#' @param Title Optionally the title to be displayed. Title = NULL will remove it 
+#' entirely. Title = "" will provide an empty title but retain the spacing.
+#' @param SubTitle Optionally the sub-title to be displayed.  SubTitle = NULL 
+#' will remove it entirely. SubTitle = "" will provide and empty title but retain 
+#' the spacing.
 #' @param Caption Optionally the caption to be displayed. Caption = NULL will remove it entirely. Caption = "" will provide and empty title but retain the sapcing.
 #' @param XTextSize Optionally the font size for the X axis labels to be displayed. XTextSize = 12 is the default must be a numeric. Note that X & Y axis text are on different scales
 #' @param YTextSize Optionally the font size for the Y axis labels to be displayed. YTextSize = 3 is the default must be a numeric. Note that X & Y axis text are on different scales
@@ -28,6 +44,7 @@
 #'
 #' @author Chuck Powell
 #' @seealso \code{\link{newcancer}}
+#' @references Based on: Edward Tufte, Beautiful Evidence (2006), pages 174-176.
 #' @examples
 #'
 #' newggslopegraph(newcancer, Year, Survival, Type)
