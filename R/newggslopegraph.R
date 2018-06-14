@@ -194,4 +194,4 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
 # title = "Estimates of Percent Survival Rates"
 # subtitle = "Based on: Edward Tufte, Beautiful Evidence, 174, 176."
 # caption = "https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0003nk"
-
+# as of 0747 14 June
