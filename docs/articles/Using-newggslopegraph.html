@@ -94,7 +94,7 @@
       <h1>Using newggslopegraph</h1>
                         <h4 class="author">Chuck Powell</h4>
             
-            <h4 class="date">2018-06-13</h4>
+            <h4 class="date">2018-06-14</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ibecav/CGPfunctions/blob/master/vignettes/Using-newggslopegraph.Rmd"><code>vignettes/Using-newggslopegraph.Rmd</code></a></small>
       <div class="hidden name"><code>Using-newggslopegraph.Rmd</code></div>
@@ -105,7 +105,7 @@
     
 <p>This function is designed to automate the process of producing a <a href="https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0003nk">Tufte style slopegraph</a> using <code>ggplot2</code>.</p>
 <p>I’ve been aware of slopegraphs and bumpcharts for quite some time, and I certainly am aware of <a href="https://www.edwardtufte.com/tufte/">Tufte’s work</a>. As an amateur military historian I’ve always loved, for example, <a href="https://www.edwardtufte.com/tufte/posters">his poster</a> depicting Napoleon’s Russian Campaign. So when I saw the article from <a href="https://www.r-bloggers.com/author/murtaza-haider/">Murtaza Haider</a> titled <em>“Edward Tufte’s Slopegraphs and political fortunes in Ontario”</em> I just had to take a shot at writing a function.</p>
-<p>To make it a little easier to get started with the function I have taken the libefty of providing the cancer data in a format where it is immediately useable. Please see <code><a href="../reference/newcancer.html">?newcancer</a></code>.</p>
+<p>To make it a little easier to get started with the function I have taken the liberty of providing the cancer data in a format where it is immediately usable. Please see <code><a href="../reference/newcancer.html">?newcancer</a></code>.</p>
 <div id="installation-and-setup" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation-and-setup" class="anchor"></a>Installation and setup</h2>
@@ -128,7 +128,7 @@
 <p>If you’re unfamiliar with slopegraphs or just want to see what the display is all about the dataset I’ve provided can get you started in one line</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span>(newcancer,Year,Survival,Type)</a></code></pre></div>
 <p><img src="Using-newggslopegraph_files/figure-html/ggslope1-1.png" width="672"></p>
-<p>Optionally you can provide important label information through <code>Title</code>, <code>Subtitle</code>, and <code>Caption</code> arguments. You can suppress them all together by setting them <code>= NULL</code> but since I think they are very important the default is to gently remind you, that you have not tpovidecd any information. Let’s provide a title and sub-title but skip the caption.</p>
+<p>Optionally you can provide important label information through <code>Title</code>, <code>Subtitle</code>, and <code>Caption</code> arguments. You can suppress them all together by setting them <code>= NULL</code> but since I think they are very important the default is to gently remind you, that you have not provided any information. Let’s provide a title and sub-title but skip the caption.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span>(<span class="dt">dataframe =</span> newcancer,</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">                <span class="dt">Times =</span> Year,</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3">                <span class="dt">Measurement =</span> Survival,</a>
@@ -146,7 +146,7 @@
 <p>You’ll need a dataframe with at least three columns. The function will do some basic error checking and complain if you don’t hit the essentials.</p>
 <ol style="list-style-type: decimal">
 <li>
-<code>Times</code> is the column in the dataframe that corresponds to the x axis of the plot and is normally a set of moments in time expressed as either characters, factors or ordered factors (in our case <code>newcancer$Year</code>. If it is truly time series data (esepcially with a lot of dates you’re much better off using an R function purpose built for that). In <code>newcancer</code> it’s an ordered factor, mainly because if we fed the information in as character the sort order would be <code>Year 10, Year 15, Year 20, Year 5</code> which is very suboptimal. A command like <code>newcancer$Year &lt;- factor(newcancer$Year,levels = c("Year.5", "Year.10", "Year.15", "Year.20"), labels = c("5 Year","10 Year","15 Year","20 Year"), ordered = TRUE)</code> would be the way to force things they way you want them.</li>
+<code>Times</code> is the column in the dataframe that corresponds to the x axis of the plot and is normally a set of moments in time expressed as either characters, factors or ordered factors (in our case <code>newcancer$Year</code>. If it is truly time series data (especially with a lot of dates you’re much better off using an R function purpose built for that). In <code>newcancer</code> it’s an ordered factor, mainly because if we fed the information in as character the sort order would be <code>Year 10, Year 15, Year 20, Year 5</code> which is very suboptimal. A command like <code>newcancer$Year &lt;- factor(newcancer$Year,levels = c("Year.5", "Year.10", "Year.15", "Year.20"), labels = c("5 Year","10 Year","15 Year","20 Year"), ordered = TRUE)</code> would be the way to force things they way you want them.</li>
 <li>
 <code>Measurement</code> is the column that has the actual numbers you want to display along the y axis. Frequently that’s a percentage but it could just as easily be any number. Watch out for scaling issues here you’ll want to ensure that its not disparate. In our case <code>newcancer$Survival</code> is the percentage of patients surviving at that point in time, so the maximum scale is 0 to 100.</li>
 <li>
@@ -173,8 +173,68 @@
 <a class="sourceLine" id="cb4-9" data-line-number="9">                      <span class="dt">row.names =</span> <span class="kw">c</span>(<span class="ot">NA</span>, <span class="op">-</span>15L))</a>
 <a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#tail(moredata)</span></a>
 <a class="sourceLine" id="cb4-11" data-line-number="11"><span class="kw"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span>(moredata,Date,Pct,Party, <span class="dt">Title =</span> <span class="st">"Notional data"</span>, <span class="dt">SubTitle =</span> <span class="ot">NULL</span>, <span class="dt">Caption =</span> <span class="ot">NULL</span>)</a>
-<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt; Warning: Converting to an ordered factor</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">#&gt; Converting 'Date' to an ordered factor</span></a></code></pre></div>
 <p><img src="Using-newggslopegraph_files/figure-html/ggslope3-1.png" width="480"></p>
+<p>There are a plethora of formatting options. See <code><a href="../reference/newggslopegraph.html">?newggslopegraph</a></code> for all of them. Here’s a few.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span>(moredata, Date, Pct, Party, </a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">                <span class="dt">Title =</span> <span class="st">"Notional data"</span>, </a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">                <span class="dt">SubTitle =</span> <span class="st">"none"</span>, </a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">                <span class="dt">Caption =</span> <span class="st">"imaginary"</span>,</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">                <span class="dt">LineColor =</span> <span class="st">"gray"</span>, </a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">                <span class="dt">LineThickness =</span> <span class="fl">.5</span>,</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">                <span class="dt">YTextSize =</span> <span class="dv">4</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">                )</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; Converting 'Date' to an ordered factor</span></a></code></pre></div>
+<p><img src="Using-newggslopegraph_files/figure-html/ggslope4-1.png" width="480"></p>
+<p>The most complex is <code>LineColor</code> where you can do the following if you want to highlight the difference between the Liberal and NDP parties while making the other three less prominent…</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span>(moredata, Date, Pct, Party, </a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">                <span class="dt">Title =</span> <span class="st">"Notional data"</span>, </a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">                <span class="dt">SubTitle =</span> <span class="st">"none"</span>, </a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">                <span class="dt">Caption =</span> <span class="st">"imaginary"</span>,</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">                <span class="dt">LineColor =</span> <span class="kw">c</span>(<span class="st">"Green"</span> =<span class="st"> "gray"</span>, <span class="st">"Liberal"</span> =<span class="st"> "green"</span>, <span class="st">"NDP"</span> =<span class="st"> "red"</span>, <span class="st">"Others"</span> =<span class="st"> "gray"</span>, <span class="st">"PC"</span> =<span class="st"> "gray"</span>), </a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">                <span class="dt">LineThickness =</span> <span class="fl">.5</span>,</a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">                <span class="dt">YTextSize =</span> <span class="dv">4</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8">                )</a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; Converting 'Date' to an ordered factor</span></a></code></pre></div>
+<p><img src="Using-newggslopegraph_files/figure-html/ggslope5-1.png" width="480"></p>
+</div>
+<div id="slopegraph-best-practices" class="section level2">
+<h2 class="hasAnchor">
+<a href="#slopegraph-best-practices" class="anchor"></a>Slopegraph Best Practices</h2>
+<ol style="list-style-type: decimal">
+<li>Scaling – this function plots to scale on an actual scale.</li>
+<li>If the datapoints or labels are bunching up, expand the vertical size of the plot as necessary.</li>
+<li>Names of the items on both the left-hand and right-hand axes are aligned, to make vertical scanning of the items’ names easier.</li>
+<li>Many suggest using a thin, light gray line to connect the data. A too-heavy line is unnecessary and will make the chart harder to read.</li>
+<li>When a chart features many slope intersections, judicious use of color can avoid what Ben Fry describes as the “pile of sticks” phenomenon (Visualizing Data, 121).</li>
+<li>A table (with more statistical detail) might be a good complement to use alongside the slopegraph. As Tufte notes: “The data table and the slopegraph are colleagues in explanation not competitors. One display can serve some but not all functions.”</li>
+</ol>
+</div>
+<div id="one-last-set-of-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#one-last-set-of-data" class="anchor"></a>One last set of data</h2>
+<p>Also from Tufte data about GDP. I’ll use it to show you a tricky way to hightlight certain countries without making a named vector with <code>LineColor = c(rep("gray",3), "red", rep("gray",3), "red", rep("gray",10))</code> the excess vector entries are silently dropped….</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">newgdp &lt;-<span class="st"> </span><span class="kw">structure</span>(<span class="kw">list</span>(<span class="dt">Year =</span> <span class="kw">c</span>(<span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>, <span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>,  <span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>, <span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>, <span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>,  <span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>, <span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>, <span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>, <span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>, <span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>, <span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>, <span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>, <span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>, <span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>, <span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>), </a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">               <span class="dt">Country =</span> <span class="kw">structure</span>(<span class="kw">c</span>(1L, 1L, 2L, 2L, 3L, 3L, 4L, 4L, 5L, 5L, 6L, 6L, 7L, 7L, 8L, 8L, 9L, 9L, 10L, 10L, 11L, 11L, 12L, 12L, 13L, 13L, 14L, 14L, 15L, 15L), </a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">              <span class="dt">.Label =</span> <span class="kw">c</span>(<span class="st">"Sweden"</span>, <span class="st">"Netherlands"</span>, <span class="st">"Norway"</span>, <span class="st">"Britain"</span>, <span class="st">"France"</span>, <span class="st">"Germany"</span>, <span class="st">"Belgium"</span>, <span class="st">"Canada"</span>, <span class="st">"Finland"</span>, <span class="st">"Italy"</span>, <span class="st">"US"</span>, <span class="st">"Greece"</span>, <span class="st">"Switzerland"</span>, <span class="st">"Spain"</span>, <span class="st">"Japan"</span>), <span class="dt">class =</span> <span class="st">"factor"</span>), </a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">               <span class="dt">GDP =</span> <span class="kw">c</span>(<span class="fl">46.9</span>, <span class="fl">57.4</span>, <span class="dv">44</span>, <span class="fl">55.8</span>, <span class="fl">43.5</span>, <span class="fl">52.2</span>, <span class="fl">40.7</span>, <span class="dv">39</span>, <span class="dv">39</span>, <span class="fl">43.4</span>, <span class="fl">37.5</span>, <span class="fl">42.9</span>, <span class="fl">35.2</span>, <span class="fl">43.2</span>, <span class="fl">35.2</span>, <span class="fl">35.8</span>, <span class="fl">34.9</span>, <span class="fl">38.2</span>, <span class="fl">30.4</span>, <span class="fl">35.7</span>, <span class="fl">30.3</span>, <span class="fl">32.5</span>, <span class="fl">26.8</span>, <span class="fl">30.6</span>, <span class="fl">26.5</span>, <span class="fl">33.2</span>, <span class="fl">22.5</span>, <span class="fl">27.1</span>, <span class="fl">20.7</span>, <span class="fl">26.6</span>)), </a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">              <span class="dt">row.names =</span> <span class="kw">c</span>(<span class="ot">NA</span>, <span class="op">-</span>30L), <span class="dt">class =</span> <span class="st">"data.frame"</span>)</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="kw"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span>(newgdp, </a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">                Year, </a>
+<a class="sourceLine" id="cb7-9" data-line-number="9">                GDP, </a>
+<a class="sourceLine" id="cb7-10" data-line-number="10">                Country, </a>
+<a class="sourceLine" id="cb7-11" data-line-number="11">                <span class="dt">Title =</span> <span class="st">"Gross GDP"</span>, </a>
+<a class="sourceLine" id="cb7-12" data-line-number="12">                <span class="dt">SubTitle =</span> <span class="ot">NULL</span>, </a>
+<a class="sourceLine" id="cb7-13" data-line-number="13">                <span class="dt">Caption =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb7-14" data-line-number="14">                <span class="dt">LineThickness =</span> <span class="fl">.5</span>,</a>
+<a class="sourceLine" id="cb7-15" data-line-number="15">                <span class="dt">YTextSize =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb7-16" data-line-number="16">                <span class="dt">LineColor =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">"gray"</span>,<span class="dv">3</span>), <span class="st">"red"</span>, <span class="kw">rep</span>(<span class="st">"gray"</span>,<span class="dv">3</span>), <span class="st">"red"</span>, <span class="kw">rep</span>(<span class="st">"gray"</span>,<span class="dv">10</span>))</a>
+<a class="sourceLine" id="cb7-17" data-line-number="17">                )</a></code></pre></div>
+<p><img src="Using-newggslopegraph_files/figure-html/ggslope6-1.png" width="576"></p>
 <div id="leaving-feedback" class="section level3">
 <h3 class="hasAnchor">
 <a href="#leaving-feedback" class="anchor"></a>Leaving Feedback</h3>
@@ -200,6 +260,8 @@
       <li><a href="#simple-examples">Simple examples</a></li>
       <li><a href="#how-it-all-works">How it all works</a></li>
       <li><a href="#another-quick-example">Another quick example</a></li>
+      <li><a href="#slopegraph-best-practices">Slopegraph Best Practices</a></li>
+      <li><a href="#one-last-set-of-data">One last set of data</a></li>
       </ul>
 </div>
       </div>
