@@ -25,7 +25,8 @@
 #' @param SubTitle Optionally the sub-title to be displayed.  SubTitle = NULL 
 #' will remove it entirely. SubTitle = "" will provide and empty title but retain 
 #' the spacing.
-#' @param Caption Optionally the caption to be displayed. Caption = NULL will remove it entirely. Caption = "" will provide and empty title but retain the sapcing.
+#' @param Caption Optionally the caption to be displayed. Caption = NULL will remove 
+#' it entirely. Caption = "" will provide and empty title but retain the spacing.
 #' @param XTextSize Optionally the font size for the X axis labels to be displayed. XTextSize = 12 is the default must be a numeric. Note that X & Y axis text are on different scales
 #' @param YTextSize Optionally the font size for the Y axis labels to be displayed. YTextSize = 3 is the default must be a numeric. Note that X & Y axis text are on different scales
 #' @param TitleTextSize Optionally the font size for the Title to be displayed. TitleTextSize = 14 is the default must be a numeric.
