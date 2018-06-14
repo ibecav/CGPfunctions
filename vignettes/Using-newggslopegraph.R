@@ -37,3 +37,42 @@ moredata <- structure(list(Date = structure(c(1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L
 #tail(moredata)
 newggslopegraph(moredata,Date,Pct,Party, Title = "Notional data", SubTitle = NULL, Caption = NULL)
 
+## ----ggslope4, fig.height=5, fig.width=5---------------------------------
+newggslopegraph(moredata, Date, Pct, Party, 
+                Title = "Notional data", 
+                SubTitle = "none", 
+                Caption = "imaginary",
+                LineColor = "gray", 
+                LineThickness = .5,
+                YTextSize = 4
+                )
+
+## ----ggslope5, fig.height=5, fig.width=5---------------------------------
+newggslopegraph(moredata, Date, Pct, Party, 
+                Title = "Notional data", 
+                SubTitle = "none", 
+                Caption = "imaginary",
+                LineColor = c("Green" = "gray", "Liberal" = "green", "NDP" = "red", "Others" = "gray", "PC" = "gray"), 
+                LineThickness = .5,
+                YTextSize = 4
+                )
+
+## ----ggslope6, fig.height=12, fig.width=6--------------------------------
+newgdp <- structure(list(Year = c("Year1970", "Year1979", "Year1970", "Year1979",  "Year1970", "Year1979", "Year1970", "Year1979", "Year1970", "Year1979",  "Year1970", "Year1979", "Year1970", "Year1979", "Year1970", "Year1979", "Year1970", "Year1979", "Year1970", "Year1979", "Year1970", "Year1979", "Year1970", "Year1979", "Year1970", "Year1979", "Year1970", "Year1979", "Year1970", "Year1979"), 
+               Country = structure(c(1L, 1L, 2L, 2L, 3L, 3L, 4L, 4L, 5L, 5L, 6L, 6L, 7L, 7L, 8L, 8L, 9L, 9L, 10L, 10L, 11L, 11L, 12L, 12L, 13L, 13L, 14L, 14L, 15L, 15L), 
+              .Label = c("Sweden", "Netherlands", "Norway", "Britain", "France", "Germany", "Belgium", "Canada", "Finland", "Italy", "US", "Greece", "Switzerland", "Spain", "Japan"), class = "factor"), 
+               GDP = c(46.9, 57.4, 44, 55.8, 43.5, 52.2, 40.7, 39, 39, 43.4, 37.5, 42.9, 35.2, 43.2, 35.2, 35.8, 34.9, 38.2, 30.4, 35.7, 30.3, 32.5, 26.8, 30.6, 26.5, 33.2, 22.5, 27.1, 20.7, 26.6)), 
+              row.names = c(NA, -30L), class = "data.frame")
+
+newggslopegraph(newgdp, 
+                Year, 
+                GDP, 
+                Country, 
+                Title = "Gross GDP", 
+                SubTitle = NULL, 
+                Caption = NULL,
+                LineThickness = .5,
+                YTextSize = 4,
+                LineColor = c(rep("gray",3), "red", rep("gray",3), "red", rep("gray",10))
+                )
+
