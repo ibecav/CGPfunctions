@@ -94,7 +94,7 @@
       <h1>Using newggslopegraph</h1>
                         <h4 class="author">Chuck Powell</h4>
             
-            <h4 class="date">2018-06-14</h4>
+            <h4 class="date">2018-06-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ibecav/CGPfunctions/blob/master/vignettes/Using-newggslopegraph.Rmd"><code>vignettes/Using-newggslopegraph.Rmd</code></a></small>
       <div class="hidden name"><code>Using-newggslopegraph.Rmd</code></div>
@@ -216,7 +216,7 @@
 <div id="one-last-set-of-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#one-last-set-of-data" class="anchor"></a>One last set of data</h2>
-<p>Also from Tufte data about GDP. I’ll use it to show you a tricky way to hightlight certain countries without making a named vector with <code>LineColor = c(rep("gray",3), "red", rep("gray",3), "red", rep("gray",10))</code> the excess vector entries are silently dropped….</p>
+<p>Also from Tufte, this is data about a select group of countries Gross Domestic Product (GDP). I’ll use it to show you a tricky way to highlight certain countries without making a named vector with <code>LineColor = c(rep("gray",3), "red", rep("gray",3), "red", rep("gray",10))</code> the excess vector entries are silently dropped… The bottom line is that <code>LineColor</code> is simply a character vector that you can fill any way you choose.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">newgdp &lt;-<span class="st"> </span><span class="kw">structure</span>(<span class="kw">list</span>(<span class="dt">Year =</span> <span class="kw">c</span>(<span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>, <span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>,  <span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>, <span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>, <span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>,  <span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>, <span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>, <span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>, <span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>, <span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>, <span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>, <span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>, <span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>, <span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>, <span class="st">"Year1970"</span>, <span class="st">"Year1979"</span>), </a>
 <a class="sourceLine" id="cb7-2" data-line-number="2">               <span class="dt">Country =</span> <span class="kw">structure</span>(<span class="kw">c</span>(1L, 1L, 2L, 2L, 3L, 3L, 4L, 4L, 5L, 5L, 6L, 6L, 7L, 7L, 8L, 8L, 9L, 9L, 10L, 10L, 11L, 11L, 12L, 12L, 13L, 13L, 14L, 14L, 15L, 15L), </a>
 <a class="sourceLine" id="cb7-3" data-line-number="3">              <span class="dt">.Label =</span> <span class="kw">c</span>(<span class="st">"Sweden"</span>, <span class="st">"Netherlands"</span>, <span class="st">"Norway"</span>, <span class="st">"Britain"</span>, <span class="st">"France"</span>, <span class="st">"Germany"</span>, <span class="st">"Belgium"</span>, <span class="st">"Canada"</span>, <span class="st">"Finland"</span>, <span class="st">"Italy"</span>, <span class="st">"US"</span>, <span class="st">"Greece"</span>, <span class="st">"Switzerland"</span>, <span class="st">"Spain"</span>, <span class="st">"Japan"</span>), <span class="dt">class =</span> <span class="st">"factor"</span>), </a>
@@ -235,6 +235,21 @@
 <a class="sourceLine" id="cb7-16" data-line-number="16">                <span class="dt">LineColor =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">"gray"</span>,<span class="dv">3</span>), <span class="st">"red"</span>, <span class="kw">rep</span>(<span class="st">"gray"</span>,<span class="dv">3</span>), <span class="st">"red"</span>, <span class="kw">rep</span>(<span class="st">"gray"</span>,<span class="dv">10</span>))</a>
 <a class="sourceLine" id="cb7-17" data-line-number="17">                )</a></code></pre></div>
 <p><img src="Using-newggslopegraph_files/figure-html/ggslope6-1.png" width="576"></p>
+<p>Finally, let me take a moment about crowding and labeling. I’ve made every effort to try and deconflict the labels on the left and right axis (in this example the <code>Country</code>) and that should work automatically as you resize your plot dimensions. ** pro tip - if you use <code>RStudio</code> you can press the <code>zoom</code> icon and then use the rescaling of the window to see best choices **.</p>
+<p>But the numbers (<code>GDP</code>) are a different matter and there’s no easy way to ensure separation in a case like this data. There’s a decent total spread from 57.4 to 20.7 and some really close measurements like France, Belgium, and Germany on the right side. My suggestion is in a case like this one you create a new column in your dataframe with two significant places. So specifically it would be <code>newgdp$rGDP &lt;- signif(newgdp$GDP, 2)</code>. In my testing, at least, I’ve found this helps without creating inaccuracy and not causing you to try and “stretch” vertically to disambiguate the numbers. This time I’ll also use <code>LineColor</code> to highlight how Canada, Finland and Belgium fare from 1970 to 1979.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">newgdp<span class="op">$</span>rGDP &lt;-<span class="st"> </span><span class="kw">signif</span>(newgdp<span class="op">$</span>GDP, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span>(newgdp, </a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">                Year, </a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">                rGDP, </a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">                Country, </a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">                <span class="dt">Title =</span> <span class="st">"Gross GDP"</span>, </a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">                <span class="dt">SubTitle =</span> <span class="ot">NULL</span>, </a>
+<a class="sourceLine" id="cb8-8" data-line-number="8">                <span class="dt">Caption =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb8-9" data-line-number="9">                <span class="dt">LineThickness =</span> <span class="fl">.5</span>,</a>
+<a class="sourceLine" id="cb8-10" data-line-number="10">                <span class="dt">YTextSize =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb8-11" data-line-number="11">                <span class="dt">LineColor =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">"gray"</span>,<span class="dv">6</span>), <span class="kw">rep</span>(<span class="st">"red"</span>,<span class="dv">2</span>), <span class="st">"red"</span>, <span class="kw">rep</span>(<span class="st">"gray"</span>,<span class="dv">10</span>))</a>
+<a class="sourceLine" id="cb8-12" data-line-number="12">                )</a></code></pre></div>
+<p><img src="Using-newggslopegraph_files/figure-html/ggslope7-1.png" width="576"></p>
 <div id="leaving-feedback" class="section level3">
 <h3 class="hasAnchor">
 <a href="#leaving-feedback" class="anchor"></a>Leaving Feedback</h3>
