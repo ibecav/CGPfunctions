@@ -76,3 +76,17 @@ newggslopegraph(newgdp,
                 LineColor = c(rep("gray",3), "red", rep("gray",3), "red", rep("gray",10))
                 )
 
+## ----ggslope7, fig.height=7, fig.width=6---------------------------------
+newgdp$rGDP <- signif(newgdp$GDP, 2)
+newggslopegraph(newgdp, 
+                Year, 
+                rGDP, 
+                Country, 
+                Title = "Gross GDP", 
+                SubTitle = NULL, 
+                Caption = NULL,
+                LineThickness = .5,
+                YTextSize = 4,
+                LineColor = c(rep("gray",6), rep("red",2), "red", rep("gray",10))
+                )
+
