@@ -125,7 +125,7 @@ newggslopegraph(moredata, Date, Pct, Party,
 
 ## One last set of data
 
-Also from Tufte data about GDP.  I'll use it to show you a tricky way to hightlight certain countries without making a named vector with `LineColor = c(rep("gray",3), "red", rep("gray",3), "red", rep("gray",10))` the excess vector entries are silently dropped....
+Also from Tufte, this is data about a select group of countries Gross Domestic Product (GDP).  I'll use it to show you a tricky way to highlight certain countries without making a named vector with `LineColor = c(rep("gray",3), "red", rep("gray",3), "red", rep("gray",10))` the excess vector entries are silently dropped...  The bottom line is that `LineColor` is simply a character vector that you can fill any way you choose.
 
 ```{r ggslope6, fig.height=12, fig.width=6}
 newgdp <- structure(list(Year = c("Year1970", "Year1979", "Year1970", "Year1979",  "Year1970", "Year1979", "Year1970", "Year1979", "Year1970", "Year1979",  "Year1970", "Year1979", "Year1970", "Year1979", "Year1970", "Year1979", "Year1970", "Year1979", "Year1970", "Year1979", "Year1970", "Year1979", "Year1970", "Year1979", "Year1970", "Year1979", "Year1970", "Year1979", "Year1970", "Year1979"), 
@@ -146,6 +146,27 @@ newggslopegraph(newgdp,
                 LineColor = c(rep("gray",3), "red", rep("gray",3), "red", rep("gray",10))
                 )
 ```
+
+Finally, let me take a moment about crowding and labeling.  I've made every effort to try and deconflict the labels on the left and right axis (in this example the `Country`) and that should work automatically as you resize your plot dimensions. ** pro tip - if you use `RStudio` you can press the `zoom` icon and then use the rescaling of the window to see best choices **. 
+
+But the numbers (`GDP`) are a different matter and there's no easy way to ensure separation in a case like this data.  There's a decent total spread from 57.4 to 20.7 and some really close measurements like France, Belgium, and Germany on the right side. My suggestion is in a case like this one you create a new column in your dataframe with two significant places. So specifically it would be `newgdp$rGDP <- signif(newgdp$GDP, 2)`.  In my testing, at least, I've found this helps without creating inaccuracy and not causing you to try and "stretch" vertically to disambiguate the numbers.  This time I'll also use `LineColor` to highlight how Canada, Finland and Belgium fare from 1970 to 1979.
+
+```{r ggslope7, fig.height=7, fig.width=6}
+newgdp$rGDP <- signif(newgdp$GDP, 2)
+newggslopegraph(newgdp, 
+                Year, 
+                rGDP, 
+                Country, 
+                Title = "Gross GDP", 
+                SubTitle = NULL, 
+                Caption = NULL,
+                LineThickness = .5,
+                YTextSize = 4,
+                LineColor = c(rep("gray",6), rep("red",2), "red", rep("gray",10))
+                )
+```
+
+
 
 
 ### Leaving Feedback
