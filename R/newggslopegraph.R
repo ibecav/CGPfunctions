@@ -50,6 +50,9 @@
 #' "Others" = "gray", "PC" = "blue"). Any input must be character, and the length 
 #' of a vector \bold{should} equal the number of levels in \code{Grouping}. If the 
 #' user does not provide enough colors they will be recycled.
+#' @param WiderLabels logical, set this value to \code{TRUE} if your "labels" or 
+#' \code{Grouping} variable values tend to be long as they are in the \code{newcancer}
+#' dataset.  This setting will give them more room in the same plot size. 
 #' 
 #' 
 #' @return a plot of type ggplot to the default plot device
@@ -99,7 +102,8 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
                             CaptionTextSize = 8,
                             LineThickness = 1,
                             LineColor = "ByGroup",
-                            DataTextSize = 2.5)
+                            DataTextSize = 2.5,
+                            WiderLabels = FALSE)
   {
   # Since ggplot2 objects are just regular R objects, put them in a list
   MySpecial <- list(
@@ -158,6 +162,11 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
         stop(paste0("Sorry I need the variable '", NTimes, "' to be of class character, factor or ordered"), call. = FALSE)
       }
     }
+  }
+
+  NumbOfLevels <- nlevels(factor(dataframe[[deparse(substitute(Times))]]))
+  if (WiderLabels) {
+    MySpecial <- c(MySpecial, expand_limits(x = c(0, NumbOfLevels+1)))
   }
   
   Times <- enquo(Times)
