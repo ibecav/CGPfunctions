@@ -81,15 +81,24 @@ Takes a dataframe as input, with three named columns being used to draw the plot
 Makes the required adjustments to the ggplot2 parameters and returns the plot.
 }
 \examples{
-
+# the minimum command to generate a plot
 newggslopegraph(newcancer, Year, Survival, Type)
-newggslopegraph(newcancer, Year, Survival, Type, Title = "Estimates of Percent Survival Rates")
+
+# adding a title which is always recommended
+newggslopegraph(newcancer, Year, Survival, Type, 
+                Title = "Estimates of Percent Survival Rates",
+                SubTitle = NULL,
+                Caption = NULL)
+                
+# simple formatting changes
 newggslopegraph(newcancer, Year, Survival, Type, 
                 Title = "Estimates of Percent Survival Rates", 
-                LineColor = "black", 
-                LineThickness = 1, 
+                LineColor = "darkgray", 
+                LineThickness = .5, 
                 SubTitle = NULL, 
                 Caption = NULL)
+                
+# complex formatting with recycling see vignette
 newggslopegraph(newcancer, Year, Survival, Type, 
                 Title = "Estimates of Percent Survival Rates", 
                 SubTitle = "Based on: Edward Tufte, Beautiful Evidence, 174, 176.",

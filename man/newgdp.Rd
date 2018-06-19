@@ -3,8 +3,14 @@
 \docType{data}
 \name{newgdp}
 \alias{newgdp}
-\title{Current receipts of government as a percentage of Gross Domestic Product, 1970 and 1979}
-\format{A data frame containing fifteen country observations for two years.}
+\title{Tufte dataset on Gross Domestic Product, 1970 and 1979}
+\format{A data frame with 30 rows and 3 variables:
+\describe{
+  \item{Year}{character for 1970 and 1979}
+  \item{Country}{factor country name}
+  \item{GDP}{numeric a percentage of gross domestic product}
+  
+}}
 \source{
 Edward Tufte. \emph{Beautiful Evidence}. Graphics Press, 174-176.
 }
