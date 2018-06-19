@@ -79,7 +79,7 @@
 #'                 SubTitle = NULL, 
 #'                 Caption = NULL)
 #'                 
-#' # complex formatting with recycling see vignette
+#' # complex formatting with recycling see vignette for more examples
 #' newggslopegraph(newcancer, Year, Survival, Type, 
 #'                 Title = "Estimates of Percent Survival Rates", 
 #'                 SubTitle = "Based on: Edward Tufte, Beautiful Evidence, 174, 176.",
@@ -166,7 +166,7 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
 
   if (length(LineColor) > 1) { 
     if (length(LineColor) < length(unique(dataframe[[NGrouping]]))) {
-      message(paste0("\nYou gave me ", length(LineColor), " colors I'm recycling because you have ", length(unique(dataframe[[NGrouping]])), " ", NGrouping, "\n"))
+      message(paste0("\nYou gave me ", length(LineColor), " colors I'm recycling colors because you have ", length(unique(dataframe[[NGrouping]])), " ", NGrouping, "s\n"))
       LineColor <- rep(LineColor, length.out = length(unique(dataframe[[NGrouping]])))
     }
     LineGeom <- list(geom_line(aes_(color = Grouping), size = LineThickness), scale_color_manual(values = LineColor))
