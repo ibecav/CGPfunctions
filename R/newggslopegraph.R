@@ -196,7 +196,10 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
                         size = YTextSize,
                         nudge_x = .5,
                         direction = "y") +
-        geom_label(aes_(label = Measurement), size = DataTextSize, label.padding = unit(0.05, "lines"), label.size = 0.0) +
+        geom_label(aes_(label = Measurement), 
+                   size = DataTextSize, 
+                   label.padding = unit(0.05, "lines"), 
+                   label.size = 0.0) +
         MySpecial +
         labs(
               title = Title,
