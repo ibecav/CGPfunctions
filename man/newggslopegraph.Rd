@@ -103,7 +103,7 @@ newggslopegraph(newcancer, Year, Survival, Type,
 Based on: Edward Tufte, Beautiful Evidence (2006), pages 174-176.
 }
 \seealso{
-\code{\link{newcancer}}
+\code{\link{newcancer}} and  \code{\link{newgdp}}
 }
 \author{
 Chuck Powell
