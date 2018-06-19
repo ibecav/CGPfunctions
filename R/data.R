@@ -1,3 +1,4 @@
+#' @rdname newcancer
 #' Tufte dataset on cancer survival rates
 #'
 #' A dataset containing cancer survival rates for different types of cancer
@@ -11,4 +12,23 @@
 #'   
 #' }
 #' @source \url{https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0003nk}
+#' @keywords datasets
 "newcancer"
+
+#' @rdname newgdp
+#' @title Current receipts of government as a percentage of Gross Domestic Product, 1970 and 1979
+#' @aliases gdp
+#' @description Current receipts of fifteen national governments as a percentage of gross domestic product
+#' @format
+#' A data frame containing fifteen country observations for two years.
+#' 
+#' @format A data frame with 30 rows and 3 variables:
+#' \describe{
+#'   \item{Year}{character for 1970 and 1979}
+#'   \item{Country}{factor country name}
+#'   \item{GDP}{numeric a percentage of gross domestic product}
+#'   
+#' }
+#' @source Edward Tufte. \emph{Beautiful Evidence}. Graphics Press, 174-176.
+#' @keywords datasets
+"newgdp"
