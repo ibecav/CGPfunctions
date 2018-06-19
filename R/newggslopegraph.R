@@ -79,6 +79,7 @@
 #'                 SubTitle = NULL, 
 #'                 Caption = NULL)
 #'                 
+#' # complex formatting with recycling see vignette
 #' newggslopegraph(newcancer, Year, Survival, Type, 
 #'                 Title = "Estimates of Percent Survival Rates", 
 #'                 SubTitle = "Based on: Edward Tufte, Beautiful Evidence, 174, 176.",
