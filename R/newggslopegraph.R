@@ -144,11 +144,17 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
   if (!NTimes %in% names(dataframe)) {
     stop(paste0("'", NTimes, "' is not the name of a variable in '", Ndataframe, "'"), call. = FALSE)
   }
+  if (anyNA(dataframe[[NTimes]])) {
+    stop(paste0("'", NTimes, "' can not have missing data please remove those rows!"), call. = FALSE)
+  }
   if (!NMeasurement %in% names(dataframe)) {
     stop(paste0("'", NMeasurement, "' is not the name of a variable in '", Ndataframe, "'"), call. = FALSE)
   }
   if (!NGrouping %in% names(dataframe)) {
     stop(paste0("'", NGrouping, "' is not the name of a variable in '", Ndataframe, "'"), call. = FALSE)
+  }
+  if (anyNA(dataframe[[NGrouping]])) {
+    stop(paste0("'", NGrouping, "' can not have missing data please remove those rows!"), call. = FALSE)
   }
   if (!class(dataframe[[NMeasurement]]) %in% c("integer","numeric")) {
     stop(paste0("Sorry I need the measured variable '", NMeasurement, "' to be a number"), call. = FALSE)
@@ -188,7 +194,7 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
   }
   
     dataframe %>%
-      filter(!is.na(!! Times), !is.na(!! Measurement), !is.na(!! Grouping))  %>%
+      filter(!is.na(!! Measurement))  %>%
       ggplot(aes_(group=Grouping, y=Measurement, x=Times)) +
         LineGeom +
         geom_text_repel(data = dataframe %>% filter(!! Times == min(!! Times)),
