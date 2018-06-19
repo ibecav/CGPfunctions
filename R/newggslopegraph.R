@@ -164,7 +164,7 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
     }
   }
 
-  NumbOfLevels <- nlevels(factor(dataframe[[deparse(substitute(Times))]]))
+  NumbOfLevels <- nlevels(factor(dataframe[[NTimes]]))
   if (WiderLabels) {
     MySpecial <- c(MySpecial, expand_limits(x = c(0, NumbOfLevels+1)))
   }
