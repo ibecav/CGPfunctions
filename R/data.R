@@ -1,7 +1,8 @@
 #' @rdname newcancer
-#' Tufte dataset on cancer survival rates
+#' @title Tufte dataset on cancer survival rates
+#' @aliases newcancer
 #'
-#' A dataset containing cancer survival rates for different types of cancer
+#' @description A dataset containing cancer survival rates for different types of cancer
 #' over a 20 year period.
 #'
 #' @format A data frame with 96 rows and 3 variables:
@@ -17,7 +18,7 @@
 
 #' @rdname newgdp
 #' @title Current receipts of government as a percentage of Gross Domestic Product, 1970 and 1979
-#' @aliases gdp
+#' @aliases newgdp
 #' @description Current receipts of fifteen national governments as a percentage of gross domestic product
 #' @format
 #' A data frame containing fifteen country observations for two years.
