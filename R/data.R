@@ -17,11 +17,9 @@
 "newcancer"
 
 #' @rdname newgdp
-#' @title Current receipts of government as a percentage of Gross Domestic Product, 1970 and 1979
+#' @title Tufte dataset on Gross Domestic Product, 1970 and 1979
 #' @aliases newgdp
 #' @description Current receipts of fifteen national governments as a percentage of gross domestic product
-#' @format
-#' A data frame containing fifteen country observations for two years.
 #' 
 #' @format A data frame with 30 rows and 3 variables:
 #' \describe{
