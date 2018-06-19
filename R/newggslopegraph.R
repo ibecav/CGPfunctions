@@ -192,7 +192,13 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
       LineGeom <- list(geom_line(aes_(), size = LineThickness, color = LineColor))
     }
   }
+
+  # xxcancer %>% group_by(Type) %>% filter(!anyNA(Survival))
+  # A tibble: 92 x 3
+  # newcancer %>% group_by(Type) %>% filter(!anyNA(Survival))
+  # A tibble: 96 x 3
   
+    
     dataframe %>%
       filter(!is.na(!! Measurement))  %>%
       ggplot(aes_(group=Grouping, y=Measurement, x=Times)) +
