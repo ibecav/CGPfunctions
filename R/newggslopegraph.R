@@ -59,7 +59,7 @@
 #' @importFrom ggrepel geom_text_repel
 #'
 #' @author Chuck Powell
-#' @seealso \code{\link{newcancer}}
+#' @seealso \code{\link{newcancer}} and  \code{\link{newgdp}}
 #' @references Based on: Edward Tufte, Beautiful Evidence (2006), pages 174-176.
 #' @examples
 #'
