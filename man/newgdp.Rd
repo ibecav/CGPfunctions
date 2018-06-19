@@ -3,7 +3,6 @@
 \docType{data}
 \name{newgdp}
 \alias{newgdp}
-\alias{gdp}
 \title{Current receipts of government as a percentage of Gross Domestic Product, 1970 and 1979}
 \format{A data frame containing fifteen country observations for two years.}
 \source{
