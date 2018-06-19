@@ -62,15 +62,23 @@
 #' @seealso \code{\link{newcancer}} and  \code{\link{newgdp}}
 #' @references Based on: Edward Tufte, Beautiful Evidence (2006), pages 174-176.
 #' @examples
-#'
+#' # the minimum command to generate a plot
 #' newggslopegraph(newcancer, Year, Survival, Type)
-#' newggslopegraph(newcancer, Year, Survival, Type, Title = "Estimates of Percent Survival Rates")
+#' 
+#' # adding a title which is always recommended
+#' newggslopegraph(newcancer, Year, Survival, Type, 
+#'                 Title = "Estimates of Percent Survival Rates",
+#'                 SubTitle = NULL,
+#'                 Caption = NULL)
+#'                 
+#' # simple formatting changes
 #' newggslopegraph(newcancer, Year, Survival, Type, 
 #'                 Title = "Estimates of Percent Survival Rates", 
-#'                 LineColor = "black", 
-#'                 LineThickness = 1, 
+#'                 LineColor = "darkgray", 
+#'                 LineThickness = .5, 
 #'                 SubTitle = NULL, 
 #'                 Caption = NULL)
+#'                 
 #' newggslopegraph(newcancer, Year, Survival, Type, 
 #'                 Title = "Estimates of Percent Survival Rates", 
 #'                 SubTitle = "Based on: Edward Tufte, Beautiful Evidence, 174, 176.",
