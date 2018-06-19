@@ -1,5 +1,6 @@
 # CGPfunctions 0.4
 
+* Release 0.4 published on CRAN 13 June 2018
 * Release 0.4 published on Github 11 June 2018
   - Changed version # to .4
   - Added new function newggslopegraph 
