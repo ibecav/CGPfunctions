@@ -9,7 +9,7 @@ newggslopegraph(dataframe, Times, Measurement, Grouping,
   Caption = "No caption given", XTextSize = 12, YTextSize = 3,
   TitleTextSize = 14, SubTitleTextSize = 10, CaptionTextSize = 8,
   LineThickness = 1, LineColor = "ByGroup", DataTextSize = 2.5,
-  WiderLabels = FALSE)
+  WiderLabels = FALSE, RemoveMissing = TRUE)
 }
 \arguments{
 \item{dataframe}{a dataframe or an object that can be coerced to a dataframe. 
@@ -74,6 +74,12 @@ is the default must be a numeric.}
 \item{WiderLabels}{logical, set this value to \code{TRUE} if your "labels" or 
 \code{Grouping} variable values tend to be long as they are in the \code{newcancer}
 dataset.  This setting will give them more room in the same plot size.}
+
+\item{RemoveMissing}{logical, by default set to \code{TRUE} so that if any \code{Measurement}
+is missing \bold{all rows} for that \code{Grouping} are removed. If set to \code{FALSE} then
+the function will try to remove and graph what data it does have. \bold{N.B.} missing values
+for \code{Times} and \code{Grouping} are never permitted and will generate a fatal error with
+a warning.}
 }
 \value{
 a plot of type ggplot to the default plot device

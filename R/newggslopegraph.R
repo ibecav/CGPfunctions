@@ -53,6 +53,11 @@
 #' @param WiderLabels logical, set this value to \code{TRUE} if your "labels" or 
 #' \code{Grouping} variable values tend to be long as they are in the \code{newcancer}
 #' dataset.  This setting will give them more room in the same plot size. 
+#' @param RemoveMissing logical, by default set to \code{TRUE} so that if any \code{Measurement}
+#' is missing \bold{all rows} for that \code{Grouping} are removed. If set to \code{FALSE} then
+#' the function will try to remove and graph what data it does have. \bold{N.B.} missing values
+#' for \code{Times} and \code{Grouping} are never permitted and will generate a fatal error with
+#' a warning. 
 #' 
 #' 
 #' @return a plot of type ggplot to the default plot device
@@ -104,7 +109,8 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
                             LineThickness = 1,
                             LineColor = "ByGroup",
                             DataTextSize = 2.5,
-                            WiderLabels = FALSE)
+                            WiderLabels = FALSE,
+                            RemoveMissing = TRUE)
   {
   . = NULL # appease CRAN since you can't import this convention from dplyr or ggplot2
   # Since ggplot2 objects are just regular R objects, put them in a list
@@ -195,13 +201,10 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
     }
   }
 
-  # xxcancer %>% group_by(Type) %>% filter(!anyNA(Survival))
-  # A tibble: 92 x 3
-  # newcancer %>% group_by(Type) %>% filter(!anyNA(Survival))
-  # A tibble: 96 x 3
-  if (anyNA(dataframe[[NMeasurement]])) { 
-    if (WiderLabels) {
-    dataframe <- dataframe %>%
+  # complex logic to sort out missing values if any
+  if (anyNA(dataframe[[NMeasurement]])) { # are there any missing
+    if (RemoveMissing) { # which way should we handle them
+      dataframe <- dataframe %>%
                   group_by(!! Grouping) %>% 
                   filter(!anyNA(!! Measurement)) %>%
                   droplevels()
