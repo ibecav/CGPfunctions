@@ -75,7 +75,7 @@ Makes the required adjustments to the ggplot2 parameters and returns the plot." 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">CGPfunctions</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.4.1</span>
       </span>
     </div>
 
@@ -151,7 +151,8 @@ Makes the required adjustments to the ggplot2 parameters and returns the plot.</
   <span class='kw'>Title</span> <span class='kw'>=</span> <span class='st'>"No title given"</span>, <span class='kw'>SubTitle</span> <span class='kw'>=</span> <span class='st'>"No subtitle given"</span>,
   <span class='kw'>Caption</span> <span class='kw'>=</span> <span class='st'>"No caption given"</span>, <span class='kw'>XTextSize</span> <span class='kw'>=</span> <span class='fl'>12</span>, <span class='kw'>YTextSize</span> <span class='kw'>=</span> <span class='fl'>3</span>,
   <span class='kw'>TitleTextSize</span> <span class='kw'>=</span> <span class='fl'>14</span>, <span class='kw'>SubTitleTextSize</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>CaptionTextSize</span> <span class='kw'>=</span> <span class='fl'>8</span>,
-  <span class='kw'>LineThickness</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='st'>"ByGroup"</span>, <span class='kw'>DataTextSize</span> <span class='kw'>=</span> <span class='fl'>2.5</span>)</pre>
+  <span class='kw'>LineThickness</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='st'>"ByGroup"</span>, <span class='kw'>DataTextSize</span> <span class='kw'>=</span> <span class='fl'>2.5</span>,
+  <span class='kw'>WiderLabels</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>RemoveMissing</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -245,6 +246,20 @@ user does not provide enough colors they will be recycled.</p></td>
       <td><p>Optionally the font size of the plotted data points. DataTextSize = 2.5 
 is the default must be a numeric.</p></td>
     </tr>
+    <tr>
+      <th>WiderLabels</th>
+      <td><p>logical, set this value to <code>TRUE</code> if your "labels" or 
+<code>Grouping</code> variable values tend to be long as they are in the <code>newcancer</code>
+dataset.  This setting will give them more room in the same plot size.</p></td>
+    </tr>
+    <tr>
+      <th>RemoveMissing</th>
+      <td><p>logical, by default set to <code>TRUE</code> so that if any <code>Measurement</code>
+is missing <b>all rows</b> for that <code>Grouping</code> are removed. If set to <code>FALSE</code> then
+the function will try to remove and graph what data it does have. <b>N.B.</b> missing values
+for <code>Times</code> and <code>Grouping</code> are never permitted and will generate a fatal error with
+a warning.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -257,23 +272,33 @@ is the default must be a numeric.</p></td>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='newcancer.html'>newcancer</a></code></p></div>
+    <div class='dont-index'><p><code><a href='newcancer.html'>newcancer</a></code> and  <code><a href='newgdp.html'>newgdp</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'>newggslopegraph</span>(<span class='no'>newcancer</span>, <span class='no'>Year</span>, <span class='no'>Survival</span>, <span class='no'>Type</span>)</div><div class='img'><img src='newggslopegraph-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>newggslopegraph</span>(<span class='no'>newcancer</span>, <span class='no'>Year</span>, <span class='no'>Survival</span>, <span class='no'>Type</span>, <span class='kw'>Title</span> <span class='kw'>=</span> <span class='st'>"Estimates of Percent Survival Rates"</span>)</div><div class='img'><img src='newggslopegraph-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>newggslopegraph</span>(<span class='no'>newcancer</span>, <span class='no'>Year</span>, <span class='no'>Survival</span>, <span class='no'>Type</span>,
+    <pre class="examples"><div class='input'><span class='co'># the minimum command to generate a plot</span>
+<span class='fu'>newggslopegraph</span>(<span class='no'>newcancer</span>, <span class='no'>Year</span>, <span class='no'>Survival</span>, <span class='no'>Type</span>)</div><div class='img'><img src='newggslopegraph-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># adding a title which is always recommended</span>
+<span class='fu'>newggslopegraph</span>(<span class='no'>newcancer</span>, <span class='no'>Year</span>, <span class='no'>Survival</span>, <span class='no'>Type</span>,
                 <span class='kw'>Title</span> <span class='kw'>=</span> <span class='st'>"Estimates of Percent Survival Rates"</span>,
-                <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
-                <span class='kw'>LineThickness</span> <span class='kw'>=</span> <span class='fl'>1</span>,
                 <span class='kw'>SubTitle</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-                <span class='kw'>Caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</div><div class='img'><img src='newggslopegraph-3.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>newggslopegraph</span>(<span class='no'>newcancer</span>, <span class='no'>Year</span>, <span class='no'>Survival</span>, <span class='no'>Type</span>,
+                <span class='kw'>Caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</div><div class='img'><img src='newggslopegraph-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># simple formatting changes</span>
+<span class='fu'>newggslopegraph</span>(<span class='no'>newcancer</span>, <span class='no'>Year</span>, <span class='no'>Survival</span>, <span class='no'>Type</span>,
+                <span class='kw'>Title</span> <span class='kw'>=</span> <span class='st'>"Estimates of Percent Survival Rates"</span>,
+                <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='st'>"darkgray"</span>,
+                <span class='kw'>LineThickness</span> <span class='kw'>=</span> <span class='fl'>.5</span>,
+                <span class='kw'>SubTitle</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+                <span class='kw'>Caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</div><div class='img'><img src='newggslopegraph-3.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># complex formatting with recycling and wider labels see vignette for more examples</span>
+<span class='fu'>newggslopegraph</span>(<span class='no'>newcancer</span>, <span class='no'>Year</span>, <span class='no'>Survival</span>, <span class='no'>Type</span>,
                 <span class='kw'>Title</span> <span class='kw'>=</span> <span class='st'>"Estimates of Percent Survival Rates"</span>,
                 <span class='kw'>SubTitle</span> <span class='kw'>=</span> <span class='st'>"Based on: Edward Tufte, Beautiful Evidence, 174, 176."</span>,
                 <span class='kw'>Caption</span> <span class='kw'>=</span> <span class='st'>"https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0003nk"</span>,
                 <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"black"</span>, <span class='st'>"red"</span>, <span class='st'>"grey"</span>),
-                <span class='kw'>LineThickness</span> <span class='kw'>=</span> <span class='fl'>.5</span>)</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>You gave me 3 colors I'm recycling because you have 24 Type</span></div><div class='img'><img src='newggslopegraph-4.png' alt='' width='700' height='433' /></div><div class='input'>
+                <span class='kw'>LineThickness</span> <span class='kw'>=</span> <span class='fl'>.5</span>,
+                <span class='kw'>WiderLabels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>You gave me 3 colors I'm recycling colors because you have 24 Types</span></div><div class='img'><img src='newggslopegraph-4.png' alt='' width='700' height='433' /></div><div class='input'>
 
 </div></pre>
   </div>
