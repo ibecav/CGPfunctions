@@ -199,13 +199,19 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
   # A tibble: 92 x 3
   # newcancer %>% group_by(Type) %>% filter(!anyNA(Survival))
   # A tibble: 96 x 3
+  if (anyNA(dataframe[[NMeasurement]])) { 
+    if (WiderLabels) {
+    dataframe <- dataframe %>%
+                  group_by(!! Grouping) %>% 
+                  filter(!anyNA(!! Measurement)) %>%
+                  droplevels()
+    } else {
+      dataframe <- dataframe %>%
+        filter(!is.na(!! Measurement))
+    }
+  }
   
-    
     dataframe %>%
-      group_by(!! Grouping) %>% 
-      filter(!anyNA(!! Measurement)) %>%
-      droplevels() %>%
-#      filter(!is.na(!! Measurement))  %>%
       ggplot(aes_(group=Grouping, y=Measurement, x=Times)) +
         LineGeom +
         geom_text_repel(data = . %>% filter(!! Times == min(!! Times)),
