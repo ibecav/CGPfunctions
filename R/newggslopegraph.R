@@ -106,6 +106,7 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
                             DataTextSize = 2.5,
                             WiderLabels = FALSE)
   {
+  . = NULL # appease CRAN since you can't import this convention from dplyr or ggplot2
   # Since ggplot2 objects are just regular R objects, put them in a list
   MySpecial <- list(
     # Format tweaks
@@ -201,10 +202,13 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
   
     
     dataframe %>%
-      filter(!is.na(!! Measurement))  %>%
+      group_by(!! Grouping) %>% 
+      filter(!anyNA(!! Measurement)) %>%
+      droplevels() %>%
+#      filter(!is.na(!! Measurement))  %>%
       ggplot(aes_(group=Grouping, y=Measurement, x=Times)) +
         LineGeom +
-        geom_text_repel(data = dataframe %>% filter(!! Times == min(!! Times)),
+        geom_text_repel(data = . %>% filter(!! Times == min(!! Times)),
                         aes_(label = Grouping) ,
                         hjust = "left",
                         box.padding = 0.10,
@@ -214,7 +218,7 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
                         size = YTextSize,
                         nudge_x = -1.95,
                         direction = "y") +
-        geom_text_repel(data = dataframe %>% filter(!! Times == max(!! Times)),
+        geom_text_repel(data = . %>% filter(!! Times == max(!! Times)),
                         aes_(label = Grouping),
                         hjust = "right",
                         box.padding = 0.10,
