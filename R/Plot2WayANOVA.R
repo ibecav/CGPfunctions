@@ -216,7 +216,9 @@ Plot2WayANOVA <- function(formula,
     xlab(iv1),
     ylab(depvar),
     scale_colour_hue(l = 40),
-    ggtitle(bquote("Group means with" ~ .(cipercent) * "% confidence intervals"))
+    ggtitle(bquote(
+      "Group means with" ~ .(cipercent) * "% confidence intervals"
+    ))
   )
 
   # ------- switch for bar versus line plot ---------
@@ -284,7 +286,8 @@ Plot2WayANOVA <- function(formula,
   # ------------- Warn user of unbalanced design ----------------
 
   if (is.list(replications(formula, dataframe))) {
-    message("\nYou have an unbalanced design. Using Type II sum of squares, eta squared may not sum to 1.0 \n")
+    message("\nYou have an unbalanced design. Using Type II sum of squares, 
+            eta squared may not sum to 1.0 \n")
     print(WithETA)
   }
   else {
@@ -303,7 +306,8 @@ Plot2WayANOVA <- function(formula,
   print(BFTest)
   message("\nTesting Normality Assumption with Shapiro-Wilk \n")
   if (SWTest$p.value <= .05) {
-    message("   *** Possible violation of the assumption.  You may want to plot the residuals to see how they vary from normal ***")
+    message("   *** Possible violation of the assumption.  You may 
+            want to plot the residuals to see how they vary from normal ***")
   }
   print(SWTest)
 
