@@ -59,15 +59,21 @@
 #' @export
 #' 
 # Stable version 0.2
-Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = "bar", PlotSave = FALSE)
+Plot2WayANOVA <- function(formula, 
+                          dataframe = NULL, 
+                          confidence=.95, 
+                          plottype = "bar", 
+                          PlotSave = FALSE)
 {
-  # to appease R CMD Check?
+
+  # ---------------- to appease R CMD Check? ----------------
   TheMean <- NULL
   TheSEM <- NULL
   CIMuliplier <- NULL
   LowerBound <- NULL
   UpperBound <- NULL
-  # error checking
+  
+  # ---------------- error checking ----------------
   if (!requireNamespace("ggplot2")) {
     stop("Can't continue can't load ggplot2")
   }
@@ -79,7 +85,8 @@ Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = 
     stop("Can't continue can't load rlang")
   }
   if (length(match.call())-1 <= 1) {
-    stop("Not enough arguments passed... requires at least a formula with a DV and 2 IV plus a dataframe")
+    stop("Not enough arguments passed... 
+         requires at least a formula with a DV and 2 IV plus a dataframe")
   }
   if (missing(formula)) {
     stop("\"formula\" argument is missing, with no default")
@@ -94,13 +101,21 @@ Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = 
   if (length(vars) != 3)
     stop("invalid value for \"formula\" argument")
   if ("+" %in% chkinter)
-    stop("Sorry you need to use an asterisk not a plus sign in the formula so the interaction can be plotted")
+    stop("Sorry you need to use an asterisk not a plus sign in 
+         the formula so the interaction can be plotted")
   if ("~" == chkinter[2])
-    stop("Sorry you can only have one dependent variable so only one ~ you have two or more")
+    stop("Sorry you can only have one dependent variable so only 
+         one tilde is allowed ~ you have two or more")
+  
+  # we can trust the basics grab the variable names from formula
+  # these are now of ***class character***
   depvar <- vars[1]
   iv1 <- vars[2]
   iv2 <- vars[3]
+
+  # create a filename in case they want to save png
   potentialfname <- paste0(depvar,"by",iv1,"and",iv2,".png")
+  
   if (missing(dataframe))
     stop("You didn't specify a data frame to use")
   if (!exists(deparse(substitute(dataframe))))
@@ -108,18 +123,26 @@ Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = 
   if (!is(dataframe, "data.frame"))
     stop("The dataframe name you specified is not valid\n")
   if (!(depvar %in% names(dataframe))) {
-    stop(paste0("'", depvar, "' is not the name of a variable in '", deparse(substitute(dataframe)), "'"))
+    stop(paste0("'", depvar, "' is not the name of a variable in '", 
+                deparse(substitute(dataframe)), "'"))
     }
   if (!(iv1 %in% names(dataframe))) {
-      stop(paste0("'", iv1, "' is not the name of a variable in '", deparse(substitute(dataframe)), "'"))
+      stop(paste0("'", iv1, "' is not the name of a variable in '", 
+                  deparse(substitute(dataframe)), "'"))
     }
   if (!(iv2 %in% names(dataframe))) {
-      stop(paste0("'", iv2, "' is not the name of a variable in '", deparse(substitute(dataframe)), "'"))
-    }
-# force it to a data frame 
+      stop(paste0("'", iv2, "' is not the name of a variable in '", 
+                  deparse(substitute(dataframe)), "'"))
+  }
+  
+  # force it to a data frame 
   dataframe <- dataframe[, c(depvar, iv1, iv2)]
-  if (!is(dataframe[, depvar], "numeric"))
+  
+  # ---------------- check variable types ----------------
+  
+  if (!is(dataframe[, depvar], "numeric")) {
     stop("dependent variable must be numeric")
+  }
   if (!is(dataframe[, iv1], "factor")) {
     message(paste0("\nConverting ", iv1, " to a factor --- check your results"))
     dataframe[, iv1] <- as.factor(dataframe[, iv1])
@@ -128,8 +151,11 @@ Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = 
     message(paste0("\nConverting ", iv2, " to a factor --- check your results"))
     dataframe[, iv2] <- as.factor(dataframe[, iv2])
   }
+  
+  # grab the names of the factor levels
   factor1.names <- levels(dataframe[, iv1])
   factor2.names <- levels(dataframe[, iv2])
+  
   if (!is(confidence, "numeric") | length(confidence) != 1 |
       confidence < .5 | confidence > .9991) {
     stop("\"confidence\" must be a number between .5 and 1")
@@ -137,28 +163,41 @@ Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = 
   if (plottype != "bar" ) {
     plottype <- "line"
   }
+  
+  # ------------- Remove missing cases notify user ----------------
+  
   missing <- apply(is.na(dataframe), 1, any)
-  if (any(missing))
+  if (any(missing)) {
     warning(paste(sum(missing)), " case(s) removed because of missing data")
+  }
   dataframe <- dataframe[!missing, ]
   
-  dataframe %>%
-    group_by(!!sym(iv1),!!sym(iv2)) %>%
-    summarise(TheMean = mean(!!sym(depvar),na.rm=TRUE),
-              TheSD = sd(!!sym(depvar),na.rm=TRUE),
-              TheSEM = sd(!!sym(depvar),na.rm=TRUE)/sqrt(n()),
+  # ------------- Build summary dataframe ----------------
+  
+  newdata <- dataframe %>%
+    group_by(!!sym(iv1), !!sym(iv2)) %>%
+    summarise(TheMean = mean(!!sym(depvar), na.rm=TRUE),
+              TheSD = sd(!!sym(depvar), na.rm=TRUE),
+              TheSEM = sd(!!sym(depvar), na.rm=TRUE)/sqrt(n()),
               CIMuliplier = qt(confidence/2 + .5, n()-1),
               LowerBound = TheMean-TheSEM*CIMuliplier,
               UpperBound = TheMean+TheSEM*CIMuliplier,
-              N = n()) -> newdata
-
+              N = n())
+  
+  # ------------- Run tests and procedures ----------------
+  
+  # run analysis of variance
   MyAOV <- aov(formula, dataframe)
+  # run custom eta squared function
   WithETA <- neweta(MyAOV)
+  # Run Brown-Forsythe
   BFTest <- car::leveneTest(MyAOV)
+  # Grab the residuals and run Shapiro-Wilk
   MyAOV_residuals <- residuals( object = MyAOV )
   SWTest <- shapiro.test( x = MyAOV_residuals ) # run Shapiro-Wilk test
 
-# save the plot common items as a list to be used
+  # ------- save the common plot items as a list to be used ---------
+  
   cipercent <- round(confidence*100,2)
   commonstuff <- list(
     xlab(iv1),
@@ -166,21 +205,53 @@ Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = 
     scale_colour_hue( l=40),
     ggtitle(bquote("Group means with"~.(cipercent)*"% confidence intervals"))
   )
-
+  
+  # ------- switch for bar versus line plot ---------
+  
   switch(plottype,
          bar =
-           newdata %>% ggplot(aes_string(x = iv1, y= "TheMean", colour= iv2, fill= iv2, group=iv2)) +
-            geom_bar(stat = "identity", position = "dodge") +
-           geom_errorbar(aes(ymin=LowerBound, ymax=UpperBound), width=.5, position = position_dodge(0.9), show.legend = FALSE) +
-         commonstuff -> p,
+           p <- newdata %>% 
+           ggplot(aes_string(x = iv1, 
+                             y= "TheMean", 
+                             colour= iv2, 
+                             fill= iv2, 
+                             group=iv2)) +
+           geom_bar(stat = "identity", 
+                    position = "dodge") +
+           geom_errorbar(aes(ymin=LowerBound, ymax=UpperBound), 
+                         width=.5, 
+                         position = position_dodge(0.9), 
+                         show.legend = FALSE) +
+           commonstuff,
          line =
-           newdata %>% ggplot(aes_string(x = iv1, y= "TheMean", colour= iv2, fill= iv2, group=iv2)) +
-            geom_errorbar(aes(ymin=LowerBound, ymax=UpperBound), width=.2) +
-            geom_line() +
-            geom_point(aes(y=TheMean), shape = 23, size = 3, alpha = 1) +
-           geom_point(data = dataframe, mapping = aes(x = !!sym(iv1), y = !!sym(depvar)), alpha = .4) +
-            commonstuff -> p
+           p <- newdata %>% 
+           ggplot(aes_string(x = iv1, 
+                             y= "TheMean", 
+                             colour= iv2, 
+                             fill= iv2, 
+                             group=iv2)) +
+           geom_errorbar(aes(ymin=LowerBound, 
+                             ymax=UpperBound), 
+                         width=.2) +
+           geom_line() +
+           geom_point(aes(y=TheMean), shape = 23, size = 3, alpha = 1) +
+           geom_point(data = dataframe, 
+                      mapping = aes(x = !!sym(iv1), 
+                                    y = !!sym(depvar)), 
+                      alpha = .4) +
+           geom_violin(data = dataframe, 
+                       mapping = aes(x = !!sym(iv1), 
+                                     y = !!sym(depvar), 
+                                     group= !!sym(iv1)),
+                       width = 0.5,
+                       alpha = 0.2,
+                       fill = "white",
+                       show.legend = FALSE
+           ) +            
+           commonstuff
   )
+  
+  # ------------- Warn user of unbalanced design ----------------
   
   if (is.list(replications(formula, dataframe))) {
     message("\nYou have an unbalanced design. Using Type II sum of squares, eta squared may not sum to 1.0 \n")
@@ -191,6 +262,8 @@ Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = 
     print(WithETA)
   }
 
+  # ------------- Print tests and tables ----------------
+  
   message("\nTable of group means\n")
   print(newdata)
   message("\nTesting Homogeneity of Variance with Brown-Forsythe \n")
@@ -203,12 +276,26 @@ Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = 
     message("   *** Possible violation of the assumption.  You may want to plot the residuals to see how they vary from normal ***")
   }
   print(SWTest)
+  
+  # ------------- Print the plot itself ----------------
+  
   message("\nInteraction graph plotted...")
   print(p)
-  whattoreturn <- list(ANOVATable = WithETA, MeansTable = newdata, BFTest = BFTest, SWTest = SWTest)
+  
+  
+  # ------------- Return stuff to user ----------------
+  
+  whattoreturn <- list(ANOVATable = WithETA, 
+                       MeansTable = newdata, 
+                       BFTest = BFTest, 
+                       SWTest = SWTest)
   if (PlotSave) {
-    ggsave(potentialfname,device = "png")
-    whattoreturn <- list(ANOVATable = WithETA, MeansTable = newdata, BFTest = BFTest, SWTest = SWTest, pFileName = potentialfname)
+    ggsave(potentialfname, device = "png")
+    whattoreturn <- list(ANOVATable = WithETA, 
+                         MeansTable = newdata, 
+                         BFTest = BFTest, 
+                         SWTest = SWTest, 
+                         pFileName = potentialfname)
   }
   return(invisible(whattoreturn))
 }
