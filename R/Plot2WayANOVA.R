@@ -26,7 +26,8 @@
 #' \item Use \code{ggplot2} to plot an interaction plot of the type the user specified }
 #'
 #' @usage Plot2WayANOVA(formula, dataframe = NULL, confidence=.95,
-#'     plottype = "bar", PlotSave = FALSE)
+#'     plottype = "bar", xlab = NULL, ylab = NULL, title = NULL,
+#'     subtitle = NULL, PlotSave = FALSE)
 #' @param formula a valid R formula with a numeric dependent (outcome)
 #' variable, and two independent (predictor) variables e.g. \code{mpg~am*vs}.
 #' The independent variables are forced to factors (with warning) if possible.
@@ -34,6 +35,11 @@
 #' @param confidence what confidence level for confidence intervals
 #' @param plottype bar or line (quoted)
 #' @param PlotSave a logical indicating whether the user wants to save the plot as a png file
+#' @param xlab,ylab Labels for `x` and `y` axis variables. If `NULL` (default),
+#'   variable names for `x` and `y` will be used.
+#' @param title The text for the plot title.
+#' @param subtitle The text for the plot subtitle. Will work only if
+#'   `results.subtitle = FALSE`.
 #' @return A list with 4 elements which is returned invisibly. The items are always sent
 #' to the console for display  The plot is always sent to the default plot device
 #' but for user convenience the function also returns a named list with the following items
@@ -62,6 +68,10 @@ Plot2WayANOVA <- function(formula,
                           dataframe = NULL,
                           confidence = .95,
                           plottype = "bar",
+                          xlab = NULL,
+                          ylab = NULL,
+                          title = NULL,
+                          subtitle = NULL,
                           PlotSave = FALSE) {
 
   # ---------------- to appease R CMD Check? ----------------
@@ -149,6 +159,18 @@ Plot2WayANOVA <- function(formula,
   # force it to a data frame
   dataframe <- dataframe[, c(depvar, iv1, iv2)]
 
+  # --------------------- x & y axis labels ----------------------------
+  
+  # if `xlab` is not provided, use the variable `x` name
+  if (is.null(xlab)) {
+    xlab <- iv1
+  }
+  
+  # if `ylab` is not provided, use the variable `y` name
+  if (is.null(ylab)) {
+    ylab <- depvar
+  }
+  
   # ---------------- check variable types ----------------
 
   if (!is(dataframe[, depvar], "numeric")) {
@@ -212,13 +234,18 @@ Plot2WayANOVA <- function(formula,
   # ------- save the common plot items as a list to be used ---------
 
   cipercent <- round(confidence * 100, 2)
-  commonstuff <- list(
-    xlab(iv1),
-    ylab(depvar),
-    scale_colour_hue(l = 40),
-    ggtitle(bquote(
+  # if `title` is not provided, use this generic
+  if (is.null(title)) {
+    title <- bquote(
       "Group means with" ~ .(cipercent) * "% confidence intervals"
-    ))
+    )
+  }
+  
+  commonstuff <- list(
+    xlab(xlab),
+    ylab(ylab),
+    scale_colour_hue(l = 40),
+    ggtitle(title, subtitle = subtitle)
   )
 
   # ------- switch for bar versus line plot ---------

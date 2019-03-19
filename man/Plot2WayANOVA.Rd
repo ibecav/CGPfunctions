@@ -5,7 +5,8 @@
 \title{Plot a 2 Way ANOVA using dplyr and ggplot2}
 \usage{
 Plot2WayANOVA(formula, dataframe = NULL, confidence=.95,
-    plottype = "bar", PlotSave = FALSE)
+    plottype = "bar", xlab = NULL, ylab = NULL, title = NULL,
+    subtitle = NULL, PlotSave = FALSE)
 }
 \arguments{
 \item{formula}{a valid R formula with a numeric dependent (outcome)
@@ -17,6 +18,14 @@ The independent variables are forced to factors (with warning) if possible.}
 \item{confidence}{what confidence level for confidence intervals}
 
 \item{plottype}{bar or line (quoted)}
+
+\item{xlab, ylab}{Labels for `x` and `y` axis variables. If `NULL` (default),
+variable names for `x` and `y` will be used.}
+
+\item{title}{The text for the plot title.}
+
+\item{subtitle}{The text for the plot subtitle. Will work only if
+`results.subtitle = FALSE`.}
 
 \item{PlotSave}{a logical indicating whether the user wants to save the plot as a png file}
 }
