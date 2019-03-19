@@ -4,8 +4,8 @@
 \alias{SeeDist}
 \title{See The Distribution}
 \usage{
-SeeDist(qqq, numbins = 0, whatvar = "Unspecified", whatplots = c("d", "b",
-  "h"))
+SeeDist(qqq, numbins = 0, whatvar = "Unspecified", whatplots = c("d",
+  "b", "h"))
 }
 \arguments{
 \item{qqq}{the data to be visualized must be numeric.}

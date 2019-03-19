@@ -141,7 +141,7 @@ Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = 
   if (any(missing))
     warning(paste(sum(missing)), " case(s) removed because of missing data")
   dataframe <- dataframe[!missing, ]
-
+  
   dataframe %>%
     group_by(!!sym(iv1),!!sym(iv2)) %>%
     summarise(TheMean = mean(!!sym(depvar),na.rm=TRUE),
@@ -177,7 +177,8 @@ Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = 
            newdata %>% ggplot(aes_string(x = iv1, y= "TheMean", colour= iv2, fill= iv2, group=iv2)) +
             geom_errorbar(aes(ymin=LowerBound, ymax=UpperBound), width=.2) +
             geom_line() +
-            geom_point(aes(y=TheMean)) +
+            geom_point(aes(y=TheMean), shape = 23, size = 3, alpha = 1) +
+           geom_point(data = dataframe, mapping = aes(x = !!sym(iv1), y = !!sym(depvar)), alpha = .4) +
             commonstuff -> p
   )
   
