@@ -171,8 +171,8 @@ Plot2WayANOVA <- function(formula, dataframe = NULL, confidence=.95, plottype = 
          bar =
            newdata %>% ggplot(aes_string(x = iv1, y= "TheMean", colour= iv2, fill= iv2, group=iv2)) +
             geom_bar(stat = "identity", position = "dodge") +
-            geom_errorbar(aes(ymin=LowerBound, ymax=UpperBound), width=.5, position = "dodge", show.legend = FALSE) +
-            commonstuff -> p,
+           geom_errorbar(aes(ymin=LowerBound, ymax=UpperBound), width=.5, position = position_dodge(0.9), show.legend = FALSE) +
+         commonstuff -> p,
          line =
            newdata %>% ggplot(aes_string(x = iv1, y= "TheMean", colour= iv2, fill= iv2, group=iv2)) +
             geom_errorbar(aes(ymin=LowerBound, ymax=UpperBound), width=.2) +
