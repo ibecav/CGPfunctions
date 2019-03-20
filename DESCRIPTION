@@ -1,6 +1,6 @@
 Package: CGPfunctions
 Title: Powell Miscellaneous Functions for Teaching and Learning Statistics
-Version: 1.9.1
+Version: 1.9.2
 Authors@R: person("Chuck", "Powell", email = "ibecav@gmail.com", role = c("aut", "cre"))
 Description: Miscellaneous functions useful for teaching statistics as well as actually practicing the art. They typically are not “new” methods but rather wrappers around either base R or other packages.
 Depends: R (>= 3.4.0)
@@ -8,6 +8,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:
+    broomExtra,
     car,
     devtools,
     dplyr,
@@ -16,6 +17,7 @@ Imports:
     methods,
     rlang (>= 0.1.6),
     scales,
+    sjstats,
     tibble
 Suggests:
     lsr,

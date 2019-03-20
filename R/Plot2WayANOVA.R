@@ -17,7 +17,7 @@
 #' \item Use \code{dplyr} to calculate a summarized table of means,
 #' sds, standard errors of the means, confidence intervals, and group sizes.
 #' \item Use the \code{aov} function to execute an Analysis of Variance (ANOVA)
-#' \item Use the \code{\link{neweta}} function to calculate eta squared values.
+#' \item Use the \code{\link[sjstats]{anova_stats}} function to calculate eta squared values.
 #' If the design is unbalanced warn the user and use Type II sums of squares
 #' \item Produce a standard ANOVA table with a column for eta-squared appended
 #' \item Use the \code{leveneTest} for testing Homogeneity of Variance
@@ -27,7 +27,9 @@
 #'
 #' @usage Plot2WayANOVA(formula, dataframe = NULL, confidence=.95,
 #'     plottype = "bar", xlab = NULL, ylab = NULL, title = NULL,
-#'     subtitle = NULL, PlotSave = FALSE)
+#'     subtitle = NULL, interact.line.size = 2, mean.plotting = TRUE, 
+#'     mean.ci = TRUE, mean.size = 4, mean.color = "darkred", 
+#'     PlotSave = FALSE)
 #' @param formula a valid R formula with a numeric dependent (outcome)
 #' variable, and two independent (predictor) variables e.g. \code{mpg~am*vs}.
 #' The independent variables are forced to factors (with warning) if possible.
@@ -40,6 +42,16 @@
 #' @param title The text for the plot title.
 #' @param subtitle The text for the plot subtitle. Will work only if
 #'   `results.subtitle = FALSE`.
+#' @param interact.line.size Line size for the line connecting mean points
+#'   (Default: `2`).
+#' @param mean.plotting Logical that decides whether mean is to be highlighted
+#'   and its value to be displayed (Default: `TRUE`).
+#' @param mean.ci Logical that decides whether 95% confidence interval for mean
+#'   is to be displayed (Default: `TRUE`).
+#' @param mean.color Color for the data point corresponding to mean (Default:
+#'   `"darkred"`).
+#' @param mean.size Point size for the data point corresponding to mean
+#'   (Default: `5`).
 #' @return A list with 4 elements which is returned invisibly. The items are always sent
 #' to the console for display  The plot is always sent to the default plot device
 #' but for user convenience the function also returns a named list with the following items
@@ -48,7 +60,7 @@
 #'
 #' @author Chuck Powell
 #' @seealso \code{\link[stats]{aov}}, \code{\link[car]{leveneTest}},
-#' \code{\link{neweta}}, \code{\link[stats]{replications}},
+#' \code{\link[sjstats]{anova_stats}}, \code{\link[stats]{replications}},
 #' \code{\link[stats]{shapiro.test}}
 #' @examples
 #' 
@@ -61,6 +73,8 @@
 #' @importFrom stats anova aov lm pf qt replications sd symnum residuals shapiro.test
 #' @importFrom tibble as_tibble
 #' @importFrom car leveneTest
+#' @importFrom sjstats anova_stats
+#' @importFrom broomExtra glance
 #' @export
 #'
 # Stable version 0.2
@@ -72,6 +86,11 @@ Plot2WayANOVA <- function(formula,
                           ylab = NULL,
                           title = NULL,
                           subtitle = NULL,
+                          interact.line.size = 2,
+                          mean.plotting = TRUE,
+                          mean.ci = TRUE,
+                          mean.size = 4,
+                          mean.color = "darkred",
                           PlotSave = FALSE) {
 
   # -------- to appease R CMD Check? ----------------
@@ -224,7 +243,9 @@ Plot2WayANOVA <- function(formula,
   # run analysis of variance
   MyAOV <- aov(formula, dataframe)
   # run custom eta squared function
-  WithETA <- neweta(MyAOV)
+  WithETA <- sjstats::anova_stats(MyAOV)
+  # creating model summary dataframe
+  model_summary <- broomExtra::glance(MyAOV)
   # Run Brown-Forsythe
   BFTest <- car::leveneTest(MyAOV)
   # Grab the residuals and run Shapiro-Wilk
@@ -238,6 +259,14 @@ Plot2WayANOVA <- function(formula,
   if (is.null(title)) {
     title <- bquote(
       "Group means with" ~ .(cipercent) * "% confidence intervals"
+    )
+  }
+
+  rsquared <- round(model_summary$r.squared, 3)
+  # if `subtitle` is not provided, use this generic
+  if (is.null(subtitle)) {
+    subtitle <- bquote(
+      "Overall model fit R squared =" ~ .(rsquared) * " blah blah"
     )
   }
   
@@ -279,14 +308,6 @@ Plot2WayANOVA <- function(formula,
           fill = iv2,
           group = iv2
         )) +
-        geom_errorbar(aes(
-          ymin = LowerBound,
-          ymax = UpperBound
-        ),
-        width = .2
-        ) +
-        geom_line() +
-        geom_point(aes(y = TheMean), shape = 23, size = 3, alpha = 1) +
         geom_point(
           data = dataframe,
           mapping = aes(
@@ -295,6 +316,18 @@ Plot2WayANOVA <- function(formula,
           ),
           alpha = .4
         ) +
+        geom_errorbar(aes(
+          ymin = LowerBound,
+          ymax = UpperBound
+        ),
+        width = .2
+        ) +
+        geom_line(size = interact.line.size) +
+        geom_point(aes(y = TheMean), 
+                   shape = 23, 
+                   size = mean.size,
+                   color = mean.color,
+                   alpha = 1) +
         geom_violin(
           data = dataframe,
           mapping = aes(
@@ -309,6 +342,7 @@ Plot2WayANOVA <- function(formula,
         ) +
         commonstuff
   )
+  
 
   # -------- Warn user of unbalanced design ----------------
 
@@ -324,6 +358,8 @@ Plot2WayANOVA <- function(formula,
 
   # -------- Print tests and tables ----------------
 
+  message("\nMeasures of overall model fit\n")
+  print(model_summary)
   message("\nTable of group means\n")
   print(newdata)
   message("\nTesting Homogeneity of Variance with Brown-Forsythe \n")
@@ -348,6 +384,7 @@ Plot2WayANOVA <- function(formula,
 
   whattoreturn <- list(
     ANOVATable = WithETA,
+    ModelSummary = model_summary,
     MeansTable = newdata,
     BFTest = BFTest,
     SWTest = SWTest
@@ -356,6 +393,7 @@ Plot2WayANOVA <- function(formula,
     ggsave(potentialfname, device = "png")
     whattoreturn <- list(
       ANOVATable = WithETA,
+      ModelSummary = model_summary,
       MeansTable = newdata,
       BFTest = BFTest,
       SWTest = SWTest,
