@@ -74,14 +74,14 @@ Plot2WayANOVA <- function(formula,
                           subtitle = NULL,
                           PlotSave = FALSE) {
 
-  # ---------------- to appease R CMD Check? ----------------
+  # -------- to appease R CMD Check? ----------------
   TheMean <- NULL
   TheSEM <- NULL
   CIMuliplier <- NULL
   LowerBound <- NULL
   UpperBound <- NULL
 
-  # ---------------- error checking ----------------
+  # -------- error checking ----------------
   if (!requireNamespace("ggplot2")) {
     stop("Can't continue can't load ggplot2")
   }
@@ -159,7 +159,7 @@ Plot2WayANOVA <- function(formula,
   # force it to a data frame
   dataframe <- dataframe[, c(depvar, iv1, iv2)]
 
-  # --------------------- x & y axis labels ----------------------------
+  # -------- x & y axis labels ----------------------------
   
   # if `xlab` is not provided, use the variable `x` name
   if (is.null(xlab)) {
@@ -171,7 +171,7 @@ Plot2WayANOVA <- function(formula,
     ylab <- depvar
   }
   
-  # ---------------- check variable types ----------------
+  # -------- check variable types ----------------
 
   if (!is(dataframe[, depvar], "numeric")) {
     stop("dependent variable must be numeric")
@@ -197,7 +197,7 @@ Plot2WayANOVA <- function(formula,
     plottype <- "line"
   }
 
-  # ------------- Remove missing cases notify user ----------------
+  # -------- Remove missing cases notify user ----------------
 
   missing <- apply(is.na(dataframe), 1, any)
   if (any(missing)) {
@@ -205,7 +205,7 @@ Plot2WayANOVA <- function(formula,
   }
   dataframe <- dataframe[!missing, ]
 
-  # ------------- Build summary dataframe ----------------
+  # -------- Build summary dataframe ----------------
 
   newdata <- dataframe %>%
     group_by(!!sym(iv1), !!sym(iv2)) %>%
@@ -219,7 +219,7 @@ Plot2WayANOVA <- function(formula,
       N = n()
     )
 
-  # ------------- Run tests and procedures ----------------
+  # -------- Run tests and procedures ----------------
 
   # run analysis of variance
   MyAOV <- aov(formula, dataframe)
@@ -231,7 +231,7 @@ Plot2WayANOVA <- function(formula,
   MyAOV_residuals <- residuals(object = MyAOV)
   SWTest <- shapiro.test(x = MyAOV_residuals) # run Shapiro-Wilk test
 
-  # ------- save the common plot items as a list to be used ---------
+  # -------- save the common plot items as a list to be used ---------
 
   cipercent <- round(confidence * 100, 2)
   # if `title` is not provided, use this generic
@@ -248,7 +248,7 @@ Plot2WayANOVA <- function(formula,
     ggtitle(title, subtitle = subtitle)
   )
 
-  # ------- switch for bar versus line plot ---------
+  # -------- switch for bar versus line plot ---------
 
   switch(plottype,
     bar =
@@ -310,7 +310,7 @@ Plot2WayANOVA <- function(formula,
         commonstuff
   )
 
-  # ------------- Warn user of unbalanced design ----------------
+  # -------- Warn user of unbalanced design ----------------
 
   if (is.list(replications(formula, dataframe))) {
     message("\nYou have an unbalanced design. Using Type II sum of squares, 
@@ -322,7 +322,7 @@ Plot2WayANOVA <- function(formula,
     print(WithETA)
   }
 
-  # ------------- Print tests and tables ----------------
+  # -------- Print tests and tables ----------------
 
   message("\nTable of group means\n")
   print(newdata)
@@ -338,13 +338,13 @@ Plot2WayANOVA <- function(formula,
   }
   print(SWTest)
 
-  # ------------- Print the plot itself ----------------
+  # -------- Print the plot itself ----------------
 
   message("\nInteraction graph plotted...")
   print(p)
 
 
-  # ------------- Return stuff to user ----------------
+  # -------- Return stuff to user ----------------
 
   whattoreturn <- list(
     ANOVATable = WithETA,
