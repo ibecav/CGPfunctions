@@ -263,10 +263,13 @@ Plot2WayANOVA <- function(formula,
   }
 
   rsquared <- round(model_summary$r.squared, 3)
+#  SER2 <- 
+  AICnumber <- round(model_summary$AIC, 1)
+  BICnumber <- round(model_summary$BIC, 1)
   # if `subtitle` is not provided, use this generic
   if (is.null(subtitle)) {
     subtitle <- bquote(
-      "Overall model fit R squared =" ~ .(rsquared) * " blah blah"
+      "Overall model measures R squared =" ~ .(rsquared) * ", AIC ="  ~ .(AICnumber)  * ", BIC ="  ~ .(BICnumber)
     )
   }
   
