@@ -24,10 +24,10 @@ The independent variables are forced to factors (with warning) if possible.}
 \item{xlab, ylab}{Labels for `x` and `y` axis variables. If `NULL` (default),
 variable names for `x` and `y` will be used.}
 
-\item{title}{The text for the plot title.}
+\item{title}{The text for the plot title. A generic default is provided.}
 
-\item{subtitle}{The text for the plot subtitle. Will work only if
-`results.subtitle = FALSE`.}
+\item{subtitle}{The text for the plot subtitle. If `NULL` (default), key
+model information is provided as a subtitle.}
 
 \item{interact.line.size}{Line size for the line connecting mean points
 (Default: `2`).}
@@ -39,32 +39,34 @@ and its value to be displayed (Default: `TRUE`).}
 is to be displayed (Default: `TRUE`).}
 
 \item{mean.size}{Point size for the data point corresponding to mean
-(Default: `5`).}
+(Default: `4`).}
 
 \item{mean.color}{Color for the data point corresponding to mean (Default:
 `"darkred"`).}
 
-\item{PlotSave}{a logical indicating whether the user wants to save the plot as a png file}
+\item{PlotSave}{a logical indicating whether the user wants to save the plot
+as a png file}
 }
 \value{
-A list with 4 elements which is returned invisibly. The items are always sent
+A list with 5 elements which is returned invisibly. The items are always sent
 to the console for display  The plot is always sent to the default plot device
 but for user convenience the function also returns a named list with the following items
 in case the user desires to save them or further process them. \code{$ANOVATable},
-\code{$MeansTable}, \code{$BFTest}, and \code{$SWTest}.
+\code{$ModelSummary}, \code{$MeansTable}, \code{$BFTest}, and \code{$SWTest}.
 }
 \description{
 Takes a formula and a dataframe as input, conducts an analysis of variance
-using the base R aov command and produces the results (AOV summary table and
+using the base R \code{\link[stats]{aov}} function and prints the results
+(AOV summary table, table of overall model information and
 table of means) to the console and as a plotted interaction graph (line or
 bar) using ggplot2.  Also uses Brown-Forsythe test for homogeneity of
-variance.
+variance.  Users can also choose to save the plot out as a png file.
 }
 \details{
 Details about how the function works in order of steps taken.
 \enumerate{
 \item Some basic error checking to ensure a valid formula and dataframe.
-Only accepts fully crossed formula to check for interaction term
+Only accepts fully *crossed* formula to check for interaction term
 \item Ensure the dependent (outcome) variable is numeric and that the two
 independent (predictor) variables are or can be coerced to factors -- user
 warned on the console

@@ -1,6 +1,6 @@
-# CGPfunctions 0.5
+# CGPfunctions 0.5.0
 
-* Release 0.5 submitted to CRAN 21 March 2019
+* Release 0.5.0 submitted to CRAN 21 March 2019
   - Major improvements and features added to Plot2WayANOVA
   - Deprecated function neweta
 * Release 0.4 published on CRAN 13 June 2018

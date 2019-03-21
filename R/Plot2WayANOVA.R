@@ -1,15 +1,16 @@
 #' Plot a 2 Way ANOVA using dplyr and ggplot2
 #'
 #' Takes a formula and a dataframe as input, conducts an analysis of variance
-#' using the base R aov command and produces the results (AOV summary table and
+#' using the base R \code{\link[stats]{aov}} function and prints the results
+#' (AOV summary table, table of overall model information and
 #' table of means) to the console and as a plotted interaction graph (line or
 #' bar) using ggplot2.  Also uses Brown-Forsythe test for homogeneity of
-#' variance.
+#' variance.  Users can also choose to save the plot out as a png file.
 #'
 #' Details about how the function works in order of steps taken.
 #' \enumerate{
 #' \item Some basic error checking to ensure a valid formula and dataframe.
-#' Only accepts fully crossed formula to check for interaction term
+#' Only accepts fully *crossed* formula to check for interaction term
 #' \item Ensure the dependent (outcome) variable is numeric and that the two
 #' independent (predictor) variables are or can be coerced to factors -- user
 #' warned on the console
@@ -36,12 +37,13 @@
 #' @param dataframe a dataframe or an object that can be coerced to a dataframe
 #' @param confidence what confidence level for confidence intervals
 #' @param plottype bar or line (quoted)
-#' @param PlotSave a logical indicating whether the user wants to save the plot as a png file
+#' @param PlotSave a logical indicating whether the user wants to save the plot
+#'  as a png file
 #' @param xlab,ylab Labels for `x` and `y` axis variables. If `NULL` (default),
 #'   variable names for `x` and `y` will be used.
-#' @param title The text for the plot title.
-#' @param subtitle The text for the plot subtitle. Will work only if
-#'   `results.subtitle = FALSE`.
+#' @param title The text for the plot title. A generic default is provided.
+#' @param subtitle The text for the plot subtitle. If `NULL` (default), key
+#'   model information is provided as a subtitle.
 #' @param interact.line.size Line size for the line connecting mean points
 #'   (Default: `2`).
 #' @param mean.plotting Logical that decides whether mean is to be highlighted
@@ -51,12 +53,12 @@
 #' @param mean.color Color for the data point corresponding to mean (Default:
 #'   `"darkred"`).
 #' @param mean.size Point size for the data point corresponding to mean
-#'   (Default: `5`).
-#' @return A list with 4 elements which is returned invisibly. The items are always sent
+#'   (Default: `4`).
+#' @return A list with 5 elements which is returned invisibly. The items are always sent
 #' to the console for display  The plot is always sent to the default plot device
 #' but for user convenience the function also returns a named list with the following items
 #' in case the user desires to save them or further process them. \code{$ANOVATable},
-#' \code{$MeansTable}, \code{$BFTest}, and \code{$SWTest}.
+#' \code{$ModelSummary}, \code{$MeansTable}, \code{$BFTest}, and \code{$SWTest}.
 #'
 #' @author Chuck Powell
 #' @seealso \code{\link[stats]{aov}}, \code{\link[car]{leveneTest}},
@@ -282,7 +284,7 @@ Plot2WayANOVA <- function(formula,
   # if `subtitle` is not provided, use this generic
   if (is.null(subtitle)) {
     subtitle <- bquote(
-      "R squared =" ~ .(rsquared) * ", CI[" ~ .(cilower) * ", " ~ .(ciupper) * "], AIC =" ~ .(AICnumber) * ", BIC =" ~ .(BICnumber)
+      "R squared =" ~ .(rsquared) * ", CI[" ~ .(cilower) * ", " ~ .(ciupper) * " ], AIC =" ~ .(AICnumber) * ", BIC =" ~ .(BICnumber)
     )
   }
 
