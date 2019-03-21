@@ -27,8 +27,8 @@
 #'
 #' @usage Plot2WayANOVA(formula, dataframe = NULL, confidence=.95,
 #'     plottype = "bar", xlab = NULL, ylab = NULL, title = NULL,
-#'     subtitle = NULL, interact.line.size = 2, mean.plotting = TRUE, 
-#'     mean.ci = TRUE, mean.size = 4, mean.color = "darkred", 
+#'     subtitle = NULL, interact.line.size = 2, mean.plotting = TRUE,
+#'     mean.ci = TRUE, mean.size = 4, mean.color = "darkred",
 #'     PlotSave = FALSE)
 #' @param formula a valid R formula with a numeric dependent (outcome)
 #' variable, and two independent (predictor) variables e.g. \code{mpg~am*vs}.
@@ -179,17 +179,17 @@ Plot2WayANOVA <- function(formula,
   dataframe <- dataframe[, c(depvar, iv1, iv2)]
 
   # -------- x & y axis labels ----------------------------
-  
+
   # if `xlab` is not provided, use the variable `x` name
   if (is.null(xlab)) {
     xlab <- iv1
   }
-  
+
   # if `ylab` is not provided, use the variable `y` name
   if (is.null(ylab)) {
     ylab <- depvar
   }
-  
+
   # -------- check variable types ----------------
 
   if (!is(dataframe[, depvar], "numeric")) {
@@ -254,6 +254,7 @@ Plot2WayANOVA <- function(formula,
 
   # -------- save the common plot items as a list to be used ---------
 
+  # Make a default title
   cipercent <- round(confidence * 100, 2)
   # if `title` is not provided, use this generic
   if (is.null(title)) {
@@ -262,17 +263,29 @@ Plot2WayANOVA <- function(formula,
     )
   }
 
+  # compute CI's for R squared using Olkin and Finn's approximation
+  denominator <- (nrow(dataframe)^2 - 1) * (3 + nrow(dataframe))
+  numerator <- (4 * model_summary$r.squared) * ((1 - model_summary$r.squared)^2) * (nrow(dataframe) - 2 - 1)^2
+  ser2 <- sqrt(numerator / denominator)
+  tvalue <- qt((1 - confidence) / 2, nrow(dataframe) - 3)
+  limit1 <- model_summary$r.squared - tvalue * ser2
+  limit2 <- model_summary$r.squared + tvalue * ser2
+  ULr2 <- max(limit1, limit2)
+  LLr2 <- min(limit1, limit2)
+
+  # make pretty labels
   rsquared <- round(model_summary$r.squared, 3)
-#  SER2 <- 
+  cilower <- round(LLr2, 3)
+  ciupper <- round(ULr2, 3)
   AICnumber <- round(model_summary$AIC, 1)
   BICnumber <- round(model_summary$BIC, 1)
   # if `subtitle` is not provided, use this generic
   if (is.null(subtitle)) {
     subtitle <- bquote(
-      "Overall model measures R squared =" ~ .(rsquared) * ", AIC ="  ~ .(AICnumber)  * ", BIC ="  ~ .(BICnumber)
+      "R squared =" ~ .(rsquared) * ", CI[" ~ .(cilower) * ", " ~ .(ciupper) * "], AIC =" ~ .(AICnumber) * ", BIC =" ~ .(BICnumber)
     )
   }
-  
+
   commonstuff <- list(
     xlab(xlab),
     ylab(ylab),
@@ -326,11 +339,12 @@ Plot2WayANOVA <- function(formula,
         width = .2
         ) +
         geom_line(size = interact.line.size) +
-        geom_point(aes(y = TheMean), 
-                   shape = 23, 
-                   size = mean.size,
-                   color = mean.color,
-                   alpha = 1) +
+        geom_point(aes(y = TheMean),
+          shape = 23,
+          size = mean.size,
+          color = mean.color,
+          alpha = 1
+        ) +
         geom_violin(
           data = dataframe,
           mapping = aes(
@@ -345,7 +359,7 @@ Plot2WayANOVA <- function(formula,
         ) +
         commonstuff
   )
-  
+
 
   # -------- Warn user of unbalanced design ----------------
 

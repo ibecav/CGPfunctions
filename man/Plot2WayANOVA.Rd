@@ -6,8 +6,8 @@
 \usage{
 Plot2WayANOVA(formula, dataframe = NULL, confidence=.95,
     plottype = "bar", xlab = NULL, ylab = NULL, title = NULL,
-    subtitle = NULL, interact.line.size = 2, mean.plotting = TRUE, 
-    mean.ci = TRUE, mean.size = 4, mean.color = "darkred", 
+    subtitle = NULL, interact.line.size = 2, mean.plotting = TRUE,
+    mean.ci = TRUE, mean.size = 4, mean.color = "darkred",
     PlotSave = FALSE)
 }
 \arguments{
