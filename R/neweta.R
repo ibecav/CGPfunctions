@@ -5,6 +5,9 @@
 #' 
 #' There are three ways to compute eta squared this function only uses Type II
 #' 
+#' **This function is deprecated as of version 0.5** please consider using
+#' \code{\link[sjstats]{eta_sq}} instead
+#' 
 #' @usage neweta(MyAOV)
 #' @param MyAOV a valid aov object such as those produced by
 #' \code{aov(dv~iv1*iv2)}
