@@ -21,7 +21,9 @@ Imports:
     sjstats,
     tibble
 Suggests:
+    BSDA,
     lsr,
+    janitor,
     knitr,
     productplots,
     rmarkdown
