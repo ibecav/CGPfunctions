@@ -95,7 +95,6 @@
 #' @importFrom broomExtra glance
 #' @export
 #'
-# Stable version 0.2
 Plot2WayANOVA <- function(formula,
                           dataframe = NULL,
                           confidence = .95,
