@@ -1,39 +1,49 @@
 #' Plot a 2 Way ANOVA using dplyr and ggplot2
 #'
 #' Takes a formula and a dataframe as input, conducts an analysis of variance
-#' using the base R \code{\link[stats]{aov}} function and prints the results
-#' (AOV summary table, table of overall model information and
-#' table of means) to the console and as a plotted interaction graph (line or
-#' bar) using ggplot2.  Also uses Brown-Forsythe test for homogeneity of
+#' prints the results (AOV summary table, table of overall model information 
+#' and table of means) then uses ggplot2 to plot an interaction graph (line 
+#' or bar) .  Also uses Brown-Forsythe test for homogeneity of
 #' variance.  Users can also choose to save the plot out as a png file.
 #'
 #' Details about how the function works in order of steps taken.
 #' \enumerate{
 #' \item Some basic error checking to ensure a valid formula and dataframe.
-#' Only accepts fully *crossed* formula to check for interaction term
+#'   Only accepts fully *crossed* formula to check for interaction term
 #' \item Ensure the dependent (outcome) variable is numeric and that the two
-#' independent (predictor) variables are or can be coerced to factors -- user
-#' warned on the console
+#'   independent (predictor) variables are or can be coerced to factors -- user
+#'   warned on the console
 #' \item Remove missing cases -- user warned on the console
-#' \item Use \code{dplyr} to calculate a summarized table of means,
-#' sds, standard errors of the means, confidence intervals, and group sizes.
-#' \item Use the \code{aov} function to execute an Analysis of Variance (ANOVA)
-#' \item Use the \code{\link[sjstats]{anova_stats}} function to calculate eta squared values.
-#' If the design is unbalanced warn the user and use Type II sums of squares
-#' \item Produce a standard ANOVA table with a column for eta-squared appended
-#' \item Use the \code{leveneTest} for testing Homogeneity of Variance
-#' assumption with Brown-Forsythe
-#' \item Use the \code{shapiro.test} for testing normality assumption with Shapiro-Wilk
-#' \item Use \code{ggplot2} to plot an interaction plot of the type the user specified }
+#' \item Calculate a summarized table of means, sds, standard errors of the
+#'    means, confidence intervals, and group sizes.
+#' \item Use \code{\link[stats]{aov}} function to execute an Analysis of 
+#'   Variance (ANOVA)
+#' \item Use \code{\link[sjstats]{anova_stats}} to calculate eta squared 
+#'   and omega squared values per factor. If the design is unbalanced warn  
+#'   the user and use Type II sums of squares
+#' \item Produce a standard ANOVA table with additional columns 
+#' \item Use the \code{\link[car]{leveneTest}} for testing Homogeneity 
+#'   of Variance assumption with Brown-Forsythe
+#' \item Use the \code{\link[stats]{shapiro.test}} for testing normality
+#'   assumption with Shapiro-Wilk
+#' \item Use \code{ggplot2} to plot an interaction plot of the type the 
+#'   user specified.}
+#' The defaults are deliberately constructed to emphasize the nature
+#'   of the interaction rather than focusing on distributions. So
+#'   while a violin plot of the first factor by level is displayed
+#'   along with dots for individual data points shaded by the second 
+#'   factor, the emphasis is on the interaction lines.
 #'
 #' @usage Plot2WayANOVA(formula, dataframe = NULL, confidence=.95,
 #'     plottype = "bar", xlab = NULL, ylab = NULL, title = NULL,
 #'     subtitle = NULL, interact.line.size = 2, mean.plotting = TRUE,
 #'     mean.ci = TRUE, mean.size = 4, mean.color = "darkred",
+#'     mean.label.size = 3, mean.label.color = "black", overlay.type = NULL,
 #'     PlotSave = FALSE)
-#' @param formula a valid R formula with a numeric dependent (outcome)
-#' variable, and two independent (predictor) variables e.g. \code{mpg~am*vs}.
-#' The independent variables are forced to factors (with warning) if possible.
+#' @param formula a formula with a numeric dependent (outcome) variable, 
+#'   and two independent (predictor) variables e.g. \code{mpg ~ am * vs}.
+#'   The independent variables are coerced to factors (with warning) if 
+#'   possible.
 #' @param dataframe a dataframe or an object that can be coerced to a dataframe
 #' @param confidence what confidence level for confidence intervals
 #' @param plottype bar or line (quoted)
@@ -44,21 +54,27 @@
 #' @param title The text for the plot title. A generic default is provided.
 #' @param subtitle The text for the plot subtitle. If `NULL` (default), key
 #'   model information is provided as a subtitle.
-#' @param interact.line.size Line size for the line connecting mean points
+#' @param interact.line.size Line size for the line connecting the group means
 #'   (Default: `2`).
-#' @param mean.plotting Logical that decides whether mean is to be highlighted
-#'   and its value to be displayed (Default: `TRUE`).
-#' @param mean.ci Logical that decides whether 95% confidence interval for mean
-#'   is to be displayed (Default: `TRUE`).
+#' @param mean.plotting Logical that decides whether the value of the group 
+#'   mean is to be displayed (Default: `FALSE`).
+#' @param mean.ci Logical that decides whether the confidence interval for 
+#'   group means is to be displayed (Default: `TRUE`).
 #' @param mean.color Color for the data point corresponding to mean (Default:
 #'   `"darkred"`).
+#' @param mean.label.size,mean.label.color Aesthetics for
+#' the label displaying mean. Defaults: `3`, `"black"`, respectively.
 #' @param mean.size Point size for the data point corresponding to mean
 #'   (Default: `4`).
-#' @return A list with 5 elements which is returned invisibly. The items are always sent
-#' to the console for display  The plot is always sent to the default plot device
-#' but for user convenience the function also returns a named list with the following items
-#' in case the user desires to save them or further process them. \code{$ANOVATable},
-#' \code{$ModelSummary}, \code{$MeansTable}, \code{$BFTest}, and \code{$SWTest}.
+#' @param overlay.type A character string (e.g., `"box"` or `"violin"`), 
+#'   if you wish to overlay that information on factor1
+#' @return A list with 5 elements which is returned invisibly. These items
+#'   are always sent to the console for display but for user convenience 
+#'   the function also returns a named list with the following items
+#'   in case the user desires to save them or further process them -
+#'   \code{$ANOVATable},\code{$ModelSummary}, \code{$MeansTable}, 
+#'   \code{$BFTest}, and \code{$SWTest}.
+#'   The plot is always sent to the default plot device
 #'
 #' @author Chuck Powell
 #' @seealso \code{\link[stats]{aov}}, \code{\link[car]{leveneTest}},
@@ -89,10 +105,13 @@ Plot2WayANOVA <- function(formula,
                           title = NULL,
                           subtitle = NULL,
                           interact.line.size = 2,
-                          mean.plotting = TRUE,
+                          mean.plotting = FALSE,
                           mean.ci = TRUE,
                           mean.size = 4,
                           mean.color = "darkred",
+                          mean.label.size = 3,
+                          mean.label.color = "black",
+                          overlay.type = NULL,
                           PlotSave = FALSE) {
 
   # -------- to appease R CMD Check? ----------------
@@ -101,7 +120,7 @@ Plot2WayANOVA <- function(formula,
   CIMuliplier <- NULL
   LowerBound <- NULL
   UpperBound <- NULL
-
+  
   # -------- error checking ----------------
   if (!requireNamespace("ggplot2")) {
     stop("Can't continue can't load ggplot2")
@@ -139,16 +158,16 @@ Plot2WayANOVA <- function(formula,
     stop("Sorry you can only have one dependent variable so only 
          one tilde is allowed ~ you have two or more")
   }
-
+  
   # we can trust the basics grab the variable names from formula
   # these are now of ***class character***
   depvar <- vars[1]
   iv1 <- vars[2]
   iv2 <- vars[3]
-
+  
   # create a filename in case they want to save png
   potentialfname <- paste0(depvar, "by", iv1, "and", iv2, ".png")
-
+  
   if (missing(dataframe)) {
     stop("You didn't specify a data frame to use")
   }
@@ -176,24 +195,24 @@ Plot2WayANOVA <- function(formula,
       deparse(substitute(dataframe)), "'"
     ))
   }
-
+  
   # force it to a data frame
   dataframe <- dataframe[, c(depvar, iv1, iv2)]
-
+  # return(dataframe)
   # -------- x & y axis labels ----------------------------
-
+  
   # if `xlab` is not provided, use the variable `x` name
   if (is.null(xlab)) {
     xlab <- iv1
   }
-
+  
   # if `ylab` is not provided, use the variable `y` name
   if (is.null(ylab)) {
     ylab <- depvar
   }
-
+  
   # -------- check variable types ----------------
-
+  
   if (!is(dataframe[, depvar], "numeric")) {
     stop("dependent variable must be numeric")
   }
@@ -205,29 +224,29 @@ Plot2WayANOVA <- function(formula,
     message(paste0("\nConverting ", iv2, " to a factor --- check your results"))
     dataframe[, iv2] <- as.factor(dataframe[, iv2])
   }
-
+  
   # grab the names of the factor levels
   factor1.names <- levels(dataframe[, iv1])
   factor2.names <- levels(dataframe[, iv2])
-
+  
   if (!is(confidence, "numeric") | length(confidence) != 1 |
-    confidence < .5 | confidence > .9991) {
+      confidence < .5 | confidence > .9991) {
     stop("\"confidence\" must be a number between .5 and 1")
   }
   if (plottype != "bar") {
     plottype <- "line"
   }
-
+  
   # -------- Remove missing cases notify user ----------------
-
+  
   missing <- apply(is.na(dataframe), 1, any)
   if (any(missing)) {
     warning(paste(sum(missing)), " case(s) removed because of missing data")
   }
   dataframe <- dataframe[!missing, ]
-
+  
   # -------- Build summary dataframe ----------------
-
+  
   newdata <- dataframe %>%
     group_by(!!sym(iv1), !!sym(iv2)) %>%
     summarise(
@@ -239,12 +258,12 @@ Plot2WayANOVA <- function(formula,
       UpperBound = TheMean + TheSEM * CIMuliplier,
       N = n()
     )
-
+  
   # -------- Run tests and procedures ----------------
-
+  
   # run analysis of variance
   MyAOV <- aov(formula, dataframe)
-  # run custom eta squared function
+  # get more detailed information including effect sizes
   WithETA <- sjstats::anova_stats(MyAOV)
   # creating model summary dataframe
   model_summary <- broomExtra::glance(MyAOV)
@@ -253,9 +272,9 @@ Plot2WayANOVA <- function(formula,
   # Grab the residuals and run Shapiro-Wilk
   MyAOV_residuals <- residuals(object = MyAOV)
   SWTest <- shapiro.test(x = MyAOV_residuals) # run Shapiro-Wilk test
-
+  
   # -------- save the common plot items as a list to be used ---------
-
+  
   # Make a default title
   cipercent <- round(confidence * 100, 2)
   # if `title` is not provided, use this generic
@@ -264,7 +283,7 @@ Plot2WayANOVA <- function(formula,
       "Group means with" ~ .(cipercent) * "% confidence intervals"
     )
   }
-
+  
   # compute CI's for R squared using Olkin and Finn's approximation
   denominator <- (nrow(dataframe)^2 - 1) * (3 + nrow(dataframe))
   numerator <- (4 * model_summary$r.squared) * ((1 - model_summary$r.squared)^2) * (nrow(dataframe) - 2 - 1)^2
@@ -274,7 +293,7 @@ Plot2WayANOVA <- function(formula,
   limit2 <- model_summary$r.squared + tvalue * ser2
   ULr2 <- max(limit1, limit2)
   LLr2 <- min(limit1, limit2)
-
+  
   # make pretty labels
   rsquared <- round(model_summary$r.squared, 3)
   cilower <- round(LLr2, 3)
@@ -287,66 +306,94 @@ Plot2WayANOVA <- function(formula,
       "R squared =" ~ .(rsquared) * ", CI[" ~ .(cilower) * ", " ~ .(ciupper) * " ], AIC =" ~ .(AICnumber) * ", BIC =" ~ .(BICnumber)
     )
   }
-
+  
   commonstuff <- list(
     xlab(xlab),
     ylab(ylab),
     scale_colour_hue(l = 40),
-    ggtitle(title, subtitle = subtitle)
+    ggtitle(title, subtitle = subtitle),
+    theme(panel.grid.major.x = element_blank())
   )
-
+  
   # -------- switch for bar versus line plot ---------
-
+  
   switch(plottype,
-    bar =
-      p <- newdata %>%
-        ggplot(aes_string(
-          x = iv1,
-          y = "TheMean",
-          colour = iv2,
-          fill = iv2,
-          group = iv2
-        )) +
-        geom_bar(
-          stat = "identity",
-          position = "dodge"
-        ) +
-        geom_errorbar(aes(ymin = LowerBound, ymax = UpperBound),
-          width = .5,
-          position = position_dodge(0.9),
-          show.legend = FALSE
-        ) +
-        commonstuff,
-    line =
-      p <- newdata %>%
-        ggplot(aes_string(
-          x = iv1,
-          y = "TheMean",
-          colour = iv2,
-          fill = iv2,
-          group = iv2
-        )) +
-        geom_point(
+         bar =
+           p <- newdata %>%
+           ggplot(aes_string(
+             x = iv1,
+             y = "TheMean",
+             colour = iv2,
+             fill = iv2,
+             group = iv2
+           )) +
+           geom_bar(
+             stat = "identity",
+             position = "dodge"
+           ) +
+           geom_errorbar(aes(ymin = LowerBound, ymax = UpperBound),
+                         width = .5,
+                         position = position_dodge(0.9),
+                         show.legend = FALSE
+           ) +
+           commonstuff,
+         line =
+           p <- newdata %>%
+           ggplot(aes_string(
+             x = iv1,
+             y = "TheMean",
+             colour = iv2,
+             fill = iv2,
+             group = iv2
+           )) +
+           geom_point(
+             data = dataframe,
+             mapping = aes(
+               x = !!sym(iv1),
+               y = !!sym(depvar)
+             ),
+             alpha = .4,
+             position = position_dodge(0.1)
+           ) +
+           geom_errorbar(aes(
+             ymin = LowerBound,
+             ymax = UpperBound
+           ),
+           width = .2,
+           position = position_dodge(0.05)
+           ) +
+           geom_line(size = interact.line.size) +
+           geom_point(aes(y = TheMean),
+                      shape = 23,
+                      size = mean.size,
+                      color = mean.color,
+                      alpha = 1,
+                      position = position_dodge(0.05)
+           ) +
+           commonstuff
+  )
+  
+  # -------- Add box or violin if needed ---------
+  
+  if(!is.null(overlay.type)) {
+    if (plottype == "line" && overlay.type == "box") {
+      p <- p +
+        geom_boxplot(
           data = dataframe,
           mapping = aes(
             x = !!sym(iv1),
-            y = !!sym(depvar)
+            y = !!sym(depvar),
+            group = !!sym(iv1)
           ),
-          alpha = .4
-        ) +
-        geom_errorbar(aes(
-          ymin = LowerBound,
-          ymax = UpperBound
-        ),
-        width = .2
-        ) +
-        geom_line(size = interact.line.size) +
-        geom_point(aes(y = TheMean),
-          shape = 23,
-          size = mean.size,
-          color = mean.color,
-          alpha = 1
-        ) +
+          color = "gray",
+          width = 0.3,
+          alpha = 0.2,
+          fill = "white",
+          outlier.shape = NA,
+          show.legend = FALSE
+        )
+    } else if (plottype == "line" && overlay.type == "violin") {
+      p <- p +
         geom_violin(
           data = dataframe,
           mapping = aes(
@@ -354,17 +401,41 @@ Plot2WayANOVA <- function(formula,
             y = !!sym(depvar),
             group = !!sym(iv1)
           ),
+          color = "gray",
           width = 0.5,
           alpha = 0.2,
           fill = "white",
           show.legend = FALSE
-        ) +
-        commonstuff
-  )
+        )
+    }
+  }
 
-
+  # -------- Add mean labels if needed ---------
+  
+  if(isTRUE(mean.plotting  && plottype == "line")){
+    p <- p +
+      ggrepel::geom_label_repel(
+        data = newdata,
+        mapping = aes(x = !!sym(iv1), 
+                      y = TheMean, 
+                      label = as.character(round(TheMean, 2))),
+        size = mean.label.size,
+        color = mean.label.color,
+        fontface = "bold",
+        alpha = .8,
+        direction = "both",
+        nudge_x = -.2,
+        max.iter = 3e2,
+        box.padding = 0.35,
+        point.padding = 0.5,
+        segment.color = "black",
+        force = 2,
+        inherit.aes = FALSE,
+        seed = 123
+      )  
+  }
   # -------- Warn user of unbalanced design ----------------
-
+  
   if (is.list(replications(formula, dataframe))) {
     message("\nYou have an unbalanced design. Using Type II sum of squares, 
             eta squared may not sum to 1.0 \n")
@@ -374,9 +445,9 @@ Plot2WayANOVA <- function(formula,
     message("\nYou have a balanced design. \n")
     print(WithETA)
   }
-
+  
   # -------- Print tests and tables ----------------
-
+  
   message("\nMeasures of overall model fit\n")
   print(model_summary)
   message("\nTable of group means\n")
@@ -392,15 +463,15 @@ Plot2WayANOVA <- function(formula,
             want to plot the residuals to see how they vary from normal ***")
   }
   print(SWTest)
-
+  
   # -------- Print the plot itself ----------------
-
+  
   message("\nInteraction graph plotted...")
   print(p)
-
-
+  
+  
   # -------- Return stuff to user ----------------
-
+  
   whattoreturn <- list(
     ANOVATable = WithETA,
     ModelSummary = model_summary,
