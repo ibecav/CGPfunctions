@@ -33,10 +33,9 @@
 <meta property="og:title" content="Plot a 2 Way ANOVA using dplyr and ggplot2 — Plot2WayANOVA" />
 
 <meta property="og:description" content="Takes a formula and a dataframe as input, conducts an analysis of variance
-using the base R aov function and prints the results
-(AOV summary table, table of overall model information and
-table of means) to the console and as a plotted interaction graph (line or
-bar) using ggplot2.  Also uses Brown-Forsythe test for homogeneity of
+prints the results (AOV summary table, table of overall model information 
+and table of means) then uses ggplot2 to plot an interaction graph (line 
+or bar) .  Also uses Brown-Forsythe test for homogeneity of
 variance.  Users can also choose to save the plot out as a png file." />
 <meta name="twitter:card" content="summary" />
 
@@ -78,7 +77,7 @@ variance.  Users can also choose to save the plot out as a png file." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">CGPfunctions</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
       </span>
     </div>
 
@@ -143,10 +142,9 @@ variance.  Users can also choose to save the plot out as a png file." />
     <div class="ref-description">
     
     <p>Takes a formula and a dataframe as input, conducts an analysis of variance
-using the base R <code><a href='https://www.rdocumentation.org/packages/stats/topics/aov'>aov</a></code> function and prints the results
-(AOV summary table, table of overall model information and
-table of means) to the console and as a plotted interaction graph (line or
-bar) using ggplot2.  Also uses Brown-Forsythe test for homogeneity of
+prints the results (AOV summary table, table of overall model information 
+and table of means) then uses ggplot2 to plot an interaction graph (line 
+or bar) .  Also uses Brown-Forsythe test for homogeneity of
 variance.  Users can also choose to save the plot out as a png file.</p>
     
     </div>
@@ -155,6 +153,7 @@ variance.  Users can also choose to save the plot out as a png file.</p>
     <span class='kw'>plottype</span> <span class='kw'>=</span> <span class='st'>"bar"</span>, <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
     <span class='kw'>subtitle</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>interact.line.size</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>mean.plotting</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
     <span class='kw'>mean.ci</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>mean.size</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>mean.color</span> <span class='kw'>=</span> <span class='st'>"darkred"</span>,
+    <span class='kw'>mean.label.size</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>mean.label.color</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>overlay.type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
     <span class='kw'>PlotSave</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -162,9 +161,10 @@ variance.  Users can also choose to save the plot out as a png file.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>formula</th>
-      <td><p>a valid R formula with a numeric dependent (outcome)
-variable, and two independent (predictor) variables e.g. <code>mpg~am*vs</code>.
-The independent variables are forced to factors (with warning) if possible.</p></td>
+      <td><p>a formula with a numeric dependent (outcome) variable, 
+and two independent (predictor) variables e.g. <code>mpg ~ am * vs</code>.
+The independent variables are coerced to factors (with warning) if 
+possible.</p></td>
     </tr>
     <tr>
       <th>dataframe</th>
@@ -194,18 +194,18 @@ model information is provided as a subtitle.</p></td>
     </tr>
     <tr>
       <th>interact.line.size</th>
-      <td><p>Line size for the line connecting mean points
+      <td><p>Line size for the line connecting the group means
 (Default: `2`).</p></td>
     </tr>
     <tr>
       <th>mean.plotting</th>
-      <td><p>Logical that decides whether mean is to be highlighted
-and its value to be displayed (Default: `TRUE`).</p></td>
+      <td><p>Logical that decides whether the value of the group 
+mean is to be displayed (Default: `FALSE`).</p></td>
     </tr>
     <tr>
       <th>mean.ci</th>
-      <td><p>Logical that decides whether 95<!-- % confidence interval for mean -->
-is to be displayed (Default: `TRUE`).</p></td>
+      <td><p>Logical that decides whether the confidence interval for 
+group means is to be displayed (Default: `TRUE`).</p></td>
     </tr>
     <tr>
       <th>mean.size</th>
@@ -218,6 +218,16 @@ is to be displayed (Default: `TRUE`).</p></td>
 `"darkred"`).</p></td>
     </tr>
     <tr>
+      <th>mean.label.size, mean.label.color</th>
+      <td><p>Aesthetics for
+the label displaying mean. Defaults: `3`, `"black"`, respectively.</p></td>
+    </tr>
+    <tr>
+      <th>overlay.type</th>
+      <td><p>A character string (e.g., `"box"` or `"violin"`), 
+if you wish to overlay that information on factor1</p></td>
+    </tr>
+    <tr>
       <th>PlotSave</th>
       <td><p>a logical indicating whether the user wants to save the plot
 as a png file</p></td>
@@ -226,32 +236,42 @@ as a png file</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list with 5 elements which is returned invisibly. The items are always sent
-to the console for display  The plot is always sent to the default plot device
-but for user convenience the function also returns a named list with the following items
-in case the user desires to save them or further process them. <code>$ANOVATable</code>,
-<code>$ModelSummary</code>, <code>$MeansTable</code>, <code>$BFTest</code>, and <code>$SWTest</code>.</p>
+    <p>A list with 5 elements which is returned invisibly. These items
+  are always sent to the console for display but for user convenience 
+  the function also returns a named list with the following items
+  in case the user desires to save them or further process them -
+  <code>$ANOVATable</code>,<code>$ModelSummary</code>, <code>$MeansTable</code>, 
+  <code>$BFTest</code>, and <code>$SWTest</code>.
+  The plot is always sent to the default plot device</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Details about how the function works in order of steps taken.</p><ol>
 <li><p>Some basic error checking to ensure a valid formula and dataframe.
-Only accepts fully *crossed* formula to check for interaction term</p></li>
+  Only accepts fully *crossed* formula to check for interaction term</p></li>
 <li><p>Ensure the dependent (outcome) variable is numeric and that the two
-independent (predictor) variables are or can be coerced to factors -- user
-warned on the console</p></li>
+  independent (predictor) variables are or can be coerced to factors -- user
+  warned on the console</p></li>
 <li><p>Remove missing cases -- user warned on the console</p></li>
-<li><p>Use <code>dplyr</code> to calculate a summarized table of means,
-sds, standard errors of the means, confidence intervals, and group sizes.</p></li>
-<li><p>Use the <code>aov</code> function to execute an Analysis of Variance (ANOVA)</p></li>
-<li><p>Use the <code><a href='https://www.rdocumentation.org/packages/sjstats/topics/eta_sq'>anova_stats</a></code> function to calculate eta squared values.
-If the design is unbalanced warn the user and use Type II sums of squares</p></li>
-<li><p>Produce a standard ANOVA table with a column for eta-squared appended</p></li>
-<li><p>Use the <code>leveneTest</code> for testing Homogeneity of Variance
-assumption with Brown-Forsythe</p></li>
-<li><p>Use the <code>shapiro.test</code> for testing normality assumption with Shapiro-Wilk</p></li>
-<li><p>Use <code>ggplot2</code> to plot an interaction plot of the type the user specified</p></li>
-</ol>
+<li><p>Calculate a summarized table of means, sds, standard errors of the
+   means, confidence intervals, and group sizes.</p></li>
+<li><p>Use <code><a href='https://www.rdocumentation.org/packages/stats/topics/aov'>aov</a></code> function to execute an Analysis of 
+  Variance (ANOVA)</p></li>
+<li><p>Use <code><a href='https://www.rdocumentation.org/packages/sjstats/topics/eta_sq'>anova_stats</a></code> to calculate eta squared 
+  and omega squared values per factor. If the design is unbalanced warn  
+  the user and use Type II sums of squares</p></li>
+<li><p>Produce a standard ANOVA table with additional columns</p></li>
+<li><p>Use the <code><a href='https://www.rdocumentation.org/packages/car/topics/leveneTest'>leveneTest</a></code> for testing Homogeneity 
+  of Variance assumption with Brown-Forsythe</p></li>
+<li><p>Use the <code><a href='https://www.rdocumentation.org/packages/stats/topics/shapiro.test'>shapiro.test</a></code> for testing normality
+  assumption with Shapiro-Wilk</p></li>
+<li><p>Use <code>ggplot2</code> to plot an interaction plot of the type the 
+  user specified.</p></li>
+</ol><p>The defaults are deliberately constructed to emphasize the nature
+  of the interaction rather than focusing on distributions. So
+  while a violin plot of the first factor by level is displayed
+  along with dots for individual data points shaded by the second 
+  factor, the emphasis is on the interaction lines.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
