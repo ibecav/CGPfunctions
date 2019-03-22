@@ -36,7 +36,7 @@
 #'
 #' @usage Plot2WayANOVA(formula, dataframe = NULL, confidence=.95,
 #'     plottype = "bar", xlab = NULL, ylab = NULL, title = NULL,
-#'     subtitle = NULL, interact.line.size = 2, mean.plotting = TRUE,
+#'     subtitle = NULL, interact.line.size = 2, mean.plotting = FALSE,
 #'     mean.ci = TRUE, mean.size = 4, mean.color = "darkred",
 #'     mean.label.size = 3, mean.label.color = "black", overlay.type = NULL,
 #'     PlotSave = FALSE)
@@ -83,6 +83,11 @@
 #' @examples
 #' 
 #' Plot2WayANOVA(mpg ~ am * cyl, mtcars, plottype = "line")
+#' Plot2WayANOVA(mpg ~ am * cyl, 
+#'               mtcars, 
+#'               plottype = "line", 
+#'               overlay.type = "box", 
+#'               mean.plotting = TRUE)
 #' Plot2WayANOVA(mpg ~ am * vs, mtcars, confidence = .99)
 #' @importFrom dplyr group_by summarise %>% n
 #' @import ggplot2
@@ -90,7 +95,7 @@
 #' @importFrom methods is
 #' @importFrom stats anova aov lm pf qt replications sd symnum residuals shapiro.test
 #' @importFrom tibble as_tibble
-#' @importFrom car leveneTest
+#' @importFrom car leveneTest Anova
 #' @importFrom sjstats anova_stats
 #' @importFrom broomExtra glance
 #' @export
@@ -197,7 +202,7 @@ Plot2WayANOVA <- function(formula,
   
   # force it to a data frame
   dataframe <- dataframe[, c(depvar, iv1, iv2)]
-  # return(dataframe)
+
   # -------- x & y axis labels ----------------------------
   
   # if `xlab` is not provided, use the variable `x` name
@@ -262,8 +267,10 @@ Plot2WayANOVA <- function(formula,
   
   # run analysis of variance
   MyAOV <- aov(formula, dataframe)
+  # force to Type 2 sums of squares
+  MyAOVt2 <- car::Anova(MyAOV, type = 2)
   # get more detailed information including effect sizes
-  WithETA <- sjstats::anova_stats(MyAOV)
+  WithETA <- sjstats::anova_stats(MyAOVt2)
   # creating model summary dataframe
   model_summary <- broomExtra::glance(MyAOV)
   # Run Brown-Forsythe
@@ -436,14 +443,18 @@ Plot2WayANOVA <- function(formula,
   # -------- Warn user of unbalanced design ----------------
   
   if (is.list(replications(formula, dataframe))) {
-    message("\nYou have an unbalanced design. Using Type II sum of squares, 
-            eta squared may not sum to 1.0 \n")
-    print(WithETA)
+    message("\n--- WARNING! ---\nYou have an unbalanced design. Using Type II sum of squares, 
+to calculate factor effect sizes eta and omega \n
+The R Squared reported is for the overall model but your 
+two factors account for ...\n")
+    message(round(1 - (MyAOVt2$`Sum Sq`[4]/sum(MyAOVt2$`Sum Sq`[1:4])),3))
+    message("\nof the type II sum of squares, as opposed to the
+R Squared reported below for overall model fit!\n")
   }
   else {
     message("\nYou have a balanced design. \n")
-    print(WithETA)
   }
+  print(WithETA)
   
   # -------- Print tests and tables ----------------
   
