@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 #  # install.packages("devtools")
 #  devtools::install_github("ibecav/CGPfunctions")
 
-## ----LoadLibrary---------------------------------------------------------
+## ----LoadLibrary, warning = FALSE----------------------------------------
 library(CGPfunctions)
 
 ## ----Plot2WayANOVA, echo=TRUE, message=TRUE, warning=FALSE, fig.width=6.0, fig.height=3.5----

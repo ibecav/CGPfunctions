@@ -5,7 +5,7 @@
 \title{Plot a 2 Way ANOVA using dplyr and ggplot2}
 \usage{
 Plot2WayANOVA(formula, dataframe = NULL, confidence=.95,
-    plottype = "bar", xlab = NULL, ylab = NULL, title = NULL,
+    plottype = "line", xlab = NULL, ylab = NULL, title = NULL,
     subtitle = NULL, interact.line.size = 2, mean.plotting = FALSE,
     mean.ci = TRUE, mean.size = 4, mean.color = "darkred",
     mean.label.size = 3, mean.label.color = "black", overlay.type = NULL,

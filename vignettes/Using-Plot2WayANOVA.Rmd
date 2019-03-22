@@ -17,36 +17,97 @@ knitr::opts_chunk$set(
 ```
 
 ## Background
-The CGPfunctions package includes functions that I find useful for teaching statistics especially to novices (as well as an opportunity to sharpen my own R skills).  I only write functions when I have a real need -- no theory -- just help for actually practicing the art.  They typically are not "new" methods but rather wrappers around either base R or other packages and are very task focused.  This vignette covers two functions from the package that try and help users (especially students) do one thing well by pulling together pieces from a variety of places. They are as follows:
+The CGPfunctions package includes functions that I find useful for teaching
+statistics especially to novices (as well as an opportunity to sharpen my own R
+skills). I only write functions when I have a real need -- no theory -- just
+help for actually practicing the art. They typically are not "new" methods but
+rather wrappers around either base R or other packages and are very task
+focused. This vignette covers one function from the package that tries to help
+users (especially students) do one thing well by pulling together pieces from a
+variety of places in `R`. `Plot2WayANOVA`, which as the name implies conducts a
+2 way ANOVA and plots the results. I always try and find the right balance
+between keeping the number of dpependencies to a minimum and not reinventing the
+wheel and writing functions that others have done for me. The function makes use
+of the following non base r packages.
 
-- `Plot2WayANOVA` which as the name implies conducts a 2 way ANOVA and plots the results using `ggplot2`
-- `neweta` which is a helper function that appends the results of a Type II eta squared calculation onto a classic ANOVA table
+ - `ggplot2` as the work horse for all the actual plotting 
+ - `car` for it's ability to compute Type II sums of squares, we'll address why
+that's important in more detail later in the scenario. We'll also make use of
+it's `leveneTest`.
+ - `sjstats` which takes out ANOVA table and gives us other important
+information such as the effect sizes ($\eta^2$ and $\omega^2$ ) through use of
+its `anova_stats` function. Prior to this version I had been using my own local
+function but this runs rings around what I could do.
+ - `broomExtra::glance` will also help us grab very importnat results like $R^2$
+and display them
 
 ## Vignette Info
 
-The ANOVA family of statistical techniques allow us to compare mean differences of one outcome (dependent) variable across two or more groups (levels) of one or more independent variables (factor). It is also true that ANOVA is a special case of the GLM or regression models so as the number of levels increase it might make more sense to try one of those approaches.  The 2 Way ANOVA allows for comparisons of mean differences across 2 independent variables `factors` with a varying numbers of `levels` in each `factor`.
+The ANOVA (Analysis of Variance) family of statistical techniques allow us to
+compare mean differences of one outcome (dependent) variable across two or more
+groups (levels) of one or more independent variables (factor). It is also true
+that ANOVA is a special case of the GLM or regression models so as the number of
+levels increase it might make more sense to try one of those approaches. The 2
+Way ANOVA allows for comparisons of mean differences across 2 independent
+variables `factors` with a varying numbers of `levels` in each `factor`.
 
-The `Plot2WayANOVA` function conducts a classic analysis of variance (ANOVA) using existing R functions and packages in a sane and defensible manner not necessarily in the one and only manner.
+The `Plot2WayANOVA` function conducts a classic analysis of variance (ANOVA) in
+a sane and defensible manner not necessarily in the one and only manner. It's
+real utitlity lies in the fact that it is pulled together in one function and
+more importantly allows you to visualize the results concurrently with no
+additional work.
 
 ## Scenario and data
 
-Imagine that you are interested in understanding whether a car's fuel efficiency (mpg) varies based upon the type of transmission (automatic or manual) and the number of cylinders the engine has. Let's imagine that the `mtcars` data set is actually a random sample of 32 cars from different manufacturers and use the mean `mpg` by `am` and `cyl` to help inform our thinking.  While we expect variation across our sample we're interested in whether the differences between the means by grouping of transmission type and cylinders is significantly different than what we would expect in random variation across the data.  
+Imagine that you are interested in understanding whether a car's fuel efficiency
+(mpg) varies based upon the type of transmission (automatic or manual) and the
+number of cylinders the engine has. Let's imagine that the `mtcars` data set is
+actually a random sample of 32 cars from different manufacturers and use the
+mean `mpg` by `am` and `cyl` to help inform our thinking. While we expect
+variation across our sample we're interested in whether the differences between
+the means by grouping of transmission type and cylinders is significantly
+different than what we would expect in random variation across the data.
 
-In simplistic terms we want to know whether `am` matters, `cyl` matters or if it depends on the interaction of the two.  It's this interaction term that typically confuses novices or is difficult to "see".  That's where a good interaction graph can hopefully play a key role, and that's what the `Plot2WayANOVA` focuses on.
+In simplistic terms we want to know whether `am` matters, `cyl` matters or if it
+depends on the interaction of the two. It's this interaction term that typically
+confuses novices or is difficult to "see". That's where a good interaction graph
+can hopefully play a key role, and that's what the `Plot2WayANOVA` focuses on.
 
-There's no lack or tools or capabilities in base R or in the many packages to do this task. What this function tries to do is pull together the disparate pieces with a set of sane defaults and a simple interface to work with it.  At its simplest you would require the library and then enter this command:
+There's no lack or tools or capabilities in base R or in the many packages to do
+this task. What this function tries to do is pull together the disparate pieces
+with a set of sane defaults and a simple interface to work with it. At its
+simplest you would require the library and then enter this command:
 
-`Plot2WayANOVA(mpg~am*cyl, mtcars)` which lays our question out in R's vernacular with a formula and a dataframe.  Optionally we can specify a different confidence level and choose a line or a bar graph.
+`Plot2WayANOVA(mpg~am*cyl, mtcars)` which lays our question out in R's
+vernacular with a formula and a dataframe. Optionally we can specify a different
+confidence level and choose a line or a bar graph.
 
 "Under the hood", however there's a lot of nice features at work.
 
-1. Some basic error checking to ensure a valid formula and dataframe. The function accepts only a fully crossed formula to check for interaction term
-1. It ensures the dependent (outcome) variable is numeric and that the two independent (predictor) variables already are or can be coerced to factors – the user is warned on the console if there are problems
-1. A check is conducted to see if any of the variables of interest have missing cases – the user is warned on the console if there are problems
-1. A summarized table of means, standard deviations, standard errors of the means, confidence intervals, and group sizes for each of the crossed combinations in our example that's 6 groupings 3 levels of cylinder and 2 levels of automatic or manual
-1. In addition to the classic ANOVA table eta squared $\eta^2$ is calculated and appended as an additional column. If you're unfamiliar with them and want to know more especially where the numbers come from I recommend a good introductory stats text.  As noted earlier I recommend *Learning Statistics with R* [LSR](http://dj-navarro.appspot.com/lsr/lsr-0.5.1.pdf) see Table 14-1 on page 432. 
-1. The Homogeneity of Variance assumption is tested with Brown-Forsythe
-1. The normality assumption is tested with Shapiro-Wilk
+ 1. Some basic error checking to ensure a valid formula and dataframe. The
+   function accepts only a fully crossed formula to check for interaction term 
+ 1. It ensures the dependent (outcome) variable is numeric and that the two
+   independent (predictor) variables already are or can be coerced to factors – the
+   user is warned on the console if there are problems 
+ 1. A check is conducted to see if any of the variables of interest have missing
+cases – the user is warned on the console if there are problems
+ 1. Balance is checked, that is whether the number of observations per cell
+ when we cross `am` and `cyl` is equal. There's some debate as to how much
+ imbalance is permissible. But you'll be given fair warning if there is any.
+ 1. In addition to the classic ANOVA table infomation available in `aov` or
+`Anova` you'll be presented with information about efect sizes like eta squared
+$\eta^2$ is calculated and appended as an additional column. If you're
+unfamiliar with them and want to know more especially where the numbers come
+from I recommend a good introductory stats text. As noted earlier I recommend
+*Learning Statistics with R*
+[LSR](http://dj-navarro.appspot.com/lsr/lsr-0.5.1.pdf) see Table 14-1 on page 432.
+ 1. A summarized table of means, standard deviations, standard errors of the
+means, confidence intervals, and group sizes for each of the crossed
+combinations in our example that's 6 groupings 3 levels of cylinder and 2 levels
+of automatic or manual.
+ 1. Some measures of overall fit including $R^2$
+ 1. The Homogeneity of Variance assumption is tested with Brown-Forsythe 
+ 1. The normality assumption is tested with Shapiro-Wilk
 
 ## Installation
 
@@ -61,24 +122,52 @@ devtools::install_github("ibecav/CGPfunctions")
 
 then load the library.
 
-```{r LoadLibrary}
+```{r LoadLibrary, warning = FALSE}
 library(CGPfunctions)
 ```
 
-
 ## Example of using the function
 
-The only two required parameters are a formula and a dataframe (like) object. If we run the function in its simplest form here's what we get.
+The only two required parameters are a formula and a dataframe (like) object. If
+we run the function in its simplest form here's what we get.
 
 ```{r Plot2WayANOVA, echo=TRUE, message=TRUE, warning=FALSE, fig.width=6.0, fig.height=3.5}
 Plot2WayANOVA(mpg~am*cyl, mtcars)
 ```
 
+In the console you'll receive a bunch of messages chronicalling your progress
+and any diagnostic information. In this case `am` and `cyl` are being coerced to
+factors and you're being prompted to make sure that's what is intended. 
+
+Next you receive a warning because you have a very unbalanced design. There are
+only two 8 cylinder cars with a manula transmiision and 12 with automatics.
+Whereas there are eight 4 cylinders with manual and only three that are
+automatics. Imbalance in our design worries us for two reasons. One is that it
+causes a lack of statictical power and creates some math challenges in deciding
+how to divide up the sums of the squared differences. This dataset causes the
+more troublesome worry. Are the number of cylinders and manual versus automatic
+related systematically which would call are whole design into question.  Make sure
+you can answer questions about which is at work here, or make sure you have a 
+balanced design.
+
+A table follows that is intended to summarize the findings.  We'll discuss it 
+more later when we examine the plot.
+
+The overall measures can be very handy for comparing numerous models. For example
+how does the AIC number change if we were to eliminate `am` ?
+
+The table of group means is sueful for looking at summary by group.  Want the best 
+gas mileage buy a 4 cylinder manual car.
+
+
+
+
 
 ## Credits
 
-Many thanks to Dani Navarro and the book  > ([Learning Statistics with R](http://www.compcogscisydney.com/learning-statistics-with-r.html)) whose etaSquared function  was the genesis of `neweta`.
-
+Many thanks to Dani Navarro and the book > ([Learning Statistics with
+R](http://www.compcogscisydney.com/learning-statistics-with-r.html)) whose
+etaSquared function was the genesis of `neweta`.
 
 > "He who gives up [code] safety for [code] speed deserves neither."
 ([via](https://twitter.com/hadleywickham/status/504368538874703872))
