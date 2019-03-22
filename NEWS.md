@@ -1,4 +1,4 @@
-# CGPfunctions 0.5.1
+# CGPfunctions 0.5.2
 
 * Release 0.5.2 submitted to CRAN 22 March 2019
   - Hotfix to Plot2WayANOVA
