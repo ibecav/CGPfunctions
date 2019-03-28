@@ -26,7 +26,7 @@ focused. This vignette covers one function from the package that tries to help
 users (especially students) do one thing well by pulling together pieces from a
 variety of places in `R`. `Plot2WayANOVA`, which as the name implies conducts a
 2 way ANOVA and plots the results. I always try and find the right balance
-between keeping the number of dpependencies to a minimum and not reinventing the
+between keeping the number of dependencies to a minimum and not reinventing the
 wheel and writing functions that others have done for me. The function makes use
 of the following non base r packages.
 
@@ -38,7 +38,7 @@ it's `leveneTest`.
 information such as the effect sizes ($\eta^2$ and $\omega^2$ ) through use of
 its `anova_stats` function. Prior to this version I had been using my own local
 function but this runs rings around what I could do.
- - `broomExtra::glance` will also help us grab very importnat results like $R^2$
+ - `broomExtra::glance` will also help us grab very important results like $R^2$
 and display them
 
 ## Vignette Info
@@ -53,7 +53,7 @@ variables `factors` with a varying numbers of `levels` in each `factor`.
 
 The `Plot2WayANOVA` function conducts a classic analysis of variance (ANOVA) in
 a sane and defensible manner not necessarily in the one and only manner. It's
-real utitlity lies in the fact that it is pulled together in one function and
+real utility lies in the fact that it is pulled together in one function and
 more importantly allows you to visualize the results concurrently with no
 additional work.
 
@@ -94,8 +94,8 @@ cases – the user is warned on the console if there are problems
  1. Balance is checked, that is whether the number of observations per cell
  when we cross `am` and `cyl` is equal. There's some debate as to how much
  imbalance is permissible. But you'll be given fair warning if there is any.
- 1. In addition to the classic ANOVA table infomation available in `aov` or
-`Anova` you'll be presented with information about efect sizes like eta squared
+ 1. In addition to the classic ANOVA table information available in `aov` or
+`Anova` you'll be presented with information about effect sizes like eta squared
 $\eta^2$ is calculated and appended as an additional column. If you're
 unfamiliar with them and want to know more especially where the numbers come
 from I recommend a good introductory stats text. As noted earlier I recommend
@@ -135,15 +135,15 @@ we run the function in its simplest form here's what we get.
 Plot2WayANOVA(mpg~am*cyl, mtcars)
 ```
 
-In the console you'll receive a bunch of messages chronicalling your progress
+In the console you'll receive a bunch of messages chronicling your progress
 and any diagnostic information. In this case `am` and `cyl` are being coerced to
 factors and you're being prompted to make sure that's what is intended. 
 
 Next you receive a warning because you have a very unbalanced design. There are
-only two 8 cylinder cars with a manula transmiision and 12 with automatics.
+only two 8 cylinder cars with a manual transmission and 12 with automatics.
 Whereas there are eight 4 cylinders with manual and only three that are
 automatics. Imbalance in our design worries us for two reasons. One is that it
-causes a lack of statictical power and creates some math challenges in deciding
+causes a lack of statistical power and creates some math challenges in deciding
 how to divide up the sums of the squared differences. This dataset causes the
 more troublesome worry. Are the number of cylinders and manual versus automatic
 related systematically which would call are whole design into question.  Make sure
@@ -156,7 +156,7 @@ more later when we examine the plot.
 The overall measures can be very handy for comparing numerous models. For example
 how does the AIC number change if we were to eliminate `am` ?
 
-The table of group means is sueful for looking at summary by group.  Want the best 
+The table of group means is useful for looking at summary by group.  Want the best 
 gas mileage buy a 4 cylinder manual car.
 
 
