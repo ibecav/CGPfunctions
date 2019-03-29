@@ -16,5 +16,5 @@ knitr::opts_chunk$set(
 library(CGPfunctions)
 
 ## ----Plot2WayANOVA, echo=TRUE, message=TRUE, warning=FALSE, fig.width=6.0, fig.height=3.5----
-Plot2WayANOVA(mpg~am*cyl, mtcars)
+Plot2WayANOVA(formula = mpg ~ am * cyl, dataframe = mtcars)
 
