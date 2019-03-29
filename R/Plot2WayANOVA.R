@@ -34,12 +34,25 @@
 #'   along with dots for individual data points shaded by the second 
 #'   factor, the emphasis is on the interaction lines.
 #'
-#' @usage Plot2WayANOVA(formula, dataframe = NULL, confidence=.95,
-#'     plottype = "line", xlab = NULL, ylab = NULL, title = NULL,
-#'     subtitle = NULL, interact.line.size = 2, ci.line.size = 1, mean.label = FALSE,
-#'     mean.ci = TRUE, mean.size = 4, mean.shape = 23, mean.color = "darkred",
-#'     mean.label.size = 3, mean.label.color = "black", overlay.type = NULL,
-#'     PlotSave = FALSE)
+#' @usage Plot2WayANOVA(formula, 
+#'                    dataframe = NULL, 
+#'                    confidence=.95,
+#'                    plottype = "line", 
+#'                    xlab = NULL, 
+#'                    ylab = NULL, 
+#'                    title = NULL,
+#'                subtitle = NULL, 
+#'                interact.line.size = 2, 
+#'                ci.line.size = 1, 
+#'                mean.label = FALSE,
+#'                mean.ci = TRUE, 
+#'                mean.size = 4, 
+#'                mean.shape = 23, 
+#'                mean.color = "darkred",
+#'                mean.label.size = 3, 
+#'                mean.label.color = "black", 
+#'                overlay.type = NULL,
+#'                PlotSave = FALSE)
 #' @param formula a formula with a numeric dependent (outcome) variable, 
 #'   and two independent (predictor) variables e.g. \code{mpg ~ am * vs}.
 #'   The independent variables are coerced to factors (with warning) if 
@@ -93,6 +106,22 @@
 #'               overlay.type = "box", 
 #'               mean.label = TRUE)
 #' Plot2WayANOVA(mpg ~ am * vs, mtcars, confidence = .99)
+#' 
+#' # Create a new dataset
+#' newmpg <- mpg %>% 
+#'           filter(cyl != 5) %>% 
+#'           mutate(am = stringi::stri_extract(trans, regex = "auto|manual"))
+#' Plot2WayANOVA(formula = hwy ~ am * cyl,
+#'               dataframe = newmpg,
+#'               ylab = "Highway mileage",
+#'               xlab = "Transmission type",
+#'               plottype = "line",
+#'               overlay.type = "box",
+#'               mean.label = TRUE, 
+#'               mean.shape = 20, 
+#'               mean.size = 5, 
+#'               mean.label.size = 5)
+#'
 #' @importFrom dplyr group_by summarise %>% n
 #' @import ggplot2
 #' @import rlang
@@ -316,7 +345,7 @@ Plot2WayANOVA <- function(formula,
   # if `subtitle` is not provided, use this generic
   if (is.null(subtitle)) {
     subtitle <- bquote(
-      "R squared =" ~ .(rsquared) * ", CI[" ~ .(cilower) * ", " ~ .(ciupper) * " ], AIC =" ~ .(AICnumber) * ", BIC =" ~ .(BICnumber)
+      "R squared =" ~ .(rsquared) * ", CI [" ~ .(cilower) * ", " ~ .(ciupper) * " ], AIC =" ~ .(AICnumber) * ", BIC =" ~ .(BICnumber)
     )
   }
   
@@ -480,10 +509,11 @@ Plot2WayANOVA <- function(formula,
     message("\n--- WARNING! ---\nYou have an unbalanced design. Using Type II sum of squares, 
 to calculate factor effect sizes eta and omega \n
 The R Squared reported is for the overall model but your 
-two factors account for ...\n")
+two factors account for ")
     message(round(1 - (MyAOVt2$`Sum Sq`[4]/sum(MyAOVt2$`Sum Sq`[1:4])),3))
-    message("\nof the type II sum of squares, as opposed to the
-R Squared reported below for overall model fit!\n")
+    message("of the type II sum of squares, as opposed to the ")
+    message(rsquared)
+    message("reported below for overall model fit!\n")
   }
   else {
     message("\nYou have a balanced design. \n")

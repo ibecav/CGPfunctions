@@ -4,12 +4,25 @@
 \alias{Plot2WayANOVA}
 \title{Plot a 2 Way ANOVA using dplyr and ggplot2}
 \usage{
-Plot2WayANOVA(formula, dataframe = NULL, confidence=.95,
-    plottype = "line", xlab = NULL, ylab = NULL, title = NULL,
-    subtitle = NULL, interact.line.size = 2, ci.line.size = 1, mean.label = FALSE,
-    mean.ci = TRUE, mean.size = 4, mean.shape = 23, mean.color = "darkred",
-    mean.label.size = 3, mean.label.color = "black", overlay.type = NULL,
-    PlotSave = FALSE)
+Plot2WayANOVA(formula, 
+                   dataframe = NULL, 
+                   confidence=.95,
+                   plottype = "line", 
+                   xlab = NULL, 
+                   ylab = NULL, 
+                   title = NULL,
+               subtitle = NULL, 
+               interact.line.size = 2, 
+               ci.line.size = 1, 
+               mean.label = FALSE,
+               mean.ci = TRUE, 
+               mean.size = 4, 
+               mean.shape = 23, 
+               mean.color = "darkred",
+               mean.label.size = 3, 
+               mean.label.color = "black", 
+               overlay.type = NULL,
+               PlotSave = FALSE)
 }
 \arguments{
 \item{formula}{a formula with a numeric dependent (outcome) variable, 
@@ -115,6 +128,22 @@ Plot2WayANOVA(mpg ~ am * cyl,
               overlay.type = "box", 
               mean.label = TRUE)
 Plot2WayANOVA(mpg ~ am * vs, mtcars, confidence = .99)
+
+# Create a new dataset
+newmpg <- mpg \%>\% 
+          filter(cyl != 5) \%>\% 
+          mutate(am = stringi::stri_extract(trans, regex = "auto|manual"))
+Plot2WayANOVA(formula = hwy ~ am * cyl,
+              dataframe = newmpg,
+              ylab = "Highway mileage",
+              xlab = "Transmission type",
+              plottype = "line",
+              overlay.type = "box",
+              mean.label = TRUE, 
+              mean.shape = 20, 
+              mean.size = 5, 
+              mean.label.size = 5)
+
 }
 \seealso{
 \code{\link[stats]{aov}}, \code{\link[car]{leveneTest}},
