@@ -36,8 +36,8 @@
 #'
 #' @usage Plot2WayANOVA(formula, dataframe = NULL, confidence=.95,
 #'     plottype = "line", xlab = NULL, ylab = NULL, title = NULL,
-#'     subtitle = NULL, interact.line.size = 2, mean.plotting = FALSE,
-#'     mean.ci = TRUE, mean.size = 4, mean.color = "darkred",
+#'     subtitle = NULL, interact.line.size = 2, ci.line.size = 1, mean.label = FALSE,
+#'     mean.ci = TRUE, mean.size = 4, mean.shape = 23, mean.color = "darkred",
 #'     mean.label.size = 3, mean.label.color = "black", overlay.type = NULL,
 #'     PlotSave = FALSE)
 #' @param formula a formula with a numeric dependent (outcome) variable, 
@@ -56,7 +56,9 @@
 #'   model information is provided as a subtitle.
 #' @param interact.line.size Line size for the line connecting the group means
 #'   (Default: `2`).
-#' @param mean.plotting Logical that decides whether the value of the group 
+#' @param ci.line.size Line size for the confidence interval bracketing 
+#'   the group means (Default: `1`).
+#' @param mean.label Logical that decides whether the value of the group 
 #'   mean is to be displayed (Default: `FALSE`).
 #' @param mean.ci Logical that decides whether the confidence interval for 
 #'   group means is to be displayed (Default: `TRUE`).
@@ -66,6 +68,8 @@
 #' the label displaying mean. Defaults: `3`, `"black"`, respectively.
 #' @param mean.size Point size for the data point corresponding to mean
 #'   (Default: `4`).
+#' @param mean.shape Shape of the plot symbol for the mean
+#'   (Default: `23` which is a diamond).
 #' @param overlay.type A character string (e.g., `"box"` or `"violin"`), 
 #'   if you wish to overlay that information on factor1
 #' @return A list with 5 elements which is returned invisibly. These items
@@ -87,7 +91,7 @@
 #'               mtcars, 
 #'               plottype = "line", 
 #'               overlay.type = "box", 
-#'               mean.plotting = TRUE)
+#'               mean.label = TRUE)
 #' Plot2WayANOVA(mpg ~ am * vs, mtcars, confidence = .99)
 #' @importFrom dplyr group_by summarise %>% n
 #' @import ggplot2
@@ -109,9 +113,11 @@ Plot2WayANOVA <- function(formula,
                           title = NULL,
                           subtitle = NULL,
                           interact.line.size = 2,
-                          mean.plotting = FALSE,
+                          ci.line.size = 1,
+                          mean.label = FALSE,
                           mean.ci = TRUE,
                           mean.size = 4,
+                          mean.shape = 23,
                           mean.color = "darkred",
                           mean.label.size = 3,
                           mean.label.color = "black",
@@ -217,6 +223,7 @@ Plot2WayANOVA <- function(formula,
   
   # -------- check variable types ----------------
   
+  dataframe <- as.data.frame(dataframe)
   if (!is(dataframe[, depvar], "numeric")) {
     stop("dependent variable must be numeric")
   }
@@ -339,6 +346,7 @@ Plot2WayANOVA <- function(formula,
            ) +
            geom_errorbar(aes(ymin = LowerBound, ymax = UpperBound),
                          width = .5,
+                         size = ci.line.size,
                          position = position_dodge(0.9),
                          show.legend = FALSE
            ) +
@@ -366,11 +374,12 @@ Plot2WayANOVA <- function(formula,
              ymax = UpperBound
            ),
            width = .2,
+           size = ci.line.size,
            position = position_dodge(0.05)
            ) +
            geom_line(size = interact.line.size) +
            geom_point(aes(y = TheMean),
-                      shape = 23,
+                      shape = mean.shape,
                       size = mean.size,
                       color = mean.color,
                       alpha = 1,
@@ -418,7 +427,7 @@ Plot2WayANOVA <- function(formula,
 
   # -------- Add mean labels if needed ---------
   
-  if(isTRUE(mean.plotting  && plottype == "line")){
+  if(isTRUE(mean.label  && plottype == "line")){
     p <- p +
       ggrepel::geom_label_repel(
         data = newdata,
@@ -440,6 +449,31 @@ Plot2WayANOVA <- function(formula,
         seed = 123
       )  
   }
+  
+  if(isTRUE(mean.label  && plottype == "bar")){
+    p <- p +
+      ggrepel::geom_label_repel(
+        data = newdata,
+        mapping = aes(x = !!sym(iv1), 
+                      y = TheMean, 
+                      label = as.character(round(TheMean, 2))),
+        size = mean.label.size,
+        color = mean.label.color,
+        fontface = "bold",
+        alpha = .8,
+        direction = "both",
+        max.iter = 3e2,
+        box.padding = 0.35,
+        point.padding = 0.5,
+        segment.color = "black",
+        force = 2,
+        position = position_dodge(0.9),
+        inherit.aes = TRUE,
+        show.legend = FALSE,
+        seed = 123
+      )  
+  }
+  
   # -------- Warn user of unbalanced design ----------------
   
   if (is.list(replications(formula, dataframe))) {

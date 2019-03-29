@@ -6,8 +6,8 @@
 \usage{
 Plot2WayANOVA(formula, dataframe = NULL, confidence=.95,
     plottype = "line", xlab = NULL, ylab = NULL, title = NULL,
-    subtitle = NULL, interact.line.size = 2, mean.plotting = FALSE,
-    mean.ci = TRUE, mean.size = 4, mean.color = "darkred",
+    subtitle = NULL, interact.line.size = 2, ci.line.size = 1, mean.label = FALSE,
+    mean.ci = TRUE, mean.size = 4, mean.shape = 23, mean.color = "darkred",
     mean.label.size = 3, mean.label.color = "black", overlay.type = NULL,
     PlotSave = FALSE)
 }
@@ -34,7 +34,10 @@ model information is provided as a subtitle.}
 \item{interact.line.size}{Line size for the line connecting the group means
 (Default: `2`).}
 
-\item{mean.plotting}{Logical that decides whether the value of the group 
+\item{ci.line.size}{Line size for the confidence interval bracketing 
+the group means (Default: `1`).}
+
+\item{mean.label}{Logical that decides whether the value of the group 
 mean is to be displayed (Default: `FALSE`).}
 
 \item{mean.ci}{Logical that decides whether the confidence interval for 
@@ -42,6 +45,9 @@ group means is to be displayed (Default: `TRUE`).}
 
 \item{mean.size}{Point size for the data point corresponding to mean
 (Default: `4`).}
+
+\item{mean.shape}{Shape of the plot symbol for the mean
+(Default: `23` which is a diamond).}
 
 \item{mean.color}{Color for the data point corresponding to mean (Default:
 `"darkred"`).}
@@ -107,7 +113,7 @@ Plot2WayANOVA(mpg ~ am * cyl,
               mtcars, 
               plottype = "line", 
               overlay.type = "box", 
-              mean.plotting = TRUE)
+              mean.label = TRUE)
 Plot2WayANOVA(mpg ~ am * vs, mtcars, confidence = .99)
 }
 \seealso{
