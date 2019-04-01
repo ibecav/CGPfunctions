@@ -52,6 +52,7 @@
 #'                mean.label.size = 3, 
 #'                mean.label.color = "black", 
 #'                overlay.type = NULL,
+#'                show.dots = FALSE,
 #'                PlotSave = FALSE)
 #' @param formula a formula with a numeric dependent (outcome) variable, 
 #'   and two independent (predictor) variables e.g. \code{mpg ~ am * vs}.
@@ -85,6 +86,8 @@
 #'   (Default: `23` which is a diamond).
 #' @param overlay.type A character string (e.g., `"box"` or `"violin"`), 
 #'   if you wish to overlay that information on factor1
+#' @param show.dots Logical that decides whether the individual data points 
+#'   are displayed (Default: `FALSE`).
 #' @return A list with 5 elements which is returned invisibly. These items
 #'   are always sent to the console for display but for user convenience 
 #'   the function also returns a named list with the following items
@@ -108,6 +111,9 @@
 #' Plot2WayANOVA(mpg ~ am * vs, mtcars, confidence = .99)
 #' 
 #' # Create a new dataset
+#' library(dplyr)
+#' library(ggplot2)
+#' library(stringi)
 #' newmpg <- mpg %>% 
 #'           filter(cyl != 5) %>% 
 #'           mutate(am = stringi::stri_extract(trans, regex = "auto|manual"))
@@ -151,6 +157,7 @@ Plot2WayANOVA <- function(formula,
                           mean.label.size = 3,
                           mean.label.color = "black",
                           overlay.type = NULL,
+                          show.dots = FALSE,
                           PlotSave = FALSE) {
 
   # -------- to appease R CMD Check? ----------------
@@ -357,18 +364,38 @@ Plot2WayANOVA <- function(formula,
     theme(panel.grid.major.x = element_blank())
   )
   
+  # -------- start the plot ---------
+  
+  p <- newdata %>%
+    ggplot(aes_string(
+      x = iv1,
+      y = "TheMean",
+      colour = iv2,
+      fill = iv2,
+      group = iv2
+    ))  +
+    commonstuff
+  
+  # -------- display individual dots ---------
+  
+  if (plottype == "line" && show.dots == TRUE) {
+    p <- p +
+      geom_point(
+        data = dataframe,
+        mapping = aes(
+          x = !!sym(iv1),
+          y = !!sym(depvar)
+        ),
+        alpha = .4,
+        position = position_dodge(0.1)
+      )
+    }
+  
   # -------- switch for bar versus line plot ---------
   
   switch(plottype,
          bar =
-           p <- newdata %>%
-           ggplot(aes_string(
-             x = iv1,
-             y = "TheMean",
-             colour = iv2,
-             fill = iv2,
-             group = iv2
-           )) +
+           p <- p +
            geom_bar(
              stat = "identity",
              position = "dodge"
@@ -378,26 +405,9 @@ Plot2WayANOVA <- function(formula,
                          size = ci.line.size,
                          position = position_dodge(0.9),
                          show.legend = FALSE
-           ) +
-           commonstuff,
+           ),
          line =
-           p <- newdata %>%
-           ggplot(aes_string(
-             x = iv1,
-             y = "TheMean",
-             colour = iv2,
-             fill = iv2,
-             group = iv2
-           )) +
-           geom_point(
-             data = dataframe,
-             mapping = aes(
-               x = !!sym(iv1),
-               y = !!sym(depvar)
-             ),
-             alpha = .4,
-             position = position_dodge(0.1)
-           ) +
+           p <- p +
            geom_errorbar(aes(
              ymin = LowerBound,
              ymax = UpperBound
@@ -413,8 +423,7 @@ Plot2WayANOVA <- function(formula,
                       color = mean.color,
                       alpha = 1,
                       position = position_dodge(0.05)
-           ) +
-           commonstuff
+           )
   )
   
   # -------- Add box or violin if needed ---------

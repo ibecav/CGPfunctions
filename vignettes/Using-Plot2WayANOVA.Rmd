@@ -147,24 +147,50 @@ and any diagnostic information. In this case `am` and `cyl` are being coerced to
 factors and you're being prompted to make sure that's what is intended. 
 
 Next you receive a warning because you have a very unbalanced design. There are
-only two 8 cylinder cars with a manual transmission and 12 with automatics.
-Whereas there are eight 4 cylinders with manual and only three that are
-automatics. Imbalance in our design worries us for two reasons. One is that it
-causes a lack of statistical power and creates some math challenges in deciding
-how to divide up the sums of the squared differences. This dataset causes the
-more troublesome worry. Are the number of cylinders and manual versus automatic
-related systematically which would call are whole design into question.  Make sure
-you can answer questions about which is at work here, or make sure you have a 
-balanced design.
+only two 8 cylinder cars with a manual transmission and twelve 8 cylinder cars
+with automatics. Whereas there are eight 4 cylinders with manual and only three
+that are automatics. Imbalance in our design worries us for two reasons. One is
+that it causes a lack of statistical power and creates some math challenges in
+deciding how to divide up the sums of the squared differences. This dataset
+causes the more troublesome worry. Are the number of cylinders and manual versus
+automatic related systematically which would call our whole design into
+question. Make sure you can answer questions about which is at work here, or
+make sure you have a balanced design.
 
 A table follows that is intended to summarize the findings.  We'll discuss it 
 more later when we examine the plot.
 
-The overall measures can be very handy for comparing numerous models. For example
-how does the AIC number change if we were to eliminate `am` ?
+The overall measures table can be very handy for comparing numerous models. For
+example how does the AIC number change if we were to eliminate `am` ?
 
 The table of group means is useful for looking at summary by group.  Want the best 
 gas mileage? Buy a 4 cylinder manual car.
+
+The next step is to test homogeneity of variance also known as
+(homoscedasticity). Since the math in our ANOVA rely on the assumption that the
+variance for the different groupings of cars is more or less equal, we need to
+check that assumption. 
+
+We'll use the Brown-Forsythe test. When you run the `leveneTest` in R the default
+is actually a Brown-Forsythe, to get a true Levene you must specify `center =
+mean`.  Brown-Forsythe is actually more robust since it tests differences from
+the median.  Not surprisingly when we consult out table of group results we have 
+some reason for concern sine the standard deviations vary widely.
+
+Finally, let’s address the assumption that our errors or residuals are normally
+distributed. We’re looking for evidence that our residuals are skewed or tailed
+or otherwise misshapen in a way that would influence our results. Surprisingly,
+there is actually quite a bit of controversy on this point since on the one hand
+we have strong reason to believe that our sample will be imperfect and that our
+population will not necessarily be “perfectly normal” either. Some argue that
+some simple plotting is all that is necessary looking for an unspecifiable
+amount of non normality that will trigger a search for the source. Other prefer
+a more formal approach using one or more statistical tests. 
+
+`Plot2WayANOVA` runs the most common test of the normality assumption (there are
+many) the Shapiro-Wilk test The statistics look good, no strong evidemce in the
+data we have.
+
 
 
 ## Credits

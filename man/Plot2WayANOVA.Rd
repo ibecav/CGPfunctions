@@ -22,6 +22,7 @@ Plot2WayANOVA(formula,
                mean.label.size = 3, 
                mean.label.color = "black", 
                overlay.type = NULL,
+               show.dots = FALSE,
                PlotSave = FALSE)
 }
 \arguments{
@@ -70,6 +71,9 @@ the label displaying mean. Defaults: `3`, `"black"`, respectively.}
 
 \item{overlay.type}{A character string (e.g., `"box"` or `"violin"`), 
 if you wish to overlay that information on factor1}
+
+\item{show.dots}{Logical that decides whether the individual data points 
+are displayed (Default: `FALSE`).}
 
 \item{PlotSave}{a logical indicating whether the user wants to save the plot
 as a png file}
@@ -130,6 +134,9 @@ Plot2WayANOVA(mpg ~ am * cyl,
 Plot2WayANOVA(mpg ~ am * vs, mtcars, confidence = .99)
 
 # Create a new dataset
+library(dplyr)
+library(ggplot2)
+library(stringi)
 newmpg <- mpg \%>\% 
           filter(cyl != 5) \%>\% 
           mutate(am = stringi::stri_extract(trans, regex = "auto|manual"))
