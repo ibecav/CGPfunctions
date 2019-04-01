@@ -126,7 +126,8 @@
 #'               mean.label = TRUE, 
 #'               mean.shape = 20, 
 #'               mean.size = 5, 
-#'               mean.label.size = 5)
+#'               mean.label.size = 5,
+#'               show.dots = TRUE)
 #'
 #' @importFrom dplyr group_by summarise %>% n
 #' @import ggplot2
