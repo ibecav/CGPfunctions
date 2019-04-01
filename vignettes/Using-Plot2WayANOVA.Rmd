@@ -142,7 +142,7 @@ we run the function in its simplest form here's what we get.
 Plot2WayANOVA(formula = mpg ~ am * cyl, dataframe = mtcars)
 ```
 
-In the console you'll receive a bunch of messages chronicling your progress
+In the console you'll receive a series of messages chronicling your progress
 and any diagnostic information. In this case `am` and `cyl` are being coerced to
 factors and you're being prompted to make sure that's what is intended. 
 
@@ -164,7 +164,7 @@ The overall measures can be very handy for comparing numerous models. For exampl
 how does the AIC number change if we were to eliminate `am` ?
 
 The table of group means is useful for looking at summary by group.  Want the best 
-gas mileage buy a 4 cylinder manual car.
+gas mileage? Buy a 4 cylinder manual car.
 
 
 ## Credits
