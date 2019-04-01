@@ -5,12 +5,12 @@
 \title{Plot a 2 Way ANOVA using dplyr and ggplot2}
 \usage{
 Plot2WayANOVA(formula, 
-                   dataframe = NULL, 
-                   confidence=.95,
-                   plottype = "line", 
-                   xlab = NULL, 
-                   ylab = NULL, 
-                   title = NULL,
+               dataframe = NULL, 
+               confidence=.95,
+               plottype = "line", 
+               xlab = NULL, 
+               ylab = NULL, 
+               title = NULL,
                subtitle = NULL, 
                interact.line.size = 2, 
                ci.line.size = 1, 

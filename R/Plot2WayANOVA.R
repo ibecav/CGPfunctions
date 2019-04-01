@@ -35,12 +35,12 @@
 #'   factor, the emphasis is on the interaction lines.
 #'
 #' @usage Plot2WayANOVA(formula, 
-#'                    dataframe = NULL, 
-#'                    confidence=.95,
-#'                    plottype = "line", 
-#'                    xlab = NULL, 
-#'                    ylab = NULL, 
-#'                    title = NULL,
+#'                dataframe = NULL, 
+#'                confidence=.95,
+#'                plottype = "line", 
+#'                xlab = NULL, 
+#'                ylab = NULL, 
+#'                title = NULL,
 #'                subtitle = NULL, 
 #'                interact.line.size = 2, 
 #'                ci.line.size = 1, 
@@ -506,14 +506,15 @@ Plot2WayANOVA <- function(formula,
   # -------- Warn user of unbalanced design ----------------
   
   if (is.list(replications(formula, dataframe))) {
-    message("\n--- WARNING! ---\nYou have an unbalanced design. Using Type II sum of squares, 
-to calculate factor effect sizes eta and omega \n
-The R Squared reported is for the overall model but your 
-two factors account for ")
-    message(round(1 - (MyAOVt2$`Sum Sq`[4]/sum(MyAOVt2$`Sum Sq`[1:4])),3))
-    message("of the type II sum of squares, as opposed to the ")
-    message(rsquared)
-    message("reported below for overall model fit!\n")
+    rsquaredx <- round(1 - (MyAOVt2$`Sum Sq`[4]/sum(MyAOVt2$`Sum Sq`[1:4])),3)
+    message(paste0("\n\t\t\t\t--- WARNING! ---\n",
+              "\t\tYou have an unbalanced design. Using Type II sum of 
+              squares, to calculate factor effect sizes eta and omega.
+              The R Squared reported is for the overall model but your 
+              two factors account for ", rsquaredx, " of the type II sum of 
+              squares, as opposed to the ", rsquared, " reported below for 
+              overall model fit!\n"))
+#    message(paste0("blah ", rsquared))
   }
   else {
     message("\nYou have a balanced design. \n")
