@@ -21,6 +21,7 @@ Plot2WayANOVA(formula,
                mean.color = "darkred",
                mean.label.size = 3, 
                mean.label.color = "black", 
+               offset.style = "none",
                overlay.type = NULL,
                posthoc.method = "scheffe",
                show.dots = FALSE,
@@ -69,6 +70,11 @@ group means is to be displayed (Default: `TRUE`).}
 
 \item{mean.label.size, mean.label.color}{Aesthetics for
 the label displaying mean. Defaults: `3`, `"black"`, respectively.}
+
+\item{offset.style}{A character string (e.g., `"wide"` or `"narrow"`, 
+or `"none"`) which controls whether items are offset from the
+centerline for clarity. Useful when you want to add individual
+datapoints or confdence interval lines overlap. (Default: `"none"`).}
 
 \item{overlay.type}{A character string (e.g., `"box"` or `"violin"`), 
 if you wish to overlay that information on factor1}
@@ -154,6 +160,7 @@ Plot2WayANOVA(formula = hwy ~ am * cyl,
               ylab = "Highway mileage",
               xlab = "Transmission type",
               plottype = "line",
+              offset.style = "wide",
               overlay.type = "box",
               mean.label = TRUE, 
               mean.shape = 20, 

@@ -55,6 +55,7 @@
 #'                mean.color = "darkred",
 #'                mean.label.size = 3, 
 #'                mean.label.color = "black", 
+#'                offset.style = "none",
 #'                overlay.type = NULL,
 #'                posthoc.method = "scheffe",
 #'                show.dots = FALSE,
@@ -89,6 +90,10 @@
 #'   (Default: `4`).
 #' @param mean.shape Shape of the plot symbol for the mean
 #'   (Default: `23` which is a diamond).
+#' @param offset.style A character string (e.g., `"wide"` or `"narrow"`, 
+#'   or `"none"`) which controls whether items are offset from the
+#'   centerline for clarity. Useful when you want to add individual
+#'   datapoints or confdence interval lines overlap. (Default: `"none"`).
 #' @param overlay.type A character string (e.g., `"box"` or `"violin"`), 
 #'   if you wish to overlay that information on factor1
 #' @param posthoc.method A character string, one of "hsd", "bonf", "lsd", 
@@ -130,6 +135,7 @@
 #'               ylab = "Highway mileage",
 #'               xlab = "Transmission type",
 #'               plottype = "line",
+#'               offset.style = "wide",
 #'               overlay.type = "box",
 #'               mean.label = TRUE, 
 #'               mean.shape = 20, 
@@ -166,6 +172,7 @@ Plot2WayANOVA <- function(formula,
                           mean.color = "darkred",
                           mean.label.size = 3,
                           mean.label.color = "black",
+                          offset.style = "none",
                           overlay.type = NULL,
                           posthoc.method = "scheffe",
                           show.dots = FALSE,
@@ -368,6 +375,7 @@ Plot2WayANOVA <- function(formula,
   ciupper <- round(ULr2, 3)
   AICnumber <- round(model_summary$AIC, 1)
   BICnumber <- round(model_summary$BIC, 1)
+  
   # if `subtitle` is not provided, use this generic
   if (is.null(subtitle)) {
     subtitle <- bquote(
@@ -375,6 +383,24 @@ Plot2WayANOVA <- function(formula,
     )
   }
   
+  # decide how much to offset things
+  if (offset.style == "wide") {
+    dot.dodge <- .4
+    ci.dodge <- .15
+    mean.dodge <- .15
+  }
+  if (offset.style == "narrow") {
+    dot.dodge <- .1
+    ci.dodge <- .05
+    mean.dodge <- .05
+  }
+  if (offset.style != "narrow" && offset.style != "wide") {
+    dot.dodge <- 0
+    ci.dodge <- 0
+    mean.dodge <- 0
+  }
+  
+ 
   commonstuff <- list(
     xlab(xlab),
     ylab(ylab),
@@ -406,7 +432,7 @@ Plot2WayANOVA <- function(formula,
           y = !!sym(depvar)
         ),
         alpha = .4,
-        position = position_dodge(0.1)
+        position = position_dodge(dot.dodge)
       )
     }
   
@@ -433,15 +459,16 @@ Plot2WayANOVA <- function(formula,
            ),
            width = .2,
            size = ci.line.size,
-           position = position_dodge(0.05)
+           position = position_dodge(ci.dodge)
            ) +
-           geom_line(size = interact.line.size) +
+           geom_line(size = interact.line.size,
+                     position = position_dodge(mean.dodge)) +
            geom_point(aes(y = TheMean),
                       shape = mean.shape,
                       size = mean.size,
                       color = mean.color,
                       alpha = 1,
-                      position = position_dodge(0.05)
+                      position = position_dodge(mean.dodge)
            )
   )
   
@@ -458,7 +485,7 @@ Plot2WayANOVA <- function(formula,
             group = !!sym(iv1)
           ),
           color = "gray",
-          width = 0.3,
+          width = 0.4,
           alpha = 0.2,
           fill = "white",
           outlier.shape = NA,
@@ -474,7 +501,7 @@ Plot2WayANOVA <- function(formula,
             group = !!sym(iv1)
           ),
           color = "gray",
-          width = 0.5,
+          width = 0.7,
           alpha = 0.2,
           fill = "white",
           show.legend = FALSE
