@@ -10,6 +10,7 @@ LazyData: true
 Imports:
     broomExtra,
     car,
+    DescTools,
     devtools,
     dplyr,
     ggplot2 (>= 2.2.1),
