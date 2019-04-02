@@ -22,6 +22,7 @@ Plot2WayANOVA(formula,
                mean.label.size = 3, 
                mean.label.color = "black", 
                overlay.type = NULL,
+               posthoc.method = "scheffe",
                show.dots = FALSE,
                PlotSave = FALSE)
 }
@@ -72,6 +73,10 @@ the label displaying mean. Defaults: `3`, `"black"`, respectively.}
 \item{overlay.type}{A character string (e.g., `"box"` or `"violin"`), 
 if you wish to overlay that information on factor1}
 
+\item{posthoc.method}{A character string, one of "hsd", "bonf", "lsd", 
+"scheffe", "newmankeuls", defining the method for the pairwise comparisons. 
+(Default: `"scheffe"`).}
+
 \item{show.dots}{Logical that decides whether the individual data points 
 are displayed (Default: `FALSE`).}
 
@@ -84,7 +89,7 @@ A list with 5 elements which is returned invisibly. These items
   the function also returns a named list with the following items
   in case the user desires to save them or further process them -
   \code{$ANOVATable},\code{$ModelSummary}, \code{$MeansTable}, 
-  \code{$BFTest}, and \code{$SWTest}.
+  \code{$PosthocTable}, \code{$BFTest}, and \code{$SWTest}.
   The plot is always sent to the default plot device
 }
 \description{
@@ -111,8 +116,12 @@ Details about how the function works in order of steps taken.
   and omega squared values per factor. If the design is unbalanced warn  
   the user and use Type II sums of squares
 \item Produce a standard ANOVA table with additional columns 
+\item Use the \code{\link[DescTools]{PostHocTest}} for producing a table 
+  of post hoc comparisons for all effects that were significant
 \item Use the \code{\link[car]{leveneTest}} for testing Homogeneity 
   of Variance assumption with Brown-Forsythe
+\item Use the \code{\link[DescTools]{PostHocTest}} for conducting 
+  post hoc tests for effects that were significant
 \item Use the \code{\link[stats]{shapiro.test}} for testing normality
   assumption with Shapiro-Wilk
 \item Use \code{ggplot2} to plot an interaction plot of the type the 
@@ -149,7 +158,8 @@ Plot2WayANOVA(formula = hwy ~ am * cyl,
               mean.label = TRUE, 
               mean.shape = 20, 
               mean.size = 5, 
-              mean.label.size = 5)
+              mean.label.size = 5,
+              show.dots = TRUE)
 
 }
 \seealso{

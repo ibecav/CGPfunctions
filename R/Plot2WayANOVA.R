@@ -22,8 +22,12 @@
 #'   and omega squared values per factor. If the design is unbalanced warn  
 #'   the user and use Type II sums of squares
 #' \item Produce a standard ANOVA table with additional columns 
+#' \item Use the \code{\link[DescTools]{PostHocTest}} for producing a table 
+#'   of post hoc comparisons for all effects that were significant
 #' \item Use the \code{\link[car]{leveneTest}} for testing Homogeneity 
 #'   of Variance assumption with Brown-Forsythe
+#' \item Use the \code{\link[DescTools]{PostHocTest}} for conducting 
+#'   post hoc tests for effects that were significant
 #' \item Use the \code{\link[stats]{shapiro.test}} for testing normality
 #'   assumption with Shapiro-Wilk
 #' \item Use \code{ggplot2} to plot an interaction plot of the type the 
@@ -52,6 +56,7 @@
 #'                mean.label.size = 3, 
 #'                mean.label.color = "black", 
 #'                overlay.type = NULL,
+#'                posthoc.method = "scheffe",
 #'                show.dots = FALSE,
 #'                PlotSave = FALSE)
 #' @param formula a formula with a numeric dependent (outcome) variable, 
@@ -86,6 +91,9 @@
 #'   (Default: `23` which is a diamond).
 #' @param overlay.type A character string (e.g., `"box"` or `"violin"`), 
 #'   if you wish to overlay that information on factor1
+#' @param posthoc.method A character string, one of "hsd", "bonf", "lsd", 
+#'   "scheffe", "newmankeuls", defining the method for the pairwise comparisons. 
+#'   (Default: `"scheffe"`).
 #' @param show.dots Logical that decides whether the individual data points 
 #'   are displayed (Default: `FALSE`).
 #' @return A list with 5 elements which is returned invisibly. These items
@@ -93,7 +101,7 @@
 #'   the function also returns a named list with the following items
 #'   in case the user desires to save them or further process them -
 #'   \code{$ANOVATable},\code{$ModelSummary}, \code{$MeansTable}, 
-#'   \code{$BFTest}, and \code{$SWTest}.
+#'   \code{$PosthocTable}, \code{$BFTest}, and \code{$SWTest}.
 #'   The plot is always sent to the default plot device
 #'
 #' @author Chuck Powell
@@ -129,7 +137,7 @@
 #'               mean.label.size = 5,
 #'               show.dots = TRUE)
 #'
-#' @importFrom dplyr group_by summarise %>% n
+#' @importFrom dplyr group_by summarise %>% n select filter
 #' @import ggplot2
 #' @import rlang
 #' @importFrom methods is
@@ -138,6 +146,7 @@
 #' @importFrom car leveneTest Anova
 #' @importFrom sjstats anova_stats
 #' @importFrom broomExtra glance
+#' @importFrom DescTools PostHocTest
 #' @export
 #'
 Plot2WayANOVA <- function(formula,
@@ -158,6 +167,7 @@ Plot2WayANOVA <- function(formula,
                           mean.label.size = 3,
                           mean.label.color = "black",
                           overlay.type = NULL,
+                          posthoc.method = "scheffe",
                           show.dots = FALSE,
                           PlotSave = FALSE) {
 
@@ -167,6 +177,8 @@ Plot2WayANOVA <- function(formula,
   CIMuliplier <- NULL
   LowerBound <- NULL
   UpperBound <- NULL
+  p.value <- NULL
+  term <- NULL
   
   # -------- error checking ----------------
   if (!requireNamespace("ggplot2")) {
@@ -322,6 +334,12 @@ Plot2WayANOVA <- function(formula,
   # Grab the residuals and run Shapiro-Wilk
   MyAOV_residuals <- residuals(object = MyAOV)
   SWTest <- shapiro.test(x = MyAOV_residuals) # run Shapiro-Wilk test
+  # Grab on the effects that were significant in omnibuds test
+  sigfactors <- filter(WithETA, p.value <= 1 - confidence) %>% select(term)
+  posthocresults <- PostHocTest(MyAOV, 
+                                method = posthoc.method, 
+                                conf.level = confidence,
+                                which =  as.character(sigfactors[,1]))
   
   # -------- save the common plot items as a list to be used ---------
   
@@ -537,6 +555,8 @@ Plot2WayANOVA <- function(formula,
   print(model_summary)
   message("\nTable of group means\n")
   print(newdata)
+  message("\nPost hoc tests for all effects that were significant\n")
+  print(posthocresults)
   message("\nTesting Homogeneity of Variance with Brown-Forsythe \n")
   if (BFTest$`Pr(>F)`[[1]] <= .05) {
     message("   *** Possible violation of the assumption ***")
@@ -561,19 +581,13 @@ Plot2WayANOVA <- function(formula,
     ANOVATable = WithETA,
     ModelSummary = model_summary,
     MeansTable = newdata,
+    PosthocTable = posthocresults,
     BFTest = BFTest,
     SWTest = SWTest
   )
   if (PlotSave) {
     ggsave(potentialfname, device = "png")
-    whattoreturn <- list(
-      ANOVATable = WithETA,
-      ModelSummary = model_summary,
-      MeansTable = newdata,
-      BFTest = BFTest,
-      SWTest = SWTest,
-      pFileName = potentialfname
-    )
+    whattoreturn[["plotfile"]] <- potentialfname
   }
   return(invisible(whattoreturn))
 }
