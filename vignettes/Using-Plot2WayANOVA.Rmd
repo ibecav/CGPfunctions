@@ -113,6 +113,9 @@ confidence level and choose a line or a bar graph.
     combinations in our example that's 6 groupings 3 levels of cylinder and 2 levels
     of automatic or manual.
  1. Some measures of overall fit including $R^2$
+ 1. If any of the effect terms (main or interaction) are significant you'll
+    be presented with a post-hoc comparison of the means.  By default a 
+    Scheffe test is run but the user can choose from several supported options.
  1. The Homogeneity of Variance assumption is tested with Brown-Forsythe 
  1. The normality assumption is tested with Shapiro-Wilk
 
@@ -138,7 +141,7 @@ library(CGPfunctions)
 The only two required parameters are a formula and a dataframe (like) object. If
 we run the function in its simplest form here's what we get.
 
-```{r Plot2WayANOVA, echo=TRUE, message=TRUE, warning=FALSE, fig.width=6.0, fig.height=3.5}
+```{r Plot2WayANOVA, echo=TRUE, message=TRUE, warning=FALSE, fig.width=7, fig.height=4}
 Plot2WayANOVA(formula = mpg ~ am * cyl, dataframe = mtcars)
 ```
 
@@ -151,7 +154,7 @@ only two 8 cylinder cars with a manual transmission and twelve 8 cylinder cars
 with automatics. Whereas there are eight 4 cylinders with manual and only three
 that are automatics. Imbalance in our design worries us for two reasons. One is
 that it causes a lack of statistical power and creates some math challenges in
-deciding how to divide up the sums of the squared differences. This dataset
+deciding how to divide up the sums of the squared differences. This data set
 causes the more troublesome worry. Are the number of cylinders and manual versus
 automatic related systematically which would call our whole design into
 question. Make sure you can answer questions about which is at work here, or
@@ -163,8 +166,14 @@ more later when we examine the plot.
 The overall measures table can be very handy for comparing numerous models. For
 example how does the AIC number change if we were to eliminate `am` ?
 
-The table of group means is useful for looking at summary by group.  Want the best 
-gas mileage? Buy a 4 cylinder manual car.
+The table of group means is useful for looking at summary by group. Want the
+best gas mileage? Buy a 4 cylinder manual car.
+
+In our simple example the only statistically significant effect is for the main
+effect of number of cylinders. Accordingly the Scheffe test is run against the
+three types of cars with 4, 6, or 8 cylinders and we can see that with a 
+difference of 7.3 mpg eight and four cylinder cars are statistically
+significant even as we control for the multiple simultaneous comparisons.
 
 The next step is to test homogeneity of variance also known as
 (homoscedasticity). Since the math in our ANOVA rely on the assumption that the
@@ -188,13 +197,87 @@ amount of non normality that will trigger a search for the source. Other prefer
 a more formal approach using one or more statistical tests. 
 
 `Plot2WayANOVA` runs the most common test of the normality assumption (there are
-many) the Shapiro-Wilk test The statistics look good, no strong evidemce in the
+many) the Shapiro-Wilk test The statistics look good, no strong evidence in the
 data we have.
 
+The default settings for the resultant plot are deliberately minimalistic,
+allowing you to focus visually on the pattern of means and the connecting lines.
+If you're already used to looking at this sort of plot it is immediately
+apparent from the separation between the lines that the number of cylinders is
+having a significant impact on mileage. Automatic versus manual transmission
+seems to have less impact (judged by the relative lack of slope except for 4
+cylinder models) and there does seem to be at least the start of an interaction
+between the two. (bear in mind this is a small data set and we are very
+unbalanced).
+
+One other easy tip is warranted. Order matters and sometimes it is helpful to
+run the command simply reversing the order of the independent variables to help
+you better "see" the results, e.g. `Plot2WayANOVA(formula = mpg ~ cyl * am,
+dataframe = mtcars)`
+
+**Note that if you want to "save" all these tables of data and information all
+you need to do is store the results in an object as in `MyResults <-
+Plot2WayANOVA(formula = mpg ~ am * cyl, dataframe = mtcars)` then `MyResults`
+can be accessed as a list.**
+
+### Some common tweaks
+
+Let's make some changes that are likely to be quite common:
+
+1. Change the order of the factors
+1. Change to p < .01 or 99% CI
+1. Add title and axis labels
+1. Add a label with the actual group mean values
+1. Change the plotted shape for the group mean to a square not a diamond
+1. Change our post hoc test method to something less conservative than Scheffe
+
+```{r Plot2WayANOVA2, echo=TRUE, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
+Plot2WayANOVA(formula = mpg ~ cyl * am, 
+              dataframe = mtcars,
+              confidence = .99,
+              title = "MPG by cylinders and type transmission",
+              xlab = "Cylinders",
+              ylab = "Miles per gallon",
+              mean.label = TRUE,
+              mean.shape = 22,
+              posthoc.method = "lsd")
+```
+
+**Please don't fail to notice how liberal Fisher's LSD is compared to Scheffe
+especially given we've demanded more confidence **
+
+
+### Less common more custom tweaks
+
+Although the defaults are minimalistic to allow you to focus on the interaction
+pattern the function also has any number of optional ways of increasing
+complexity and showing more information.
+
+```{r Plot2WayANOVA3, echo=TRUE, fig.height=4, fig.width=7, message=FALSE, warning=FALSE}
+# Create a new dataset
+library(dplyr)
+library(ggplot2)
+library(stringi)
+newmpg <- mpg %>% 
+          filter(cyl != 5) %>% 
+          mutate(am = stringi::stri_extract(trans, regex = "auto|manual"))
+Plot2WayANOVA(formula = hwy ~ am * cyl,
+              dataframe = newmpg,
+              ylab = "Highway mileage",
+              xlab = "Transmission type",
+              plottype = "line",
+              offset.style = "wide",
+              overlay.type = "box",
+              mean.label = TRUE, 
+              mean.shape = 20, 
+              mean.size = 3, 
+              mean.label.size = 3,
+              show.dots = TRUE)
+```
 
 
 ## Credits
 
-Many thanks to Danielle Navarro and the book > ([Learning Statistics with
-R](http://www.compcogscisydney.com/learning-statistics-with-r.html)).
+Many thanks to Danielle Navarro and the book * [Learning Statistics with
+R](https://learningstatisticswithr.com/).*
 
