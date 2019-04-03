@@ -95,7 +95,7 @@
       <h1>Using Plot2WayAnova</h1>
                         <h4 class="author">Chuck Powell</h4>
             
-            <h4 class="date">2019-03-22</h4>
+            <h4 class="date">2019-04-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ibecav/CGPfunctions/blob/master/vignettes/Using-Plot2WayANOVA.Rmd"><code>vignettes/Using-Plot2WayANOVA.Rmd</code></a></small>
       <div class="hidden name"><code>Using-Plot2WayANOVA.Rmd</code></div>
@@ -107,35 +107,43 @@
 <div id="background" class="section level2">
 <h2 class="hasAnchor">
 <a href="#background" class="anchor"></a>Background</h2>
-<p>The CGPfunctions package includes functions that I find useful for teaching statistics especially to novices (as well as an opportunity to sharpen my own R skills). I only write functions when I have a real need – no theory – just help for actually practicing the art. They typically are not “new” methods but rather wrappers around either base R or other packages and are very task focused. This vignette covers two functions from the package that try and help users (especially students) do one thing well by pulling together pieces from a variety of places. They are as follows:</p>
+<p>The CGPfunctions package includes functions that I find useful for teaching statistics especially to novices (as well as an opportunity to sharpen my own R skills). I only write functions when I have a real need – no theory – just help for actually practicing the art. They typically are not “new” methods but rather wrappers around either base R or other packages and are very task focused. This vignette covers one function from the package that tries to help users (especially students) do one thing well by pulling together pieces from a variety of places in <code>R</code>. <code>Plot2WayANOVA</code>, which as the name implies conducts a 2 way ANOVA and plots the results. I always try and find the right balance between keeping the number of dependencies to a minimum and not reinventing the wheel and writing functions that others have done for me. The function makes use of the following non base r packages.</p>
 <ul>
 <li>
-<code>Plot2WayANOVA</code> which as the name implies conducts a 2 way ANOVA and plots the results using <code>ggplot2</code>
-</li>
+<code>ggplot2</code> as the work horse for all the actual plotting</li>
 <li>
-<code>neweta</code> which is a helper function that appends the results of a Type II eta squared calculation onto a classic ANOVA table</li>
+<code>car</code> for it’s ability to compute Type II sums of squares, we’ll address why that’s important in more detail later in the scenario. We’ll also make use of it’s <code>leveneTest</code>.</li>
+<li>
+<code>sjstats</code> which takes out ANOVA table and gives us other important information such as the effect sizes (<span class="math inline">\(\eta^2\)</span> and <span class="math inline">\(\omega^2\)</span> ) through use of its <code>anova_stats</code> function. Prior to this version I had been using my own local function but this runs rings around what I could do.</li>
+<li>
+<code><a href="https://indrajeetpatil.github.io/broomExtra//reference/glance.html">broomExtra::glance</a></code> will also help us grab very important results like <span class="math inline">\(R^2\)</span> and display them</li>
 </ul>
 </div>
 <div id="vignette-info" class="section level2">
 <h2 class="hasAnchor">
 <a href="#vignette-info" class="anchor"></a>Vignette Info</h2>
-<p>The ANOVA family of statistical techniques allow us to compare mean differences of one outcome (dependent) variable across two or more groups (levels) of one or more independent variables (factor). It is also true that ANOVA is a special case of the GLM or regression models so as the number of levels increase it might make more sense to try one of those approaches. The 2 Way ANOVA allows for comparisons of mean differences across 2 independent variables <code>factors</code> with a varying numbers of <code>levels</code> in each <code>factor</code>.</p>
-<p>The <code>Plot2WayANOVA</code> function conducts a classic analysis of variance (ANOVA) using existing R functions and packages in a sane and defensible manner not necessarily in the one and only manner.</p>
+<p>The ANOVA (Analysis of Variance) family of statistical techniques allow us to compare mean differences of one outcome (dependent) variable across two or more groups (levels) of one or more independent variables (factor). It is also true that ANOVA is a special case of the GLM or regression models so as the number of levels increase it might make more sense to try one of those approaches. The 2 Way ANOVA allows for comparisons of mean differences across 2 independent variables <code>factors</code> with a varying numbers of <code>levels</code> in each <code>factor</code>.</p>
+<p>If you prefer a more regression based approach with a very similar plotted result I highly recommend the <code>interactions</code> package which I was unaware of until just recently. It is <a href="https://cran.r-project.org/web/packages/interactions/index.html">available through CRAN</a>.</p>
+<p>The <code>Plot2WayANOVA</code> function conducts a classic analysis of variance (ANOVA) in a sane and defensible manner, not necessarily the only one. It’s real strength (<em>I hope</em>) lies in the fact that it is pulled together in one function and more importantly allows you to visualize the results concurrently with no additional work.</p>
 </div>
 <div id="scenario-and-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#scenario-and-data" class="anchor"></a>Scenario and data</h2>
-<p>Imagine that you are interested in understanding whether a car’s fuel efficiency (mpg) varies based upon the type of transmission (automatic or manual) and the number of cylinders the engine has. Let’s imagine that the <code>mtcars</code> data set is actually a random sample of 32 cars from different manufacturers and use the mean <code>mpg</code> by <code>am</code> and <code>cyl</code> to help inform our thinking. While we expect variation across our sample we’re interested in whether the differences between the means by grouping of transmission type and cylinders is significantly different than what we would expect in random variation across the data.</p>
+<p>Imagine that you are interested in understanding whether a car’s fuel efficiency (mpg) varies based upon the type of transmission (automatic or manual) and the number of cylinders the engine has. Let’s imagine that the <code>mtcars</code> data set is actually a random sample of 32 cars from different manufacturers and use the mean <code>mpg</code> grouped by <code>am</code> and <code>cyl</code> to help inform our thinking. While we expect variation across our sample we’re interested in whether the differences between the means by grouping of transmission type and cylinders is significantly different than what we would expect in random variation across the data.</p>
 <p>In simplistic terms we want to know whether <code>am</code> matters, <code>cyl</code> matters or if it depends on the interaction of the two. It’s this interaction term that typically confuses novices or is difficult to “see”. That’s where a good interaction graph can hopefully play a key role, and that’s what the <code>Plot2WayANOVA</code> focuses on.</p>
 <p>There’s no lack or tools or capabilities in base R or in the many packages to do this task. What this function tries to do is pull together the disparate pieces with a set of sane defaults and a simple interface to work with it. At its simplest you would require the library and then enter this command:</p>
-<p><code><a href="../reference/Plot2WayANOVA.html">Plot2WayANOVA(mpg~am*cyl, mtcars)</a></code> which lays our question out in R’s vernacular with a formula and a dataframe. Optionally we can specify a different confidence level and choose a line or a bar graph.</p>
+<p><code><a href="../reference/Plot2WayANOVA.html">Plot2WayANOVA(mpg ~ am * cyl, mtcars)</a></code> which lays our question out in R’s vernacular with a formula and a dataframe. Optionally we can specify a different confidence level and choose a line or a bar graph.</p>
 <p>“Under the hood”, however there’s a lot of nice features at work.</p>
 <ol style="list-style-type: decimal">
-<li>Some basic error checking to ensure a valid formula and dataframe. The function accepts only a fully crossed formula to check for interaction term</li>
-<li>It ensures the dependent (outcome) variable is numeric and that the two independent (predictor) variables already are or can be coerced to factors – the user is warned on the console if there are problems</li>
-<li>A check is conducted to see if any of the variables of interest have missing cases – the user is warned on the console if there are problems</li>
-<li>A summarized table of means, standard deviations, standard errors of the means, confidence intervals, and group sizes for each of the crossed combinations in our example that’s 6 groupings 3 levels of cylinder and 2 levels of automatic or manual</li>
-<li>In addition to the classic ANOVA table eta squared <span class="math inline">\(\eta^2\)</span> is calculated and appended as an additional column. If you’re unfamiliar with them and want to know more especially where the numbers come from I recommend a good introductory stats text. As noted earlier I recommend <em>Learning Statistics with R</em> <a href="http://dj-navarro.appspot.com/lsr/lsr-0.5.1.pdf">LSR</a> see Table 14-1 on page 432.</li>
+<li>Some basic error checking to ensure a valid formula and dataframe. The function accepts only a fully crossed formula to check for an interaction term</li>
+<li>It ensures the dependent (outcome) variable is numeric and that the two independent (predictor) variables already are or can be coerced to factors – the user is warned on the console if there are problems.</li>
+<li>A check is conducted to see if any of the variables of interest have missing cases – the user is warned on the console if there are problems.</li>
+<li>Balance is checked, that is whether the number of observations per cell when we cross <code>am</code> and <code>cyl</code> is equal. There’s some debate as to how much imbalance is permissible. But you’ll be given fair warning if there is any.</li>
+<li>In addition to the classic ANOVA table information available in <code>aov</code> or <code>Anova</code> you’ll be presented with information about effect sizes like eta squared <span class="math inline">\(\eta^2\)</span>. They’re calculated and appended as additional columns. If you’re unfamiliar with them and want to know more especially where the numbers come from I recommend a good introductory stats text. I recommend <em>Learning Statistics with R</em> <a href="http://dj-navarro.appspot.com/lsr/lsr-0.5.1.pdf">LSR</a> see Table 14-1 on page 432.</li>
+<li>A summarized table of means, standard deviations, standard errors of the means, confidence intervals, and group sizes for each of the crossed combinations in our example that’s 6 groupings 3 levels of cylinder and 2 levels of automatic or manual.</li>
+<li>Some measures of overall fit including <span class="math inline">\(R^2\)</span>
+</li>
+<li>If any of the effect terms (main or interaction) are significant you’ll be presented with a post-hoc comparison of the means. By default a Scheffe test is run but the user can choose from several supported options.</li>
 <li>The Homogeneity of Variance assumption is tested with Brown-Forsythe</li>
 <li>The normality assumption is tested with Shapiro-Wilk</li>
 </ol>
@@ -150,88 +158,252 @@
 <a class="sourceLine" id="cb1-5" title="5"><span class="co"># install.packages("devtools")</span></a>
 <a class="sourceLine" id="cb1-6" title="6">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"ibecav/CGPfunctions"</span>)</a></code></pre></div>
 <p>then load the library.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(CGPfunctions)</a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="co">#&gt; Warning in checkMatrixPackageVersion(): Package version inconsistency detected.</span></a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="co">#&gt; TMB was built with Matrix version 1.2.15</span></a>
-<a class="sourceLine" id="cb2-4" title="4"><span class="co">#&gt; Current Matrix version is 1.2.16</span></a>
-<a class="sourceLine" id="cb2-5" title="5"><span class="co">#&gt; Please re-install 'TMB' from source using install.packages('TMB', type = 'source') or ask CRAN for a binary version of 'TMB' matching CRAN's 'Matrix' package</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(CGPfunctions)</a></code></pre></div>
 </div>
 <div id="example-of-using-the-function" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example-of-using-the-function" class="anchor"></a>Example of using the function</h2>
 <p>The only two required parameters are a formula and a dataframe (like) object. If we run the function in its simplest form here’s what we get.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="../reference/Plot2WayANOVA.html">Plot2WayANOVA</a></span>(mpg<span class="op">~</span>am<span class="op">*</span>cyl, mtcars)</a>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="../reference/Plot2WayANOVA.html">Plot2WayANOVA</a></span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span>am <span class="op">*</span><span class="st"> </span>cyl, <span class="dt">dataframe =</span> mtcars)</a>
 <a class="sourceLine" id="cb3-2" title="2"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb3-3" title="3"><span class="co">#&gt; Converting am to a factor --- check your results</span></a>
 <a class="sourceLine" id="cb3-4" title="4"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb3-5" title="5"><span class="co">#&gt; Converting cyl to a factor --- check your results</span></a>
 <a class="sourceLine" id="cb3-6" title="6"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb3-7" title="7"><span class="co">#&gt; --- </span><span class="al">WARNING</span><span class="co">! ---</span></a>
-<a class="sourceLine" id="cb3-8" title="8"><span class="co">#&gt; You have an unbalanced design. Using Type II sum of squares, </span></a>
-<a class="sourceLine" id="cb3-9" title="9"><span class="co">#&gt; to calculate factor effect sizes eta and omega </span></a>
-<a class="sourceLine" id="cb3-10" title="10"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb3-11" title="11"><span class="co">#&gt; The R Squared reported is for the overall model but your </span></a>
-<a class="sourceLine" id="cb3-12" title="12"><span class="co">#&gt; two factors account for ...</span></a>
-<a class="sourceLine" id="cb3-13" title="13"><span class="co">#&gt; 0.684</span></a>
-<a class="sourceLine" id="cb3-14" title="14"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb3-15" title="15"><span class="co">#&gt; of the type II sum of squares, as opposed to the</span></a>
-<a class="sourceLine" id="cb3-16" title="16"><span class="co">#&gt; R Squared reported below for overall model fit!</span></a>
-<a class="sourceLine" id="cb3-17" title="17"><span class="co">#&gt;        term   sumsq  meansq df statistic p.value etasq partial.etasq</span></a>
-<a class="sourceLine" id="cb3-18" title="18"><span class="co">#&gt; 1        am  36.767  36.767  1     3.999   0.056 0.049         0.133</span></a>
-<a class="sourceLine" id="cb3-19" title="19"><span class="co">#&gt; 2       cyl 456.401 228.200  2    24.819   0.000 0.602         0.656</span></a>
-<a class="sourceLine" id="cb3-20" title="20"><span class="co">#&gt; 3    am:cyl  25.437  12.718  2     1.383   0.269 0.034         0.096</span></a>
-<a class="sourceLine" id="cb3-21" title="21"><span class="co">#&gt; 4 Residuals 239.059   9.195 26        NA      NA    NA            NA</span></a>
-<a class="sourceLine" id="cb3-22" title="22"><span class="co">#&gt;   omegasq partial.omegasq cohens.f power</span></a>
-<a class="sourceLine" id="cb3-23" title="23"><span class="co">#&gt; 1   0.036           0.086    0.392 0.515</span></a>
-<a class="sourceLine" id="cb3-24" title="24"><span class="co">#&gt; 2   0.571           0.598    1.382 1.000</span></a>
-<a class="sourceLine" id="cb3-25" title="25"><span class="co">#&gt; 3   0.009           0.023    0.326 0.298</span></a>
-<a class="sourceLine" id="cb3-26" title="26"><span class="co">#&gt; 4      NA              NA       NA    NA</span></a>
-<a class="sourceLine" id="cb3-27" title="27"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb3-28" title="28"><span class="co">#&gt; Measures of overall model fit</span></a>
-<a class="sourceLine" id="cb3-29" title="29"><span class="co">#&gt; # A tibble: 1 x 11</span></a>
-<a class="sourceLine" id="cb3-30" title="30"><span class="co">#&gt;   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC</span></a>
-<a class="sourceLine" id="cb3-31" title="31"><span class="co">#&gt;       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb3-32" title="32"><span class="co">#&gt; 1     0.788         0.747  3.03      19.3 5.18e-8     6  -77.6  169.  179.</span></a>
-<a class="sourceLine" id="cb3-33" title="33"><span class="co">#&gt; # … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb3-34" title="34"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb3-35" title="35"><span class="co">#&gt; Table of group means</span></a>
-<a class="sourceLine" id="cb3-36" title="36"><span class="co">#&gt; # A tibble: 6 x 9</span></a>
-<a class="sourceLine" id="cb3-37" title="37"><span class="co">#&gt; # Groups:   am [2]</span></a>
-<a class="sourceLine" id="cb3-38" title="38"><span class="co">#&gt;   am    cyl   TheMean TheSD TheSEM CIMuliplier LowerBound UpperBound     N</span></a>
-<a class="sourceLine" id="cb3-39" title="39"><span class="co">#&gt;   &lt;fct&gt; &lt;fct&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt; &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb3-40" title="40"><span class="co">#&gt; 1 0     4        22.9 1.45   0.839        4.30       19.3       26.5     3</span></a>
-<a class="sourceLine" id="cb3-41" title="41"><span class="co">#&gt; 2 0     6        19.1 1.63   0.816        3.18       16.5       21.7     4</span></a>
-<a class="sourceLine" id="cb3-42" title="42"><span class="co">#&gt; 3 0     8        15.0 2.77   0.801        2.20       13.3       16.8    12</span></a>
-<a class="sourceLine" id="cb3-43" title="43"><span class="co">#&gt; 4 1     4        28.1 4.48   1.59         2.36       24.3       31.8     8</span></a>
-<a class="sourceLine" id="cb3-44" title="44"><span class="co">#&gt; 5 1     6        20.6 0.751  0.433        4.30       18.7       22.4     3</span></a>
-<a class="sourceLine" id="cb3-45" title="45"><span class="co">#&gt; 6 1     8        15.4 0.566  0.4         12.7        10.3       20.5     2</span></a>
-<a class="sourceLine" id="cb3-46" title="46"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb3-47" title="47"><span class="co">#&gt; Testing Homogeneity of Variance with Brown-Forsythe</span></a>
-<a class="sourceLine" id="cb3-48" title="48"><span class="co">#&gt;    *** Possible violation of the assumption ***</span></a>
-<a class="sourceLine" id="cb3-49" title="49"><span class="co">#&gt; Levene's Test for Homogeneity of Variance (center = median)</span></a>
-<a class="sourceLine" id="cb3-50" title="50"><span class="co">#&gt;       Df F value  Pr(&gt;F)  </span></a>
-<a class="sourceLine" id="cb3-51" title="51"><span class="co">#&gt; group  5   2.736 0.04086 *</span></a>
-<a class="sourceLine" id="cb3-52" title="52"><span class="co">#&gt;       26                  </span></a>
-<a class="sourceLine" id="cb3-53" title="53"><span class="co">#&gt; ---</span></a>
-<a class="sourceLine" id="cb3-54" title="54"><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></a>
-<a class="sourceLine" id="cb3-55" title="55"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb3-56" title="56"><span class="co">#&gt; Testing Normality Assumption with Shapiro-Wilk</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="co">#&gt;              --- </span><span class="al">WARNING</span><span class="co">! ---</span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="co">#&gt;      You have an unbalanced design. Using Type II sum of </span></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="co">#&gt;               squares, to calculate factor effect sizes eta and omega.</span></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="co">#&gt;               The R Squared reported is for the overall model but your </span></a>
+<a class="sourceLine" id="cb3-11" title="11"><span class="co">#&gt;               two factors account for 0.684 of the type II sum of </span></a>
+<a class="sourceLine" id="cb3-12" title="12"><span class="co">#&gt;               squares, as opposed to the 0.788 reported below for </span></a>
+<a class="sourceLine" id="cb3-13" title="13"><span class="co">#&gt;               overall model fit!</span></a>
+<a class="sourceLine" id="cb3-14" title="14"><span class="co">#&gt;        term   sumsq  meansq df statistic p.value etasq partial.etasq</span></a>
+<a class="sourceLine" id="cb3-15" title="15"><span class="co">#&gt; 1        am  36.767  36.767  1     3.999   0.056 0.049         0.133</span></a>
+<a class="sourceLine" id="cb3-16" title="16"><span class="co">#&gt; 2       cyl 456.401 228.200  2    24.819   0.000 0.602         0.656</span></a>
+<a class="sourceLine" id="cb3-17" title="17"><span class="co">#&gt; 3    am:cyl  25.437  12.718  2     1.383   0.269 0.034         0.096</span></a>
+<a class="sourceLine" id="cb3-18" title="18"><span class="co">#&gt; 4 Residuals 239.059   9.195 26        NA      NA    NA            NA</span></a>
+<a class="sourceLine" id="cb3-19" title="19"><span class="co">#&gt;   omegasq partial.omegasq cohens.f power</span></a>
+<a class="sourceLine" id="cb3-20" title="20"><span class="co">#&gt; 1   0.036           0.086    0.392 0.515</span></a>
+<a class="sourceLine" id="cb3-21" title="21"><span class="co">#&gt; 2   0.571           0.598    1.382 1.000</span></a>
+<a class="sourceLine" id="cb3-22" title="22"><span class="co">#&gt; 3   0.009           0.023    0.326 0.298</span></a>
+<a class="sourceLine" id="cb3-23" title="23"><span class="co">#&gt; 4      NA              NA       NA    NA</span></a>
+<a class="sourceLine" id="cb3-24" title="24"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-25" title="25"><span class="co">#&gt; Measures of overall model fit</span></a>
+<a class="sourceLine" id="cb3-26" title="26"><span class="co">#&gt; # A tibble: 1 x 11</span></a>
+<a class="sourceLine" id="cb3-27" title="27"><span class="co">#&gt;   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC</span></a>
+<a class="sourceLine" id="cb3-28" title="28"><span class="co">#&gt;       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb3-29" title="29"><span class="co">#&gt; 1     0.788         0.747  3.03      19.3 5.18e-8     6  -77.6  169.  179.</span></a>
+<a class="sourceLine" id="cb3-30" title="30"><span class="co">#&gt; # … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb3-31" title="31"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-32" title="32"><span class="co">#&gt; Table of group means</span></a>
+<a class="sourceLine" id="cb3-33" title="33"><span class="co">#&gt; # A tibble: 6 x 9</span></a>
+<a class="sourceLine" id="cb3-34" title="34"><span class="co">#&gt; # Groups:   am [2]</span></a>
+<a class="sourceLine" id="cb3-35" title="35"><span class="co">#&gt;   am    cyl   TheMean TheSD TheSEM CIMuliplier LowerBound UpperBound     N</span></a>
+<a class="sourceLine" id="cb3-36" title="36"><span class="co">#&gt;   &lt;fct&gt; &lt;fct&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt; &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb3-37" title="37"><span class="co">#&gt; 1 0     4        22.9 1.45   0.839        4.30       19.3       26.5     3</span></a>
+<a class="sourceLine" id="cb3-38" title="38"><span class="co">#&gt; 2 0     6        19.1 1.63   0.816        3.18       16.5       21.7     4</span></a>
+<a class="sourceLine" id="cb3-39" title="39"><span class="co">#&gt; 3 0     8        15.0 2.77   0.801        2.20       13.3       16.8    12</span></a>
+<a class="sourceLine" id="cb3-40" title="40"><span class="co">#&gt; 4 1     4        28.1 4.48   1.59         2.36       24.3       31.8     8</span></a>
+<a class="sourceLine" id="cb3-41" title="41"><span class="co">#&gt; 5 1     6        20.6 0.751  0.433        4.30       18.7       22.4     3</span></a>
+<a class="sourceLine" id="cb3-42" title="42"><span class="co">#&gt; 6 1     8        15.4 0.566  0.4         12.7        10.3       20.5     2</span></a>
+<a class="sourceLine" id="cb3-43" title="43"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-44" title="44"><span class="co">#&gt; Post hoc tests for all effects that were significant</span></a>
+<a class="sourceLine" id="cb3-45" title="45"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-46" title="46"><span class="co">#&gt;   Posthoc multiple comparisons of means : Scheffe Test </span></a>
+<a class="sourceLine" id="cb3-47" title="47"><span class="co">#&gt;     95% family-wise confidence level</span></a>
+<a class="sourceLine" id="cb3-48" title="48"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-49" title="49"><span class="co">#&gt; $cyl</span></a>
+<a class="sourceLine" id="cb3-50" title="50"><span class="co">#&gt;          diff     lwr.ci     upr.ci    pval    </span></a>
+<a class="sourceLine" id="cb3-51" title="51"><span class="co">#&gt; 6-4 -4.756706 -10.029278  0.5158655 0.09684 .  </span></a>
+<a class="sourceLine" id="cb3-52" title="52"><span class="co">#&gt; 8-4 -7.329581 -11.723391 -2.9357710 0.00024 ***</span></a>
+<a class="sourceLine" id="cb3-53" title="53"><span class="co">#&gt; 8-6 -2.572874  -7.620978  2.4752288 0.64828    </span></a>
+<a class="sourceLine" id="cb3-54" title="54"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-55" title="55"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb3-56" title="56"><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></a>
 <a class="sourceLine" id="cb3-57" title="57"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb3-58" title="58"><span class="co">#&gt;  Shapiro-Wilk normality test</span></a>
-<a class="sourceLine" id="cb3-59" title="59"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb3-60" title="60"><span class="co">#&gt; data:  MyAOV_residuals</span></a>
-<a class="sourceLine" id="cb3-61" title="61"><span class="co">#&gt; W = 0.96277, p-value = 0.3263</span></a>
-<a class="sourceLine" id="cb3-62" title="62"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb3-63" title="63"><span class="co">#&gt; Interaction graph plotted...</span></a></code></pre></div>
-<p><img src="Using-Plot2WayANOVA_files/figure-html/Plot2WayANOVA-1.png" width="576"></p>
+<a class="sourceLine" id="cb3-58" title="58"><span class="co">#&gt; Testing Homogeneity of Variance with Brown-Forsythe</span></a>
+<a class="sourceLine" id="cb3-59" title="59"><span class="co">#&gt;    *** Possible violation of the assumption ***</span></a>
+<a class="sourceLine" id="cb3-60" title="60"><span class="co">#&gt; Levene's Test for Homogeneity of Variance (center = median)</span></a>
+<a class="sourceLine" id="cb3-61" title="61"><span class="co">#&gt;       Df F value  Pr(&gt;F)  </span></a>
+<a class="sourceLine" id="cb3-62" title="62"><span class="co">#&gt; group  5   2.736 0.04086 *</span></a>
+<a class="sourceLine" id="cb3-63" title="63"><span class="co">#&gt;       26                  </span></a>
+<a class="sourceLine" id="cb3-64" title="64"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb3-65" title="65"><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></a>
+<a class="sourceLine" id="cb3-66" title="66"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-67" title="67"><span class="co">#&gt; Testing Normality Assumption with Shapiro-Wilk</span></a>
+<a class="sourceLine" id="cb3-68" title="68"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-69" title="69"><span class="co">#&gt;  Shapiro-Wilk normality test</span></a>
+<a class="sourceLine" id="cb3-70" title="70"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-71" title="71"><span class="co">#&gt; data:  MyAOV_residuals</span></a>
+<a class="sourceLine" id="cb3-72" title="72"><span class="co">#&gt; W = 0.96277, p-value = 0.3263</span></a>
+<a class="sourceLine" id="cb3-73" title="73"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-74" title="74"><span class="co">#&gt; Interaction graph plotted...</span></a></code></pre></div>
+<p><img src="Using-Plot2WayANOVA_files/figure-html/Plot2WayANOVA-1.png" width="672"></p>
+<p>In the console you’ll receive a series of messages chronicling your progress and any diagnostic information. In this case <code>am</code> and <code>cyl</code> are being coerced to factors and you’re being prompted to make sure that’s what is intended.</p>
+<p>Next you receive a warning because you have a very unbalanced design. There are only two 8 cylinder cars with a manual transmission and twelve 8 cylinder cars with automatics. Whereas there are eight 4 cylinders with manual and only three that are automatics. Imbalance in our design worries us for two reasons. One is that it causes a lack of statistical power and creates some math challenges in deciding how to divide up the sums of the squared differences. This data set causes the more troublesome worry. Are the number of cylinders and manual versus automatic related systematically which would call our whole design into question. Make sure you can answer questions about which is at work here, or make sure you have a balanced design.</p>
+<p>A table follows that is intended to summarize the findings. We’ll discuss it more later when we examine the plot.</p>
+<p>The overall measures table can be very handy for comparing numerous models. For example how does the AIC number change if we were to eliminate <code>am</code> ?</p>
+<p>The table of group means is useful for looking at summary by group. Want the best gas mileage? Buy a 4 cylinder manual car.</p>
+<p>In our simple example the only statistically significant effect is for the main effect of number of cylinders. Accordingly the Scheffe test is run against the three types of cars with 4, 6, or 8 cylinders and we can see that with a difference of 7.3 mpg eight and four cylinder cars are statistically significant even as we control for the multiple simultaneous comparisons.</p>
+<p>The next step is to test homogeneity of variance also known as (homoscedasticity). Since the math in our ANOVA rely on the assumption that the variance for the different groupings of cars is more or less equal, we need to check that assumption.</p>
+<p>We’ll use the Brown-Forsythe test. When you run the <code>leveneTest</code> in R the default is actually a Brown-Forsythe, to get a true Levene you must specify <code>center = mean</code>. Brown-Forsythe is actually more robust since it tests differences from the median. Not surprisingly when we consult out table of group results we have some reason for concern sine the standard deviations vary widely.</p>
+<p>Finally, let’s address the assumption that our errors or residuals are normally distributed. We’re looking for evidence that our residuals are skewed or tailed or otherwise misshapen in a way that would influence our results. Surprisingly, there is actually quite a bit of controversy on this point since on the one hand we have strong reason to believe that our sample will be imperfect and that our population will not necessarily be “perfectly normal” either. Some argue that some simple plotting is all that is necessary looking for an unspecifiable amount of non normality that will trigger a search for the source. Other prefer a more formal approach using one or more statistical tests.</p>
+<p><code>Plot2WayANOVA</code> runs the most common test of the normality assumption (there are many) the Shapiro-Wilk test The statistics look good, no strong evidence in the data we have.</p>
+<p>The default settings for the resultant plot are deliberately minimalistic, allowing you to focus visually on the pattern of means and the connecting lines. If you’re already used to looking at this sort of plot it is immediately apparent from the separation between the lines that the number of cylinders is having a significant impact on mileage. Automatic versus manual transmission seems to have less impact (judged by the relative lack of slope except for 4 cylinder models) and there does seem to be at least the start of an interaction between the two. (bear in mind this is a small data set and we are very unbalanced).</p>
+<p>One other easy tip is warranted. Order matters and sometimes it is helpful to run the command simply reversing the order of the independent variables to help you better “see” the results, e.g. <code><a href="../reference/Plot2WayANOVA.html">Plot2WayANOVA(formula = mpg ~ cyl * am, dataframe = mtcars)</a></code></p>
+<p><strong>Note that if you want to “save” all these tables of data and information all you need to do is store the results in an object as in <code>MyResults &lt;- Plot2WayANOVA(formula = mpg ~ am * cyl, dataframe = mtcars)</code> then <code>MyResults</code> can be accessed as a list.</strong></p>
+<div id="some-common-tweaks" class="section level3">
+<h3 class="hasAnchor">
+<a href="#some-common-tweaks" class="anchor"></a>Some common tweaks</h3>
+<p>Let’s make some changes that are likely to be quite common:</p>
+<ol style="list-style-type: decimal">
+<li>Change the order of the factors</li>
+<li>Change to p &lt; .01 or 99% CI</li>
+<li>Add title and axis labels</li>
+<li>Add a label with the actual group mean values</li>
+<li>Change the plotted shape for the group mean to a square not a diamond</li>
+<li>Change our post hoc test method to something less conservative than Scheffe</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="../reference/Plot2WayANOVA.html">Plot2WayANOVA</a></span>(<span class="dt">formula =</span> mpg <span class="op">~</span><span class="st"> </span>cyl <span class="op">*</span><span class="st"> </span>am, </a>
+<a class="sourceLine" id="cb4-2" title="2">              <span class="dt">dataframe =</span> mtcars,</a>
+<a class="sourceLine" id="cb4-3" title="3">              <span class="dt">confidence =</span> <span class="fl">.99</span>,</a>
+<a class="sourceLine" id="cb4-4" title="4">              <span class="dt">title =</span> <span class="st">"MPG by cylinders and type transmission"</span>,</a>
+<a class="sourceLine" id="cb4-5" title="5">              <span class="dt">xlab =</span> <span class="st">"Cylinders"</span>,</a>
+<a class="sourceLine" id="cb4-6" title="6">              <span class="dt">ylab =</span> <span class="st">"Miles per gallon"</span>,</a>
+<a class="sourceLine" id="cb4-7" title="7">              <span class="dt">mean.label =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb4-8" title="8">              <span class="dt">mean.shape =</span> <span class="dv">22</span>,</a>
+<a class="sourceLine" id="cb4-9" title="9">              <span class="dt">posthoc.method =</span> <span class="st">"lsd"</span>)</a>
+<a class="sourceLine" id="cb4-10" title="10"><span class="co">#&gt;        term   sumsq  meansq df statistic p.value etasq partial.etasq</span></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="co">#&gt; 1       cyl 456.401 228.200  2    24.819   0.000 0.602         0.656</span></a>
+<a class="sourceLine" id="cb4-12" title="12"><span class="co">#&gt; 2        am  36.767  36.767  1     3.999   0.056 0.049         0.133</span></a>
+<a class="sourceLine" id="cb4-13" title="13"><span class="co">#&gt; 3    cyl:am  25.437  12.718  2     1.383   0.269 0.034         0.096</span></a>
+<a class="sourceLine" id="cb4-14" title="14"><span class="co">#&gt; 4 Residuals 239.059   9.195 26        NA      NA    NA            NA</span></a>
+<a class="sourceLine" id="cb4-15" title="15"><span class="co">#&gt;   omegasq partial.omegasq cohens.f power</span></a>
+<a class="sourceLine" id="cb4-16" title="16"><span class="co">#&gt; 1   0.571           0.598    1.382 1.000</span></a>
+<a class="sourceLine" id="cb4-17" title="17"><span class="co">#&gt; 2   0.036           0.086    0.392 0.515</span></a>
+<a class="sourceLine" id="cb4-18" title="18"><span class="co">#&gt; 3   0.009           0.023    0.326 0.298</span></a>
+<a class="sourceLine" id="cb4-19" title="19"><span class="co">#&gt; 4      NA              NA       NA    NA</span></a>
+<a class="sourceLine" id="cb4-20" title="20"><span class="co">#&gt; # A tibble: 1 x 11</span></a>
+<a class="sourceLine" id="cb4-21" title="21"><span class="co">#&gt;   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC</span></a>
+<a class="sourceLine" id="cb4-22" title="22"><span class="co">#&gt;       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb4-23" title="23"><span class="co">#&gt; 1     0.788         0.747  3.03      19.3 5.18e-8     6  -77.6  169.  179.</span></a>
+<a class="sourceLine" id="cb4-24" title="24"><span class="co">#&gt; # … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb4-25" title="25"><span class="co">#&gt; # A tibble: 6 x 9</span></a>
+<a class="sourceLine" id="cb4-26" title="26"><span class="co">#&gt; # Groups:   cyl [3]</span></a>
+<a class="sourceLine" id="cb4-27" title="27"><span class="co">#&gt;   cyl   am    TheMean TheSD TheSEM CIMuliplier LowerBound UpperBound     N</span></a>
+<a class="sourceLine" id="cb4-28" title="28"><span class="co">#&gt;   &lt;fct&gt; &lt;fct&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt; &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb4-29" title="29"><span class="co">#&gt; 1 4     0        22.9 1.45   0.839        9.92       14.6       31.2     3</span></a>
+<a class="sourceLine" id="cb4-30" title="30"><span class="co">#&gt; 2 4     1        28.1 4.48   1.59         3.50       22.5       33.6     8</span></a>
+<a class="sourceLine" id="cb4-31" title="31"><span class="co">#&gt; 3 6     0        19.1 1.63   0.816        5.84       14.4       23.9     4</span></a>
+<a class="sourceLine" id="cb4-32" title="32"><span class="co">#&gt; 4 6     1        20.6 0.751  0.433        9.92       16.3       24.9     3</span></a>
+<a class="sourceLine" id="cb4-33" title="33"><span class="co">#&gt; 5 8     0        15.0 2.77   0.801        3.11       12.6       17.5    12</span></a>
+<a class="sourceLine" id="cb4-34" title="34"><span class="co">#&gt; 6 8     1        15.4 0.566  0.4         63.7       -10.1       40.9     2</span></a>
+<a class="sourceLine" id="cb4-35" title="35"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-36" title="36"><span class="co">#&gt;   Posthoc multiple comparisons of means : Fisher LSD </span></a>
+<a class="sourceLine" id="cb4-37" title="37"><span class="co">#&gt;     99% family-wise confidence level</span></a>
+<a class="sourceLine" id="cb4-38" title="38"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-39" title="39"><span class="co">#&gt; $cyl</span></a>
+<a class="sourceLine" id="cb4-40" title="40"><span class="co">#&gt;           diff     lwr.ci     upr.ci    pval    </span></a>
+<a class="sourceLine" id="cb4-41" title="41"><span class="co">#&gt; 6-4  -6.920779 -10.994590 -2.8469685 7.0e-05 ***</span></a>
+<a class="sourceLine" id="cb4-42" title="42"><span class="co">#&gt; 8-4 -11.563636 -14.958479 -8.1687941 6.6e-10 ***</span></a>
+<a class="sourceLine" id="cb4-43" title="43"><span class="co">#&gt; 8-6  -4.642857  -8.543234 -0.7424803  0.0028 ** </span></a>
+<a class="sourceLine" id="cb4-44" title="44"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-45" title="45"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb4-46" title="46"><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></a>
+<a class="sourceLine" id="cb4-47" title="47"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-48" title="48"><span class="co">#&gt; Levene's Test for Homogeneity of Variance (center = median)</span></a>
+<a class="sourceLine" id="cb4-49" title="49"><span class="co">#&gt;       Df F value  Pr(&gt;F)  </span></a>
+<a class="sourceLine" id="cb4-50" title="50"><span class="co">#&gt; group  5   2.736 0.04086 *</span></a>
+<a class="sourceLine" id="cb4-51" title="51"><span class="co">#&gt;       26                  </span></a>
+<a class="sourceLine" id="cb4-52" title="52"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb4-53" title="53"><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></a>
+<a class="sourceLine" id="cb4-54" title="54"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-55" title="55"><span class="co">#&gt;  Shapiro-Wilk normality test</span></a>
+<a class="sourceLine" id="cb4-56" title="56"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-57" title="57"><span class="co">#&gt; data:  MyAOV_residuals</span></a>
+<a class="sourceLine" id="cb4-58" title="58"><span class="co">#&gt; W = 0.96277, p-value = 0.3263</span></a></code></pre></div>
+<p><img src="Using-Plot2WayANOVA_files/figure-html/Plot2WayANOVA2-1.png" width="672"></p>
+<p><strong>Please don’t fail to notice how liberal Fisher’s LSD is compared to Scheffe especially given we’ve demanded more confidence </strong></p>
+</div>
+<div id="less-common-more-custom-tweaks" class="section level3">
+<h3 class="hasAnchor">
+<a href="#less-common-more-custom-tweaks" class="anchor"></a>Less common more custom tweaks</h3>
+<p>Although the defaults are minimalistic to allow you to focus on the interaction pattern the function also has any number of optional ways of increasing complexity and showing more information.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Create a new dataset</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(stringi)</a>
+<a class="sourceLine" id="cb5-5" title="5">newmpg &lt;-<span class="st"> </span>mpg <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="st">          </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(cyl <span class="op">!=</span><span class="st"> </span><span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="st">          </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">am =</span> stringi<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/stringi/topics/stri_extract">stri_extract</a></span>(trans, <span class="dt">regex =</span> <span class="st">"auto|manual"</span>))</a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="kw"><a href="../reference/Plot2WayANOVA.html">Plot2WayANOVA</a></span>(<span class="dt">formula =</span> hwy <span class="op">~</span><span class="st"> </span>am <span class="op">*</span><span class="st"> </span>cyl,</a>
+<a class="sourceLine" id="cb5-9" title="9">              <span class="dt">dataframe =</span> newmpg,</a>
+<a class="sourceLine" id="cb5-10" title="10">              <span class="dt">ylab =</span> <span class="st">"Highway mileage"</span>,</a>
+<a class="sourceLine" id="cb5-11" title="11">              <span class="dt">xlab =</span> <span class="st">"Transmission type"</span>,</a>
+<a class="sourceLine" id="cb5-12" title="12">              <span class="dt">plottype =</span> <span class="st">"line"</span>,</a>
+<a class="sourceLine" id="cb5-13" title="13">              <span class="dt">offset.style =</span> <span class="st">"wide"</span>,</a>
+<a class="sourceLine" id="cb5-14" title="14">              <span class="dt">overlay.type =</span> <span class="st">"box"</span>,</a>
+<a class="sourceLine" id="cb5-15" title="15">              <span class="dt">mean.label =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb5-16" title="16">              <span class="dt">mean.shape =</span> <span class="dv">20</span>, </a>
+<a class="sourceLine" id="cb5-17" title="17">              <span class="dt">mean.size =</span> <span class="dv">3</span>, </a>
+<a class="sourceLine" id="cb5-18" title="18">              <span class="dt">mean.label.size =</span> <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb5-19" title="19">              <span class="dt">show.dots =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb5-20" title="20"><span class="co">#&gt;        term    sumsq   meansq  df statistic p.value etasq partial.etasq</span></a>
+<a class="sourceLine" id="cb5-21" title="21"><span class="co">#&gt; 1        am   33.447   33.447   1     2.235   0.136 0.004         0.010</span></a>
+<a class="sourceLine" id="cb5-22" title="22"><span class="co">#&gt; 2       cyl 4135.686 2067.843   2   138.208   0.000 0.547         0.552</span></a>
+<a class="sourceLine" id="cb5-23" title="23"><span class="co">#&gt; 3    am:cyl   39.796   19.898   2     1.330   0.267 0.005         0.012</span></a>
+<a class="sourceLine" id="cb5-24" title="24"><span class="co">#&gt; 4 Residuals 3351.458   14.962 224        NA      NA    NA            NA</span></a>
+<a class="sourceLine" id="cb5-25" title="25"><span class="co">#&gt;   omegasq partial.omegasq cohens.f power</span></a>
+<a class="sourceLine" id="cb5-26" title="26"><span class="co">#&gt; 1   0.002           0.005    0.100 0.321</span></a>
+<a class="sourceLine" id="cb5-27" title="27"><span class="co">#&gt; 2   0.542           0.544    1.111 1.000</span></a>
+<a class="sourceLine" id="cb5-28" title="28"><span class="co">#&gt; 3   0.001           0.003    0.109 0.289</span></a>
+<a class="sourceLine" id="cb5-29" title="29"><span class="co">#&gt; 4      NA              NA       NA    NA</span></a>
+<a class="sourceLine" id="cb5-30" title="30"><span class="co">#&gt; # A tibble: 1 x 11</span></a>
+<a class="sourceLine" id="cb5-31" title="31"><span class="co">#&gt;   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC</span></a>
+<a class="sourceLine" id="cb5-32" title="32"><span class="co">#&gt;       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb5-33" title="33"><span class="co">#&gt; 1     0.589         0.579  3.87      64.1 2.60e-41     6  -634. 1283. 1307.</span></a>
+<a class="sourceLine" id="cb5-34" title="34"><span class="co">#&gt; # … with 2 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb5-35" title="35"><span class="co">#&gt; # A tibble: 6 x 9</span></a>
+<a class="sourceLine" id="cb5-36" title="36"><span class="co">#&gt; # Groups:   am [2]</span></a>
+<a class="sourceLine" id="cb5-37" title="37"><span class="co">#&gt;   am     cyl   TheMean TheSD TheSEM CIMuliplier LowerBound UpperBound     N</span></a>
+<a class="sourceLine" id="cb5-38" title="38"><span class="co">#&gt;   &lt;fct&gt;  &lt;fct&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt; &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb5-39" title="39"><span class="co">#&gt; 1 auto   4        28.3  4.15  0.648        2.02       27.0       29.6    41</span></a>
+<a class="sourceLine" id="cb5-40" title="40"><span class="co">#&gt; 2 auto   6        22.9  3.64  0.487        2.00       21.9       23.9    56</span></a>
+<a class="sourceLine" id="cb5-41" title="41"><span class="co">#&gt; 3 auto   8        17.2  2.81  0.368        2.00       16.5       18.0    58</span></a>
+<a class="sourceLine" id="cb5-42" title="42"><span class="co">#&gt; 4 manual 4        29.3  4.86  0.768        2.02       27.8       30.9    40</span></a>
+<a class="sourceLine" id="cb5-43" title="43"><span class="co">#&gt; 5 manual 6        22.7  3.87  0.807        2.07       21.0       24.3    23</span></a>
+<a class="sourceLine" id="cb5-44" title="44"><span class="co">#&gt; 6 manual 8        19.5  4.62  1.33         2.20       16.6       22.4    12</span></a>
+<a class="sourceLine" id="cb5-45" title="45"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-46" title="46"><span class="co">#&gt;   Posthoc multiple comparisons of means : Scheffe Test </span></a>
+<a class="sourceLine" id="cb5-47" title="47"><span class="co">#&gt;     95% family-wise confidence level</span></a>
+<a class="sourceLine" id="cb5-48" title="48"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-49" title="49"><span class="co">#&gt; $cyl</span></a>
+<a class="sourceLine" id="cb5-50" title="50"><span class="co">#&gt;           diff     lwr.ci    upr.ci    pval    </span></a>
+<a class="sourceLine" id="cb5-51" title="51"><span class="co">#&gt; 6-4  -5.270233  -7.323725 -3.216741 1.4e-12 ***</span></a>
+<a class="sourceLine" id="cb5-52" title="52"><span class="co">#&gt; 8-4 -10.045433 -12.164702 -7.926165 &lt; 2e-16 ***</span></a>
+<a class="sourceLine" id="cb5-53" title="53"><span class="co">#&gt; 8-6  -4.775200  -6.906869 -2.643532 9.7e-10 ***</span></a>
+<a class="sourceLine" id="cb5-54" title="54"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-55" title="55"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb5-56" title="56"><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></a>
+<a class="sourceLine" id="cb5-57" title="57"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-58" title="58"><span class="co">#&gt; Levene's Test for Homogeneity of Variance (center = median)</span></a>
+<a class="sourceLine" id="cb5-59" title="59"><span class="co">#&gt;        Df F value  Pr(&gt;F)  </span></a>
+<a class="sourceLine" id="cb5-60" title="60"><span class="co">#&gt; group   5   1.946 0.08778 .</span></a>
+<a class="sourceLine" id="cb5-61" title="61"><span class="co">#&gt;       224                  </span></a>
+<a class="sourceLine" id="cb5-62" title="62"><span class="co">#&gt; ---</span></a>
+<a class="sourceLine" id="cb5-63" title="63"><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></a>
+<a class="sourceLine" id="cb5-64" title="64"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-65" title="65"><span class="co">#&gt;  Shapiro-Wilk normality test</span></a>
+<a class="sourceLine" id="cb5-66" title="66"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-67" title="67"><span class="co">#&gt; data:  MyAOV_residuals</span></a>
+<a class="sourceLine" id="cb5-68" title="68"><span class="co">#&gt; W = 0.97548, p-value = 0.0005039</span></a></code></pre></div>
+<p><img src="Using-Plot2WayANOVA_files/figure-html/Plot2WayANOVA3-1.png" width="672"></p>
+</div>
 </div>
 <div id="credits" class="section level2">
 <h2 class="hasAnchor">
 <a href="#credits" class="anchor"></a>Credits</h2>
-<p>Many thanks to Dani Navarro and the book &gt; (<a href="http://www.compcogscisydney.com/learning-statistics-with-r.html">Learning Statistics with R</a>) whose etaSquared function was the genesis of <code>neweta</code>.</p>
-<blockquote>
-<p>“He who gives up [code] safety for [code] speed deserves neither.” (<a href="https://twitter.com/hadleywickham/status/504368538874703872">via</a>)</p>
-</blockquote>
+<p>Many thanks to Danielle Navarro and the book * <a href="https://learningstatisticswithr.com/">Learning Statistics with R</a>.*</p>
 </div>
   </div>
 

@@ -95,7 +95,7 @@
       <h1>Using newggslopegraph</h1>
                         <h4 class="author">Chuck Powell</h4>
             
-            <h4 class="date">2019-03-22</h4>
+            <h4 class="date">2019-04-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ibecav/CGPfunctions/blob/master/vignettes/Using-newggslopegraph.Rmd"><code>vignettes/Using-newggslopegraph.Rmd</code></a></small>
       <div class="hidden name"><code>Using-newggslopegraph.Rmd</code></div>
@@ -122,26 +122,22 @@
 <a class="sourceLine" id="cb1-9" title="9"><span class="co"># install.packages("devtools")</span></a>
 <a class="sourceLine" id="cb1-10" title="10"><span class="co"># devtools::install_github("ibecav/CGPfunctions")</span></a>
 <a class="sourceLine" id="cb1-11" title="11"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(CGPfunctions)</a></code></pre></div>
-<pre><code>## Warning in checkMatrixPackageVersion(): Package version inconsistency detected.
-## TMB was built with Matrix version 1.2.15
-## Current Matrix version is 1.2.16
-## Please re-install 'TMB' from source using install.packages('TMB', type = 'source') or ask CRAN for a binary version of 'TMB' matching CRAN's 'Matrix' package</code></pre>
 </div>
 <div id="simple-examples" class="section level2">
 <h2 class="hasAnchor">
 <a href="#simple-examples" class="anchor"></a>Simple examples</h2>
 <p>If you’re unfamiliar with slopegraphs or just want to see what the display is all about the dataset I’ve provided can get you started in one line</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span>(newcancer,Year,Survival,Type)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span>(newcancer,Year,Survival,Type)</a></code></pre></div>
 <p><img src="Using-newggslopegraph_files/figure-html/ggslope1-1.png" width="672"></p>
 <p>Optionally you can provide important label information through <code>Title</code>, <code>Subtitle</code>, and <code>Caption</code> arguments. You can suppress them all together by setting them <code>= NULL</code> but since I think they are very important the default is to gently remind you, that you have not provided any information. Let’s provide a title and sub-title but skip the caption.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span>(<span class="dt">dataframe =</span> newcancer,</a>
-<a class="sourceLine" id="cb4-2" title="2">                <span class="dt">Times =</span> Year,</a>
-<a class="sourceLine" id="cb4-3" title="3">                <span class="dt">Measurement =</span> Survival,</a>
-<a class="sourceLine" id="cb4-4" title="4">                <span class="dt">Grouping =</span> Type,</a>
-<a class="sourceLine" id="cb4-5" title="5">                <span class="dt">Title =</span> <span class="st">"Estimates of Percent Survival Rates"</span>,</a>
-<a class="sourceLine" id="cb4-6" title="6">                <span class="dt">SubTitle =</span> <span class="st">"Based on: Edward Tufte, Beautiful Evidence, 174, 176."</span>,</a>
-<a class="sourceLine" id="cb4-7" title="7">                <span class="dt">Caption =</span> <span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb4-8" title="8">                )</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span>(<span class="dt">dataframe =</span> newcancer,</a>
+<a class="sourceLine" id="cb3-2" title="2">                <span class="dt">Times =</span> Year,</a>
+<a class="sourceLine" id="cb3-3" title="3">                <span class="dt">Measurement =</span> Survival,</a>
+<a class="sourceLine" id="cb3-4" title="4">                <span class="dt">Grouping =</span> Type,</a>
+<a class="sourceLine" id="cb3-5" title="5">                <span class="dt">Title =</span> <span class="st">"Estimates of Percent Survival Rates"</span>,</a>
+<a class="sourceLine" id="cb3-6" title="6">                <span class="dt">SubTitle =</span> <span class="st">"Based on: Edward Tufte, Beautiful Evidence, 174, 176."</span>,</a>
+<a class="sourceLine" id="cb3-7" title="7">                <span class="dt">Caption =</span> <span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb3-8" title="8">                )</a></code></pre></div>
 <p><img src="Using-newggslopegraph_files/figure-html/ggslope2-1.png" width="672"></p>
 </div>
 <div id="how-it-all-works" class="section level2">
@@ -167,43 +163,43 @@
 <p>The data is loosely based on real data but is not actually accurate.</p>
 </blockquote>
 <p><code>moredata$Date</code> is the hypothetical polling date as a factor (in this case <code>character</code> would work equally well). <code>moredata$Party</code> is the various political parties and <code>moredata$Pct</code> is the percentage of the vote they are estimated to have.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">moredata &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/structure">structure</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">Date =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/structure">structure</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 3L, 3L, 3L, 3L, 3L), </a>
-<a class="sourceLine" id="cb5-2" title="2">                                            <span class="dt">.Label =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"11-May-18"</span>, <span class="st">"18-May-18"</span>, <span class="st">"25-May-18"</span>), </a>
-<a class="sourceLine" id="cb5-3" title="3">                                            <span class="dt">class =</span> <span class="st">"factor"</span>), </a>
-<a class="sourceLine" id="cb5-4" title="4">                           <span class="dt">Party =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/structure">structure</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(5L, 3L, 2L, 1L, 4L, 5L, 3L, 2L, 1L, 4L, 5L, 3L, 2L, 1L, 4L), </a>
-<a class="sourceLine" id="cb5-5" title="5">                                             <span class="dt">.Label =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"Green"</span>, <span class="st">"Liberal"</span>, <span class="st">"NDP"</span>, <span class="st">"Others"</span>, <span class="st">"PC"</span>), </a>
-<a class="sourceLine" id="cb5-6" title="6">                                             <span class="dt">class =</span> <span class="st">"factor"</span>), </a>
-<a class="sourceLine" id="cb5-7" title="7">                           <span class="dt">Pct =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">42.3</span>, <span class="fl">28.4</span>, <span class="fl">22.1</span>, <span class="fl">5.4</span>, <span class="fl">1.8</span>, <span class="fl">41.9</span>, <span class="fl">29.3</span>, <span class="fl">22.3</span>, <span class="dv">5</span>, <span class="fl">1.4</span>, <span class="fl">41.9</span>, <span class="fl">26.8</span>, <span class="fl">26.8</span>, <span class="dv">5</span>, <span class="fl">1.4</span>)), </a>
-<a class="sourceLine" id="cb5-8" title="8">                      <span class="dt">class =</span> <span class="st">"data.frame"</span>, </a>
-<a class="sourceLine" id="cb5-9" title="9">                      <span class="dt">row.names =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">NA</span>, <span class="op">-</span>15L))</a>
-<a class="sourceLine" id="cb5-10" title="10"><span class="co">#tail(moredata)</span></a>
-<a class="sourceLine" id="cb5-11" title="11"><span class="kw"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span>(moredata,Date,Pct,Party, <span class="dt">Title =</span> <span class="st">"Notional data"</span>, <span class="dt">SubTitle =</span> <span class="ot">NULL</span>, <span class="dt">Caption =</span> <span class="ot">NULL</span>)</a>
-<a class="sourceLine" id="cb5-12" title="12"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb5-13" title="13"><span class="co">#&gt; Converting 'Date' to an ordered factor</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">moredata &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/structure">structure</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">Date =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/structure">structure</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(1L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 3L, 3L, 3L, 3L, 3L), </a>
+<a class="sourceLine" id="cb4-2" title="2">                                            <span class="dt">.Label =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"11-May-18"</span>, <span class="st">"18-May-18"</span>, <span class="st">"25-May-18"</span>), </a>
+<a class="sourceLine" id="cb4-3" title="3">                                            <span class="dt">class =</span> <span class="st">"factor"</span>), </a>
+<a class="sourceLine" id="cb4-4" title="4">                           <span class="dt">Party =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/structure">structure</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(5L, 3L, 2L, 1L, 4L, 5L, 3L, 2L, 1L, 4L, 5L, 3L, 2L, 1L, 4L), </a>
+<a class="sourceLine" id="cb4-5" title="5">                                             <span class="dt">.Label =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"Green"</span>, <span class="st">"Liberal"</span>, <span class="st">"NDP"</span>, <span class="st">"Others"</span>, <span class="st">"PC"</span>), </a>
+<a class="sourceLine" id="cb4-6" title="6">                                             <span class="dt">class =</span> <span class="st">"factor"</span>), </a>
+<a class="sourceLine" id="cb4-7" title="7">                           <span class="dt">Pct =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">42.3</span>, <span class="fl">28.4</span>, <span class="fl">22.1</span>, <span class="fl">5.4</span>, <span class="fl">1.8</span>, <span class="fl">41.9</span>, <span class="fl">29.3</span>, <span class="fl">22.3</span>, <span class="dv">5</span>, <span class="fl">1.4</span>, <span class="fl">41.9</span>, <span class="fl">26.8</span>, <span class="fl">26.8</span>, <span class="dv">5</span>, <span class="fl">1.4</span>)), </a>
+<a class="sourceLine" id="cb4-8" title="8">                      <span class="dt">class =</span> <span class="st">"data.frame"</span>, </a>
+<a class="sourceLine" id="cb4-9" title="9">                      <span class="dt">row.names =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="ot">NA</span>, <span class="op">-</span>15L))</a>
+<a class="sourceLine" id="cb4-10" title="10"><span class="co">#tail(moredata)</span></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="kw"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span>(moredata,Date,Pct,Party, <span class="dt">Title =</span> <span class="st">"Notional data"</span>, <span class="dt">SubTitle =</span> <span class="ot">NULL</span>, <span class="dt">Caption =</span> <span class="ot">NULL</span>)</a>
+<a class="sourceLine" id="cb4-12" title="12"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-13" title="13"><span class="co">#&gt; Converting 'Date' to an ordered factor</span></a></code></pre></div>
 <p><img src="Using-newggslopegraph_files/figure-html/ggslope3-1.png" width="480"></p>
 <p>There are a plethora of formatting options. See <code><a href="../reference/newggslopegraph.html">?newggslopegraph</a></code> for all of them. Here’s a few.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span>(moredata, Date, Pct, Party, </a>
+<a class="sourceLine" id="cb5-2" title="2">                <span class="dt">Title =</span> <span class="st">"Notional data"</span>, </a>
+<a class="sourceLine" id="cb5-3" title="3">                <span class="dt">SubTitle =</span> <span class="st">"none"</span>, </a>
+<a class="sourceLine" id="cb5-4" title="4">                <span class="dt">Caption =</span> <span class="st">"imaginary"</span>,</a>
+<a class="sourceLine" id="cb5-5" title="5">                <span class="dt">LineColor =</span> <span class="st">"gray"</span>, </a>
+<a class="sourceLine" id="cb5-6" title="6">                <span class="dt">LineThickness =</span> <span class="fl">.5</span>,</a>
+<a class="sourceLine" id="cb5-7" title="7">                <span class="dt">YTextSize =</span> <span class="dv">4</span></a>
+<a class="sourceLine" id="cb5-8" title="8">                )</a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-10" title="10"><span class="co">#&gt; Converting 'Date' to an ordered factor</span></a></code></pre></div>
+<p><img src="Using-newggslopegraph_files/figure-html/ggslope4-1.png" width="480"></p>
+<p>The most complex is <code>LineColor</code> where you can do the following if you want to highlight the difference between the Liberal and NDP parties while making the other three less prominent…</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span>(moredata, Date, Pct, Party, </a>
 <a class="sourceLine" id="cb6-2" title="2">                <span class="dt">Title =</span> <span class="st">"Notional data"</span>, </a>
 <a class="sourceLine" id="cb6-3" title="3">                <span class="dt">SubTitle =</span> <span class="st">"none"</span>, </a>
 <a class="sourceLine" id="cb6-4" title="4">                <span class="dt">Caption =</span> <span class="st">"imaginary"</span>,</a>
-<a class="sourceLine" id="cb6-5" title="5">                <span class="dt">LineColor =</span> <span class="st">"gray"</span>, </a>
+<a class="sourceLine" id="cb6-5" title="5">                <span class="dt">LineColor =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"Green"</span> =<span class="st"> "gray"</span>, <span class="st">"Liberal"</span> =<span class="st"> "green"</span>, <span class="st">"NDP"</span> =<span class="st"> "red"</span>, <span class="st">"Others"</span> =<span class="st"> "gray"</span>, <span class="st">"PC"</span> =<span class="st"> "gray"</span>), </a>
 <a class="sourceLine" id="cb6-6" title="6">                <span class="dt">LineThickness =</span> <span class="fl">.5</span>,</a>
 <a class="sourceLine" id="cb6-7" title="7">                <span class="dt">YTextSize =</span> <span class="dv">4</span></a>
 <a class="sourceLine" id="cb6-8" title="8">                )</a>
 <a class="sourceLine" id="cb6-9" title="9"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb6-10" title="10"><span class="co">#&gt; Converting 'Date' to an ordered factor</span></a></code></pre></div>
-<p><img src="Using-newggslopegraph_files/figure-html/ggslope4-1.png" width="480"></p>
-<p>The most complex is <code>LineColor</code> where you can do the following if you want to highlight the difference between the Liberal and NDP parties while making the other three less prominent…</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span>(moredata, Date, Pct, Party, </a>
-<a class="sourceLine" id="cb7-2" title="2">                <span class="dt">Title =</span> <span class="st">"Notional data"</span>, </a>
-<a class="sourceLine" id="cb7-3" title="3">                <span class="dt">SubTitle =</span> <span class="st">"none"</span>, </a>
-<a class="sourceLine" id="cb7-4" title="4">                <span class="dt">Caption =</span> <span class="st">"imaginary"</span>,</a>
-<a class="sourceLine" id="cb7-5" title="5">                <span class="dt">LineColor =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"Green"</span> =<span class="st"> "gray"</span>, <span class="st">"Liberal"</span> =<span class="st"> "green"</span>, <span class="st">"NDP"</span> =<span class="st"> "red"</span>, <span class="st">"Others"</span> =<span class="st"> "gray"</span>, <span class="st">"PC"</span> =<span class="st"> "gray"</span>), </a>
-<a class="sourceLine" id="cb7-6" title="6">                <span class="dt">LineThickness =</span> <span class="fl">.5</span>,</a>
-<a class="sourceLine" id="cb7-7" title="7">                <span class="dt">YTextSize =</span> <span class="dv">4</span></a>
-<a class="sourceLine" id="cb7-8" title="8">                )</a>
-<a class="sourceLine" id="cb7-9" title="9"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb7-10" title="10"><span class="co">#&gt; Converting 'Date' to an ordered factor</span></a></code></pre></div>
 <p><img src="Using-newggslopegraph_files/figure-html/ggslope5-1.png" width="480"></p>
 </div>
 <div id="slopegraph-best-practices" class="section level2">
@@ -222,32 +218,32 @@
 <h2 class="hasAnchor">
 <a href="#one-last-set-of-data" class="anchor"></a>One last set of data</h2>
 <p>Also from Tufte, this is data about a select group of countries Gross Domestic Product (GDP). I’ll use it to show you a tricky way to highlight certain countries without making a named vector with <code>LineColor = c(rep("gray",3), "red", rep("gray",3), "red", rep("gray",10))</code> the excess vector entries are silently dropped… The bottom line is that <code>LineColor</code> is simply a character vector that you can fill any way you choose.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span>(newgdp, </a>
-<a class="sourceLine" id="cb8-2" title="2">                Year, </a>
-<a class="sourceLine" id="cb8-3" title="3">                GDP, </a>
-<a class="sourceLine" id="cb8-4" title="4">                Country, </a>
-<a class="sourceLine" id="cb8-5" title="5">                <span class="dt">Title =</span> <span class="st">"Gross GDP"</span>, </a>
-<a class="sourceLine" id="cb8-6" title="6">                <span class="dt">SubTitle =</span> <span class="ot">NULL</span>, </a>
-<a class="sourceLine" id="cb8-7" title="7">                <span class="dt">Caption =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb8-8" title="8">                <span class="dt">LineThickness =</span> <span class="fl">.5</span>,</a>
-<a class="sourceLine" id="cb8-9" title="9">                <span class="dt">YTextSize =</span> <span class="dv">4</span>,</a>
-<a class="sourceLine" id="cb8-10" title="10">                <span class="dt">LineColor =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="st">"gray"</span>,<span class="dv">3</span>), <span class="st">"red"</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="st">"gray"</span>,<span class="dv">3</span>), <span class="st">"red"</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="st">"gray"</span>,<span class="dv">10</span>))</a>
-<a class="sourceLine" id="cb8-11" title="11">                )</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span>(newgdp, </a>
+<a class="sourceLine" id="cb7-2" title="2">                Year, </a>
+<a class="sourceLine" id="cb7-3" title="3">                GDP, </a>
+<a class="sourceLine" id="cb7-4" title="4">                Country, </a>
+<a class="sourceLine" id="cb7-5" title="5">                <span class="dt">Title =</span> <span class="st">"Gross GDP"</span>, </a>
+<a class="sourceLine" id="cb7-6" title="6">                <span class="dt">SubTitle =</span> <span class="ot">NULL</span>, </a>
+<a class="sourceLine" id="cb7-7" title="7">                <span class="dt">Caption =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb7-8" title="8">                <span class="dt">LineThickness =</span> <span class="fl">.5</span>,</a>
+<a class="sourceLine" id="cb7-9" title="9">                <span class="dt">YTextSize =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb7-10" title="10">                <span class="dt">LineColor =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="st">"gray"</span>,<span class="dv">3</span>), <span class="st">"red"</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="st">"gray"</span>,<span class="dv">3</span>), <span class="st">"red"</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="st">"gray"</span>,<span class="dv">10</span>))</a>
+<a class="sourceLine" id="cb7-11" title="11">                )</a></code></pre></div>
 <p><img src="Using-newggslopegraph_files/figure-html/ggslope6-1.png" width="576"></p>
 <p>Finally, let me take a moment about crowding and labeling. I’ve made every effort to try and deconflict the labels on the left and right axis (in this example the <code>Country</code>) and that should work automatically as you resize your plot dimensions. ** pro tip - if you use <code>RStudio</code> you can press the <code>zoom</code> icon and then use the rescaling of the window to see best choices **.</p>
 <p>But the numbers (<code>GDP</code>) are a different matter and there’s no easy way to ensure separation in a case like this data. There’s a decent total spread from 57.4 to 20.7 and some really close measurements like France, Belgium, and Germany on the right side. My suggestion is in a case like this one you create a new column in your dataframe with two significant places. So specifically it would be <code>newgdp$rGDP &lt;- signif(newgdp$GDP, 2)</code>. In my testing, at least, I’ve found this helps without creating inaccuracy and not causing you to try and “stretch” vertically to disambiguate the numbers. This time I’ll also use <code>LineColor</code> to highlight how Canada, Finland and Belgium fare from 1970 to 1979.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">newgdp<span class="op">$</span>rGDP &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Round">signif</a></span>(newgdp<span class="op">$</span>GDP, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb9-2" title="2"><span class="kw"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span>(newgdp, </a>
-<a class="sourceLine" id="cb9-3" title="3">                Year, </a>
-<a class="sourceLine" id="cb9-4" title="4">                rGDP, </a>
-<a class="sourceLine" id="cb9-5" title="5">                Country, </a>
-<a class="sourceLine" id="cb9-6" title="6">                <span class="dt">Title =</span> <span class="st">"Gross GDP"</span>, </a>
-<a class="sourceLine" id="cb9-7" title="7">                <span class="dt">SubTitle =</span> <span class="ot">NULL</span>, </a>
-<a class="sourceLine" id="cb9-8" title="8">                <span class="dt">Caption =</span> <span class="ot">NULL</span>,</a>
-<a class="sourceLine" id="cb9-9" title="9">                <span class="dt">LineThickness =</span> <span class="fl">.5</span>,</a>
-<a class="sourceLine" id="cb9-10" title="10">                <span class="dt">YTextSize =</span> <span class="dv">4</span>,</a>
-<a class="sourceLine" id="cb9-11" title="11">                <span class="dt">LineColor =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="st">"gray"</span>,<span class="dv">6</span>), <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="st">"red"</span>,<span class="dv">2</span>), <span class="st">"red"</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="st">"gray"</span>,<span class="dv">10</span>))</a>
-<a class="sourceLine" id="cb9-12" title="12">                )</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">newgdp<span class="op">$</span>rGDP &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Round">signif</a></span>(newgdp<span class="op">$</span>GDP, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="kw"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span>(newgdp, </a>
+<a class="sourceLine" id="cb8-3" title="3">                Year, </a>
+<a class="sourceLine" id="cb8-4" title="4">                rGDP, </a>
+<a class="sourceLine" id="cb8-5" title="5">                Country, </a>
+<a class="sourceLine" id="cb8-6" title="6">                <span class="dt">Title =</span> <span class="st">"Gross GDP"</span>, </a>
+<a class="sourceLine" id="cb8-7" title="7">                <span class="dt">SubTitle =</span> <span class="ot">NULL</span>, </a>
+<a class="sourceLine" id="cb8-8" title="8">                <span class="dt">Caption =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb8-9" title="9">                <span class="dt">LineThickness =</span> <span class="fl">.5</span>,</a>
+<a class="sourceLine" id="cb8-10" title="10">                <span class="dt">YTextSize =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb8-11" title="11">                <span class="dt">LineColor =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="st">"gray"</span>,<span class="dv">6</span>), <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="st">"red"</span>,<span class="dv">2</span>), <span class="st">"red"</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="st">"gray"</span>,<span class="dv">10</span>))</a>
+<a class="sourceLine" id="cb8-12" title="12">                )</a></code></pre></div>
 <p><img src="Using-newggslopegraph_files/figure-html/ggslope7-1.png" width="576"></p>
 <div id="leaving-feedback" class="section level3">
 <h3 class="hasAnchor">
