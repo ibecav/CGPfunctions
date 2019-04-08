@@ -343,10 +343,12 @@ Plot2WayANOVA <- function(formula,
   SWTest <- shapiro.test(x = MyAOV_residuals) # run Shapiro-Wilk test
   # Grab on the effects that were significant in omnibuds test
   sigfactors <- filter(WithETA, p.value <= 1 - confidence) %>% select(term)
+  if(!is.null(sigfactors)) {
   posthocresults <- PostHocTest(MyAOV, 
                                 method = posthoc.method, 
                                 conf.level = confidence,
                                 which =  as.character(sigfactors[,1]))
+  }
   
   # -------- save the common plot items as a list to be used ---------
   
