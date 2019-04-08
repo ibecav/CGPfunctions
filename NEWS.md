@@ -1,5 +1,8 @@
-# CGPfunctions 0.5.3
+# CGPfunctions 0.5.4
 
+* Release 0.5.4 hotfix release 8 April 2019
+  - Updated Plot2WayANOVA to remedy an error when there were zero significant effects
+    and post hoc tests failed
 * Release 0.5.3 stable release 3 April 2019
   - Updated vignette for Plot2WayANOVA
   - Major improvements and features added to Plot2WayANOVA
