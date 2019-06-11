@@ -1,5 +1,7 @@
 # CGPfunctions 0.5.4
 
+* Release 0.5.7 feature release 12 June 2019
+  - Updated newslopegraph to add aditional formatting options
 * Release 0.5.4 hotfix release 8 April 2019
   - Updated Plot2WayANOVA to remedy an error when there were zero significant effects
     and post hoc tests failed
