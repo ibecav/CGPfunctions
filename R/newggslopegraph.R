@@ -217,6 +217,7 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
     dataframe %>%
       ggplot(aes_(group=Grouping, y=Measurement, x=Times)) +
         LineGeom +
+        # left side y axis labels
         geom_text_repel(data = . %>% filter(!! Times == min(!! Times)),
                         aes_(label = Grouping) ,
                         hjust = "left",
@@ -227,6 +228,7 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
                         size = YTextSize,
                         nudge_x = -1.95,
                         direction = "y") +
+        # right side y axis labels
         geom_text_repel(data = . %>% filter(!! Times == max(!! Times)),
                         aes_(label = Grouping),
                         hjust = "right",
@@ -237,10 +239,18 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
                         size = YTextSize,
                         nudge_x = 1.95,
                         direction = "y") +
+        # data point labels
         geom_label(aes_(label = Measurement), 
                    size = DataTextSize, 
+                   # label.padding controls fill padding
                    label.padding = unit(0.05, "lines"), 
-                   label.size = 0.0) +
+                   # label.size controls width or line around label box
+                   # 0 = no box line
+                   label.size = 0,
+                   # color = text color of label
+                   color = "black",
+                   # fill background color for data label
+                   fill = "white") +
         MySpecial +
         labs(
               title = Title,
