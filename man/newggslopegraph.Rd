@@ -9,6 +9,8 @@ newggslopegraph(dataframe, Times, Measurement, Grouping,
   Caption = "No caption given", XTextSize = 12, YTextSize = 3,
   TitleTextSize = 14, SubTitleTextSize = 10, CaptionTextSize = 8,
   LineThickness = 1, LineColor = "ByGroup", DataTextSize = 2.5,
+  DataTextColor = "black", DataLabelPadding = 0.05,
+  DataLabelLineSize = 0, DataLabelFillColor = "white",
   WiderLabels = FALSE, RemoveMissing = TRUE)
 }
 \arguments{
@@ -55,8 +57,8 @@ SubTitleTextSize = 10 is the default must be a numeric.}
 \item{CaptionTextSize}{Optionally the font size for the Caption to be displayed. 
 CaptionTextSize = 8 is the default must be a numeric.}
 
-\item{LineThickness}{Optionally the thickness of the plotted lines. LineThickness = 1 
-is the default must be a numeric.}
+\item{LineThickness}{Optionally the thickness of the plotted lines that
+connect the data points. LineThickness = 1 is the default must be a numeric.}
 
 \item{LineColor}{Optionally the color of the plotted lines. By default it will use 
 the ggplot2 color palette for coloring by \code{Grouping}. The user may override 
@@ -70,6 +72,22 @@ user does not provide enough colors they will be recycled.}
 
 \item{DataTextSize}{Optionally the font size of the plotted data points. DataTextSize = 2.5 
 is the default must be a numeric.}
+
+\item{DataTextColor}{Optionally the font color of the plotted data points. `"black"`
+is the default can be either `colors()` or hex value e.g. "#FF00FF".}
+
+\item{DataLabelPadding}{Optionally the amount of space between the plotted
+data point numbers and the label "box". By default very small = 0.05 to
+avoid overlap. Must be a numeric. Too large a value will risk "hiding"
+datapoints.}
+
+\item{DataLabelLineSize}{Optionally how wide a line to plot around the data
+label box. By default = 0 to have no visible border line around the
+label. Must be a numeric.}
+
+\item{DataLabelFillColor}{Optionally the fill color or background of the 
+plotted data points. `"white"` is the default can be any of the `colors()`
+or hex value e.g. "#FF00FF".}
 
 \item{WiderLabels}{logical, set this value to \code{TRUE} if your "labels" or 
 \code{Grouping} variable values tend to be long as they are in the \code{newcancer}
@@ -117,7 +135,19 @@ newggslopegraph(newcancer, Year, Survival, Type,
                 LineColor = c("black", "red", "grey"), 
                 LineThickness = .5,
                 WiderLabels = TRUE)
+                
+# not a great example but demonstrating functionality
+newgdp$rGDP <- round(newgdp$GDP)
 
+newggslopegraph(newgdp, 
+                Year, 
+                rGDP, 
+                Country, 
+                LineColor = c(rep("grey", 3), "red", rep("grey", 11)), 
+                DataTextSize = 3, 
+                DataLabelFillColor = "gray", 
+                DataLabelPadding = .2, 
+                DataLabelLineSize = .5)
 
 }
 \references{
