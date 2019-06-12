@@ -13,11 +13,11 @@ Imports:
     DescTools,
     devtools,
     dplyr,
-    ggplot2 (>= 2.2.1),
+    ggplot2,
     ggrepel,
     methods,
     pwr,
-    rlang (>= 0.1.6),
+    rlang,
     scales,
     sjstats,
     tibble
