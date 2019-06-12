@@ -6,6 +6,3 @@
 ## R CMD check results
 
 0 errors | 0 warnings | 0 notes
-
-* Sorry for the second submission in two days.
-  the problem was in my statistics not my R code
