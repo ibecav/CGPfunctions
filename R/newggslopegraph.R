@@ -37,10 +37,22 @@
 #' SubTitleTextSize = 10 is the default must be a numeric.
 #' @param CaptionTextSize Optionally the font size for the Caption to be displayed. 
 #' CaptionTextSize = 8 is the default must be a numeric.
-#' @param LineThickness Optionally the thickness of the plotted lines. LineThickness = 1 
-#' is the default must be a numeric.
+#' @param LineThickness Optionally the thickness of the plotted lines that
+#' connect the data points. LineThickness = 1 is the default must be a numeric.
 #' @param DataTextSize Optionally the font size of the plotted data points. DataTextSize = 2.5 
 #' is the default must be a numeric.
+#' @param DataTextColor Optionally the font color of the plotted data points. `"black"`
+#' is the default can be either `colors()` or hex value e.g. "#FF00FF".
+#' @param DataLabelPadding Optionally the amount of space between the plotted
+#'   data point numbers and the label "box". By default very small = 0.05 to
+#'   avoid overlap. Must be a numeric. Too large a value will risk "hiding"
+#'   datapoints.
+#' @param DataLabelLineSize Optionally how wide a line to plot around the data
+#'   label box. By default = 0 to have no visible border line around the
+#'   label. Must be a numeric. 
+#' @param DataLabelFillColor Optionally the fill color or background of the 
+#'   plotted data points. `"white"` is the default can be any of the `colors()`
+#'   or hex value e.g. "#FF00FF".
 #' @param LineColor Optionally the color of the plotted lines. By default it will use 
 #' the ggplot2 color palette for coloring by \code{Grouping}. The user may override 
 #' with \bold{one} valid color of their choice e.g. "black" (see colors() for choices) 
@@ -64,7 +76,7 @@
 #' @export
 #' @import ggplot2
 #' @importFrom dplyr filter mutate group_by summarise %>% n
-#' @importFrom ggrepel geom_text_repel
+#' @importFrom ggrepel geom_text_repel geom_label_repel
 #'
 #' @author Chuck Powell
 #' @seealso \code{\link{newcancer}} and  \code{\link{newgdp}}
@@ -95,7 +107,19 @@
 #'                 LineColor = c("black", "red", "grey"), 
 #'                 LineThickness = .5,
 #'                 WiderLabels = TRUE)
-#'
+#'                 
+#' # not a great example but demonstrating functionality
+#' newgdp$rGDP <- round(newgdp$GDP)
+#' 
+#' newggslopegraph(newgdp, 
+#'                 Year, 
+#'                 rGDP, 
+#'                 Country, 
+#'                 LineColor = c(rep("grey", 3), "red", rep("grey", 11)), 
+#'                 DataTextSize = 3, 
+#'                 DataLabelFillColor = "gray", 
+#'                 DataLabelPadding = .2, 
+#'                 DataLabelLineSize = .5)
 #'
 newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
                             Title = "No title given",
@@ -109,6 +133,10 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
                             LineThickness = 1,
                             LineColor = "ByGroup",
                             DataTextSize = 2.5,
+                            DataTextColor = "black",
+                            DataLabelPadding = 0.05,
+                            DataLabelLineSize = 0,
+                            DataLabelFillColor = "white",
                             WiderLabels = FALSE,
                             RemoveMissing = TRUE)
   {
@@ -217,6 +245,7 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
     dataframe %>%
       ggplot(aes_(group=Grouping, y=Measurement, x=Times)) +
         LineGeom +
+        # left side y axis labels
         geom_text_repel(data = . %>% filter(!! Times == min(!! Times)),
                         aes_(label = Grouping) ,
                         hjust = "left",
@@ -227,6 +256,7 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
                         size = YTextSize,
                         nudge_x = -1.95,
                         direction = "y") +
+        # right side y axis labels
         geom_text_repel(data = . %>% filter(!! Times == max(!! Times)),
                         aes_(label = Grouping),
                         hjust = "right",
@@ -237,10 +267,18 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
                         size = YTextSize,
                         nudge_x = 1.95,
                         direction = "y") +
+        # data point labels
         geom_label(aes_(label = Measurement), 
                    size = DataTextSize, 
-                   label.padding = unit(0.05, "lines"), 
-                   label.size = 0.0) +
+                   # label.padding controls fill padding
+                   label.padding = unit(DataLabelPadding, "lines"), 
+                   # label.size controls width of line around label box
+                   # 0 = no box line
+                   label.size = DataLabelLineSize,
+                   # color = text color of label
+                   color = DataTextColor,
+                   # fill background color for data label
+                   fill = DataLabelFillColor) +
         MySpecial +
         labs(
               title = Title,
