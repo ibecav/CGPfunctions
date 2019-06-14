@@ -169,6 +169,9 @@ Plot2WayANOVA(formula = hwy ~ am * cyl,
               show.dots = TRUE)
 
 }
+\references{
+: ANOVA: Delacre, Leys, Mora, & Lakens, *PsyArXiv*, 2018
+}
 \seealso{
 \code{\link[stats]{aov}}, \code{\link[car]{leveneTest}},
 \code{\link[sjstats]{anova_stats}}, \code{\link[stats]{replications}},

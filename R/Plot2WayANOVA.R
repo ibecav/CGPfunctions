@@ -109,6 +109,8 @@
 #'   \code{$PosthocTable}, \code{$BFTest}, and \code{$SWTest}.
 #'   The plot is always sent to the default plot device
 #'
+#' @references: ANOVA: Delacre, Leys, Mora, & Lakens, *PsyArXiv*, 2018
+#'
 #' @author Chuck Powell
 #' @seealso \code{\link[stats]{aov}}, \code{\link[car]{leveneTest}},
 #' \code{\link[sjstats]{anova_stats}}, \code{\link[stats]{replications}},
