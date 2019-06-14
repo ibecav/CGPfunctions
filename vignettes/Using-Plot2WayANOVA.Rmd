@@ -53,7 +53,7 @@ variables `factors` with a varying numbers of `levels` in each `factor`.
 
 If you prefer a more regression based approach with a very similar plotted
 result I highly recommend the `interactions` package which I was unaware of
-until just recently.  It is [available through CRAN](https://cran.r-project.org/web/packages/interactions/index.html).
+until just recently.  It is [available through CRAN](https://CRAN.R-project.org/package=interactions).
 
 The `Plot2WayANOVA` function conducts a classic analysis of variance (ANOVA) in
 a sane and defensible manner, not necessarily the only one. It's real strength
