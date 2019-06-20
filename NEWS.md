@@ -1,5 +1,8 @@
-# CGPfunctions 0.5.4
+# CGPfunctions 0.5.8
 
+* Release 0.5.8 feature release 20 June 2019
+  - Updated newslopegraph to add aditional formatting options
+  - Added support for selected themes from ggthemes
 * Release 0.5.7 feature release 12 June 2019
   - Updated newslopegraph to add aditional formatting options
 * Release 0.5.4 hotfix release 8 April 2019

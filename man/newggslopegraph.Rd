@@ -8,10 +8,13 @@ newggslopegraph(dataframe, Times, Measurement, Grouping,
   Title = "No title given", SubTitle = "No subtitle given",
   Caption = "No caption given", XTextSize = 12, YTextSize = 3,
   TitleTextSize = 14, SubTitleTextSize = 10, CaptionTextSize = 8,
-  LineThickness = 1, LineColor = "ByGroup", DataTextSize = 2.5,
-  DataTextColor = "black", DataLabelPadding = 0.05,
-  DataLabelLineSize = 0, DataLabelFillColor = "white",
-  WiderLabels = FALSE, RemoveMissing = TRUE)
+  TitleJustify = "left", SubTitleJustify = "left",
+  CaptionJustify = "right", LineThickness = 1, LineColor = "ByGroup",
+  DataTextSize = 2.5, DataTextColor = "black",
+  DataLabelPadding = 0.05, DataLabelLineSize = 0,
+  DataLabelFillColor = "white", WiderLabels = FALSE,
+  ReverseYAxis = FALSE, ReverseXAxis = FALSE, RemoveMissing = TRUE,
+  ThemeChoice = "bw")
 }
 \arguments{
 \item{dataframe}{a dataframe or an object that can be coerced to a dataframe. 
@@ -57,6 +60,18 @@ SubTitleTextSize = 10 is the default must be a numeric.}
 \item{CaptionTextSize}{Optionally the font size for the Caption to be displayed. 
 CaptionTextSize = 8 is the default must be a numeric.}
 
+\item{TitleJustify}{Justification of title can be either a character "L", 
+"R" or "C" or use the \code{hjust = } notation from \code{ggplot2} with 
+a numeric value between `0` (left) and `1` (right).}
+
+\item{SubTitleJustify}{Justification of subtitle can be either a character "L", 
+"R" or "C" or use the \code{hjust = } notation from \code{ggplot2} with 
+a numeric value between `0` (left) and `1` (right).}
+
+\item{CaptionJustify}{Justification of caption can be either a character "L", 
+"R" or "C" or use the \code{hjust = } notation from \code{ggplot2} with 
+a numeric value between `0` (left) and `1` (right).}
+
 \item{LineThickness}{Optionally the thickness of the plotted lines that
 connect the data points. LineThickness = 1 is the default must be a numeric.}
 
@@ -93,11 +108,22 @@ or hex value e.g. "#FF00FF".}
 \code{Grouping} variable values tend to be long as they are in the \code{newcancer}
 dataset.  This setting will give them more room in the same plot size.}
 
+\item{ReverseYAxis}{logical, set this value to \code{TRUE} if you want
+to reverse the Y scale, especially useful for rankings when you want #1 on
+top.}
+
+\item{ReverseXAxis}{logical, set this value to \code{TRUE} if you want
+to reverse the **factor levels** on the X scale.}
+
 \item{RemoveMissing}{logical, by default set to \code{TRUE} so that if any \code{Measurement}
 is missing \bold{all rows} for that \code{Grouping} are removed. If set to \code{FALSE} then
 the function will try to remove and graph what data it does have. \bold{N.B.} missing values
 for \code{Times} and \code{Grouping} are never permitted and will generate a fatal error with
 a warning.}
+
+\item{ThemeChoice}{character, by default set to \bold{"bw"} the other
+choices are \bold{"ipsum"}, \bold{"econ"}, \bold{"wsj"}, \bold{"gdocs"},
+and \bold{"tufte"}.}
 }
 \value{
 a plot of type ggplot to the default plot device

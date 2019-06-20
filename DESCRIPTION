@@ -1,6 +1,6 @@
 Package: CGPfunctions
 Title: Powell Miscellaneous Functions for Teaching and Learning Statistics
-Version: 0.5.7
+Version: 0.5.8
 Authors@R: person("Chuck", "Powell", email = "ibecav@gmail.com", role = c("aut", "cre"),
              comment = c(ORCID = "0000-0002-3606-2188"))
 Description: Miscellaneous functions useful for teaching statistics as well as actually practicing the art. They typically are not “new” methods but rather wrappers around either base R or other packages.
@@ -14,6 +14,7 @@ Imports:
     DescTools,
     devtools,
     dplyr,
+    forcats,
     ggplot2,
     ggrepel,
     methods,
@@ -21,12 +22,15 @@ Imports:
     rlang,
     scales,
     sjstats,
+    stringr,
     tibble
 Suggests:
     BSDA,
-    lsr,
+    ggthemes,
+    hrbrthemes,
     janitor,
     knitr,
+    lsr,
     productplots,
     rmarkdown,
     stringi
