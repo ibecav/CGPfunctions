@@ -37,6 +37,15 @@
 #' SubTitleTextSize = 10 is the default must be a numeric.
 #' @param CaptionTextSize Optionally the font size for the Caption to be displayed. 
 #' CaptionTextSize = 8 is the default must be a numeric.
+#' @param TitleJustify Justification of title can be either a character "L", 
+#'   "R" or "C" or use the \code{hjust = } notation from \code{ggplot2} with 
+#'   a numeric value between `0` (left) and `1` (right).
+#' @param SubTitleJustify Justification of subtitle can be either a character "L", 
+#'   "R" or "C" or use the \code{hjust = } notation from \code{ggplot2} with 
+#'   a numeric value between `0` (left) and `1` (right).
+#' @param CaptionJustify Justification of caption can be either a character "L", 
+#'   "R" or "C" or use the \code{hjust = } notation from \code{ggplot2} with 
+#'   a numeric value between `0` (left) and `1` (right).
 #' @param LineThickness Optionally the thickness of the plotted lines that
 #' connect the data points. LineThickness = 1 is the default must be a numeric.
 #' @param DataTextSize Optionally the font size of the plotted data points. DataTextSize = 2.5 
@@ -65,18 +74,27 @@
 #' @param WiderLabels logical, set this value to \code{TRUE} if your "labels" or 
 #' \code{Grouping} variable values tend to be long as they are in the \code{newcancer}
 #' dataset.  This setting will give them more room in the same plot size. 
+#' @param ReverseYAxis logical, set this value to \code{TRUE} if you want
+#' to reverse the Y scale, especially useful for rankings when you want #1 on
+#' top.
+#' @param ReverseXAxis logical, set this value to \code{TRUE} if you want
+#' to reverse the **factor levels** on the X scale.
 #' @param RemoveMissing logical, by default set to \code{TRUE} so that if any \code{Measurement}
 #' is missing \bold{all rows} for that \code{Grouping} are removed. If set to \code{FALSE} then
 #' the function will try to remove and graph what data it does have. \bold{N.B.} missing values
 #' for \code{Times} and \code{Grouping} are never permitted and will generate a fatal error with
 #' a warning. 
+#' @param ThemeChoice character, by default set to \bold{"bw"} the other
+#' choices are \bold{"ipsum"}, \bold{"econ"}, \bold{"wsj"}, \bold{"gdocs"},
+#' and \bold{"tufte"}. 
 #' 
 #' 
 #' @return a plot of type ggplot to the default plot device
 #' @export
 #' @import ggplot2
-#' @importFrom dplyr filter mutate group_by summarise %>% n
+#' @importFrom dplyr filter mutate group_by summarise %>% n case_when
 #' @importFrom ggrepel geom_text_repel geom_label_repel
+#' @importFrom forcats fct_rev
 #'
 #' @author Chuck Powell
 #' @seealso \code{\link{newcancer}} and  \code{\link{newgdp}}
@@ -130,6 +148,9 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
                             TitleTextSize = 14,
                             SubTitleTextSize = 10,
                             CaptionTextSize = 8,
+                            TitleJustify = "left",
+                            SubTitleJustify = "left",
+                            CaptionJustify = "right",
                             LineThickness = 1,
                             LineColor = "ByGroup",
                             DataTextSize = 2.5,
@@ -138,14 +159,48 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
                             DataLabelLineSize = 0,
                             DataLabelFillColor = "white",
                             WiderLabels = FALSE,
-                            RemoveMissing = TRUE)
-  {
-  . = NULL # appease CRAN since you can't import this convention from dplyr or ggplot2
+                            ReverseYAxis = FALSE,
+                            ReverseXAxis = FALSE,
+                            RemoveMissing = TRUE,
+                            ThemeChoice = "bw") {
+  
+  # ---------------- nonsense ----------------------------
+  # appease CRAN since you can't import this convention from dplyr or ggplot2
+  
+  . = NULL 
+
+  # ---------------- theme selection ----------------------------
+  
+  if (ThemeChoice == "bw") {
+    theme_set(theme_bw())
+  } else if (ThemeChoice == "ipsum") {
+    theme_set(hrbrthemes::theme_ipsum_rc())
+  } else if (ThemeChoice == "econ") {
+    theme_set(ggthemes::theme_economist()) ## background = "#d5e4eb"
+    if (DataLabelFillColor == "white") {
+      DataLabelFillColor = "#d5e4eb"
+    }
+  } else if (ThemeChoice == "wsj") {
+    theme_set(ggthemes::theme_wsj()) ## background = "#f8f2e4"
+    if (DataLabelFillColor == "white") {
+      DataLabelFillColor <- "#f8f2e4"
+    }
+    TitleTextSize <- TitleTextSize - 1
+    SubTitleTextSize <- SubTitleTextSize + 1
+  } else if (ThemeChoice == "gdocs") {
+    theme_set(ggthemes::theme_gdocs())
+  } else if (ThemeChoice == "tufte") {
+    theme_set(ggthemes::theme_tufte())
+  } else {
+    theme_set(theme_bw())
+  }
+  
+  # ---------------- ggplot setup work ----------------------------
+  
   # Since ggplot2 objects are just regular R objects, put them in a list
   MySpecial <- list(
     # Format tweaks
     scale_x_discrete(position = "top"), # move the x axis labels up top
-    theme_bw(),
     theme(legend.position  = "none"), # Remove the legend
     theme(panel.border     = element_blank()), # Remove the panel border
     theme(axis.title.y     = element_blank()), # Remove just about everything from the y axis
@@ -154,18 +209,24 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
     theme(panel.grid.minor.y = element_blank()),
     theme(axis.title.x     = element_blank()), # Remove a few things from the x axis
     theme(panel.grid.major.x = element_blank()),
-    theme(axis.text.x.top      = element_text(size = XTextSize)), # and increase font size
+    theme(axis.text.x.top      = element_text(size = XTextSize, face = "bold")), # and increase font size
     theme(axis.ticks       = element_blank()), # Remove x & y tick marks
-    theme(plot.title       = element_text(size = TitleTextSize, face = "bold")), # Format title
-    theme(plot.title       = element_text(hjust = 0.5)), # Center title & subtitle
-    theme(plot.subtitle    = element_text(hjust = 0.5, size = SubTitleTextSize)),
-    theme(plot.caption     = element_text(size = CaptionTextSize))
+    theme(plot.title       = element_text(size = TitleTextSize, 
+                                          face = "bold",
+                                          hjust = justifyme(TitleJustify))),
+    theme(plot.subtitle    = element_text(size = SubTitleTextSize,
+                                          hjust = justifyme(SubTitleJustify))),
+    theme(plot.caption     = element_text(size = CaptionTextSize,
+                                          hjust = justifyme(CaptionJustify)))
   )
-  # for convenience store these
+
+  # ---------------- input checking ----------------------------
+  
   Ndataframe <- deparse(substitute(dataframe)) # name of dataframe
   NTimes <- deparse(substitute(Times)) # name of Times variable
   NMeasurement <- deparse(substitute(Measurement)) # name of Measurement variable
   NGrouping <- deparse(substitute(Grouping)) # name of Grouping variable
+  
   # error checking and setup
   if (length(match.call()) <= 4) {
     stop("Not enough arguments passed... requires a dataframe, plus at least three variables")
@@ -206,9 +267,19 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
     }
   }
 
+  # ---------------- handle some special options ----------------------------
+  
+  if (ReverseXAxis) {
+    dataframe[[NTimes]] <- forcats::fct_rev(dataframe[[NTimes]])
+  }
+  
   NumbOfLevels <- nlevels(factor(dataframe[[NTimes]]))
   if (WiderLabels) {
     MySpecial <- c(MySpecial, expand_limits(x = c(0, NumbOfLevels+1)))
+  }
+  
+  if (ReverseYAxis) {
+    MySpecial <- c(MySpecial, scale_y_reverse())
   }
   
   Times <- enquo(Times)
@@ -242,7 +313,9 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
     }
   }
   
-    dataframe %>%
+  # ---------------- main ggplot routine ----------------------------
+  
+  dataframe %>%
       ggplot(aes_(group=Grouping, y=Measurement, x=Times)) +
         LineGeom +
         # left side y axis labels
@@ -285,5 +358,7 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
               subtitle = SubTitle,
               caption = Caption
             )
+  
+  # implicitly return plot object
 } # end of function
 
