@@ -77,7 +77,7 @@ Makes the required adjustments to the ggplot2 parameters and returns the plot." 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">CGPfunctions</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.8</span>
       </span>
     </div>
 
@@ -153,10 +153,13 @@ Makes the required adjustments to the ggplot2 parameters and returns the plot.</
   <span class='kw'>Title</span> <span class='kw'>=</span> <span class='st'>"No title given"</span>, <span class='kw'>SubTitle</span> <span class='kw'>=</span> <span class='st'>"No subtitle given"</span>,
   <span class='kw'>Caption</span> <span class='kw'>=</span> <span class='st'>"No caption given"</span>, <span class='kw'>XTextSize</span> <span class='kw'>=</span> <span class='fl'>12</span>, <span class='kw'>YTextSize</span> <span class='kw'>=</span> <span class='fl'>3</span>,
   <span class='kw'>TitleTextSize</span> <span class='kw'>=</span> <span class='fl'>14</span>, <span class='kw'>SubTitleTextSize</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>CaptionTextSize</span> <span class='kw'>=</span> <span class='fl'>8</span>,
-  <span class='kw'>LineThickness</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='st'>"ByGroup"</span>, <span class='kw'>DataTextSize</span> <span class='kw'>=</span> <span class='fl'>2.5</span>,
-  <span class='kw'>DataTextColor</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>DataLabelPadding</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
-  <span class='kw'>DataLabelLineSize</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>DataLabelFillColor</span> <span class='kw'>=</span> <span class='st'>"white"</span>,
-  <span class='kw'>WiderLabels</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>RemoveMissing</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+  <span class='kw'>TitleJustify</span> <span class='kw'>=</span> <span class='st'>"left"</span>, <span class='kw'>SubTitleJustify</span> <span class='kw'>=</span> <span class='st'>"left"</span>,
+  <span class='kw'>CaptionJustify</span> <span class='kw'>=</span> <span class='st'>"right"</span>, <span class='kw'>LineThickness</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='st'>"ByGroup"</span>,
+  <span class='kw'>DataTextSize</span> <span class='kw'>=</span> <span class='fl'>2.5</span>, <span class='kw'>DataTextColor</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
+  <span class='kw'>DataLabelPadding</span> <span class='kw'>=</span> <span class='fl'>0.05</span>, <span class='kw'>DataLabelLineSize</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>DataLabelFillColor</span> <span class='kw'>=</span> <span class='st'>"white"</span>, <span class='kw'>WiderLabels</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>ReverseYAxis</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>ReverseXAxis</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>RemoveMissing</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>ThemeChoice</span> <span class='kw'>=</span> <span class='st'>"bw"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -229,6 +232,24 @@ SubTitleTextSize = 10 is the default must be a numeric.</p></td>
 CaptionTextSize = 8 is the default must be a numeric.</p></td>
     </tr>
     <tr>
+      <th>TitleJustify</th>
+      <td><p>Justification of title can be either a character "L", 
+"R" or "C" or use the <code>hjust = </code> notation from <code>ggplot2</code> with 
+a numeric value between `0` (left) and `1` (right).</p></td>
+    </tr>
+    <tr>
+      <th>SubTitleJustify</th>
+      <td><p>Justification of subtitle can be either a character "L", 
+"R" or "C" or use the <code>hjust = </code> notation from <code>ggplot2</code> with 
+a numeric value between `0` (left) and `1` (right).</p></td>
+    </tr>
+    <tr>
+      <th>CaptionJustify</th>
+      <td><p>Justification of caption can be either a character "L", 
+"R" or "C" or use the <code>hjust = </code> notation from <code>ggplot2</code> with 
+a numeric value between `0` (left) and `1` (right).</p></td>
+    </tr>
+    <tr>
       <th>LineThickness</th>
       <td><p>Optionally the thickness of the plotted lines that
 connect the data points. LineThickness = 1 is the default must be a numeric.</p></td>
@@ -281,12 +302,29 @@ or hex value e.g. "#FF00FF".</p></td>
 dataset.  This setting will give them more room in the same plot size.</p></td>
     </tr>
     <tr>
+      <th>ReverseYAxis</th>
+      <td><p>logical, set this value to <code>TRUE</code> if you want
+to reverse the Y scale, especially useful for rankings when you want #1 on
+top.</p></td>
+    </tr>
+    <tr>
+      <th>ReverseXAxis</th>
+      <td><p>logical, set this value to <code>TRUE</code> if you want
+to reverse the **factor levels** on the X scale.</p></td>
+    </tr>
+    <tr>
       <th>RemoveMissing</th>
       <td><p>logical, by default set to <code>TRUE</code> so that if any <code>Measurement</code>
 is missing <b>all rows</b> for that <code>Grouping</code> are removed. If set to <code>FALSE</code> then
 the function will try to remove and graph what data it does have. <b>N.B.</b> missing values
 for <code>Times</code> and <code>Grouping</code> are never permitted and will generate a fatal error with
 a warning.</p></td>
+    </tr>
+    <tr>
+      <th>ThemeChoice</th>
+      <td><p>character, by default set to <b>"bw"</b> the other
+choices are <b>"ipsum"</b>, <b>"econ"</b>, <b>"wsj"</b>, <b>"gdocs"</b>,
+and <b>"tufte"</b>.</p></td>
     </tr>
     </table>
     
