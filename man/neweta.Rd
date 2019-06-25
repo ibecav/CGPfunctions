@@ -27,10 +27,12 @@ There are three ways to compute eta squared this function only uses Type II
 }
 \examples{
 
+mtcars$am <- factor(mtcars$am)
+mtcars$cyl <- factor(mtcars$cyl)
 neweta(aov(mpg ~ am * cyl, mtcars))
 }
 \references{
-neweta function is a shortened and simplified verion of Dani
+neweta function is a shortened and simplified verion of Danielle
 Navarro's \code{\link[lsr]{etaSquared}}
 }
 \seealso{

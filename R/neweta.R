@@ -16,14 +16,17 @@
 #' additional column
 #' @author Chuck Powell
 #' @seealso \code{\link{Plot2WayANOVA}}
-#' @references neweta function is a shortened and simplified verion of Dani
+#' @references neweta function is a shortened and simplified verion of Danielle
 #' Navarro's \code{\link[lsr]{etaSquared}}
 #' @examples
 #'
+#' mtcars$am <- factor(mtcars$am)
+#' mtcars$cyl <- factor(mtcars$cyl)
 #' neweta(aov(mpg ~ am * cyl, mtcars))
 #' @export
 #'
 neweta <- function(MyAOV) {
+  .Deprecated(new = "sjstats::eta_sq")
   ss.tot <- sum((MyAOV$model[, 1] - mean(MyAOV$model[, 1]))^2)
   ss.res <- sum((MyAOV$residuals)^2)
   terms <- attr(MyAOV$terms, "factors")[-1, , drop = FALSE]
