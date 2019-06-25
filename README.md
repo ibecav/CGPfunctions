@@ -15,9 +15,9 @@ packages and concepts I’m trying to master. Currently contains:
     plots the results using `ggplot2`
   - `PlotXTabs` which as the name implies plots cross tabulated
     variables using `ggplot2`
-  - `neweta` which is a helper function that appends the results of a
-    Type II eta squared calculation onto a classic ANOVA table
-  - `Mode` which finds the modal value in a vector of data
+  - `newggslopegraph` which creates a Tufte“esque” slopegraph using
+    `ggplot2`
+  - `Mode` which finds the modal value(s) in a vector of data
   - `SeeDist` which wraps around ggplot2 to provide visualizations of
     univariate data.
   - `OurConf` is a simulation function that helps you learn about
@@ -36,54 +36,16 @@ devtools::install_github("ibecav/CGPfunctions")
 
 ## Usage
 
-`library(CGPfunctions)` will load the package which contains 4
-functions:
-
-`SeeDist` will give you some plots of the distribution of a variable
-using `ggplot2`
-
-`Mode` is a helper function that simply returns one or more modal values
-
-`neweta` is a helper function which returns a tibble containing AOV
-output similar to summary(aov(MyAOV)) but with eta squared computed and
-appended as an additional column
-
-The `Plot2WayANOVA` function conducts a classic analysis using existing
-R functions and packages in a sane and defensible manner not necessarily
-in the one and only manner.
-
-`OurConf` is a simulation function that helps you learn about confidence
-intervals
+[Online documentation and vignettes are located
+here](https://ibecav.github.io/CGPfunctions).
 
 ## Credits
 
-Many thanks to Dani Navarro and the book \> ([Learning Statistics with
-R](http://www.compcogscisydney.com/learning-statistics-with-r.html))
-whose etaSquared function was the genesis of `neweta`.
+Many thanks to Danielle Navarro and the book *[Learning Statistics with
+R](https://learningstatisticswithr.com/book/)*.
 
 “He who gives up safety for speed deserves neither.”
 ([via](https://twitter.com/hadleywickham/status/504368538874703872))
-
-#### A shoutout to some other packages I find essential.
-
-  - [stringr](https://github.com/tidyverse/stringr), for strings.
-  - [lubridate](https://github.com/hadley/lubridate), for date/times.
-  - [forcats](https://github.com/hadley/forcats), for factors.
-  - [haven](https://github.com/hadley/haven), for SPSS, SAS and Stata
-    files.
-  - [readxl](https://github.com/hadley/readxl), for `.xls` and `.xlsx`
-    files.
-  - [modelr](https://github.com/hadley/modelr), for modelling within a
-    pipeline
-  - [broom](https://github.com/dgrtwo/broom), for turning models into
-    tidy data
-  - [ggplot2](http://ggplot2.tidyverse.org), for data visualisation.
-  - [dplyr](http://dplyr.tidyverse.org), for data manipulation.
-  - [tidyr](http://tidyr.tidyverse.org), for data tidying.
-  - [readr](http://readr.tidyverse.org), for data import.
-  - [purrr](http://purrr.tidyverse.org), for functional programming.
-  - [tibble](http://tibble.tidyverse.org), for tibbles, a modern
-    re-imagining of data frames.
 
 ## Leaving Feedback
 
