@@ -27,9 +27,8 @@ their confidence intervals
 }
 \examples{
 OurConf(samples = 100, n = 30, mu = 0, sigma = 1, conf.level = 0.95)
-OurConf(samples = 2, n =5)
+OurConf(samples = 2, n = 5)
 OurConf(samples = 25, n = 25, mu = 100, sigma = 20, conf.level = 0.99)
-
 }
 \seealso{
 \code{\link[stats]{qnorm}}, \code{\link[stats]{rnorm}}, \code{\link[BSDA]{CIsim}}

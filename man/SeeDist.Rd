@@ -21,7 +21,7 @@ such as "Miles Per Gallon"}
 for a density, a boxplot, and a histogram}
 }
 \value{
-from 1 to 3 plots depending on what the user specifies as well as a 
+from 1 to 3 plots depending on what the user specifies as well as a
 base R summary printed to the console
 }
 \description{
@@ -37,10 +37,9 @@ Missing values are removed with a warning to the user
 }
 
 \examples{
-SeeDist(rnorm(100, mean=100, sd=20), numbins = 15, whatvar = "A Random Sample")
-SeeDist(mtcars$hp, whatvar = "Horsepower", whatplots = c("d","b"))
+SeeDist(rnorm(100, mean = 100, sd = 20), numbins = 15, whatvar = "A Random Sample")
+SeeDist(mtcars$hp, whatvar = "Horsepower", whatplots = c("d", "b"))
 SeeDist(iris$Sepal.Length, whatvar = "Sepal Length", whatplots = "d")
-
 }
 \seealso{
 \code{\link[grDevices]{nclass}}

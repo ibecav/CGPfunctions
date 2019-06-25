@@ -4,23 +4,23 @@
 \alias{Plot2WayANOVA}
 \title{Plot a 2 Way ANOVA using dplyr and ggplot2}
 \usage{
-Plot2WayANOVA(formula, 
-               dataframe = NULL, 
+Plot2WayANOVA(formula,
+               dataframe = NULL,
                confidence=.95,
-               plottype = "line", 
-               xlab = NULL, 
-               ylab = NULL, 
+               plottype = "line",
+               xlab = NULL,
+               ylab = NULL,
                title = NULL,
-               subtitle = NULL, 
-               interact.line.size = 2, 
-               ci.line.size = 1, 
+               subtitle = NULL,
+               interact.line.size = 2,
+               ci.line.size = 1,
                mean.label = FALSE,
-               mean.ci = TRUE, 
-               mean.size = 4, 
-               mean.shape = 23, 
+               mean.ci = TRUE,
+               mean.size = 4,
+               mean.shape = 23,
                mean.color = "darkred",
-               mean.label.size = 3, 
-               mean.label.color = "black", 
+               mean.label.size = 3,
+               mean.label.color = "black",
                offset.style = "none",
                overlay.type = NULL,
                posthoc.method = "scheffe",
@@ -28,9 +28,9 @@ Plot2WayANOVA(formula,
                PlotSave = FALSE)
 }
 \arguments{
-\item{formula}{a formula with a numeric dependent (outcome) variable, 
+\item{formula}{a formula with a numeric dependent (outcome) variable,
 and two independent (predictor) variables e.g. \code{mpg ~ am * vs}.
-The independent variables are coerced to factors (with warning) if 
+The independent variables are coerced to factors (with warning) if
 possible.}
 
 \item{dataframe}{a dataframe or an object that can be coerced to a dataframe}
@@ -50,13 +50,13 @@ model information is provided as a subtitle.}
 \item{interact.line.size}{Line size for the line connecting the group means
 (Default: `2`).}
 
-\item{ci.line.size}{Line size for the confidence interval bracketing 
+\item{ci.line.size}{Line size for the confidence interval bracketing
 the group means (Default: `1`).}
 
-\item{mean.label}{Logical that decides whether the value of the group 
+\item{mean.label}{Logical that decides whether the value of the group
 mean is to be displayed (Default: `FALSE`).}
 
-\item{mean.ci}{Logical that decides whether the confidence interval for 
+\item{mean.ci}{Logical that decides whether the confidence interval for
 group means is to be displayed (Default: `TRUE`).}
 
 \item{mean.size}{Point size for the data point corresponding to mean
@@ -71,19 +71,19 @@ group means is to be displayed (Default: `TRUE`).}
 \item{mean.label.size, mean.label.color}{Aesthetics for
 the label displaying mean. Defaults: `3`, `"black"`, respectively.}
 
-\item{offset.style}{A character string (e.g., `"wide"` or `"narrow"`, 
+\item{offset.style}{A character string (e.g., `"wide"` or `"narrow"`,
 or `"none"`) which controls whether items are offset from the
 centerline for clarity. Useful when you want to add individual
 datapoints or confdence interval lines overlap. (Default: `"none"`).}
 
-\item{overlay.type}{A character string (e.g., `"box"` or `"violin"`), 
+\item{overlay.type}{A character string (e.g., `"box"` or `"violin"`),
 if you wish to overlay that information on factor1}
 
-\item{posthoc.method}{A character string, one of "hsd", "bonf", "lsd", 
-"scheffe", "newmankeuls", defining the method for the pairwise comparisons. 
+\item{posthoc.method}{A character string, one of "hsd", "bonf", "lsd",
+"scheffe", "newmankeuls", defining the method for the pairwise comparisons.
 (Default: `"scheffe"`).}
 
-\item{show.dots}{Logical that decides whether the individual data points 
+\item{show.dots}{Logical that decides whether the individual data points
 are displayed (Default: `FALSE`).}
 
 \item{PlotSave}{a logical indicating whether the user wants to save the plot
@@ -91,17 +91,17 @@ as a png file}
 }
 \value{
 A list with 5 elements which is returned invisibly. These items
-  are always sent to the console for display but for user convenience 
+  are always sent to the console for display but for user convenience
   the function also returns a named list with the following items
   in case the user desires to save them or further process them -
-  \code{$ANOVATable},\code{$ModelSummary}, \code{$MeansTable}, 
+  \code{$ANOVATable},\code{$ModelSummary}, \code{$MeansTable},
   \code{$PosthocTable}, \code{$BFTest}, and \code{$SWTest}.
   The plot is always sent to the default plot device
 }
 \description{
 Takes a formula and a dataframe as input, conducts an analysis of variance
-prints the results (AOV summary table, table of overall model information 
-and table of means) then uses ggplot2 to plot an interaction graph (line 
+prints the results (AOV summary table, table of overall model information
+and table of means) then uses ggplot2 to plot an interaction graph (line
 or bar) .  Also uses Brown-Forsythe test for homogeneity of
 variance.  Users can also choose to save the plot out as a png file.
 }
@@ -116,58 +116,60 @@ Details about how the function works in order of steps taken.
 \item Remove missing cases -- user warned on the console
 \item Calculate a summarized table of means, sds, standard errors of the
    means, confidence intervals, and group sizes.
-\item Use \code{\link[stats]{aov}} function to execute an Analysis of 
+\item Use \code{\link[stats]{aov}} function to execute an Analysis of
   Variance (ANOVA)
-\item Use \code{\link[sjstats]{anova_stats}} to calculate eta squared 
-  and omega squared values per factor. If the design is unbalanced warn  
+\item Use \code{\link[sjstats]{anova_stats}} to calculate eta squared
+  and omega squared values per factor. If the design is unbalanced warn
   the user and use Type II sums of squares
-\item Produce a standard ANOVA table with additional columns 
-\item Use the \code{\link[DescTools]{PostHocTest}} for producing a table 
+\item Produce a standard ANOVA table with additional columns
+\item Use the \code{\link[DescTools]{PostHocTest}} for producing a table
   of post hoc comparisons for all effects that were significant
-\item Use the \code{\link[car]{leveneTest}} for testing Homogeneity 
+\item Use the \code{\link[car]{leveneTest}} for testing Homogeneity
   of Variance assumption with Brown-Forsythe
-\item Use the \code{\link[DescTools]{PostHocTest}} for conducting 
+\item Use the \code{\link[DescTools]{PostHocTest}} for conducting
   post hoc tests for effects that were significant
 \item Use the \code{\link[stats]{shapiro.test}} for testing normality
   assumption with Shapiro-Wilk
-\item Use \code{ggplot2} to plot an interaction plot of the type the 
+\item Use \code{ggplot2} to plot an interaction plot of the type the
   user specified.}
 The defaults are deliberately constructed to emphasize the nature
   of the interaction rather than focusing on distributions. So
   while a violin plot of the first factor by level is displayed
-  along with dots for individual data points shaded by the second 
+  along with dots for individual data points shaded by the second
   factor, the emphasis is on the interaction lines.
 }
 \examples{
 
 Plot2WayANOVA(mpg ~ am * cyl, mtcars, plottype = "line")
-Plot2WayANOVA(mpg ~ am * cyl, 
-              mtcars, 
-              plottype = "line", 
-              overlay.type = "box", 
-              mean.label = TRUE)
+Plot2WayANOVA(mpg ~ am * cyl,
+  mtcars,
+  plottype = "line",
+  overlay.type = "box",
+  mean.label = TRUE
+)
 Plot2WayANOVA(mpg ~ am * vs, mtcars, confidence = .99)
 
 # Create a new dataset
 library(dplyr)
 library(ggplot2)
 library(stringi)
-newmpg <- mpg \%>\% 
-          filter(cyl != 5) \%>\% 
-          mutate(am = stringi::stri_extract(trans, regex = "auto|manual"))
-Plot2WayANOVA(formula = hwy ~ am * cyl,
-              dataframe = newmpg,
-              ylab = "Highway mileage",
-              xlab = "Transmission type",
-              plottype = "line",
-              offset.style = "wide",
-              overlay.type = "box",
-              mean.label = TRUE, 
-              mean.shape = 20, 
-              mean.size = 5, 
-              mean.label.size = 5,
-              show.dots = TRUE)
-
+newmpg <- mpg \%>\%
+  filter(cyl != 5) \%>\%
+  mutate(am = stringi::stri_extract(trans, regex = "auto|manual"))
+Plot2WayANOVA(
+  formula = hwy ~ am * cyl,
+  dataframe = newmpg,
+  ylab = "Highway mileage",
+  xlab = "Transmission type",
+  plottype = "line",
+  offset.style = "wide",
+  overlay.type = "box",
+  mean.label = TRUE,
+  mean.shape = 20,
+  mean.size = 5,
+  mean.label.size = 5,
+  show.dots = TRUE
+)
 }
 \references{
 : ANOVA: Delacre, Leys, Mora, & Lakens, *PsyArXiv*, 2018

@@ -27,7 +27,7 @@ There are three ways to compute eta squared this function only uses Type II
 }
 \examples{
 
-neweta(aov(mpg~am*cyl, mtcars))
+neweta(aov(mpg ~ am * cyl, mtcars))
 }
 \references{
 neweta function is a shortened and simplified verion of Dani
