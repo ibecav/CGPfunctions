@@ -51,7 +51,7 @@ Example
 [newggslopegraph](https://ibecav.github.io/CGPfunctions/articles/Using-newggslopegraph.html)
 plot
 
-<img src="https://ibecav.github.io/CGPfunctions/articles/Using-newggslopegraph_files/figure-html/ggslope6-1.png" title="Example newggslopegraph plot" alt="Example newggslopegraph plot" width="70%" />
+<img src="https://ibecav.github.io/CGPfunctions/articles/Using-newggslopegraph_files/figure-html/ggslope7-1.png" title="Example newggslopegraph plot" alt="Example newggslopegraph plot" width="80%" />
 
 ### Credits
 

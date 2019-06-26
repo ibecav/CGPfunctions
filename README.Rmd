@@ -53,8 +53,8 @@ knitr::include_graphics("https://ibecav.github.io/CGPfunctions/articles/Using-Pl
 
 Example [newggslopegraph](https://ibecav.github.io/CGPfunctions/articles/Using-newggslopegraph.html) plot
 
-```{r example3, echo=FALSE, fig.cap="Example newggslopegraph plot", out.width = '70%'}
-knitr::include_graphics("https://ibecav.github.io/CGPfunctions/articles/Using-newggslopegraph_files/figure-html/ggslope6-1.png")
+```{r example3, echo=FALSE, fig.cap="Example newggslopegraph plot", out.width = '80%'}
+knitr::include_graphics("https://ibecav.github.io/CGPfunctions/articles/Using-newggslopegraph_files/figure-html/ggslope7-1.png")
 ```
 
 
