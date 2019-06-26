@@ -29,7 +29,7 @@ There are three ways to compute eta squared this function only uses Type II
 \dontrun{
 mtcars$am <- factor(mtcars$am)
 mtcars$cyl <- factor(mtcars$cyl)
-neweta(aov(mpg ~ am * cyl, mtcars))
+CGPfunctions:::neweta(aov(mpg ~ am * cyl, mtcars))
 }
 
 }

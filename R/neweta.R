@@ -22,7 +22,7 @@
 #' \dontrun{
 #' mtcars$am <- factor(mtcars$am)
 #' mtcars$cyl <- factor(mtcars$cyl)
-#' neweta(aov(mpg ~ am * cyl, mtcars))
+#' CGPfunctions:::neweta(aov(mpg ~ am * cyl, mtcars))
 #' }
 #' 
 neweta <- function(MyAOV) {
