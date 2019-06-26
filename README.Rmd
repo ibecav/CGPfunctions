@@ -39,19 +39,19 @@ devtools::install_github("ibecav/CGPfunctions")
 
 [Online documentation and vignettes are located here](https://ibecav.github.io/CGPfunctions).
 
-Example Plot2WayANOVA plot
+#### Example [Plot2WayANOVA](https://ibecav.github.io/CGPfunctions/articles/Using-Plot2WayANOVA.html) plot
 
 ```{r example1, echo=FALSE, fig.cap="Example Plot2WayANOVA", out.width = '100%'}
 knitr::include_graphics("https://ibecav.github.io/CGPfunctions/articles/Using-Plot2WayANOVA_files/figure-html/Plot2WayANOVA3-1.png")
 ```
 
-Example PlotXTabs plot
+#### Example [PlotXTabs](https://ibecav.github.io/CGPfunctions/articles/Using-PlotXTabs.html) plot
 
 ```{r example2, echo=FALSE, fig.cap="Example PlotXTabs plot", out.width = '100%'}
 knitr::include_graphics("https://ibecav.github.io/CGPfunctions/articles/Using-PlotXTabs_files/figure-html/vignette1-18.png")
 ```
 
-Example [newggslopegraph](https://ibecav.github.io/CGPfunctions/articles/Using-newggslopegraph.html) plot
+#### Example [newggslopegraph](https://ibecav.github.io/CGPfunctions/articles/Using-newggslopegraph.html) plot
 
 ```{r example3, echo=FALSE, fig.cap="Example newggslopegraph plot", out.width = '80%'}
 knitr::include_graphics("https://ibecav.github.io/CGPfunctions/articles/Using-newggslopegraph_files/figure-html/ggslope7-1.png")

@@ -39,17 +39,15 @@ devtools::install_github("ibecav/CGPfunctions")
 [Online documentation and vignettes are located
 here](https://ibecav.github.io/CGPfunctions).
 
-Example Plot2WayANOVA plot
+#### Example [Plot2WayANOVA](https://ibecav.github.io/CGPfunctions/articles/Using-Plot2WayANOVA.html) plot
 
 <img src="https://ibecav.github.io/CGPfunctions/articles/Using-Plot2WayANOVA_files/figure-html/Plot2WayANOVA3-1.png" title="Example Plot2WayANOVA" alt="Example Plot2WayANOVA" width="100%" />
 
-Example PlotXTabs plot
+#### Example [PlotXTabs](https://ibecav.github.io/CGPfunctions/articles/Using-PlotXTabs.html) plot
 
 <img src="https://ibecav.github.io/CGPfunctions/articles/Using-PlotXTabs_files/figure-html/vignette1-18.png" title="Example PlotXTabs plot" alt="Example PlotXTabs plot" width="100%" />
 
-Example
-[newggslopegraph](https://ibecav.github.io/CGPfunctions/articles/Using-newggslopegraph.html)
-plot
+#### Example [newggslopegraph](https://ibecav.github.io/CGPfunctions/articles/Using-newggslopegraph.html) plot
 
 <img src="https://ibecav.github.io/CGPfunctions/articles/Using-newggslopegraph_files/figure-html/ggslope7-1.png" title="Example newggslopegraph plot" alt="Example newggslopegraph plot" width="80%" />
 
