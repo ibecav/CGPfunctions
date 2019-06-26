@@ -19,11 +19,12 @@
 #' @references neweta function is a shortened and simplified verion of Danielle
 #' Navarro's \code{\link[lsr]{etaSquared}}
 #' @examples
-#'
+#' \dontrun{
 #' mtcars$am <- factor(mtcars$am)
 #' mtcars$cyl <- factor(mtcars$cyl)
 #' neweta(aov(mpg ~ am * cyl, mtcars))
-#'
+#' }
+#' 
 neweta <- function(MyAOV) {
   .Deprecated(new = "sjstats::eta_sq")
   ss.tot <- sum((MyAOV$model[, 1] - mean(MyAOV$model[, 1]))^2)

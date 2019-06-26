@@ -26,10 +26,11 @@ There are three ways to compute eta squared this function only uses Type II
 \code{\link[sjstats]{eta_sq}} instead
 }
 \examples{
-
+\dontrun{
 mtcars$am <- factor(mtcars$am)
 mtcars$cyl <- factor(mtcars$cyl)
 neweta(aov(mpg ~ am * cyl, mtcars))
+}
 
 }
 \references{
