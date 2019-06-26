@@ -97,9 +97,9 @@
     
 <!-- README.md is generated from this README.Rmd. Please edit the .rmd file not the .md file -->
 
-<div id="overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
+<div id="overview" class="section level3">
+<h3 class="hasAnchor">
+<a href="#overview" class="anchor"></a>Overview</h3>
 <p>A package that includes functions that I find useful for teaching statistics as well as actually practicing the art. They typically are not “new” methods but rather wrappers around either base R or other packages and concepts I’m trying to master. Currently contains:</p>
 <ul>
 <li>
@@ -109,74 +109,63 @@
 <code>PlotXTabs</code> which as the name implies plots cross tabulated variables using <code>ggplot2</code>
 </li>
 <li>
-<code>neweta</code> which is a helper function that appends the results of a Type II eta squared calculation onto a classic ANOVA table</li>
+<code>newggslopegraph</code> which creates a Tufte“esque” slopegraph using <code>ggplot2</code>
+</li>
 <li>
-<code>Mode</code> which finds the modal value in a vector of data</li>
+<code>Mode</code> which finds the modal value(s) in a vector of data</li>
 <li>
 <code>SeeDist</code> which wraps around ggplot2 to provide visualizations of univariate data.</li>
 <li>
 <code>OurConf</code> is a simulation function that helps you learn about confidence intervals</li>
-<li>
-<code>newggslopegraph</code> plot a Tufte style slopegraph using <code>ggplot2</code>
-</li>
 </ul>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Install from CRAN</span></a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"CGPfunctions"</span>)</a>
-<a class="sourceLine" id="cb1-3" title="3"></a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="co"># Or the development version from GitHub</span></a>
-<a class="sourceLine" id="cb1-5" title="5"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb1-6" title="6">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"ibecav/CGPfunctions"</span>)</a></code></pre></div>
+<div id="installation" class="section level3">
+<h3 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Install from CRAN</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"CGPfunctions"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># Or the development version from GitHub</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co"># install.packages("devtools")</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"ibecav/CGPfunctions"</span>)</span></code></pre></div>
 </div>
-<div id="credits" class="section level2">
-<h2 class="hasAnchor">
-<a href="#credits" class="anchor"></a>Credits</h2>
-<p>Many thanks to Dani Navarro and the book &gt; (<a href="http://www.compcogscisydney.com/learning-statistics-with-r.html">Learning Statistics with R</a>) whose etaSquared function was the genesis of <code>neweta</code>.</p>
+<div id="usage" class="section level3">
+<h3 class="hasAnchor">
+<a href="#usage" class="anchor"></a>Usage</h3>
+<p><a href="https://ibecav.github.io/CGPfunctions">Online documentation and vignettes are located here</a>.</p>
+<p>Example Plot2WayANOVA plot</p>
+<div class="figure">
+<img src="https://ibecav.github.io/CGPfunctions/articles/Using-Plot2WayANOVA_files/figure-html/Plot2WayANOVA3-1.png" alt="Example Plot2WayANOVA" width="100%"><p class="caption">
+Example Plot2WayANOVA
+</p>
+</div>
+<p>Example PlotXTabs plot</p>
+<div class="figure">
+<img src="https://ibecav.github.io/CGPfunctions/articles/Using-PlotXTabs_files/figure-html/vignette1-18.png" alt="Example PlotXTabs plot" width="100%"><p class="caption">
+Example PlotXTabs plot
+</p>
+</div>
+<p>Example <a href="https://ibecav.github.io/CGPfunctions/articles/Using-newggslopegraph.html">newggslopegraph</a> plot</p>
+<div class="figure">
+<img src="https://ibecav.github.io/CGPfunctions/articles/Using-newggslopegraph_files/figure-html/ggslope7-1.png" alt="Example newggslopegraph plot" width="80%"><p class="caption">
+Example newggslopegraph plot
+</p>
+</div>
+</div>
+<div id="credits" class="section level3">
+<h3 class="hasAnchor">
+<a href="#credits" class="anchor"></a>Credits</h3>
+<p>Many thanks to Danielle Navarro and the book <em><a href="https://learningstatisticswithr.com/book/">Learning Statistics with R</a></em>.</p>
 <p>“He who gives up safety for speed deserves neither.” (<a href="https://twitter.com/hadleywickham/status/504368538874703872">via</a>)</p>
-<div id="a-shoutout-to-some-other-packages-i-find-essential-" class="section level4">
-<h4 class="hasAnchor">
-<a href="#a-shoutout-to-some-other-packages-i-find-essential-" class="anchor"></a>A shoutout to some other packages I find essential.</h4>
-<ul>
-<li>
-<a href="https://github.com/tidyverse/stringr">stringr</a>, for strings.</li>
-<li>
-<a href="https://github.com/hadley/lubridate">lubridate</a>, for date/times.</li>
-<li>
-<a href="https://github.com/hadley/forcats">forcats</a>, for factors.</li>
-<li>
-<a href="https://github.com/hadley/haven">haven</a>, for SPSS, SAS and Stata files.</li>
-<li>
-<a href="https://github.com/hadley/readxl">readxl</a>, for <code>.xls</code> and <code>.xlsx</code> files.</li>
-<li>
-<a href="https://github.com/hadley/modelr">modelr</a>, for modelling within a pipeline</li>
-<li>
-<a href="https://github.com/dgrtwo/broom">broom</a>, for turning models into tidy data</li>
-<li>
-<a href="http://ggplot2.tidyverse.org">ggplot2</a>, for data visualisation.</li>
-<li>
-<a href="http://dplyr.tidyverse.org">dplyr</a>, for data manipulation.</li>
-<li>
-<a href="http://tidyr.tidyverse.org">tidyr</a>, for data tidying.</li>
-<li>
-<a href="http://readr.tidyverse.org">readr</a>, for data import.</li>
-<li>
-<a href="http://purrr.tidyverse.org">purrr</a>, for functional programming.</li>
-<li>
-<a href="http://tibble.tidyverse.org">tibble</a>, for tibbles, a modern re-imagining of data frames.</li>
-</ul>
 </div>
-</div>
-<div id="leaving-feedback" class="section level2">
-<h2 class="hasAnchor">
-<a href="#leaving-feedback" class="anchor"></a>Leaving Feedback</h2>
+<div id="leaving-feedback" class="section level3">
+<h3 class="hasAnchor">
+<a href="#leaving-feedback" class="anchor"></a>Leaving Feedback</h3>
 <p>If you like <strong>CGPfunctions</strong>, please consider leaving <a href="https://github.com/ibecav/CGPfunctions/issues">feedback here</a>.</p>
 </div>
-<div id="contributing" class="section level2">
-<h2 class="hasAnchor">
-<a href="#contributing" class="anchor"></a>Contributing</h2>
+<div id="contributing" class="section level3">
+<h3 class="hasAnchor">
+<a href="#contributing" class="anchor"></a>Contributing</h3>
 <p>Contributions in the form of feedback, comments, code, and bug reports are most welcome. How to contribute:</p>
 <ul>
 <li>Issues, bug reports, and wish lists: <a href="https://github.com/ibecav/CGPfunctions/issues">File a GitHub issue</a>.</li>

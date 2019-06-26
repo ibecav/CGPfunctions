@@ -33,8 +33,8 @@
 <meta property="og:title" content="Plot a 2 Way ANOVA using dplyr and ggplot2 — Plot2WayANOVA" />
 
 <meta property="og:description" content="Takes a formula and a dataframe as input, conducts an analysis of variance
-prints the results (AOV summary table, table of overall model information 
-and table of means) then uses ggplot2 to plot an interaction graph (line 
+prints the results (AOV summary table, table of overall model information
+and table of means) then uses ggplot2 to plot an interaction graph (line
 or bar) .  Also uses Brown-Forsythe test for homogeneity of
 variance.  Users can also choose to save the plot out as a png file." />
 <meta name="twitter:card" content="summary" />
@@ -142,8 +142,8 @@ variance.  Users can also choose to save the plot out as a png file." />
     <div class="ref-description">
     
     <p>Takes a formula and a dataframe as input, conducts an analysis of variance
-prints the results (AOV summary table, table of overall model information 
-and table of means) then uses ggplot2 to plot an interaction graph (line 
+prints the results (AOV summary table, table of overall model information
+and table of means) then uses ggplot2 to plot an interaction graph (line
 or bar) .  Also uses Brown-Forsythe test for homogeneity of
 variance.  Users can also choose to save the plot out as a png file.</p>
     
@@ -177,9 +177,9 @@ variance.  Users can also choose to save the plot out as a png file.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>formula</th>
-      <td><p>a formula with a numeric dependent (outcome) variable, 
+      <td><p>a formula with a numeric dependent (outcome) variable,
 and two independent (predictor) variables e.g. <code>mpg ~ am * vs</code>.
-The independent variables are coerced to factors (with warning) if 
+The independent variables are coerced to factors (with warning) if
 possible.</p></td>
     </tr>
     <tr>
@@ -215,17 +215,17 @@ model information is provided as a subtitle.</p></td>
     </tr>
     <tr>
       <th>ci.line.size</th>
-      <td><p>Line size for the confidence interval bracketing 
+      <td><p>Line size for the confidence interval bracketing
 the group means (Default: `1`).</p></td>
     </tr>
     <tr>
       <th>mean.label</th>
-      <td><p>Logical that decides whether the value of the group 
+      <td><p>Logical that decides whether the value of the group
 mean is to be displayed (Default: `FALSE`).</p></td>
     </tr>
     <tr>
       <th>mean.ci</th>
-      <td><p>Logical that decides whether the confidence interval for 
+      <td><p>Logical that decides whether the confidence interval for
 group means is to be displayed (Default: `TRUE`).</p></td>
     </tr>
     <tr>
@@ -250,25 +250,25 @@ the label displaying mean. Defaults: `3`, `"black"`, respectively.</p></td>
     </tr>
     <tr>
       <th>offset.style</th>
-      <td><p>A character string (e.g., `"wide"` or `"narrow"`, 
+      <td><p>A character string (e.g., `"wide"` or `"narrow"`,
 or `"none"`) which controls whether items are offset from the
 centerline for clarity. Useful when you want to add individual
 datapoints or confdence interval lines overlap. (Default: `"none"`).</p></td>
     </tr>
     <tr>
       <th>overlay.type</th>
-      <td><p>A character string (e.g., `"box"` or `"violin"`), 
+      <td><p>A character string (e.g., `"box"` or `"violin"`),
 if you wish to overlay that information on factor1</p></td>
     </tr>
     <tr>
       <th>posthoc.method</th>
-      <td><p>A character string, one of "hsd", "bonf", "lsd", 
-"scheffe", "newmankeuls", defining the method for the pairwise comparisons. 
+      <td><p>A character string, one of "hsd", "bonf", "lsd",
+"scheffe", "newmankeuls", defining the method for the pairwise comparisons.
 (Default: `"scheffe"`).</p></td>
     </tr>
     <tr>
       <th>show.dots</th>
-      <td><p>Logical that decides whether the individual data points 
+      <td><p>Logical that decides whether the individual data points
 are displayed (Default: `FALSE`).</p></td>
     </tr>
     <tr>
@@ -281,10 +281,10 @@ as a png file</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A list with 5 elements which is returned invisibly. These items
-  are always sent to the console for display but for user convenience 
+  are always sent to the console for display but for user convenience
   the function also returns a named list with the following items
   in case the user desires to save them or further process them -
-  <code>$ANOVATable</code>,<code>$ModelSummary</code>, <code>$MeansTable</code>, 
+  <code>$ANOVATable</code>,<code>$ModelSummary</code>, <code>$MeansTable</code>,
   <code>$PosthocTable</code>, <code>$BFTest</code>, and <code>$SWTest</code>.
   The plot is always sent to the default plot device</p>
     
@@ -299,26 +299,26 @@ as a png file</p></td>
 <li><p>Remove missing cases -- user warned on the console</p></li>
 <li><p>Calculate a summarized table of means, sds, standard errors of the
    means, confidence intervals, and group sizes.</p></li>
-<li><p>Use <code><a href='https://www.rdocumentation.org/packages/stats/topics/aov'>aov</a></code> function to execute an Analysis of 
+<li><p>Use <code><a href='https://www.rdocumentation.org/packages/stats/topics/aov'>aov</a></code> function to execute an Analysis of
   Variance (ANOVA)</p></li>
-<li><p>Use <code><a href='https://www.rdocumentation.org/packages/sjstats/topics/eta_sq'>anova_stats</a></code> to calculate eta squared 
-  and omega squared values per factor. If the design is unbalanced warn  
+<li><p>Use <code><a href='https://www.rdocumentation.org/packages/sjstats/topics/eta_sq'>anova_stats</a></code> to calculate eta squared
+  and omega squared values per factor. If the design is unbalanced warn
   the user and use Type II sums of squares</p></li>
 <li><p>Produce a standard ANOVA table with additional columns</p></li>
-<li><p>Use the <code><a href='https://www.rdocumentation.org/packages/DescTools/topics/PostHocTest'>PostHocTest</a></code> for producing a table 
+<li><p>Use the <code><a href='https://www.rdocumentation.org/packages/DescTools/topics/PostHocTest'>PostHocTest</a></code> for producing a table
   of post hoc comparisons for all effects that were significant</p></li>
-<li><p>Use the <code><a href='https://www.rdocumentation.org/packages/car/topics/leveneTest'>leveneTest</a></code> for testing Homogeneity 
+<li><p>Use the <code><a href='https://www.rdocumentation.org/packages/car/topics/leveneTest'>leveneTest</a></code> for testing Homogeneity
   of Variance assumption with Brown-Forsythe</p></li>
-<li><p>Use the <code><a href='https://www.rdocumentation.org/packages/DescTools/topics/PostHocTest'>PostHocTest</a></code> for conducting 
+<li><p>Use the <code><a href='https://www.rdocumentation.org/packages/DescTools/topics/PostHocTest'>PostHocTest</a></code> for conducting
   post hoc tests for effects that were significant</p></li>
 <li><p>Use the <code><a href='https://www.rdocumentation.org/packages/stats/topics/shapiro.test'>shapiro.test</a></code> for testing normality
   assumption with Shapiro-Wilk</p></li>
-<li><p>Use <code>ggplot2</code> to plot an interaction plot of the type the 
+<li><p>Use <code>ggplot2</code> to plot an interaction plot of the type the
   user specified.</p></li>
 </ol><p>The defaults are deliberately constructed to emphasize the nature
   of the interaction rather than focusing on distributions. So
   while a violin plot of the first factor by level is displayed
-  along with dots for individual data points shaded by the second 
+  along with dots for individual data points shaded by the second
   factor, the emphasis is on the interaction lines.</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
@@ -394,10 +394,11 @@ as a png file</p></td>
 #&gt; W = 0.96277, p-value = 0.3263
 #&gt; </div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Interaction graph plotted...</span></div><div class='img'><img src='Plot2WayANOVA-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>Plot2WayANOVA</span>(<span class='no'>mpg</span> ~ <span class='no'>am</span> * <span class='no'>cyl</span>,
-              <span class='no'>mtcars</span>,
-              <span class='kw'>plottype</span> <span class='kw'>=</span> <span class='st'>"line"</span>,
-              <span class='kw'>overlay.type</span> <span class='kw'>=</span> <span class='st'>"box"</span>,
-              <span class='kw'>mean.label</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+  <span class='no'>mtcars</span>,
+  <span class='kw'>plottype</span> <span class='kw'>=</span> <span class='st'>"line"</span>,
+  <span class='kw'>overlay.type</span> <span class='kw'>=</span> <span class='st'>"box"</span>,
+  <span class='kw'>mean.label</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Converting am to a factor --- check your results</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Converting cyl to a factor --- check your results</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>				--- WARNING! ---</span>
@@ -523,21 +524,22 @@ as a png file</p></td>
 #&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>ggplot2</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>stringi</span>)
 <span class='no'>newmpg</span> <span class='kw'>&lt;-</span> <span class='no'>mpg</span> <span class='kw'>%&gt;%</span>
-          <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>cyl</span> <span class='kw'>!=</span> <span class='fl'>5</span>) <span class='kw'>%&gt;%</span>
-          <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>am</span> <span class='kw'>=</span> <span class='kw pkg'>stringi</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/stringi/topics/stri_extract'>stri_extract</a></span>(<span class='no'>trans</span>, <span class='kw'>regex</span> <span class='kw'>=</span> <span class='st'>"auto|manual"</span>))
-<span class='fu'>Plot2WayANOVA</span>(<span class='kw'>formula</span> <span class='kw'>=</span> <span class='no'>hwy</span> ~ <span class='no'>am</span> * <span class='no'>cyl</span>,
-              <span class='kw'>dataframe</span> <span class='kw'>=</span> <span class='no'>newmpg</span>,
-              <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Highway mileage"</span>,
-              <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Transmission type"</span>,
-              <span class='kw'>plottype</span> <span class='kw'>=</span> <span class='st'>"line"</span>,
-              <span class='kw'>offset.style</span> <span class='kw'>=</span> <span class='st'>"wide"</span>,
-              <span class='kw'>overlay.type</span> <span class='kw'>=</span> <span class='st'>"box"</span>,
-              <span class='kw'>mean.label</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-              <span class='kw'>mean.shape</span> <span class='kw'>=</span> <span class='fl'>20</span>,
-              <span class='kw'>mean.size</span> <span class='kw'>=</span> <span class='fl'>5</span>,
-              <span class='kw'>mean.label.size</span> <span class='kw'>=</span> <span class='fl'>5</span>,
-              <span class='kw'>show.dots</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='error'>Error in Plot2WayANOVA(formula = hwy ~ am * cyl, dataframe = newmpg, ylab = "Highway mileage",     xlab = "Transmission type", plottype = "line", offset.style = "wide",     overlay.type = "box", mean.label = TRUE, mean.shape = 20,     mean.size = 5, mean.label.size = 5, show.dots = TRUE): That dataframe does not exist</span></div><div class='input'>
-</div></pre>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>cyl</span> <span class='kw'>!=</span> <span class='fl'>5</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>am</span> <span class='kw'>=</span> <span class='kw pkg'>stringi</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/stringi/topics/stri_extract'>stri_extract</a></span>(<span class='no'>trans</span>, <span class='kw'>regex</span> <span class='kw'>=</span> <span class='st'>"auto|manual"</span>))
+<span class='fu'>Plot2WayANOVA</span>(
+  <span class='kw'>formula</span> <span class='kw'>=</span> <span class='no'>hwy</span> ~ <span class='no'>am</span> * <span class='no'>cyl</span>,
+  <span class='kw'>dataframe</span> <span class='kw'>=</span> <span class='no'>newmpg</span>,
+  <span class='kw'>ylab</span> <span class='kw'>=</span> <span class='st'>"Highway mileage"</span>,
+  <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='st'>"Transmission type"</span>,
+  <span class='kw'>plottype</span> <span class='kw'>=</span> <span class='st'>"line"</span>,
+  <span class='kw'>offset.style</span> <span class='kw'>=</span> <span class='st'>"wide"</span>,
+  <span class='kw'>overlay.type</span> <span class='kw'>=</span> <span class='st'>"box"</span>,
+  <span class='kw'>mean.label</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>mean.shape</span> <span class='kw'>=</span> <span class='fl'>20</span>,
+  <span class='kw'>mean.size</span> <span class='kw'>=</span> <span class='fl'>5</span>,
+  <span class='kw'>mean.label.size</span> <span class='kw'>=</span> <span class='fl'>5</span>,
+  <span class='kw'>show.dots</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</div><div class='output co'>#&gt; <span class='error'>Error in Plot2WayANOVA(formula = hwy ~ am * cyl, dataframe = newmpg, ylab = "Highway mileage",     xlab = "Transmission type", plottype = "line", offset.style = "wide",     overlay.type = "box", mean.label = TRUE, mean.shape = 20,     mean.size = 5, mean.label.size = 5, show.dots = TRUE): That dataframe does not exist</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
