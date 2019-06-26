@@ -4,7 +4,7 @@
 [![CRAN
 Version](https://www.r-pkg.org/badges/version/CGPfunctions)](https://CRAN.R-project.org/package=CGPfunctions)
 
-## Overview
+### Overview
 
 A package that includes functions that I find useful for teaching
 statistics as well as actually practicing the art. They typically are
@@ -23,7 +23,7 @@ packages and concepts I’m trying to master. Currently contains:
   - `OurConf` is a simulation function that helps you learn about
     confidence intervals
 
-## Installation
+### Installation
 
 ``` r
 # Install from CRAN
@@ -34,12 +34,26 @@ install.packages("CGPfunctions")
 devtools::install_github("ibecav/CGPfunctions")
 ```
 
-## Usage
+### Usage
 
 [Online documentation and vignettes are located
 here](https://ibecav.github.io/CGPfunctions).
 
-## Credits
+Example Plot2WayANOVA plot
+
+<img src="https://ibecav.github.io/CGPfunctions/articles/Using-Plot2WayANOVA_files/figure-html/Plot2WayANOVA3-1.png" title="Example Plot2WayANOVA" alt="Example Plot2WayANOVA" width="100%" />
+
+Example PlotXTabs plot
+
+<img src="https://ibecav.github.io/CGPfunctions/articles/Using-PlotXTabs_files/figure-html/vignette1-18.png" title="Example PlotXTabs plot" alt="Example PlotXTabs plot" width="100%" />
+
+Example
+[newggslopegraph](https://ibecav.github.io/CGPfunctions/articles/Using-newggslopegraph.html)
+plot
+
+<img src="https://ibecav.github.io/CGPfunctions/articles/Using-newggslopegraph_files/figure-html/ggslope6-1.png" title="Example newggslopegraph plot" alt="Example newggslopegraph plot" width="70%" />
+
+### Credits
 
 Many thanks to Danielle Navarro and the book *[Learning Statistics with
 R](https://learningstatisticswithr.com/book/)*.
@@ -47,12 +61,12 @@ R](https://learningstatisticswithr.com/book/)*.
 “He who gives up safety for speed deserves neither.”
 ([via](https://twitter.com/hadleywickham/status/504368538874703872))
 
-## Leaving Feedback
+### Leaving Feedback
 
 If you like **CGPfunctions**, please consider leaving [feedback
 here](https://github.com/ibecav/CGPfunctions/issues).
 
-## Contributing
+### Contributing
 
 Contributions in the form of feedback, comments, code, and bug reports
 are most welcome. How to contribute:

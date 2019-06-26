@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Overview
+### Overview
 
 A package that includes functions that I find useful for teaching statistics as well as actually practicing the art.  They typically are not "new" methods but rather wrappers around either base R or other packages and concepts I'm trying to master.  Currently contains:
 
@@ -24,7 +24,7 @@ A package that includes functions that I find useful for teaching statistics as 
 - `SeeDist` which wraps around ggplot2 to provide visualizations of univariate data.
 - `OurConf` is a simulation function that helps you learn about confidence intervals
 
-## Installation
+### Installation
 
 ```{r eval = FALSE}
 # Install from CRAN
@@ -35,21 +35,40 @@ install.packages("CGPfunctions")
 devtools::install_github("ibecav/CGPfunctions")
 ```
 
-## Usage
+### Usage
 
 [Online documentation and vignettes are located here](https://ibecav.github.io/CGPfunctions).
 
-## Credits
+Example Plot2WayANOVA plot
+
+```{r example1, echo=FALSE, fig.cap="Example Plot2WayANOVA", out.width = '100%'}
+knitr::include_graphics("https://ibecav.github.io/CGPfunctions/articles/Using-Plot2WayANOVA_files/figure-html/Plot2WayANOVA3-1.png")
+```
+
+Example PlotXTabs plot
+
+```{r example2, echo=FALSE, fig.cap="Example PlotXTabs plot", out.width = '100%'}
+knitr::include_graphics("https://ibecav.github.io/CGPfunctions/articles/Using-PlotXTabs_files/figure-html/vignette1-18.png")
+```
+
+Example [newggslopegraph](https://ibecav.github.io/CGPfunctions/articles/Using-newggslopegraph.html) plot
+
+```{r example3, echo=FALSE, fig.cap="Example newggslopegraph plot", out.width = '70%'}
+knitr::include_graphics("https://ibecav.github.io/CGPfunctions/articles/Using-newggslopegraph_files/figure-html/ggslope6-1.png")
+```
+
+
+### Credits
 
 Many thanks to Danielle Navarro and the book *[Learning Statistics with R](https://learningstatisticswithr.com/book/)*.
 
 "He who gives up safety for speed deserves neither." ([via](https://twitter.com/hadleywickham/status/504368538874703872))
 
-## Leaving Feedback
+### Leaving Feedback
 
 If you like **CGPfunctions**, please consider leaving [feedback here](https://github.com/ibecav/CGPfunctions/issues).
 
-## Contributing
+### Contributing
 
 Contributions in the form of feedback, comments, code, and bug reports
 are most welcome. How to contribute:
