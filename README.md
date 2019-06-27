@@ -3,6 +3,9 @@
 
 [![CRAN
 Version](https://www.r-pkg.org/badges/version/CGPfunctions)](https://CRAN.R-project.org/package=CGPfunctions)
+[![Build
+Status](https://travis-ci.org/ibecav/CGPfunctions.svg?branch=master)](https://travis-ci.org/ibecav/CGPfunctions)
+[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/CGPfunctions)](http://cranlogs.r-pkg.org/badges/grand-total/CGPfunctions)
 
 ### Overview
 
