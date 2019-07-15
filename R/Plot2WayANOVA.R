@@ -344,7 +344,12 @@ Plot2WayANOVA <- function(formula,
   BFTest <- car::leveneTest(MyAOV)
   # Grab the residuals and run Shapiro-Wilk
   MyAOV_residuals <- residuals(object = MyAOV)
-  SWTest <- shapiro.test(x = MyAOV_residuals) # run Shapiro-Wilk test
+  if (nrow(dataframe) < 5000){
+    SWTest <- shapiro.test(x = MyAOV_residuals) # run Shapiro-Wilk test
+  } else {
+    SWTest <- NULL
+  }
+    
   # Grab on the effects that were significant in omnibuds test
   sigfactors <- filter(WithETA, p.value <= 1 - confidence) %>% select(term)
   if (nrow(sigfactors) > 0) {
@@ -606,13 +611,15 @@ Plot2WayANOVA <- function(formula,
     message("   *** Possible violation of the assumption ***")
   }
   print(BFTest)
-  message("\nTesting Normality Assumption with Shapiro-Wilk \n")
-  if (SWTest$p.value <= .05) {
-    message("   *** Possible violation of the assumption.  You may 
+  if(!is.null(SWTest)) {
+    message("\nTesting Normality Assumption with Shapiro-Wilk \n")
+    if (SWTest$p.value <= .05) {
+      message("   *** Possible violation of the assumption.  You may 
             want to plot the residuals to see how they vary from normal ***")
+    }
+    print(SWTest)
   }
-  print(SWTest)
-
+  
   # -------- Print the plot itself ----------------
 
   message("\nInteraction graph plotted...")
