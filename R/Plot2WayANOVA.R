@@ -349,10 +349,7 @@ Plot2WayANOVA <- function(formula,
   } else {
     SWTest <- NULL
   }
-<<<<<<< HEAD
-=======
-    
->>>>>>> 7b2c33db62c0ebf76db6a5da8737e7652f23a1f2
+
   # Grab on the effects that were significant in omnibuds test
   sigfactors <- filter(WithETA, p.value <= 1 - confidence) %>% select(term)
   if (nrow(sigfactors) > 0) {
@@ -614,11 +611,7 @@ Plot2WayANOVA <- function(formula,
     message("   *** Possible violation of the assumption ***")
   }
   print(BFTest)
-<<<<<<< HEAD
-  if (!is.null(SWTest)) {
-=======
   if(!is.null(SWTest)) {
->>>>>>> 7b2c33db62c0ebf76db6a5da8737e7652f23a1f2
     message("\nTesting Normality Assumption with Shapiro-Wilk \n")
     if (SWTest$p.value <= .05) {
       message("   *** Possible violation of the assumption.  You may 
