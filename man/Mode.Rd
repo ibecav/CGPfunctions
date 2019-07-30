@@ -24,8 +24,7 @@ are \code{NA} is also NA
 }
 
 \examples{
-Mode(sample(1:100,1000,replace=TRUE))
+Mode(sample(1:100, 1000, replace = TRUE))
 Mode(mtcars$hp)
 Mode(iris$Sepal.Length)
-
 }

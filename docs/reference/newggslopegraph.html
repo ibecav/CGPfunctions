@@ -33,7 +33,7 @@
 <meta property="og:title" content="Plot a Slopegraph a la Tufte using dplyr and ggplot2 — newggslopegraph" />
 
 <meta property="og:description" content="Creates a &quot;slopegraph&quot; as conceptualized by Edward Tufte. Slopegraphs are minimalist
-and efficient presentations of your data that can simultaneously convey the relative rankings, 
+and efficient presentations of your data that can simultaneously convey the relative rankings,
 the actual numeric values, and the changes and directionality of the data over time.
 Takes a dataframe as input, with three named columns being used to draw the plot.
 Makes the required adjustments to the ggplot2 parameters and returns the plot." />
@@ -142,7 +142,7 @@ Makes the required adjustments to the ggplot2 parameters and returns the plot." 
     <div class="ref-description">
     
     <p>Creates a "slopegraph" as conceptualized by Edward Tufte. Slopegraphs are minimalist
-and efficient presentations of your data that can simultaneously convey the relative rankings, 
+and efficient presentations of your data that can simultaneously convey the relative rankings,
 the actual numeric values, and the changes and directionality of the data over time.
 Takes a dataframe as input, with three named columns being used to draw the plot.
 Makes the required adjustments to the ggplot2 parameters and returns the plot.</p>
@@ -166,44 +166,44 @@ Makes the required adjustments to the ggplot2 parameters and returns the plot.</
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>dataframe</th>
-      <td><p>a dataframe or an object that can be coerced to a dataframe. 
-Basic error checking is performed, to include ensuring that the named columns 
+      <td><p>a dataframe or an object that can be coerced to a dataframe.
+Basic error checking is performed, to include ensuring that the named columns
 exist in the dataframe. See the <code><a href='newcancer.html'>newcancer</a></code> dataset for an example of
 how the dataframe should be organized.</p></td>
     </tr>
     <tr>
       <th>Times</th>
-      <td><p>a column inside the dataframe that will be plotted on the x axis. 
+      <td><p>a column inside the dataframe that will be plotted on the x axis.
 Traditionally this is some measure of time.  The function accepts a column of class
-ordered, factor or character.  NOTE if your variable is currently a "date" class 
+ordered, factor or character.  NOTE if your variable is currently a "date" class
 you must convert before using the function with <code><a href='https://www.rdocumentation.org/packages/base/topics/character'>as.character(variablename)</a></code>.</p></td>
     </tr>
     <tr>
       <th>Measurement</th>
-      <td><p>a column inside the dataframe that will be plotted on the y axis. 
-Traditionally this is some measure such as a percentage.  Currently the function 
+      <td><p>a column inside the dataframe that will be plotted on the y axis.
+Traditionally this is some measure such as a percentage.  Currently the function
 accepts a column of type integer or numeric.  The slopegraph will be most effective
 when the measurements are not too disparate.</p></td>
     </tr>
     <tr>
       <th>Grouping</th>
-      <td><p>a column inside the dataframe that will be used to group and 
+      <td><p>a column inside the dataframe that will be used to group and
 distinguish measurements.</p></td>
     </tr>
     <tr>
       <th>Title</th>
-      <td><p>Optionally the title to be displayed. Title = NULL will remove it 
+      <td><p>Optionally the title to be displayed. Title = NULL will remove it
 entirely. Title = "" will provide an empty title but retain the spacing.</p></td>
     </tr>
     <tr>
       <th>SubTitle</th>
-      <td><p>Optionally the sub-title to be displayed.  SubTitle = NULL 
-will remove it entirely. SubTitle = "" will provide and empty title but retain 
+      <td><p>Optionally the sub-title to be displayed.  SubTitle = NULL
+will remove it entirely. SubTitle = "" will provide and empty title but retain
 the spacing.</p></td>
     </tr>
     <tr>
       <th>Caption</th>
-      <td><p>Optionally the caption to be displayed. Caption = NULL will remove 
+      <td><p>Optionally the caption to be displayed. Caption = NULL will remove
 it entirely. Caption = "" will provide and empty title but retain the spacing.</p></td>
     </tr>
     <tr>
@@ -212,41 +212,41 @@ it entirely. Caption = "" will provide and empty title but retain the spacing.</
     </tr>
     <tr>
       <th>YTextSize</th>
-      <td><p>Optionally the font size for the Y axis labels to be displayed. 
-YTextSize = 3 is the default must be a numeric. Note that X &amp; Y axis text are on 
+      <td><p>Optionally the font size for the Y axis labels to be displayed.
+YTextSize = 3 is the default must be a numeric. Note that X &amp; Y axis text are on
 different scales</p></td>
     </tr>
     <tr>
       <th>TitleTextSize</th>
-      <td><p>Optionally the font size for the Title to be displayed. 
+      <td><p>Optionally the font size for the Title to be displayed.
 TitleTextSize = 14 is the default must be a numeric.</p></td>
     </tr>
     <tr>
       <th>SubTitleTextSize</th>
-      <td><p>Optionally the font size for the SubTitle to be displayed. 
+      <td><p>Optionally the font size for the SubTitle to be displayed.
 SubTitleTextSize = 10 is the default must be a numeric.</p></td>
     </tr>
     <tr>
       <th>CaptionTextSize</th>
-      <td><p>Optionally the font size for the Caption to be displayed. 
+      <td><p>Optionally the font size for the Caption to be displayed.
 CaptionTextSize = 8 is the default must be a numeric.</p></td>
     </tr>
     <tr>
       <th>TitleJustify</th>
-      <td><p>Justification of title can be either a character "L", 
-"R" or "C" or use the <code>hjust = </code> notation from <code>ggplot2</code> with 
+      <td><p>Justification of title can be either a character "L",
+"R" or "C" or use the <code>hjust = </code> notation from <code>ggplot2</code> with
 a numeric value between `0` (left) and `1` (right).</p></td>
     </tr>
     <tr>
       <th>SubTitleJustify</th>
-      <td><p>Justification of subtitle can be either a character "L", 
-"R" or "C" or use the <code>hjust = </code> notation from <code>ggplot2</code> with 
+      <td><p>Justification of subtitle can be either a character "L",
+"R" or "C" or use the <code>hjust = </code> notation from <code>ggplot2</code> with
 a numeric value between `0` (left) and `1` (right).</p></td>
     </tr>
     <tr>
       <th>CaptionJustify</th>
-      <td><p>Justification of caption can be either a character "L", 
-"R" or "C" or use the <code>hjust = </code> notation from <code>ggplot2</code> with 
+      <td><p>Justification of caption can be either a character "L",
+"R" or "C" or use the <code>hjust = </code> notation from <code>ggplot2</code> with
 a numeric value between `0` (left) and `1` (right).</p></td>
     </tr>
     <tr>
@@ -256,19 +256,19 @@ connect the data points. LineThickness = 1 is the default must be a numeric.</p>
     </tr>
     <tr>
       <th>LineColor</th>
-      <td><p>Optionally the color of the plotted lines. By default it will use 
-the ggplot2 color palette for coloring by <code>Grouping</code>. The user may override 
-with <b>one</b> valid color of their choice e.g. "black" (see colors() for choices) 
-<b>OR</b> 
-they may provide a vector of colors such as c("gray", "red", "green", "gray", "blue") 
-<b>OR</b> a named vector like c("Green" = "gray", "Liberal" = "red", "NDP" = "green", 
-"Others" = "gray", "PC" = "blue"). Any input must be character, and the length 
-of a vector <b>should</b> equal the number of levels in <code>Grouping</code>. If the 
+      <td><p>Optionally the color of the plotted lines. By default it will use
+the ggplot2 color palette for coloring by <code>Grouping</code>. The user may override
+with <b>one</b> valid color of their choice e.g. "black" (see colors() for choices)
+<b>OR</b>
+they may provide a vector of colors such as c("gray", "red", "green", "gray", "blue")
+<b>OR</b> a named vector like c("Green" = "gray", "Liberal" = "red", "NDP" = "green",
+"Others" = "gray", "PC" = "blue"). Any input must be character, and the length
+of a vector <b>should</b> equal the number of levels in <code>Grouping</code>. If the
 user does not provide enough colors they will be recycled.</p></td>
     </tr>
     <tr>
       <th>DataTextSize</th>
-      <td><p>Optionally the font size of the plotted data points. DataTextSize = 2.5 
+      <td><p>Optionally the font size of the plotted data points. DataTextSize = 2.5
 is the default must be a numeric.</p></td>
     </tr>
     <tr>
@@ -291,13 +291,13 @@ label. Must be a numeric.</p></td>
     </tr>
     <tr>
       <th>DataLabelFillColor</th>
-      <td><p>Optionally the fill color or background of the 
+      <td><p>Optionally the fill color or background of the
 plotted data points. `"white"` is the default can be any of the `colors()`
 or hex value e.g. "#FF00FF".</p></td>
     </tr>
     <tr>
       <th>WiderLabels</th>
-      <td><p>logical, set this value to <code>TRUE</code> if your "labels" or 
+      <td><p>logical, set this value to <code>TRUE</code> if your "labels" or
 <code>Grouping</code> variable values tend to be long as they are in the <code>newcancer</code>
 dataset.  This setting will give them more room in the same plot size.</p></td>
     </tr>
@@ -346,38 +346,41 @@ and <b>"tufte"</b>.</p></td>
 <span class='fu'>newggslopegraph</span>(<span class='no'>newcancer</span>, <span class='no'>Year</span>, <span class='no'>Survival</span>, <span class='no'>Type</span>)</div><div class='img'><img src='newggslopegraph-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># adding a title which is always recommended</span>
 <span class='fu'>newggslopegraph</span>(<span class='no'>newcancer</span>, <span class='no'>Year</span>, <span class='no'>Survival</span>, <span class='no'>Type</span>,
-                <span class='kw'>Title</span> <span class='kw'>=</span> <span class='st'>"Estimates of Percent Survival Rates"</span>,
-                <span class='kw'>SubTitle</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-                <span class='kw'>Caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</div><div class='img'><img src='newggslopegraph-2.png' alt='' width='700' height='433' /></div><div class='input'>
+  <span class='kw'>Title</span> <span class='kw'>=</span> <span class='st'>"Estimates of Percent Survival Rates"</span>,
+  <span class='kw'>SubTitle</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>Caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</div><div class='img'><img src='newggslopegraph-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># simple formatting changes</span>
 <span class='fu'>newggslopegraph</span>(<span class='no'>newcancer</span>, <span class='no'>Year</span>, <span class='no'>Survival</span>, <span class='no'>Type</span>,
-                <span class='kw'>Title</span> <span class='kw'>=</span> <span class='st'>"Estimates of Percent Survival Rates"</span>,
-                <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='st'>"darkgray"</span>,
-                <span class='kw'>LineThickness</span> <span class='kw'>=</span> <span class='fl'>.5</span>,
-                <span class='kw'>SubTitle</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-                <span class='kw'>Caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</div><div class='img'><img src='newggslopegraph-3.png' alt='' width='700' height='433' /></div><div class='input'>
+  <span class='kw'>Title</span> <span class='kw'>=</span> <span class='st'>"Estimates of Percent Survival Rates"</span>,
+  <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='st'>"darkgray"</span>,
+  <span class='kw'>LineThickness</span> <span class='kw'>=</span> <span class='fl'>.5</span>,
+  <span class='kw'>SubTitle</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>Caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</div><div class='img'><img src='newggslopegraph-3.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># complex formatting with recycling and wider labels see vignette for more examples</span>
 <span class='fu'>newggslopegraph</span>(<span class='no'>newcancer</span>, <span class='no'>Year</span>, <span class='no'>Survival</span>, <span class='no'>Type</span>,
-                <span class='kw'>Title</span> <span class='kw'>=</span> <span class='st'>"Estimates of Percent Survival Rates"</span>,
-                <span class='kw'>SubTitle</span> <span class='kw'>=</span> <span class='st'>"Based on: Edward Tufte, Beautiful Evidence, 174, 176."</span>,
-                <span class='kw'>Caption</span> <span class='kw'>=</span> <span class='st'>"https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0003nk"</span>,
-                <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"black"</span>, <span class='st'>"red"</span>, <span class='st'>"grey"</span>),
-                <span class='kw'>LineThickness</span> <span class='kw'>=</span> <span class='fl'>.5</span>,
-                <span class='kw'>WiderLabels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+  <span class='kw'>Title</span> <span class='kw'>=</span> <span class='st'>"Estimates of Percent Survival Rates"</span>,
+  <span class='kw'>SubTitle</span> <span class='kw'>=</span> <span class='st'>"Based on: Edward Tufte, Beautiful Evidence, 174, 176."</span>,
+  <span class='kw'>Caption</span> <span class='kw'>=</span> <span class='st'>"https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0003nk"</span>,
+  <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"black"</span>, <span class='st'>"red"</span>, <span class='st'>"grey"</span>),
+  <span class='kw'>LineThickness</span> <span class='kw'>=</span> <span class='fl'>.5</span>,
+  <span class='kw'>WiderLabels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>You gave me 3 colors I'm recycling colors because you have 24 Types</span></div><div class='img'><img src='newggslopegraph-4.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># not a great example but demonstrating functionality</span>
 <span class='no'>newgdp</span>$<span class='no'>rGDP</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Round'>round</a></span>(<span class='no'>newgdp</span>$<span class='no'>GDP</span>)
 
 <span class='fu'>newggslopegraph</span>(<span class='no'>newgdp</span>,
-                <span class='no'>Year</span>,
-                <span class='no'>rGDP</span>,
-                <span class='no'>Country</span>,
-                <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='st'>"grey"</span>, <span class='fl'>3</span>), <span class='st'>"red"</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='st'>"grey"</span>, <span class='fl'>11</span>)),
-                <span class='kw'>DataTextSize</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-                <span class='kw'>DataLabelFillColor</span> <span class='kw'>=</span> <span class='st'>"gray"</span>,
-                <span class='kw'>DataLabelPadding</span> <span class='kw'>=</span> <span class='fl'>.2</span>,
-                <span class='kw'>DataLabelLineSize</span> <span class='kw'>=</span> <span class='fl'>.5</span>)</div><div class='img'><img src='newggslopegraph-5.png' alt='' width='700' height='433' /></div><div class='input'>
-</div></pre>
+  <span class='no'>Year</span>,
+  <span class='no'>rGDP</span>,
+  <span class='no'>Country</span>,
+  <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='st'>"grey"</span>, <span class='fl'>3</span>), <span class='st'>"red"</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='st'>"grey"</span>, <span class='fl'>11</span>)),
+  <span class='kw'>DataTextSize</span> <span class='kw'>=</span> <span class='fl'>3</span>,
+  <span class='kw'>DataLabelFillColor</span> <span class='kw'>=</span> <span class='st'>"gray"</span>,
+  <span class='kw'>DataLabelPadding</span> <span class='kw'>=</span> <span class='fl'>.2</span>,
+  <span class='kw'>DataLabelLineSize</span> <span class='kw'>=</span> <span class='fl'>.5</span>
+)</div><div class='img'><img src='newggslopegraph-5.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

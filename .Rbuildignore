@@ -4,15 +4,7 @@
 ^CRAN-RELEASE$
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^DESCRIPTION\.jic$
-^NAMESPACE\.jic$
-^Rplots.pdf
-^mpgbyamandvs\.png$
-^salarybyrankanddiscipline\.png$
-^README-Plot2WayANOVA-1\.png$
-^README-SeeDist-1\.png$
 ^README\.Rmd$
-^README-OurConf-1\.png$
-^comparewithPASWR\.R$
 ^docs$
 ^_pkgdown\.yaml
+.travis.yml

@@ -9,12 +9,12 @@ PlotXTabs(dataframe, xwhich, ywhich, plottype = "side")
 \arguments{
 \item{dataframe}{an object that is of class dataframe}
 
-\item{xwhich}{either a bare variable name that is valid in the 
+\item{xwhich}{either a bare variable name that is valid in the
 dataframe or one or more column numbers. An attempt will be
 made to coerce the variable to a factor but odd plots will occur
 if you pass it a variable that is by rights continuous in nature.}
 
-\item{ywhich}{either a bare variable name that is valid in the 
+\item{ywhich}{either a bare variable name that is valid in the
 dataframe or one or more column numbers that exist in the dataframe.
 An attempt will be
 made to coerce the variable to a factor but odd plots will occur
@@ -23,14 +23,14 @@ if you pass it a variable that is by rights continuous in nature.}
 \item{plottype}{one of three options "side", "stack" or "percent"}
 }
 \value{
-One or more ggplots to the default graphics device as well as 
+One or more ggplots to the default graphics device as well as
 advisory information in the console
 }
 \description{
-Takes a dataframe and at least two variables as input, conducts a 
+Takes a dataframe and at least two variables as input, conducts a
 crosstabulation of the variables using dplyr. Removes NAs and then
 plots the results as one of three types of bar (column) graphs
-using ggplot2.  The function accepts either bare variable names or 
+using ggplot2.  The function accepts either bare variable names or
 column numbers as input (see examples for the possibilities)
 }
 \examples{
@@ -39,17 +39,17 @@ PlotXTabs(mtcars, am, vs, "stack")
 PlotXTabs(mtcars, am, vs, "percent")
 PlotXTabs(mtcars, am, 8, "side")
 PlotXTabs(mtcars, 8, am, "stack")
-PlotXTabs(mtcars, am, c(8,10), "percent")
-PlotXTabs(mtcars, c(10,8), am)
-PlotXTabs(mtcars, c(2,9), c(10,8), "mispelled")
+PlotXTabs(mtcars, am, c(8, 10), "percent")
+PlotXTabs(mtcars, c(10, 8), am)
+PlotXTabs(mtcars, c(2, 9), c(10, 8), "mispelled")
 \dontrun{
-PlotXTabs(happy,happy,sex) # baseline
-PlotXTabs(happy,2,5,"stack") # same thing using column numbers
+PlotXTabs(happy, happy, sex) # baseline
+PlotXTabs(happy, 2, 5, "stack") # same thing using column numbers
 PlotXTabs(happy, 2, c(5:9), plottype = "percent") # multiple columns RHS
-PlotXTabs(happy, c(2,5), 9, plottype = "side") # multiple columns LHS
-PlotXTabs(happy, c(2,5), c(6:9), plottype = "percent")
-PlotXTabs(happy, happy, c(6,7,9), plottype = "percent")
-PlotXTabs(happy, c(6,7,9), happy, plottype = "percent")
+PlotXTabs(happy, c(2, 5), 9, plottype = "side") # multiple columns LHS
+PlotXTabs(happy, c(2, 5), c(6:9), plottype = "percent")
+PlotXTabs(happy, happy, c(6, 7, 9), plottype = "percent")
+PlotXTabs(happy, c(6, 7, 9), happy, plottype = "percent")
 }
 
 }

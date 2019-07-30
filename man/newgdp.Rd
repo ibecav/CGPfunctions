@@ -9,7 +9,7 @@
   \item{Year}{character for 1970 and 1979}
   \item{Country}{factor country name}
   \item{GDP}{numeric a percentage of gross domestic product}
-  
+
 }}
 \source{
 Edward Tufte. \emph{Beautiful Evidence}. Graphics Press, 174-176.

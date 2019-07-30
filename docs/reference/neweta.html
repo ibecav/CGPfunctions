@@ -169,7 +169,7 @@ additional column</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>neweta function is a shortened and simplified verion of Dani
+    <p>neweta function is a shortened and simplified verion of Danielle
 Navarro's <code><a href='https://www.rdocumentation.org/packages/lsr/topics/etaSquared'>etaSquared</a></code></p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
@@ -178,14 +178,12 @@ Navarro's <code><a href='https://www.rdocumentation.org/packages/lsr/topics/etaS
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='fu'>neweta</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/aov'>aov</a></span>(<span class='no'>mpg</span>~<span class='no'>am</span>*<span class='no'>cyl</span>, <span class='no'>mtcars</span>))</div><div class='output co'>#&gt; # A tibble: 4 x 8
-#&gt;   Source       Df `Sum Sq` `Mean Sq` `F value`      p sigstars `eta sq`
-#&gt;   &lt;fct&gt;     &lt;int&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;
-#&gt; 1 am            1     37.0     37.0        4.3  0.048 *           0.033
-#&gt; 2 cyl           1    450.     450.        52    0     ***         0.399
-#&gt; 3 am:cyl        1     29.4     29.4        3.4  0.076 .           0.026
-#&gt; 4 Residuals    28    242.       8.64      NA   NA     &lt;NA&gt;        0.215</div></pre>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>mtcars</span>$<span class='no'>am</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/factor'>factor</a></span>(<span class='no'>mtcars</span>$<span class='no'>am</span>)
+<span class='no'>mtcars</span>$<span class='no'>cyl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/factor'>factor</a></span>(<span class='no'>mtcars</span>$<span class='no'>cyl</span>)
+<span class='kw pkg'>CGPfunctions</span><span class='kw ns'>:::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/CGPfunctions/topics/neweta'>neweta</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/aov'>aov</a></span>(<span class='no'>mpg</span> ~ <span class='no'>am</span> * <span class='no'>cyl</span>, <span class='no'>mtcars</span>))
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

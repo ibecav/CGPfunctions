@@ -17,75 +17,75 @@ newggslopegraph(dataframe, Times, Measurement, Grouping,
   ThemeChoice = "bw")
 }
 \arguments{
-\item{dataframe}{a dataframe or an object that can be coerced to a dataframe. 
-Basic error checking is performed, to include ensuring that the named columns 
+\item{dataframe}{a dataframe or an object that can be coerced to a dataframe.
+Basic error checking is performed, to include ensuring that the named columns
 exist in the dataframe. See the \code{\link{newcancer}} dataset for an example of
 how the dataframe should be organized.}
 
-\item{Times}{a column inside the dataframe that will be plotted on the x axis. 
+\item{Times}{a column inside the dataframe that will be plotted on the x axis.
 Traditionally this is some measure of time.  The function accepts a column of class
-ordered, factor or character.  NOTE if your variable is currently a "date" class 
+ordered, factor or character.  NOTE if your variable is currently a "date" class
 you must convert before using the function with \code{as.character(variablename)}.}
 
-\item{Measurement}{a column inside the dataframe that will be plotted on the y axis. 
-Traditionally this is some measure such as a percentage.  Currently the function 
+\item{Measurement}{a column inside the dataframe that will be plotted on the y axis.
+Traditionally this is some measure such as a percentage.  Currently the function
 accepts a column of type integer or numeric.  The slopegraph will be most effective
 when the measurements are not too disparate.}
 
-\item{Grouping}{a column inside the dataframe that will be used to group and 
+\item{Grouping}{a column inside the dataframe that will be used to group and
 distinguish measurements.}
 
-\item{Title}{Optionally the title to be displayed. Title = NULL will remove it 
+\item{Title}{Optionally the title to be displayed. Title = NULL will remove it
 entirely. Title = "" will provide an empty title but retain the spacing.}
 
-\item{SubTitle}{Optionally the sub-title to be displayed.  SubTitle = NULL 
-will remove it entirely. SubTitle = "" will provide and empty title but retain 
+\item{SubTitle}{Optionally the sub-title to be displayed.  SubTitle = NULL
+will remove it entirely. SubTitle = "" will provide and empty title but retain
 the spacing.}
 
-\item{Caption}{Optionally the caption to be displayed. Caption = NULL will remove 
+\item{Caption}{Optionally the caption to be displayed. Caption = NULL will remove
 it entirely. Caption = "" will provide and empty title but retain the spacing.}
 
 \item{XTextSize}{Optionally the font size for the X axis labels to be displayed. XTextSize = 12 is the default must be a numeric. Note that X & Y axis text are on different scales}
 
-\item{YTextSize}{Optionally the font size for the Y axis labels to be displayed. 
-YTextSize = 3 is the default must be a numeric. Note that X & Y axis text are on 
+\item{YTextSize}{Optionally the font size for the Y axis labels to be displayed.
+YTextSize = 3 is the default must be a numeric. Note that X & Y axis text are on
 different scales}
 
-\item{TitleTextSize}{Optionally the font size for the Title to be displayed. 
+\item{TitleTextSize}{Optionally the font size for the Title to be displayed.
 TitleTextSize = 14 is the default must be a numeric.}
 
-\item{SubTitleTextSize}{Optionally the font size for the SubTitle to be displayed. 
+\item{SubTitleTextSize}{Optionally the font size for the SubTitle to be displayed.
 SubTitleTextSize = 10 is the default must be a numeric.}
 
-\item{CaptionTextSize}{Optionally the font size for the Caption to be displayed. 
+\item{CaptionTextSize}{Optionally the font size for the Caption to be displayed.
 CaptionTextSize = 8 is the default must be a numeric.}
 
-\item{TitleJustify}{Justification of title can be either a character "L", 
-"R" or "C" or use the \code{hjust = } notation from \code{ggplot2} with 
+\item{TitleJustify}{Justification of title can be either a character "L",
+"R" or "C" or use the \code{hjust = } notation from \code{ggplot2} with
 a numeric value between `0` (left) and `1` (right).}
 
-\item{SubTitleJustify}{Justification of subtitle can be either a character "L", 
-"R" or "C" or use the \code{hjust = } notation from \code{ggplot2} with 
+\item{SubTitleJustify}{Justification of subtitle can be either a character "L",
+"R" or "C" or use the \code{hjust = } notation from \code{ggplot2} with
 a numeric value between `0` (left) and `1` (right).}
 
-\item{CaptionJustify}{Justification of caption can be either a character "L", 
-"R" or "C" or use the \code{hjust = } notation from \code{ggplot2} with 
+\item{CaptionJustify}{Justification of caption can be either a character "L",
+"R" or "C" or use the \code{hjust = } notation from \code{ggplot2} with
 a numeric value between `0` (left) and `1` (right).}
 
 \item{LineThickness}{Optionally the thickness of the plotted lines that
 connect the data points. LineThickness = 1 is the default must be a numeric.}
 
-\item{LineColor}{Optionally the color of the plotted lines. By default it will use 
-the ggplot2 color palette for coloring by \code{Grouping}. The user may override 
-with \bold{one} valid color of their choice e.g. "black" (see colors() for choices) 
-\bold{OR} 
-they may provide a vector of colors such as c("gray", "red", "green", "gray", "blue") 
-\bold{OR} a named vector like c("Green" = "gray", "Liberal" = "red", "NDP" = "green", 
-"Others" = "gray", "PC" = "blue"). Any input must be character, and the length 
-of a vector \bold{should} equal the number of levels in \code{Grouping}. If the 
+\item{LineColor}{Optionally the color of the plotted lines. By default it will use
+the ggplot2 color palette for coloring by \code{Grouping}. The user may override
+with \bold{one} valid color of their choice e.g. "black" (see colors() for choices)
+\bold{OR}
+they may provide a vector of colors such as c("gray", "red", "green", "gray", "blue")
+\bold{OR} a named vector like c("Green" = "gray", "Liberal" = "red", "NDP" = "green",
+"Others" = "gray", "PC" = "blue"). Any input must be character, and the length
+of a vector \bold{should} equal the number of levels in \code{Grouping}. If the
 user does not provide enough colors they will be recycled.}
 
-\item{DataTextSize}{Optionally the font size of the plotted data points. DataTextSize = 2.5 
+\item{DataTextSize}{Optionally the font size of the plotted data points. DataTextSize = 2.5
 is the default must be a numeric.}
 
 \item{DataTextColor}{Optionally the font color of the plotted data points. `"black"`
@@ -100,11 +100,11 @@ datapoints.}
 label box. By default = 0 to have no visible border line around the
 label. Must be a numeric.}
 
-\item{DataLabelFillColor}{Optionally the fill color or background of the 
+\item{DataLabelFillColor}{Optionally the fill color or background of the
 plotted data points. `"white"` is the default can be any of the `colors()`
 or hex value e.g. "#FF00FF".}
 
-\item{WiderLabels}{logical, set this value to \code{TRUE} if your "labels" or 
+\item{WiderLabels}{logical, set this value to \code{TRUE} if your "labels" or
 \code{Grouping} variable values tend to be long as they are in the \code{newcancer}
 dataset.  This setting will give them more room in the same plot size.}
 
@@ -130,7 +130,7 @@ a plot of type ggplot to the default plot device
 }
 \description{
 Creates a "slopegraph" as conceptualized by Edward Tufte. Slopegraphs are minimalist
-and efficient presentations of your data that can simultaneously convey the relative rankings, 
+and efficient presentations of your data that can simultaneously convey the relative rankings,
 the actual numeric values, and the changes and directionality of the data over time.
 Takes a dataframe as input, with three named columns being used to draw the plot.
 Makes the required adjustments to the ggplot2 parameters and returns the plot.
@@ -140,41 +140,44 @@ Makes the required adjustments to the ggplot2 parameters and returns the plot.
 newggslopegraph(newcancer, Year, Survival, Type)
 
 # adding a title which is always recommended
-newggslopegraph(newcancer, Year, Survival, Type, 
-                Title = "Estimates of Percent Survival Rates",
-                SubTitle = NULL,
-                Caption = NULL)
-                
+newggslopegraph(newcancer, Year, Survival, Type,
+  Title = "Estimates of Percent Survival Rates",
+  SubTitle = NULL,
+  Caption = NULL
+)
+
 # simple formatting changes
-newggslopegraph(newcancer, Year, Survival, Type, 
-                Title = "Estimates of Percent Survival Rates", 
-                LineColor = "darkgray", 
-                LineThickness = .5, 
-                SubTitle = NULL, 
-                Caption = NULL)
-                
+newggslopegraph(newcancer, Year, Survival, Type,
+  Title = "Estimates of Percent Survival Rates",
+  LineColor = "darkgray",
+  LineThickness = .5,
+  SubTitle = NULL,
+  Caption = NULL
+)
+
 # complex formatting with recycling and wider labels see vignette for more examples
-newggslopegraph(newcancer, Year, Survival, Type, 
-                Title = "Estimates of Percent Survival Rates", 
-                SubTitle = "Based on: Edward Tufte, Beautiful Evidence, 174, 176.",
-                Caption = "https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0003nk",
-                LineColor = c("black", "red", "grey"), 
-                LineThickness = .5,
-                WiderLabels = TRUE)
-                
+newggslopegraph(newcancer, Year, Survival, Type,
+  Title = "Estimates of Percent Survival Rates",
+  SubTitle = "Based on: Edward Tufte, Beautiful Evidence, 174, 176.",
+  Caption = "https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0003nk",
+  LineColor = c("black", "red", "grey"),
+  LineThickness = .5,
+  WiderLabels = TRUE
+)
+
 # not a great example but demonstrating functionality
 newgdp$rGDP <- round(newgdp$GDP)
 
-newggslopegraph(newgdp, 
-                Year, 
-                rGDP, 
-                Country, 
-                LineColor = c(rep("grey", 3), "red", rep("grey", 11)), 
-                DataTextSize = 3, 
-                DataLabelFillColor = "gray", 
-                DataLabelPadding = .2, 
-                DataLabelLineSize = .5)
-
+newggslopegraph(newgdp,
+  Year,
+  rGDP,
+  Country,
+  LineColor = c(rep("grey", 3), "red", rep("grey", 11)),
+  DataTextSize = 3,
+  DataLabelFillColor = "gray",
+  DataLabelPadding = .2,
+  DataLabelLineSize = .5
+)
 }
 \references{
 Based on: Edward Tufte, Beautiful Evidence (2006), pages 174-176.

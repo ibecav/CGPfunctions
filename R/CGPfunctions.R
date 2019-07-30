@@ -1,7 +1,7 @@
 #' CGPfunctions: A package of miscellaneous functions for teaching statistics.
 #'
 #' A package that includes miscellaneous functions useful for teaching statistics as well as actually practicing the art. They typically are not new methods but rather wrappers around either base R or other packages.
-#' 
+#'
 #' @section Functions included:
 #' \itemize{
 #'   \item \code{\link{Plot2WayANOVA}} which as the name implies conducts a 2 way ANOVA and plots the results using `ggplot2`

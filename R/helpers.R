@@ -8,7 +8,6 @@
 #' @keywords internal
 
 justifyme <- function(x) {
-
   if (tolower(stringr::str_sub(x, 1, 1)) %in% c("l", "c", "r")) {
     whichletter <- tolower(stringr::str_sub(x, 1, 1))
     justification <- dplyr::case_when(
