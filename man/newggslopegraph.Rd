@@ -4,17 +4,35 @@
 \alias{newggslopegraph}
 \title{Plot a Slopegraph a la Tufte using dplyr and ggplot2}
 \usage{
-newggslopegraph(dataframe, Times, Measurement, Grouping,
-  Title = "No title given", SubTitle = "No subtitle given",
-  Caption = "No caption given", XTextSize = 12, YTextSize = 3,
-  TitleTextSize = 14, SubTitleTextSize = 10, CaptionTextSize = 8,
-  TitleJustify = "left", SubTitleJustify = "left",
-  CaptionJustify = "right", LineThickness = 1, LineColor = "ByGroup",
-  DataTextSize = 2.5, DataTextColor = "black",
-  DataLabelPadding = 0.05, DataLabelLineSize = 0,
-  DataLabelFillColor = "white", WiderLabels = FALSE,
-  ReverseYAxis = FALSE, ReverseXAxis = FALSE, RemoveMissing = TRUE,
-  ThemeChoice = "bw")
+newggslopegraph(
+  dataframe,
+  Times,
+  Measurement,
+  Grouping,
+  Title = "No title given",
+  SubTitle = "No subtitle given",
+  Caption = "No caption given",
+  XTextSize = 12,
+  YTextSize = 3,
+  TitleTextSize = 14,
+  SubTitleTextSize = 10,
+  CaptionTextSize = 8,
+  TitleJustify = "left",
+  SubTitleJustify = "left",
+  CaptionJustify = "right",
+  LineThickness = 1,
+  LineColor = "ByGroup",
+  DataTextSize = 2.5,
+  DataTextColor = "black",
+  DataLabelPadding = 0.05,
+  DataLabelLineSize = 0,
+  DataLabelFillColor = "white",
+  WiderLabels = FALSE,
+  ReverseYAxis = FALSE,
+  ReverseXAxis = FALSE,
+  RemoveMissing = TRUE,
+  ThemeChoice = "bw"
+)
 }
 \arguments{
 \item{dataframe}{a dataframe or an object that can be coerced to a dataframe.

@@ -1,6 +1,6 @@
 Package: CGPfunctions
 Title: Powell Miscellaneous Functions for Teaching and Learning Statistics
-Version: 0.5.8
+Version: 0.5.9
 Authors@R: person("Chuck", "Powell", email = "ibecav@gmail.com", role = c("aut", "cre"),
              comment = c(ORCID = "0000-0002-3606-2188"))
 Description: Miscellaneous functions useful for teaching statistics as well as actually practicing the art. They typically are not “new” methods but rather wrappers around either base R or other packages.
@@ -9,6 +9,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:
+    BayesFactor,
     broomExtra,
     car,
     DescTools,
@@ -18,12 +19,14 @@ Imports:
     ggplot2,
     ggrepel,
     methods,
+    paletteer,
     pwr,
     rlang,
     scales,
     sjstats,
     stringr,
-    tibble
+    tibble,
+    tidyr
 Suggests:
     BSDA,
     ggthemes,
@@ -36,6 +39,6 @@ Suggests:
     stringi,
     testthat (>= 2.1.0)
 VignetteBuilder: knitr
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 URL: https://github.com/ibecav/CGPfunctions
 BugReports: https://github.com/ibecav/CGPfunctions/issues
