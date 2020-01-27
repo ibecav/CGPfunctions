@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Using PlotXTabs • CGPfunctions</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Using PlotXTabs">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
@@ -36,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">CGPfunctions</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.9</span>
       </span>
     </div>
 
@@ -44,7 +45,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -76,7 +77,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/ibecav/CGPfunctions">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -89,13 +90,14 @@
 <!--/.navbar -->
 
       
-      </header><div class="row">
+
+      </header><script src="Using-PlotXTabs_files/header-attrs-2.1/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Using PlotXTabs</h1>
                         <h4 class="author">Chuck Powell</h4>
             
-            <h4 class="date">2019-07-29</h4>
+            <h4 class="date">2020-01-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ibecav/CGPfunctions/blob/master/vignettes/Using-PlotXTabs.Rmd"><code>vignettes/Using-PlotXTabs.Rmd</code></a></small>
       <div class="hidden name"><code>Using-PlotXTabs.Rmd</code></div>
@@ -128,34 +130,34 @@
 <p>The data is a small sample of variables related to happiness from the general social survey (GSS). The GSS is a yearly cross-sectional survey of Americans, run from 1976. We combine data for 25 years to yield 51,020 observations, and of the over 5,000 variables, we select nine related to happiness.</p>
 </blockquote>
 <p>We’ll load the library and take a quick look at the structure of the data.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(productplots)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(happy)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co">#&gt; 'data.frame':    51020 obs. of  10 variables:</span></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co">#&gt;  $ id     : num  1 2 3 4 5 6 7 8 9 10 ...</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">#&gt;  $ happy  : Factor w/ 3 levels "not too happy",..: 1 1 2 1 2 2 1 1 2 2 ...</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co">#&gt;  $ year   : num  1972 1972 1972 1972 1972 ...</span></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co">#&gt;  $ age    : num  23 70 48 27 61 26 28 27 21 30 ...</span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">#&gt;  $ sex    : Factor w/ 2 levels "male","female": 2 1 2 2 2 1 1 1 2 2 ...</span></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt;  $ marital: Factor w/ 5 levels "married","never married",..: 2 1 1 1 1 2 3 2 2 1 ...</span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">#&gt;  $ degree : Factor w/ 5 levels "lt high school",..: 4 1 2 4 2 2 2 4 2 2 ...</span></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="co">#&gt;  $ finrela: Factor w/ 5 levels "far below average",..: 3 4 3 3 4 4 4 3 3 2 ...</span></a>
-<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="co">#&gt;  $ health : Factor w/ 4 levels "poor","fair",..: 3 2 4 3 3 3 4 3 4 2 ...</span></a>
-<a class="sourceLine" id="cb1-13" data-line-number="13"><span class="co">#&gt;  $ wtssall: num  0.445 0.889 0.889 0.889 0.889 ...</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(productplots)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(happy)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co">#&gt; 'data.frame':    51020 obs. of  10 variables:</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co">#&gt;  $ id     : num  1 2 3 4 5 6 7 8 9 10 ...</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co">#&gt;  $ happy  : Factor w/ 3 levels "not too happy",..: 1 1 2 1 2 2 1 1 2 2 ...</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="co">#&gt;  $ year   : num  1972 1972 1972 1972 1972 ...</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co">#&gt;  $ age    : num  23 70 48 27 61 26 28 27 21 30 ...</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="co">#&gt;  $ sex    : Factor w/ 2 levels "male","female": 2 1 2 2 2 1 1 1 2 2 ...</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="co">#&gt;  $ marital: Factor w/ 5 levels "married","never married",..: 2 1 1 1 1 2 3 2 2 1 ...</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co">#&gt;  $ degree : Factor w/ 5 levels "lt high school",..: 4 1 2 4 2 2 2 4 2 2 ...</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="co">#&gt;  $ finrela: Factor w/ 5 levels "far below average",..: 3 4 3 3 4 4 4 3 3 2 ...</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="co">#&gt;  $ health : Factor w/ 4 levels "poor","fair",..: 3 2 4 3 3 3 4 3 4 2 ...</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="co">#&gt;  $ wtssall: num  0.445 0.889 0.889 0.889 0.889 ...</span></span></code></pre></div>
 <p>We’ll be focusing on the non numeric variables. I certainly can’t claim to do a detailed analysis here but at least the questions will be fun I hope…</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># who's happier by gender</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="../reference/PlotXTabs.html">PlotXTabs</a></span>(happy,happy,sex)</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt; Plotted dataset happy variables happy by sex</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># who's happier by gender</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw"><a href="../reference/PlotXTabs.html">PlotXTabs</a></span>(happy,happy,sex)</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="co">#&gt; Plotted dataset happy variables happy by sex</span></span></code></pre></div>
 <p><img src="Using-PlotXTabs_files/figure-html/vignette1-1.png" width="576"></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># same thing using column numbers and a stacked bar</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="../reference/PlotXTabs.html">PlotXTabs</a></span>(happy,<span class="dv">2</span>,<span class="dv">5</span>,<span class="st">"stack"</span>)</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; Creating the variable pairings from dataframe happy</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; Plot #1 happy with sex</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; Plotting complete</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># same thing using column numbers and a stacked bar</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw"><a href="../reference/PlotXTabs.html">PlotXTabs</a></span>(happy,<span class="dv">2</span>,<span class="dv">5</span>,<span class="st">"stack"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co">#&gt; Creating the variable pairings from dataframe happy</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co">#&gt; Plot #1 happy with sex</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt; Plotting complete</span></span></code></pre></div>
 <p><img src="Using-PlotXTabs_files/figure-html/vignette1-2.png" width="576"></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># happiness by a variety of possible factors as a percent</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw"><a href="../reference/PlotXTabs.html">PlotXTabs</a></span>(happy, <span class="dv">2</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">5</span><span class="op">:</span><span class="dv">9</span>), <span class="dt">plottype =</span> <span class="st">"percent"</span>)</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; Creating the variable pairings from dataframe happy</span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt; Plot #1 happy with sex</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># happiness by a variety of possible factors as a percent</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw"><a href="../reference/PlotXTabs.html">PlotXTabs</a></span>(happy, <span class="dv">2</span>, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">5</span><span class="op">:</span><span class="dv">9</span>), <span class="dt">plottype =</span> <span class="st">"percent"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; Creating the variable pairings from dataframe happy</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; Plot #1 happy with sex</span></span></code></pre></div>
 <p><img src="Using-PlotXTabs_files/figure-html/vignette1-3.png" width="576"></p>
 <pre><code>#&gt; Plot #2 happy with marital</code></pre>
 <p><img src="Using-PlotXTabs_files/figure-html/vignette1-4.png" width="576"></p>
@@ -166,18 +168,18 @@
 <pre><code>#&gt; Plot #5 happy with health
 #&gt; Plotting complete</code></pre>
 <p><img src="Using-PlotXTabs_files/figure-html/vignette1-7.png" width="576"></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># turn the numbers around and change them up basically just showing all</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co"># the permutations</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw"><a href="../reference/PlotXTabs.html">PlotXTabs</a></span>(happy, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">2</span>,<span class="dv">5</span>), <span class="dv">9</span>, <span class="dt">plottype =</span> <span class="st">"side"</span>)</a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; Creating the variable pairings from dataframe happy</span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; Plot #1 happy with health</span></a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># turn the numbers around and change them up basically just showing all</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="co"># the permutations</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="kw"><a href="../reference/PlotXTabs.html">PlotXTabs</a></span>(happy, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">2</span>,<span class="dv">5</span>), <span class="dv">9</span>, <span class="dt">plottype =</span> <span class="st">"side"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt; Creating the variable pairings from dataframe happy</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt; Plot #1 happy with health</span></span></code></pre></div>
 <p><img src="Using-PlotXTabs_files/figure-html/vignette1-8.png" width="576"></p>
 <pre><code>#&gt; Plot #2 sex with health
 #&gt; Plotting complete</code></pre>
 <p><img src="Using-PlotXTabs_files/figure-html/vignette1-9.png" width="576"></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="../reference/PlotXTabs.html">PlotXTabs</a></span>(happy, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">2</span>,<span class="dv">5</span>), <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">6</span><span class="op">:</span><span class="dv">9</span>), <span class="dt">plottype =</span> <span class="st">"percent"</span>)</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="co">#&gt; Creating the variable pairings from dataframe happy</span></a>
-<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt; Plot #1 happy with marital</span></a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw"><a href="../reference/PlotXTabs.html">PlotXTabs</a></span>(happy, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">2</span>,<span class="dv">5</span>), <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">6</span><span class="op">:</span><span class="dv">9</span>), <span class="dt">plottype =</span> <span class="st">"percent"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="co">#&gt; Creating the variable pairings from dataframe happy</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="co">#&gt; Plot #1 happy with marital</span></span></code></pre></div>
 <p><img src="Using-PlotXTabs_files/figure-html/vignette1-10.png" width="576"></p>
 <pre><code>#&gt; Plot #2 happy with degree</code></pre>
 <p><img src="Using-PlotXTabs_files/figure-html/vignette1-11.png" width="576"></p>
@@ -194,18 +196,18 @@
 <pre><code>#&gt; Plot #8 sex with health
 #&gt; Plotting complete</code></pre>
 <p><img src="Using-PlotXTabs_files/figure-html/vignette1-17.png" width="576"></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw"><a href="../reference/PlotXTabs.html">PlotXTabs</a></span>(happy, happy, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">9</span>), <span class="dt">plottype =</span> <span class="st">"percent"</span>)</a>
-<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="co">#&gt; Creating the variable pairings from dataframe happy</span></a>
-<a class="sourceLine" id="cb19-3" data-line-number="3"><span class="co">#&gt; Plot #1 happy with marital</span></a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw"><a href="../reference/PlotXTabs.html">PlotXTabs</a></span>(happy, happy, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">9</span>), <span class="dt">plottype =</span> <span class="st">"percent"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="co">#&gt; Creating the variable pairings from dataframe happy</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="co">#&gt; Plot #1 happy with marital</span></span></code></pre></div>
 <p><img src="Using-PlotXTabs_files/figure-html/vignette1-18.png" width="576"></p>
 <pre><code>#&gt; Plot #2 happy with degree</code></pre>
 <p><img src="Using-PlotXTabs_files/figure-html/vignette1-19.png" width="576"></p>
 <pre><code>#&gt; Plot #3 happy with health
 #&gt; Plotting complete</code></pre>
 <p><img src="Using-PlotXTabs_files/figure-html/vignette1-20.png" width="576"></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw"><a href="../reference/PlotXTabs.html">PlotXTabs</a></span>(happy, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">9</span>), happy, <span class="dt">plottype =</span> <span class="st">"percent"</span>)</a>
-<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="co">#&gt; Creating the variable pairings from dataframe happy</span></a>
-<a class="sourceLine" id="cb22-3" data-line-number="3"><span class="co">#&gt; Plot #1 marital with happy</span></a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw"><a href="../reference/PlotXTabs.html">PlotXTabs</a></span>(happy, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">9</span>), happy, <span class="dt">plottype =</span> <span class="st">"percent"</span>)</span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="co">#&gt; Creating the variable pairings from dataframe happy</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="co">#&gt; Plot #1 marital with happy</span></span></code></pre></div>
 <p><img src="Using-PlotXTabs_files/figure-html/vignette1-21.png" width="576"></p>
 <pre><code>#&gt; Plot #2 degree with happy</code></pre>
 <p><img src="Using-PlotXTabs_files/figure-html/vignette1-22.png" width="576"></p>
@@ -226,6 +228,7 @@
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
@@ -239,17 +242,20 @@
 </div>
 
 
+
       <footer><div class="copyright">
   <p>Developed by Chuck Powell.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

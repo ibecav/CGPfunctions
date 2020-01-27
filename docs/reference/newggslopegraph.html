@@ -8,21 +8,25 @@
 
 <title>Plot a Slopegraph a la Tufte using dplyr and ggplot2 — newggslopegraph • CGPfunctions</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,14 +34,15 @@
 
 
 
-<meta property="og:title" content="Plot a Slopegraph a la Tufte using dplyr and ggplot2 — newggslopegraph" />
 
+<meta property="og:title" content="Plot a Slopegraph a la Tufte using dplyr and ggplot2 — newggslopegraph" />
 <meta property="og:description" content="Creates a &quot;slopegraph&quot; as conceptualized by Edward Tufte. Slopegraphs are minimalist
 and efficient presentations of your data that can simultaneously convey the relative rankings,
 the actual numeric values, and the changes and directionality of the data over time.
 Takes a dataframe as input, with three named columns being used to draw the plot.
 Makes the required adjustments to the ggplot2 parameters and returns the plot." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -61,6 +66,7 @@ Makes the required adjustments to the ggplot2 parameters and returns the plot." 
   gtag('config', 'UA-117082388-1');
 </script>
 
+
   </head>
 
   <body>
@@ -77,7 +83,7 @@ Makes the required adjustments to the ggplot2 parameters and returns the plot." 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">CGPfunctions</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.9</span>
       </span>
     </div>
 
@@ -85,7 +91,7 @@ Makes the required adjustments to the ggplot2 parameters and returns the plot." 
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -114,11 +120,10 @@ Makes the required adjustments to the ggplot2 parameters and returns the plot." 
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/ibecav/CGPfunctions">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -129,6 +134,7 @@ Makes the required adjustments to the ggplot2 parameters and returns the plot." 
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -140,27 +146,43 @@ Makes the required adjustments to the ggplot2 parameters and returns the plot." 
     </div>
 
     <div class="ref-description">
-    
     <p>Creates a "slopegraph" as conceptualized by Edward Tufte. Slopegraphs are minimalist
 and efficient presentations of your data that can simultaneously convey the relative rankings,
 the actual numeric values, and the changes and directionality of the data over time.
 Takes a dataframe as input, with three named columns being used to draw the plot.
 Makes the required adjustments to the ggplot2 parameters and returns the plot.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>newggslopegraph</span>(<span class='no'>dataframe</span>, <span class='no'>Times</span>, <span class='no'>Measurement</span>, <span class='no'>Grouping</span>,
-  <span class='kw'>Title</span> <span class='kw'>=</span> <span class='st'>"No title given"</span>, <span class='kw'>SubTitle</span> <span class='kw'>=</span> <span class='st'>"No subtitle given"</span>,
-  <span class='kw'>Caption</span> <span class='kw'>=</span> <span class='st'>"No caption given"</span>, <span class='kw'>XTextSize</span> <span class='kw'>=</span> <span class='fl'>12</span>, <span class='kw'>YTextSize</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>TitleTextSize</span> <span class='kw'>=</span> <span class='fl'>14</span>, <span class='kw'>SubTitleTextSize</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>CaptionTextSize</span> <span class='kw'>=</span> <span class='fl'>8</span>,
-  <span class='kw'>TitleJustify</span> <span class='kw'>=</span> <span class='st'>"left"</span>, <span class='kw'>SubTitleJustify</span> <span class='kw'>=</span> <span class='st'>"left"</span>,
-  <span class='kw'>CaptionJustify</span> <span class='kw'>=</span> <span class='st'>"right"</span>, <span class='kw'>LineThickness</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='st'>"ByGroup"</span>,
-  <span class='kw'>DataTextSize</span> <span class='kw'>=</span> <span class='fl'>2.5</span>, <span class='kw'>DataTextColor</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
-  <span class='kw'>DataLabelPadding</span> <span class='kw'>=</span> <span class='fl'>0.05</span>, <span class='kw'>DataLabelLineSize</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>DataLabelFillColor</span> <span class='kw'>=</span> <span class='st'>"white"</span>, <span class='kw'>WiderLabels</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>ReverseYAxis</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>ReverseXAxis</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>RemoveMissing</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>ThemeChoice</span> <span class='kw'>=</span> <span class='st'>"bw"</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>newggslopegraph</span>(
+  <span class='no'>dataframe</span>,
+  <span class='no'>Times</span>,
+  <span class='no'>Measurement</span>,
+  <span class='no'>Grouping</span>,
+  <span class='kw'>Title</span> <span class='kw'>=</span> <span class='st'>"No title given"</span>,
+  <span class='kw'>SubTitle</span> <span class='kw'>=</span> <span class='st'>"No subtitle given"</span>,
+  <span class='kw'>Caption</span> <span class='kw'>=</span> <span class='st'>"No caption given"</span>,
+  <span class='kw'>XTextSize</span> <span class='kw'>=</span> <span class='fl'>12</span>,
+  <span class='kw'>YTextSize</span> <span class='kw'>=</span> <span class='fl'>3</span>,
+  <span class='kw'>TitleTextSize</span> <span class='kw'>=</span> <span class='fl'>14</span>,
+  <span class='kw'>SubTitleTextSize</span> <span class='kw'>=</span> <span class='fl'>10</span>,
+  <span class='kw'>CaptionTextSize</span> <span class='kw'>=</span> <span class='fl'>8</span>,
+  <span class='kw'>TitleJustify</span> <span class='kw'>=</span> <span class='st'>"left"</span>,
+  <span class='kw'>SubTitleJustify</span> <span class='kw'>=</span> <span class='st'>"left"</span>,
+  <span class='kw'>CaptionJustify</span> <span class='kw'>=</span> <span class='st'>"right"</span>,
+  <span class='kw'>LineThickness</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='st'>"ByGroup"</span>,
+  <span class='kw'>DataTextSize</span> <span class='kw'>=</span> <span class='fl'>2.5</span>,
+  <span class='kw'>DataTextColor</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
+  <span class='kw'>DataLabelPadding</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
+  <span class='kw'>DataLabelLineSize</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>DataLabelFillColor</span> <span class='kw'>=</span> <span class='st'>"white"</span>,
+  <span class='kw'>WiderLabels</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>ReverseYAxis</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>ReverseXAxis</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>RemoveMissing</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>ThemeChoice</span> <span class='kw'>=</span> <span class='st'>"bw"</span>
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -176,7 +198,7 @@ how the dataframe should be organized.</p></td>
       <td><p>a column inside the dataframe that will be plotted on the x axis.
 Traditionally this is some measure of time.  The function accepts a column of class
 ordered, factor or character.  NOTE if your variable is currently a "date" class
-you must convert before using the function with <code><a href='https://www.rdocumentation.org/packages/base/topics/character'>as.character(variablename)</a></code>.</p></td>
+you must convert before using the function with <code><a href='https://rdrr.io/r/base/character.html'>as.character(variablename)</a></code>.</p></td>
     </tr>
     <tr>
       <th>Measurement</th>
@@ -327,19 +349,16 @@ choices are <b>"ipsum"</b>, <b>"econ"</b>, <b>"wsj"</b>, <b>"gdocs"</b>,
 and <b>"tufte"</b>.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>a plot of type ggplot to the default plot device</p>
-    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Based on: Edward Tufte, Beautiful Evidence (2006), pages 174-176.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='newcancer.html'>newcancer</a></code> and  <code><a href='newgdp.html'>newgdp</a></code></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># the minimum command to generate a plot</span>
@@ -363,19 +382,19 @@ and <b>"tufte"</b>.</p></td>
   <span class='kw'>Title</span> <span class='kw'>=</span> <span class='st'>"Estimates of Percent Survival Rates"</span>,
   <span class='kw'>SubTitle</span> <span class='kw'>=</span> <span class='st'>"Based on: Edward Tufte, Beautiful Evidence, 174, 176."</span>,
   <span class='kw'>Caption</span> <span class='kw'>=</span> <span class='st'>"https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0003nk"</span>,
-  <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"black"</span>, <span class='st'>"red"</span>, <span class='st'>"grey"</span>),
+  <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"black"</span>, <span class='st'>"red"</span>, <span class='st'>"grey"</span>),
   <span class='kw'>LineThickness</span> <span class='kw'>=</span> <span class='fl'>.5</span>,
   <span class='kw'>WiderLabels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )</div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>You gave me 3 colors I'm recycling colors because you have 24 Types</span></div><div class='img'><img src='newggslopegraph-4.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># not a great example but demonstrating functionality</span>
-<span class='no'>newgdp</span>$<span class='no'>rGDP</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Round'>round</a></span>(<span class='no'>newgdp</span>$<span class='no'>GDP</span>)
+<span class='no'>newgdp</span>$<span class='no'>rGDP</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>newgdp</span>$<span class='no'>GDP</span>)
 
 <span class='fu'>newggslopegraph</span>(<span class='no'>newgdp</span>,
   <span class='no'>Year</span>,
   <span class='no'>rGDP</span>,
   <span class='no'>Country</span>,
-  <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='st'>"grey"</span>, <span class='fl'>3</span>), <span class='st'>"red"</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='st'>"grey"</span>, <span class='fl'>11</span>)),
+  <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"grey"</span>, <span class='fl'>3</span>), <span class='st'>"red"</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"grey"</span>, <span class='fl'>11</span>)),
   <span class='kw'>DataTextSize</span> <span class='kw'>=</span> <span class='fl'>3</span>,
   <span class='kw'>DataLabelFillColor</span> <span class='kw'>=</span> <span class='st'>"gray"</span>,
   <span class='kw'>DataLabelPadding</span> <span class='kw'>=</span> <span class='fl'>.2</span>,
@@ -386,13 +405,9 @@ and <b>"tufte"</b>.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#references">References</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -401,19 +416,23 @@ and <b>"tufte"</b>.</p></td>
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by Chuck Powell.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
