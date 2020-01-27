@@ -3,7 +3,6 @@
 \docType{package}
 \name{CGPfunctions}
 \alias{CGPfunctions}
-\alias{CGPfunctions-package}
 \title{CGPfunctions: A package of miscellaneous functions for teaching statistics.}
 \description{
 A package that includes miscellaneous functions useful for teaching statistics as well as actually practicing the art. They typically are not new methods but rather wrappers around either base R or other packages.
@@ -17,6 +16,7 @@ A package that includes miscellaneous functions useful for teaching statistics a
   \item \code{\link{Mode}} which finds the modal value in a vector of data
   \item \code{\link{SeeDist}} which wraps around ggplot2 to provide visualizations of univariate data.
   \item \code{\link{OurConf}} which wraps around ggplot2 to provide visualizations of sampling confidence intervals.
+  \item \code{\link{PlotXTabs2}} which wraps around ggplot2 to provide Bivariate bar charts for categorical and ordinal data.
 }
 }
 

@@ -10,6 +10,7 @@
 #'   \item \code{\link{Mode}} which finds the modal value in a vector of data
 #'   \item \code{\link{SeeDist}} which wraps around ggplot2 to provide visualizations of univariate data.
 #'   \item \code{\link{OurConf}} which wraps around ggplot2 to provide visualizations of sampling confidence intervals.
+#'   \item \code{\link{PlotXTabs2}} which wraps around ggplot2 to provide Bivariate bar charts for categorical and ordinal data.
 #' }
 #'
 #' @docType package
