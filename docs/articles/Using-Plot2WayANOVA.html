@@ -66,6 +66,9 @@
       <a href="../articles/Using-PlotXTabs.html">Using PlotXTabs</a>
     </li>
     <li>
+      <a href="../articles/Using-PlotXTabs2.html">Using PlotXTabs2</a>
+    </li>
+    <li>
       <a href="../articles/Using-newggslopegraph.html">Using newggslopegraph</a>
     </li>
   </ul>
@@ -97,7 +100,7 @@
       <h1>Using Plot2WayAnova</h1>
                         <h4 class="author">Chuck Powell</h4>
             
-            <h4 class="date">2020-01-27</h4>
+            <h4 class="date">2020-01-28</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ibecav/CGPfunctions/blob/master/vignettes/Using-Plot2WayANOVA.Rmd"><code>vignettes/Using-Plot2WayANOVA.Rmd</code></a></small>
       <div class="hidden name"><code>Using-Plot2WayANOVA.Rmd</code></div>
@@ -141,7 +144,7 @@
 <li>It ensures the dependent (outcome) variable is numeric and that the two independent (predictor) variables already are or can be coerced to factors – the user is warned on the console if there are problems.</li>
 <li>A check is conducted to see if any of the variables of interest have missing cases – the user is warned on the console if there are problems.</li>
 <li>Balance is checked, that is whether the number of observations per cell when we cross <code>am</code> and <code>cyl</code> is equal. There’s some debate as to how much imbalance is permissible. But you’ll be given fair warning if there is any.</li>
-<li>In addition to the classic ANOVA table information available in <code>aov</code> or <code>Anova</code> you’ll be presented with information about effect sizes like eta squared <span class="math inline">\(\eta^2\)</span>. They’re calculated and appended as additional columns. If you’re unfamiliar with them and want to know more especially where the numbers come from I recommend a good introductory stats text. I recommend <em>Learning Statistics with R</em> <a href="http://dj-navarro.appspot.com/lsr/lsr-0.5.1.pdf">LSR</a> see Table 14-1 on page 432.</li>
+<li>In addition to the classic ANOVA table information available in <code>aov</code> or <code>Anova</code> you’ll be presented with information about effect sizes like eta squared <span class="math inline">\(\eta^2\)</span>. They’re calculated and appended as additional columns. If you’re unfamiliar with them and want to know more especially where the numbers come from I recommend a good introductory stats text. I recommend <em>Learning Statistics with R</em> <a href="https://learningstatisticswithr.com/">LSR</a> see Table 14-1 on page 432.</li>
 <li>A summarized table of means, standard deviations, standard errors of the means, confidence intervals, and group sizes for each of the crossed combinations in our example that’s 6 groupings 3 levels of cylinder and 2 levels of automatic or manual.</li>
 <li>Some measures of overall fit including <span class="math inline">\(R^2\)</span>
 </li>

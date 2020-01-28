@@ -1,10 +1,10 @@
-## ----setup, include = FALSE----------------------------------------------
+## ----setup, include = FALSE---------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
 
-## ----eval = FALSE--------------------------------------------------------
+## ----eval = FALSE-------------------------------------------------------------
 #  # Install from CRAN
 #  install.packages("CGPfunctions")
 #  
@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
 #  # install.packages("devtools")
 #  devtools::install_github("ibecav/CGPfunctions")
 
-## ----LoadLibrary, warning = FALSE----------------------------------------
+## ----LoadLibrary, warning = FALSE---------------------------------------------
 library(CGPfunctions)
 
 ## ----Plot2WayANOVA, echo=TRUE, message=TRUE, warning=FALSE, fig.width=7, fig.height=4----

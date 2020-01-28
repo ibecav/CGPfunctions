@@ -182,15 +182,6 @@ Plot2WayANOVA <- function(formula,
                           show.dots = FALSE,
                           PlotSave = FALSE) {
 
-  # -------- to appease R CMD Check? ----------------
-  TheMean <- NULL
-  TheSEM <- NULL
-  CIMuliplier <- NULL
-  LowerBound <- NULL
-  UpperBound <- NULL
-  p.value <- NULL
-  term <- NULL
-
   # -------- error checking ----------------
   if (!requireNamespace("ggplot2")) {
     stop("Can't continue can't load ggplot2")

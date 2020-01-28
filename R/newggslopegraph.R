@@ -167,11 +167,6 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
                             RemoveMissing = TRUE,
                             ThemeChoice = "bw") {
 
-  # ---------------- nonsense ----------------------------
-  # appease CRAN since you can't import this convention from dplyr or ggplot2
-
-  . <- NULL
-
   # ---------------- theme selection ----------------------------
 
   if (ThemeChoice == "bw") {

@@ -4,7 +4,16 @@ utils::globalVariables(
   names = c(
     ".",
     "perc",
-    "N"
+    "N",
+    "n",
+    "TheMean",
+    "TheSEM",
+    "CIMuliplier",
+    "LowerBound",
+    "UpperBound",
+    "p.value",
+    "term",
+    "."
   ),
   package = "CGPfunctions",
   add = FALSE

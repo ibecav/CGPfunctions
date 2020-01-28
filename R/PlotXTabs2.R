@@ -211,7 +211,7 @@ PlotXTabs2 <- function(data,
       dplyr::select(
         .data = data,
         y = !!rlang::enquo(y),
-        x = !!rlang::quo_name(rlang::enquo(x))
+        x = !!rlang::enquo(x)
       )
   } else {
     data <-

@@ -4,6 +4,7 @@ pkgdown_sha: ~
 articles:
   Using-Plot2WayANOVA: Using-Plot2WayANOVA.html
   Using-PlotXTabs: Using-PlotXTabs.html
+  Using-PlotXTabs2: Using-PlotXTabs2.html
   Using-newggslopegraph: Using-newggslopegraph.html
 urls:
   reference: http://ibecav.github.io/CGPfunctions/reference

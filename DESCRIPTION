@@ -20,6 +20,7 @@ Imports:
     ggrepel,
     methods,
     paletteer,
+    purrr,
     pwr,
     rlang,
     scales,

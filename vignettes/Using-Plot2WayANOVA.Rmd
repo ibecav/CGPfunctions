@@ -106,7 +106,7 @@ confidence level and choose a line or a bar graph.
     If you're unfamiliar with them and want to know more especially where the
     numbers come from I recommend a good introductory stats text. I recommend
     *Learning Statistics with R*
-    [LSR](http://dj-navarro.appspot.com/lsr/lsr-0.5.1.pdf) see Table 14-1 
+    [LSR](https://learningstatisticswithr.com/) see Table 14-1 
     on page 432.
  1. A summarized table of means, standard deviations, standard errors of the
     means, confidence intervals, and group sizes for each of the crossed

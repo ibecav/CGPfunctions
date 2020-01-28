@@ -48,9 +48,6 @@
 #' }
 #'
 PlotXTabs <- function(dataframe, xwhich, ywhich, plottype = "side") {
-  # to appease R CMD Check?
-  n <- NULL
-  # end of appeasement
   theme_set(theme_bw())
   if (length(match.call()) <= 3) {
     stop("Not enough arguments passed... requires a dataframe, plus at least two variables")
