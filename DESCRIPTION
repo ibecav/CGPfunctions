@@ -27,7 +27,8 @@ Imports:
     sjstats,
     stringr,
     tibble,
-    tidyr
+    tidyr,
+    tidyselect
 Suggests:
     BSDA,
     ggthemes,
