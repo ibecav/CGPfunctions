@@ -22,9 +22,17 @@ relatively common task in some branches of science. The task of cross tabulating
 and displaying certain nominal and ordinal variables. It makes use of the
 `tidyverse` and to achieve those ends and is optimized to work with `purrr`.
 
-Imagine that you want to take two of the `mtcars` variables, for example `am` and `cyl`, and conduct a cross tabulation, get some basic statistics about whether they are "independent" and then plot it.  Since it's the sort of thing I'm likely to do often seemed like a good candidate for a function.  The function should allow us to efficiently repeat across more than two variables at a time.  It would be very tedious to execute the command 25 times if I had 1 dependent variables and 25 independent variables.
+Imagine that you want to take two of the `mtcars` variables, for example `am`
+and `cyl`, and conduct a cross tabulation, get some basic statistics about
+whether they are "independent" and then plot it. Since it's the sort of thing
+I'm likely to do often seemed like a good candidate for a function. The function
+should allow us to efficiently repeat across more than two variables at a time.
+It would be very tedious to execute the command 25 times if I had 1 dependent
+variables and 25 independent variables.
 
-It provides visually appealing and sensibly labelled charts quickly and efficiently. It does some basic error checking and allows the user some choice as to exact style without having to know any underlying syntax or semantics.
+It provides visually appealing and sensibly labelled charts quickly and
+efficiently. It does some basic error checking and allows the user some choice
+as to exact style without having to know any underlying syntax or semantics.
 
 ```{r simple, fig.width=7.0, fig.height=3.5}
 # simplest possible call with the defaults
@@ -37,9 +45,12 @@ PlotXTabs2(
 
 ## Important considerations
 
-1.  The variables may be `bare` or quoted text.
-2.  By default a simple summary of key frequentist and bayesian information is supplied but this subtitle can be suppressed.
-3.  Thanks to `ggstatsplot` there are a plethora of formatting options.
+1. The variables may be `bare` or quoted text.
+
+2. By default a simple summary of key frequentist and bayesian information is
+   supplied but this subtitle can be suppressed.
+
+3. Thanks to `ggstatsplot` there are a plethora of formatting options.
 
 To demonstrate just a few...
 
@@ -62,15 +73,24 @@ PlotXTabs2(
 )
 ```
 
-
-
 ## Example scenario ... What makes us happy?
 
-The documentation examples use the `mtcars` and `HairEyeColor` built-in datasets.  They are handy, convenient, and available by default. To demonstrate the function in action, however, I'm going to use a different dataset.  Something that should allow you to better see the value of making plots of the crosstabs rather than simple tables.  It also has the happy property of being much much larger than `mtcars` so we can see if there are lags in performance due to the number of rows.
+The documentation examples use the `mtcars` and `HairEyeColor` built-in
+datasets. They are handy, convenient, and available by default. To demonstrate
+the function in action, however, I'm going to use a different dataset. Something
+that should allow you to better see the value of making plots of the crosstabs
+rather than simple tables. It also has the happy property of being much much
+larger than `mtcars` so we can see if there are lags in performance due to the
+number of rows.
 
-Rather than provide my own or make anyone work too hard I selected that `happy` dataset that comes bundled with several `R` packages including `productplots` and `GGally`.   From the description:
+Rather than provide my own or make anyone work too hard I selected that `happy`
+dataset that comes bundled with several `R` packages including `productplots`
+and `GGally`. From the description:
 
-> The data is a small sample of variables related to happiness from the general social survey (GSS). The GSS is a yearly cross-sectional survey of Americans, run from 1976. We combine data for 25 years to yield 51,020 observations, and of the over 5,000 variables, we select nine related to happiness. 
+> The data is a small sample of variables related to happiness from the general
+social survey (GSS). The GSS is a yearly cross-sectional survey of Americans,
+run from 1976. We combine data for 25 years to yield 51,020 observations, and of
+the over 5,000 variables, we select nine related to happiness.
 
 We'll load the library and take a quick look at the structure of the data.
 
@@ -91,11 +111,26 @@ the shortest possible call.
 PlotXTabs2(happy,happy,sex)
 ```
 
-That's useful, especially when you consider the variety of formatting options, but far more useful in my work flows when we make use of `purrr` `map` operators.  Let's imagine a scenario where we want to see how happiness is related to all the other `factor` (categorical - be they nomainal or ordinal) variables in our dataset.  For each of them (`sex`, `marital`, `degree`, `finrela` and `health`) we want to plot consistent graphs and have the same information available.  Rather than the tedium of cutting and pasting five times and then changing the variable name let's let `purrr` handles as much of the workflow as possible.
+That's useful, especially when you consider the variety of formatting options,
+but far more useful in my work flows when we make use of `purrr` `map`
+operators. Let's imagine a scenario where we want to see how happiness is
+related to all the other `factor` (categorical - be they nomainal or ordinal)
+variables in our dataset. For each of them (`sex`, `marital`, `degree`,
+`finrela` and `health`) we want to plot consistent graphs and have the same
+information available. Rather than the tedium of cutting and pasting five times
+and then changing the variable name let's let `purrr` handles as much of the
+workflow as possible.
 
-Using a simple set of `dplyr` verbs we'll create a simple list of the variables we are interested in. Technically it's a vector but `purrr` will coerce it to a list. Since I dislike plots without titles we can also create a vector of titles by prepending "Happiness by " to the capitalized variable name.
+Using a simple set of `dplyr` verbs we'll create a simple list of the variables
+we are interested in. Technically it's a vector but `purrr` will coerce it to a
+list. Since I dislike plots without titles we can also create a vector of titles
+by prepending "Happiness by " to the capitalized variable name.
 
-After checking our handiwork in creating the vectors we can then feed them to `purrr:map2`.  We could conceivably have used any `map` depending on complexity.  Just for a little "twist" we'll actually use the `myvariables` list twice.  Once as the variable name for the x variable and then again after capitalizing it as the X axis label.
+After checking our handiwork in creating the vectors we can then feed them to
+`purrr:map2`. We could conceivably have used any `map` depending on complexity.
+Just for a little "twist" we'll actually use the `myvariables` list twice. Once
+as the variable name for the x variable and then again after capitalizing it as
+the X axis label.
 
 ```{r vignette2, fig.width=7.0, fig.height=3.5}
 myvariables <- happy %>% 
@@ -124,12 +159,14 @@ purrr::map2(.x = myvariables,
             )
 ```
 
-I hope you've found this useful.  I am always open to comments, corrections and suggestions.
+### Leaving Feedback
+If you like CGPfunctions, please consider Filing a GitHub issue by [leaving feedback here](https://github.com/ibecav/CGPfunctions/issues), or by contacting me at ibecav at gmail.com by email.
 
-Chuck (ibecav at gmail dot com)
+I hope you've found this useful. I am always open to comments, corrections and
+suggestions.
+
+Chuck 
 
 ### License
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
