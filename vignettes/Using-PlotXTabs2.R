@@ -35,6 +35,7 @@ PlotXTabs2(
 library(dplyr)
 library(purrr)
 library(productplots)
+library(tidyselect) 
 str(happy)
 
 ## ----vignette1, fig.width=7.0, fig.height=3.5---------------------------------
@@ -46,7 +47,9 @@ myvariables <- happy %>%
                 select_if(is.factor)  %>% 
                 select(-happy) %>% 
                 names
-mytitles <- stringr::str_c("Happiness by ", stringr::str_to_title(myvariables), " status")
+mytitles <- stringr::str_c("Happiness by ", 
+                           stringr::str_to_title(myvariables), 
+                           " status")
 
 myvariables
 mytitles

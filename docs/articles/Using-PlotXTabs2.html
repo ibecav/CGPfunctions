@@ -100,7 +100,7 @@
       <h1>Using PlotXTabs2</h1>
                         <h4 class="author">Chuck Powell</h4>
             
-            <h4 class="date">2020-01-28</h4>
+            <h4 class="date">2020-01-29</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ibecav/CGPfunctions/blob/master/vignettes/Using-PlotXTabs2.Rmd"><code>vignettes/Using-PlotXTabs2.Rmd</code></a></small>
       <div class="hidden name"><code>Using-PlotXTabs2.Rmd</code></div>
@@ -123,9 +123,9 @@
 <h2 class="hasAnchor">
 <a href="#important-considerations" class="anchor"></a>Important considerations</h2>
 <ol style="list-style-type: decimal">
-<li>The variables may be <code>bare</code> or quoted text.</li>
-<li>By default a simple summary of key frequentist and bayesian information is supplied but this subtitle can be suppressed.</li>
-<li>Thanks to <code>ggstatsplot</code> there are a plethora of formatting options.</li>
+<li><p>The variables may be <code>bare</code> or quoted text.</p></li>
+<li><p>By default a simple summary of key frequentist and bayesian information is supplied but this subtitle can be suppressed.</p></li>
+<li><p>Thanks to <code>ggstatsplot</code> there are a plethora of formatting options.</p></li>
 </ol>
 <p>To demonstrate just a few…</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># more complex call</span></span>
@@ -166,54 +166,59 @@
 <span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
 <span id="cb3-10"><a href="#cb3-10"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(purrr)</span>
 <span id="cb3-11"><a href="#cb3-11"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(productplots)</span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(happy)</span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt; 'data.frame':    51020 obs. of  10 variables:</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a><span class="co">#&gt;  $ id     : num  1 2 3 4 5 6 7 8 9 10 ...</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="co">#&gt;  $ happy  : Factor w/ 3 levels "not too happy",..: 1 1 2 1 2 2 1 1 2 2 ...</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt;  $ year   : num  1972 1972 1972 1972 1972 ...</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a><span class="co">#&gt;  $ age    : num  23 70 48 27 61 26 28 27 21 30 ...</span></span>
-<span id="cb3-18"><a href="#cb3-18"></a><span class="co">#&gt;  $ sex    : Factor w/ 2 levels "male","female": 2 1 2 2 2 1 1 1 2 2 ...</span></span>
-<span id="cb3-19"><a href="#cb3-19"></a><span class="co">#&gt;  $ marital: Factor w/ 5 levels "married","never married",..: 2 1 1 1 1 2 3 2 2 1 ...</span></span>
-<span id="cb3-20"><a href="#cb3-20"></a><span class="co">#&gt;  $ degree : Factor w/ 5 levels "lt high school",..: 4 1 2 4 2 2 2 4 2 2 ...</span></span>
-<span id="cb3-21"><a href="#cb3-21"></a><span class="co">#&gt;  $ finrela: Factor w/ 5 levels "far below average",..: 3 4 3 3 4 4 4 3 3 2 ...</span></span>
-<span id="cb3-22"><a href="#cb3-22"></a><span class="co">#&gt;  $ health : Factor w/ 4 levels "poor","fair",..: 3 2 4 3 3 3 4 3 4 2 ...</span></span>
-<span id="cb3-23"><a href="#cb3-23"></a><span class="co">#&gt;  $ wtssall: num  0.445 0.889 0.889 0.889 0.889 ...</span></span></code></pre></div>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidyselect) </span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(happy)</span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="co">#&gt; 'data.frame':    51020 obs. of  10 variables:</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="co">#&gt;  $ id     : num  1 2 3 4 5 6 7 8 9 10 ...</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt;  $ happy  : Factor w/ 3 levels "not too happy",..: 1 1 2 1 2 2 1 1 2 2 ...</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="co">#&gt;  $ year   : num  1972 1972 1972 1972 1972 ...</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="co">#&gt;  $ age    : num  23 70 48 27 61 26 28 27 21 30 ...</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="co">#&gt;  $ sex    : Factor w/ 2 levels "male","female": 2 1 2 2 2 1 1 1 2 2 ...</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="co">#&gt;  $ marital: Factor w/ 5 levels "married","never married",..: 2 1 1 1 1 2 3 2 2 1 ...</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a><span class="co">#&gt;  $ degree : Factor w/ 5 levels "lt high school",..: 4 1 2 4 2 2 2 4 2 2 ...</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a><span class="co">#&gt;  $ finrela: Factor w/ 5 levels "far below average",..: 3 4 3 3 4 4 4 3 3 2 ...</span></span>
+<span id="cb3-23"><a href="#cb3-23"></a><span class="co">#&gt;  $ health : Factor w/ 4 levels "poor","fair",..: 3 2 4 3 3 3 4 3 4 2 ...</span></span>
+<span id="cb3-24"><a href="#cb3-24"></a><span class="co">#&gt;  $ wtssall: num  0.445 0.889 0.889 0.889 0.889 ...</span></span></code></pre></div>
 <p>We’ll be focusing on the non numeric variables. I certainly can’t claim to do a detailed analysis here but at least the questions will be fun I hope… Here’s the shortest possible call.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># who's happier by gender</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="kw"><a href="../reference/PlotXTabs2.html">PlotXTabs2</a></span>(happy,happy,sex)</span></code></pre></div>
 <p><img src="Using-PlotXTabs2_files/figure-html/vignette1-1.png" width="672"></p>
-<p>That’s useful, especially when you consider the variety of formatting options, but far more useful in my work flows when we make use of <code>purrr</code> <code>map</code> operators.</p>
+<p>That’s useful, especially when you consider the variety of formatting options, but far more useful in my work flows when we make use of <code>purrr</code> <code>map</code> operators. Let’s imagine a scenario where we want to see how happiness is related to all the other <code>factor</code> (categorical - be they nomainal or ordinal) variables in our dataset. For each of them (<code>sex</code>, <code>marital</code>, <code>degree</code>, <code>finrela</code> and <code>health</code>) we want to plot consistent graphs and have the same information available. Rather than the tedium of cutting and pasting five times and then changing the variable name let’s let <code>purrr</code> handles as much of the workflow as possible.</p>
+<p>Using a simple set of <code>dplyr</code> verbs we’ll create a simple list of the variables we are interested in. Technically it’s a vector but <code>purrr</code> will coerce it to a list. Since I dislike plots without titles we can also create a vector of titles by prepending “Happiness by” to the capitalized variable name.</p>
+<p>After checking our handiwork in creating the vectors we can then feed them to <code>purrr:map2</code>. We could conceivably have used any <code>map</code> depending on complexity. Just for a little “twist” we’ll actually use the <code>myvariables</code> list twice. Once as the variable name for the x variable and then again after capitalizing it as the X axis label.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>myvariables &lt;-<span class="st"> </span>happy <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="st">                </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select_all.html">select_if</a></span>(is.factor)  <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="st">                </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span>happy) <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb5-4"><a href="#cb5-4"></a><span class="st">                </span>names</span>
-<span id="cb5-5"><a href="#cb5-5"></a>mytitles &lt;-<span class="st"> </span>stringr<span class="op">::</span><span class="kw"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span>(<span class="st">"Happiness by "</span>, stringr<span class="op">::</span><span class="kw"><a href="https://stringr.tidyverse.org/reference/case.html">str_to_title</a></span>(myvariables), <span class="st">" status"</span>)</span>
-<span id="cb5-6"><a href="#cb5-6"></a></span>
-<span id="cb5-7"><a href="#cb5-7"></a>myvariables</span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="co">#&gt; [1] "sex"     "marital" "degree"  "finrela" "health"</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a>mytitles</span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="co">#&gt; [1] "Happiness by Sex status"     "Happiness by Marital status"</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="co">#&gt; [3] "Happiness by Degree status"  "Happiness by Finrela status"</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="co">#&gt; [5] "Happiness by Health status"</span></span>
-<span id="cb5-13"><a href="#cb5-13"></a></span>
-<span id="cb5-14"><a href="#cb5-14"></a>purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map2.html">map2</a></span>(<span class="dt">.x =</span> myvariables,</span>
-<span id="cb5-15"><a href="#cb5-15"></a>            <span class="dt">.y =</span> mytitles,</span>
-<span id="cb5-16"><a href="#cb5-16"></a>            <span class="dt">.f =</span>  <span class="op">~</span><span class="st"> </span><span class="kw"><a href="../reference/PlotXTabs2.html">PlotXTabs2</a></span>(<span class="dt">x =</span> .x,</span>
-<span id="cb5-17"><a href="#cb5-17"></a>                               <span class="dt">title =</span> .y,</span>
-<span id="cb5-18"><a href="#cb5-18"></a>                               <span class="dt">data =</span> happy,</span>
-<span id="cb5-19"><a href="#cb5-19"></a>                               <span class="dt">y =</span> happy,</span>
-<span id="cb5-20"><a href="#cb5-20"></a>                               <span class="dt">legend.title =</span> <span class="st">"Rating"</span>,</span>
-<span id="cb5-21"><a href="#cb5-21"></a>                               <span class="dt">xlab =</span> stringr<span class="op">::</span><span class="kw"><a href="https://stringr.tidyverse.org/reference/case.html">str_to_title</a></span>(.x),</span>
-<span id="cb5-22"><a href="#cb5-22"></a>                               <span class="dt">ylab =</span> <span class="ot">NULL</span>,</span>
-<span id="cb5-23"><a href="#cb5-23"></a>                               <span class="dt">perc.k =</span> <span class="dv">1</span>,</span>
-<span id="cb5-24"><a href="#cb5-24"></a>                               <span class="dt">palette =</span> <span class="st">"Set2"</span></span>
-<span id="cb5-25"><a href="#cb5-25"></a>                               )</span>
-<span id="cb5-26"><a href="#cb5-26"></a>            )</span>
-<span id="cb5-27"><a href="#cb5-27"></a><span class="co">#&gt; Note: Using an external vector in selections is ambiguous.</span></span>
-<span id="cb5-28"><a href="#cb5-28"></a><span class="co">#&gt; ℹ Use `all_of(.x)` instead of `.x` to silence this message.</span></span>
-<span id="cb5-29"><a href="#cb5-29"></a><span class="co">#&gt; ℹ See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</span></span>
-<span id="cb5-30"><a href="#cb5-30"></a><span class="co">#&gt; This message is displayed once per session.</span></span>
-<span id="cb5-31"><a href="#cb5-31"></a><span class="co">#&gt; [[1]]</span></span></code></pre></div>
+<span id="cb5-5"><a href="#cb5-5"></a>mytitles &lt;-<span class="st"> </span>stringr<span class="op">::</span><span class="kw"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span>(<span class="st">"Happiness by "</span>, </span>
+<span id="cb5-6"><a href="#cb5-6"></a>                           stringr<span class="op">::</span><span class="kw"><a href="https://stringr.tidyverse.org/reference/case.html">str_to_title</a></span>(myvariables), </span>
+<span id="cb5-7"><a href="#cb5-7"></a>                           <span class="st">" status"</span>)</span>
+<span id="cb5-8"><a href="#cb5-8"></a></span>
+<span id="cb5-9"><a href="#cb5-9"></a>myvariables</span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="co">#&gt; [1] "sex"     "marital" "degree"  "finrela" "health"</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>mytitles</span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="co">#&gt; [1] "Happiness by Sex status"     "Happiness by Marital status"</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="co">#&gt; [3] "Happiness by Degree status"  "Happiness by Finrela status"</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="co">#&gt; [5] "Happiness by Health status"</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a></span>
+<span id="cb5-16"><a href="#cb5-16"></a>purrr<span class="op">::</span><span class="kw"><a href="https://purrr.tidyverse.org/reference/map2.html">map2</a></span>(<span class="dt">.x =</span> myvariables,</span>
+<span id="cb5-17"><a href="#cb5-17"></a>            <span class="dt">.y =</span> mytitles,</span>
+<span id="cb5-18"><a href="#cb5-18"></a>            <span class="dt">.f =</span>  <span class="op">~</span><span class="st"> </span><span class="kw"><a href="../reference/PlotXTabs2.html">PlotXTabs2</a></span>(<span class="dt">x =</span> .x,</span>
+<span id="cb5-19"><a href="#cb5-19"></a>                               <span class="dt">title =</span> .y,</span>
+<span id="cb5-20"><a href="#cb5-20"></a>                               <span class="dt">data =</span> happy,</span>
+<span id="cb5-21"><a href="#cb5-21"></a>                               <span class="dt">y =</span> happy,</span>
+<span id="cb5-22"><a href="#cb5-22"></a>                               <span class="dt">legend.title =</span> <span class="st">"Rating"</span>,</span>
+<span id="cb5-23"><a href="#cb5-23"></a>                               <span class="dt">xlab =</span> stringr<span class="op">::</span><span class="kw"><a href="https://stringr.tidyverse.org/reference/case.html">str_to_title</a></span>(.x),</span>
+<span id="cb5-24"><a href="#cb5-24"></a>                               <span class="dt">ylab =</span> <span class="ot">NULL</span>,</span>
+<span id="cb5-25"><a href="#cb5-25"></a>                               <span class="dt">perc.k =</span> <span class="dv">1</span>,</span>
+<span id="cb5-26"><a href="#cb5-26"></a>                               <span class="dt">palette =</span> <span class="st">"Set2"</span></span>
+<span id="cb5-27"><a href="#cb5-27"></a>                               )</span>
+<span id="cb5-28"><a href="#cb5-28"></a>            )</span>
+<span id="cb5-29"><a href="#cb5-29"></a><span class="co">#&gt; Note: Using an external vector in selections is ambiguous.</span></span>
+<span id="cb5-30"><a href="#cb5-30"></a><span class="co">#&gt; ℹ Use `all_of(.x)` instead of `.x` to silence this message.</span></span>
+<span id="cb5-31"><a href="#cb5-31"></a><span class="co">#&gt; ℹ See &lt;https://tidyselect.r-lib.org/reference/faq-external-vector.html&gt;.</span></span>
+<span id="cb5-32"><a href="#cb5-32"></a><span class="co">#&gt; This message is displayed once per session.</span></span>
+<span id="cb5-33"><a href="#cb5-33"></a><span class="co">#&gt; [[1]]</span></span></code></pre></div>
 <p><img src="Using-PlotXTabs2_files/figure-html/vignette2-1.png" width="672"></p>
 <pre><code>#&gt; 
 #&gt; [[2]]</code></pre>
@@ -227,15 +232,17 @@
 <pre><code>#&gt; 
 #&gt; [[5]]</code></pre>
 <p><img src="Using-PlotXTabs2_files/figure-html/vignette2-5.png" width="672"></p>
+<div id="leaving-feedback" class="section level3">
+<h3 class="hasAnchor">
+<a href="#leaving-feedback" class="anchor"></a>Leaving Feedback</h3>
+<p>If you like CGPfunctions, please consider Filing a GitHub issue by <a href="https://github.com/ibecav/CGPfunctions/issues">leaving feedback here</a>, or by contacting me at ibecav at gmail.com by email.</p>
 <p>I hope you’ve found this useful. I am always open to comments, corrections and suggestions.</p>
-<p>Chuck (ibecav at gmail dot com)</p>
+<p>Chuck</p>
+</div>
 <div id="license" class="section level3">
 <h3 class="hasAnchor">
 <a href="#license" class="anchor"></a>License</h3>
 <p><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"></a><br>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
-<blockquote>
-<p>“He who gives up [code] safety for [code] speed deserves neither.” (<a href="https://twitter.com/hadleywickham/status/504368538874703872">via</a>)</p>
-</blockquote>
 </div>
 </div>
   </div>
