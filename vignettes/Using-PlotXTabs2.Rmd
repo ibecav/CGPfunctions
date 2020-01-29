@@ -78,6 +78,7 @@ We'll load the library and take a quick look at the structure of the data.
 library(dplyr)
 library(purrr)
 library(productplots)
+library(tidyselect) 
 str(happy)
 ```
 
@@ -92,7 +93,9 @@ PlotXTabs2(happy,happy,sex)
 
 That's useful, especially when you consider the variety of formatting options, but far more useful in my work flows when we make use of `purrr` `map` operators.  Let's imagine a scenario where we want to see how happiness is related to all the other `factor` (categorical - be they nomainal or ordinal) variables in our dataset.  For each of them (`sex`, `marital`, `degree`, `finrela` and `health`) we want to plot consistent graphs and have the same information available.  Rather than the tedium of cutting and pasting five times and then changing the variable name let's let `purrr` handles as much of the workflow as possible.
 
-Using a simple set of `dplyr` verbs we'll create a simple list of the variables we are interested in. Technically it's a vector but `purrr` will coerce it to a list. 
+Using a simple set of `dplyr` verbs we'll create a simple list of the variables we are interested in. Technically it's a vector but `purrr` will coerce it to a list. Since I dislike plots without titles we can also create a vector of titles by prepending "Happiness by " to the capitalized variable name.
+
+After checking our handiwork in creating the vectors we can then feed them to `purrr:map2`.  We could conceivably have used any `map` depending on complexity.  Just for a little "twist" we'll actually use the `myvariables` list twice.  Once as the variable name for the x variable and then again after capitalizing it as the X axis label.
 
 ```{r vignette2, fig.width=7.0, fig.height=3.5}
 myvariables <- happy %>% 
@@ -108,7 +111,7 @@ mytitles
 
 purrr::map2(.x = myvariables,
             .y = mytitles,
-            .f =  ~ PlotXTabs2(x = tidyselect:::all_of(.x),
+            .f =  ~ PlotXTabs2(x = all_of(.x),
                                title = .y,
                                data = happy,
                                y = happy,
