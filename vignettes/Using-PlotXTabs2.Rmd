@@ -160,7 +160,9 @@ purrr::map2(.x = myvariables,
 ```
 
 ### Leaving Feedback
-If you like CGPfunctions, please consider Filing a GitHub issue by [leaving feedback here](https://github.com/ibecav/CGPfunctions/issues), or by contacting me at ibecav at gmail.com by email.
+If you like CGPfunctions, please consider Filing a GitHub issue by [leaving
+feedback here](https://github.com/ibecav/CGPfunctions/issues), or by contacting
+me at ibecav at gmail.com by email.
 
 I hope you've found this useful. I am always open to comments, corrections and
 suggestions.
