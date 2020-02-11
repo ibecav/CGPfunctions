@@ -31,3 +31,43 @@
 #' @source Edward Tufte. \emph{Beautiful Evidence}. Graphics Press, 174-176.
 #' @keywords datasets
 "newgdp"
+
+#' @rdname USvoteS
+#' @title U.S. 2000 Election Data (short)
+#' @aliases USvoteS
+#' @description Data from a post-election survey following the year 2000 U.S. 
+#'    presidential elections.  This is a subset from package `CHAID`.
+#'
+#' @format A data frame with 1000 observations on the following 6 variables.:
+#' \describe{
+#'   \item{vote3}{candidate voted for Gore or Bush}
+#'   \item{gender}{gender, a factor with levels male and female}
+#'   \item{ager}{age group, an ordered factor with levels 18-24 < 25-34 < 35-44 < 45-54 < 55-64 < 65+}
+#'   \item{empstat}{status of employment, a factor with levels yes, no or retired}
+#'   \item{educr}{status of education, an ordered factor with levels <HS < HS < >HS < College < Post Coll}
+#'   \item{marstat}{status of living situation, a factor with levels married, widowed, divorced or never married}
+#'
+#' }
+#' @source https://r-forge.r-project.org/R/?group_id=343
+#' @keywords datasets
+"USvoteS"
+
+#' @rdname chaidUS
+#' @title U.S. 2000 Election Data (short)
+#' @aliases chaidUS
+#' @description Data from a post-election survey following the year 2000 U.S. 
+#'    presidential elections.  This is a subset from package `CHAID`.
+#'
+#' @format A partykit on the following 6 variables.:
+#' \describe{
+#'   \item{vote3}{candidate voted for Gore or Bush}
+#'   \item{gender}{gender, a factor with levels male and female}
+#'   \item{ager}{age group, an ordered factor with levels 18-24 < 25-34 < 35-44 < 45-54 < 55-64 < 65+}
+#'   \item{empstat}{status of employment, a factor with levels yes, no or retired}
+#'   \item{educr}{status of education, an ordered factor with levels <HS < HS < >HS < College < Post Coll}
+#'   \item{marstat}{status of living situation, a factor with levels married, widowed, divorced or never married}
+#'
+#' }
+#' @source https://r-forge.r-project.org/R/?group_id=343
+#' @keywords datasets
+"chaidUS"
