@@ -17,19 +17,7 @@ A tibble containing the results.
 Produce CHAID results tables from a partykit CHAID model
 }
 \examples{
-library("CGPfunctions")
-library("CHAID")
-set.seed(290875)
-USvoteS <- dplyr::sample_n(tbl = USvote, size = 1000)
-    
-ctrl <- chaid_control(
-  minsplit = 200,
-  minprob = 0.1
-)
-chaidUS <- chaid(vote3 ~ .,
-  data = USvoteS,
-  control = ctrl
-)
+library(CGPfunctions)
 chaid_table(chaidUS)
 
 }
