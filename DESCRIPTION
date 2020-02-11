@@ -46,6 +46,7 @@ Suggests:
     rmarkdown,
     stringi,
     testthat
+Additional_repositories: http://R-Forge.R-project.org
 VignetteBuilder: knitr
 RoxygenNote: 7.0.2
 URL: https://github.com/ibecav/CGPfunctions
