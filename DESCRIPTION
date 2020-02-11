@@ -10,6 +10,7 @@ Encoding: UTF-8
 LazyData: true
 Imports:
     BayesFactor,
+    broom,
     broomExtra,
     car,
     DescTools,
@@ -18,19 +19,24 @@ Imports:
     forcats,
     ggplot2,
     ggrepel,
+    grid,
+    magrittr,
     methods,
     paletteer,
+    partykit,
     purrr,
     pwr,
     rlang,
     scales,
     sjstats,
+    stats,
     stringr,
     tibble,
     tidyr,
     tidyselect
 Suggests:
     BSDA,
+    CHAID,
     ggthemes,
     hrbrthemes,
     janitor,
