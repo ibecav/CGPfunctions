@@ -30,6 +30,8 @@ knitr::opts_chunk$set(
 # install.packages("devtools")
 # devtools::install_github("ibecav/CGPfunctions")
 library(CGPfunctions)
+library(tidyr)
+library(dplyr)
 ```
 
 ## Simple examples
@@ -125,7 +127,12 @@ newggslopegraph(moredata, Date, Pct, Party,
 
 ## One last set of data
 
-Also from Tufte, this is data about a select group of countries Gross Domestic Product (GDP).  I'll use it to show you a tricky way to highlight certain countries without making a named vector with `LineColor = c(rep("gray",3), "red", rep("gray",3), "red", rep("gray",10))` the excess vector entries are silently dropped...  The bottom line is that `LineColor` is simply a character vector that you can fill any way you choose.
+Also from Tufte, this is data about a select group of countries Gross Domestic
+Product (GDP). I'll use it to show you a tricky way to highlight certain
+countries without making a named vector with `LineColor = c(rep("gray",3), "red", rep("gray",3), "red", rep("gray",10))`
+the excess vector entries are
+silently dropped... The bottom line is that `LineColor` is simply a character
+vector that you can fill any way you choose.
 
 ```{r ggslope6, fig.height=12, fig.width=6}
 newggslopegraph(newgdp, 
@@ -141,9 +148,26 @@ newggslopegraph(newgdp,
                 )
 ```
 
-Finally, let me take a moment about crowding and labeling.  I've made every effort to try and deconflict the labels on the left and right axis (in this example the `Country`) and that should work automatically as you resize your plot dimensions. ** pro tip - if you use `RStudio` you can press the `zoom` icon and then use the rescaling of the window to see best choices **. 
+Finally, let me take a moment about crowding and labeling. I've made every
+effort to try and deconflict the labels on the left and right axis (in this
+example the `Country`) and that should work automatically as you resize your
+plot dimensions. ** pro tip - if you use `RStudio` you can press the `zoom` icon
+and then use the rescaling of the window to see best choices **.
 
-But the numbers (`GDP`) are a different matter and there's no easy way to ensure separation in a case like this data.  There's a decent total spread from 57.4 to 20.7 and some really close measurements like France, Belgium, and Germany on the right side. My suggestion is in a case like this one you create a new column in your dataframe with two significant places. So specifically it would be `newgdp$rGDP <- signif(newgdp$GDP, 2)`.  In my testing, at least, I've found this helps without creating inaccuracy and not causing you to try and "stretch" vertically to disambiguate the numbers.  This time I'll also use `LineColor` to highlight how Canada, Finland and Belgium fare from 1970 to 1979.
+But the numbers (`GDP`) are a different matter and there's no easy way to ensure
+separation in a case like this data. There's a decent total spread from 57.4 to
+20.7 and some really close measurements like France, Belgium, and Germany on the
+right side. My suggestion is in a case like this one you create a new column in
+your dataframe with two significant places. So specifically it would be
+`newgdp$rGDP <- signif(newgdp$GDP, 2)`. In my testing, at least, I've found this
+helps without creating inaccuracy and not causing you to try and "stretch"
+vertically to disambiguate the numbers. This time I'll also use `LineColor` to
+highlight how Canada, Finland and Belgium fare from 1970 to 1979.
+
+Then to demonstrate how flexible `LineColor` really is I'll use some `tidyverse`
+tools to build a named list of countries and colors. The country's line color will
+be determined by whether the difference between 1979 is positive, near neutral
+or negative.
 
 ```{r ggslope7, fig.height=7, fig.width=6}
 newgdp$rGDP <- signif(newgdp$GDP, 2)
@@ -158,6 +182,35 @@ newggslopegraph(newgdp,
                 YTextSize = 4,
                 LineColor = c(rep("gray",6), rep("red",2), "red", rep("gray",10))
                 )
+
+custom_colors <- tidyr::pivot_wider(newgdp, 
+                   id_cols = Country, 
+                   names_from = Year, 
+                   values_from = GDP) %>% 
+  mutate(difference = Year1979 - Year1970) %>%
+  mutate(trend = case_when(
+    difference >= 2 ~ "green",
+    difference <= -1 ~ "red",
+    TRUE ~ "gray"
+    )
+  ) %>%
+  select(Country, trend) %>%
+  tibble::deframe()
+
+custom_colors
+
+newggslopegraph(newgdp, 
+                Year, 
+                rGDP, 
+                Country, 
+                Title = "Gross GDP", 
+                SubTitle = NULL, 
+                Caption = NULL,
+                LineThickness = .5,
+                YTextSize = 4,
+                LineColor = custom_colors
+)
+
 ```
 
 
@@ -169,6 +222,3 @@ If you like CGPfunctions, please consider Filing a GitHub issue by [leaving feed
 
 ### License
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
