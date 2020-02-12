@@ -77,7 +77,7 @@
 #' @importFrom rlang !! enquo quo_name
 #' @importFrom paletteer scale_fill_paletteer_d
 #' @importFrom tidyr uncount drop_na
-#' @importFrom tibble as_tibble
+#' @importFrom dplyr as_tibble
 #' @importFrom scales label_percent
 #' @importFrom BayesFactor extractBF
 #' @importFrom BayesFactor contingencyTableBF
@@ -242,7 +242,7 @@ PlotXTabs2 <- function(data,
 
   # converting to tibble
   data <- data %>%
-    tibble::as_tibble(x = .)
+    dplyr::as_tibble(x = .)
 
   # convert the data into percentages; group by conditional variable
   df <-

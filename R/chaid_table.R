@@ -9,7 +9,7 @@
 #'
 #' @importFrom purrr map_dfr
 #' @importFrom stringr str_replace_all str_split str_trim
-#' @importFrom tibble as_tibble
+#' @importFrom dplyr as_tibble
 #' @importFrom utils getFromNamespace
 #' @importFrom tidyr pivot_wider separate
 #' @importFrom grid depth

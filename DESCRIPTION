@@ -1,8 +1,12 @@
 Package: CGPfunctions
 Title: Powell Miscellaneous Functions for Teaching and Learning Statistics
 Version: 0.5.9
-Authors@R: person("Chuck", "Powell", email = "ibecav@gmail.com", role = c("aut", "cre"),
-             comment = c(ORCID = "0000-0002-3606-2188"))
+Authors@R: person("Chuck", 
+                  "Powell", 
+                  email = "ibecav@gmail.com", 
+                  role = c("aut", "cre"),
+                  comment = c(ORCID = "0000-0002-3606-2188")
+                )
 Description: Miscellaneous functions useful for teaching statistics as well as actually practicing the art. They typically are not “new” methods but rather wrappers around either base R or other packages.
 Depends: R (>= 3.5.0)
 License: MIT + file LICENSE
@@ -20,7 +24,6 @@ Imports:
     ggplot2,
     ggrepel,
     grid,
-    magrittr,
     methods,
     paletteer,
     partykit,
@@ -31,21 +34,20 @@ Imports:
     sjstats,
     stats,
     stringr,
-    tibble,
-    tidyr,
-    tidyselect
+    tidyr
 Suggests:
-    BSDA,
     CHAID,
     ggthemes,
     hrbrthemes,
     janitor,
     knitr,
-    lsr,
+    magrittr,
     productplots,
     rmarkdown,
     stringi,
-    testthat
+    tibble,
+    testthat,
+    tidyselect
 Additional_repositories: http://R-Forge.R-project.org
 VignetteBuilder: knitr
 RoxygenNote: 7.0.2

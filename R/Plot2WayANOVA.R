@@ -152,7 +152,7 @@
 #' @import rlang
 #' @importFrom methods is
 #' @importFrom stats anova aov lm pf qt replications sd symnum residuals shapiro.test
-#' @importFrom tibble as_tibble
+#' @importFrom dplyr as_tibble
 #' @importFrom car leveneTest Anova
 #' @importFrom sjstats anova_stats
 #' @importFrom broomExtra glance

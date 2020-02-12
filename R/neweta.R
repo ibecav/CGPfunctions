@@ -66,5 +66,5 @@ neweta <- function(MyAOV) {
   E$sigstars <- unclass(symnum(E$p, corr = FALSE, na = TRUE, cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1), symbols = c("***", "**", "*", ".", "")))
   E[4, 8] <- NA
   E <- E[, c(1:6, 8, 7)]
-  return(tibble::as_tibble(E))
+  return(dplyr::as_tibble(E))
 }
