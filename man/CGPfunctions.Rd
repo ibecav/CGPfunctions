@@ -12,11 +12,12 @@ A package that includes miscellaneous functions useful for teaching statistics a
 \itemize{
   \item \code{\link{Plot2WayANOVA}} which as the name implies conducts a 2 way ANOVA and plots the results using `ggplot2`
   \item \code{\link{PlotXTabs}} Plots cross tabulated variables using `ggplot2`
-  \item \code{\link{neweta}} which is a helper function that appends the results of a Type II eta squared calculation onto a classic ANOVA table
   \item \code{\link{Mode}} which finds the modal value in a vector of data
   \item \code{\link{SeeDist}} which wraps around ggplot2 to provide visualizations of univariate data.
   \item \code{\link{OurConf}} which wraps around ggplot2 to provide visualizations of sampling confidence intervals.
   \item \code{\link{PlotXTabs2}} which wraps around ggplot2 to provide Bivariate bar charts for categorical and ordinal data.
+  \item \code{\link{chaid_table}} provides tabular summary of CHAID partykit object.
+  \item \code{\link{newggslopegraph}} creates a "slopegraph" as conceptualized by Edward Tufte. .
 }
 }
 
