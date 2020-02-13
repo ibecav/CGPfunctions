@@ -18,8 +18,11 @@ packages and concepts I’m trying to master. Currently contains:
     plots the results using `ggplot2`
   - `PlotXTabs` which as the name implies plots cross tabulated
     variables using `ggplot2`
+  - `PlotXTabs2` which wraps around ggplot2 to provide Bivariate bar
+    charts for categorical and ordinal data.
   - `newggslopegraph` which creates a Tufte“esque” slopegraph using
     `ggplot2`
+  - `chaid_table` provides tabular summary of `CHAID` `partykit` object
   - `Mode` which finds the modal value(s) in a vector of data
   - `SeeDist` which wraps around ggplot2 to provide visualizations of
     univariate data.
@@ -44,23 +47,50 @@ here](https://ibecav.github.io/CGPfunctions).
 
 #### Example [Plot2WayANOVA](https://ibecav.github.io/CGPfunctions/articles/Using-Plot2WayANOVA.html) plot
 
-<img src="https://ibecav.github.io/CGPfunctions/articles/Using-Plot2WayANOVA_files/figure-html/Plot2WayANOVA3-1.png" title="Example Plot2WayANOVA" alt="Example Plot2WayANOVA" width="100%" />
+<div class="figure">
+
+<img src="https://ibecav.github.io/CGPfunctions/articles/Using-Plot2WayANOVA_files/figure-html/Plot2WayANOVA3-1.png" alt="Example Plot2WayANOVA" width="100%" />
+
+<p class="caption">
+
+Example Plot2WayANOVA
+
+</p>
+
+</div>
 
 #### Example [PlotXTabs](https://ibecav.github.io/CGPfunctions/articles/Using-PlotXTabs.html) plot
 
-<img src="https://ibecav.github.io/CGPfunctions/articles/Using-PlotXTabs_files/figure-html/vignette1-18.png" title="Example PlotXTabs plot" alt="Example PlotXTabs plot" width="100%" />
+<div class="figure">
+
+<img src="https://ibecav.github.io/CGPfunctions/articles/Using-PlotXTabs_files/figure-html/vignette1-18.png" alt="Example PlotXTabs plot" width="100%" />
+
+<p class="caption">
+
+Example PlotXTabs plot
+
+</p>
+
+</div>
 
 #### Example [newggslopegraph](https://ibecav.github.io/CGPfunctions/articles/Using-newggslopegraph.html) plot
 
-<img src="https://ibecav.github.io/CGPfunctions/articles/Using-newggslopegraph_files/figure-html/ggslope7-1.png" title="Example newggslopegraph plot" alt="Example newggslopegraph plot" width="80%" />
+<div class="figure">
+
+<img src="https://ibecav.github.io/CGPfunctions/articles/Using-newggslopegraph_files/figure-html/ggslope7-1.png" alt="Example newggslopegraph plot" width="80%" />
+
+<p class="caption">
+
+Example newggslopegraph plot
+
+</p>
+
+</div>
 
 ### Credits
 
 Many thanks to Danielle Navarro and the book *[Learning Statistics with
 R](https://learningstatisticswithr.com/book/)*.
-
-“He who gives up safety for speed deserves neither.”
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
 
 ### Leaving Feedback
 
