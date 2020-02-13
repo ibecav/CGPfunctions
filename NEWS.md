@@ -5,6 +5,7 @@
   - Soon to release chaid_table()
   - Requiring R >= 3.6.0 to support DescTools
   - Cleaned up dependencies
+  - Corrected overly aggresive error checking in newggslopegraph
 * Release 0.5.8 feature release 20 June 2019
   - Updated newslopegraph to add aditional formatting options
   - Added support for selected themes from ggthemes
