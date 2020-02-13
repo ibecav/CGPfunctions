@@ -95,6 +95,7 @@
 #' @importFrom dplyr filter mutate group_by summarise %>% n case_when
 #' @importFrom ggrepel geom_text_repel geom_label_repel
 #' @importFrom forcats fct_rev
+#' @importFrom methods hasArg
 #'
 #' @author Chuck Powell
 #' @seealso \code{\link{newcancer}} and  \code{\link{newgdp}}
@@ -226,33 +227,34 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
 
   # ---------------- input checking ----------------------------
 
-  Ndataframe <- deparse(substitute(dataframe)) # name of dataframe
   NTimes <- deparse(substitute(Times)) # name of Times variable
   NMeasurement <- deparse(substitute(Measurement)) # name of Measurement variable
   NGrouping <- deparse(substitute(Grouping)) # name of Grouping variable
 
   # error checking and setup
   if (length(match.call()) <= 4) {
-    stop("Not enough arguments passed... requires a dataframe, plus at least three variables")
+    stop("Not enough arguments passed requires a dataframe, plus at least three variables")
   }
   argList <- as.list(match.call()[-1])
-  if (!exists(Ndataframe)) {
-    stop("The first object in your list '", Ndataframe, "' does not exist. It should be a dataframe", call. = FALSE)
+  if (!hasArg(dataframe)) {
+    stop("You didn't specify a dataframe to use", call. = FALSE)
   }
+  Ndataframe <- argList$dataframe # name of dataframe
   if (!is(dataframe, "data.frame")) {
-    stop(paste0("'", Ndataframe, "' does not appear to be a data frame"), call. = FALSE)
+    stop(paste0("'", Ndataframe, "' does not appear to be a data frame"))
   }
+
   if (!NTimes %in% names(dataframe)) {
-    stop(paste0("'", NTimes, "' is not the name of a variable in '", Ndataframe, "'"), call. = FALSE)
+    stop(paste0("'", NTimes, "' is not the name of a variable in the dataframe"), call. = FALSE)
   }
   if (anyNA(dataframe[[NTimes]])) {
     stop(paste0("'", NTimes, "' can not have missing data please remove those rows!"), call. = FALSE)
   }
   if (!NMeasurement %in% names(dataframe)) {
-    stop(paste0("'", NMeasurement, "' is not the name of a variable in '", Ndataframe, "'"), call. = FALSE)
+    stop(paste0("'", NMeasurement, "' is not the name of a variable in the dataframe"), call. = FALSE)
   }
   if (!NGrouping %in% names(dataframe)) {
-    stop(paste0("'", NGrouping, "' is not the name of a variable in '", Ndataframe, "'"), call. = FALSE)
+    stop(paste0("'", NGrouping, "' is not the name of a variable in the dataframe"), call. = FALSE)
   }
   if (anyNA(dataframe[[NGrouping]])) {
     stop(paste0("'", NGrouping, "' can not have missing data please remove those rows!"), call. = FALSE)
