@@ -40,9 +40,6 @@
     <loc>http://ibecav.github.io/CGPfunctions/reference/newcancer.html</loc>
   </url>
   <url>
-    <loc>http://ibecav.github.io/CGPfunctions/reference/neweta.html</loc>
-  </url>
-  <url>
     <loc>http://ibecav.github.io/CGPfunctions/reference/newgdp.html</loc>
   </url>
   <url>
@@ -56,6 +53,9 @@
   </url>
   <url>
     <loc>http://ibecav.github.io/CGPfunctions/articles/Using-PlotXTabs2.html</loc>
+  </url>
+  <url>
+    <loc>http://ibecav.github.io/CGPfunctions/articles/Using-chaid_table.html</loc>
   </url>
   <url>
     <loc>http://ibecav.github.io/CGPfunctions/articles/Using-newggslopegraph.html</loc>

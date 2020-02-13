@@ -2,7 +2,7 @@
 
 * Release 0.5.9 in development January 2020
   - Another vignette example for newggslopegraph
-  - Soon to release chaid_table()
+  - Added chaid_table() including vignette
   - Requiring R >= 3.6.0 to support DescTools
   - Cleaned up dependencies
   - Corrected overly aggresive error checking in newggslopegraph

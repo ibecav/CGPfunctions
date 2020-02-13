@@ -1,0 +1,144 @@
+---
+title: "Using chaid_table"
+author: "Chuck Powell"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using chaid_table}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, echo = FALSE, warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+**Chi-square automatic interaction detection (CHAID)** is a decision tree
+technique, based on adjusted significance testing (Bonferroni testing). The
+technique was developed in South Africa and was published in 1980 by Gordon V.
+Kass, who had completed a PhD thesis on this topic. [Wikipedia](https://en.wikipedia.org/wiki/Chi-square_automatic_interaction_detection) 
+
+I've [written a few blog posts](https://ibecav.netlify.com/tags/chaid/) about
+using this venerable technique. The default output using `print()` and `plot()`
+is sparse, elegant and useful as is, and can be adjusted in many ways that [I
+have documented here](https://ibecav.github.io/chaidtutor1/).
+
+The code chunk below is taken straight from the example in the help page for
+`CHAID::chaid`
+
+> The dataset is based on data from a post-election survey on persons who voted for either Bush or Gore in the 2000 U.S. election. The specific variables are related to the publication of Magidson and Vermunt (2005).
+
+> Further information (and datasets) about the 2000 U.S. election and other National Election Studies is available on the American National Election Studies Web site (http://www.electionstudies.org/).
+
+
+```{r one, fig.width=7.0, fig.height=5.5, warning=FALSE, message=FALSE}
+library(CGPfunctions)
+library(CHAID)
+library(dplyr)
+library(knitr)
+
+### fit tree to subsample see ?chaid
+##  set.seed(290875)
+##  USvoteS <- USvote[sample(1:nrow(USvote), 1000),]
+
+##  ctrl <- chaid_control(minsplit = 200, minprob = 0.1)
+##  chaidUS <- chaid(vote3 ~ ., data = USvoteS, control = ctrl)
+print(chaidUS) 
+plot(chaidUS)
+```
+
+## Getting more detailed
+
+But what happens if you want to investigate your results more closely? I
+actually had at least one reader of my blog posts point out that [some other
+statistical
+packages](https://www.ibm.com/support/knowledgecenter/en/SSLVMB_23.0.0/spss/tutorials/tree_credit_treetable.html#tree_credit_treetable)
+produce more detailed information in a tabular format.
+
+Some additional things you may want to know that are actually contained in
+`chaidUS` but aren't especially easy to see from the default plot and print and
+aren't necessarily easy to ferret out of the `chaidUS` object:
+
+1. It's clear from our call that we fed `chaid` 1,000 random rows of the
+   dataset `USvote`. It must be safe to assume that's how many valid cases there were
+   right?  The documentation is mute on how it handles missing cases.
+
+2. There's information about counts and frequencies in the terminal nodes (3, 4,
+   6, 8, 9) and we could manually calculate the answers to other questions like
+   how many people voted for Bush in node #9 (115 * 40.9% = 47)? How many total
+   voters are in node #2 (311 + 249 = 560)? But getting more information gets
+   increasingly tedious. At node #2 what was the breakdown of votes for Bush -v-
+   Gore (hint 245 -v- 315 respectively).
+
+3. It would also be nice to have easy access to the results of the $\chi^2$
+   tests that are the inherent workhorse of CHAID. We know that `marstat` was
+   selected as the first split by virtue of having the smallest `p value` after
+   a Bonferroni adjustment, but what were the results?
+
+`chaid_table` attempts to provide much more granular information in a tibble and
+also make it possible for you to derive even more nuanced questions through
+piping operations. The simplest call is just to feed it the name of the object
+after it has been processed by `CHAID`. That object will be of class
+"constparty" "party".
+
+```{r simple2, fig.width=7.0, fig.height=3.5}
+# simplest use --- chaidUS is included in the package
+class(chaidUS)
+
+chaid_table(chaidUS)
+
+mychaidtable <- chaid_table(chaidUS)
+```
+
+I debated the wisdom of providing tables as output in the manner I found most
+useful and aesthetically pleasing but in the end decided to simply provide the
+tibble and let the user decide what and how to format.
+
+## Example uses
+
+Some easy examples using `kable` and `dplyr`.
+
+```{r simple3}
+mychaidtable %>% 
+  select(nodeID:ruletext) %>% 
+  kable()
+
+# Just node #2 show percentage
+mychaidtable %>% 
+  select(nodeID:ruletext) %>% 
+  filter(nodeID == 2) %>% 
+  mutate(pctBush = Bush/NodeN * 100) %>%
+  kable(digits = 1)
+
+# Just the children of node #5
+mychaidtable %>% 
+  select(nodeID:ruletext) %>% 
+  filter(parent == 5) %>% 
+  kable()
+
+# stats for all splits including raw (unadjusted) p value
+mychaidtable %>% 
+  select(nodeID, NodeN, split.variable:rawpvalue) %>% 
+  filter(!is.na(split.variable)) %>% 
+  kable()
+
+```
+
+Hopefully those are enough examples to get your creative juices going.
+
+### Leaving Feedback
+If you like CGPfunctions, please consider Filing a GitHub issue by [leaving
+feedback here](https://github.com/ibecav/CGPfunctions/issues), or by contacting
+me at ibecav at gmail.com by email.
+
+I hope you've found this useful. I am always open to comments, corrections and
+suggestions.
+
+Chuck 
+
+### License
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+
