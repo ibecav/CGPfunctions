@@ -56,7 +56,7 @@ mytitles
 
 purrr::map2(.x = myvariables,
             .y = mytitles,
-            .f =  ~ PlotXTabs2(x = .x,
+            .f =  ~ PlotXTabs2(x = all_of(.x),
                                title = .y,
                                data = happy,
                                y = happy,
