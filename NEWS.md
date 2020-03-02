@@ -3,6 +3,7 @@
 * Release 0.5.9 in development January 2020
   - Another vignette example for newggslopegraph
   - Added chaid_table() including vignette
+  - Added cross2_var_vectors function
   - Requiring R >= 3.6.0 to support DescTools
   - Cleaned up dependencies
   - Corrected overly aggresive error checking in newggslopegraph

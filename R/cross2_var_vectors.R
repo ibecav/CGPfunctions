@@ -8,6 +8,7 @@
 #'
 #' @return a list with two sublists `lista` and `listb`. Very handy for
 #'   feeding the lists to `purrr` for further processing.
+#' @author Chuck Powell
 #' @export
 #'
 #' @examples
