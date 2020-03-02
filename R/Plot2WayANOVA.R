@@ -155,7 +155,7 @@
 #' @importFrom dplyr as_tibble
 #' @importFrom car leveneTest Anova
 #' @importFrom sjstats anova_stats
-#' @importFrom broomExtra glance
+#' @importFrom broom glance
 #' @importFrom DescTools PostHocTest
 #' @export
 #'
@@ -330,7 +330,7 @@ Plot2WayANOVA <- function(formula,
   # get more detailed information including effect sizes
   WithETA <- sjstats::anova_stats(MyAOVt2)
   # creating model summary dataframe
-  model_summary <- broomExtra::glance(MyAOV)
+  model_summary <- broom::glance(MyAOV)
   # Run Brown-Forsythe
   BFTest <- car::leveneTest(MyAOV)
   # Grab the residuals and run Shapiro-Wilk
