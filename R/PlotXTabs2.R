@@ -229,6 +229,8 @@ PlotXTabs2 <- function(data,
         .id = "id"
       )
   }
+  
+  original_N <- nrow(data)
 
   ### -----  calculate counts and percents -------
 
@@ -239,7 +241,10 @@ PlotXTabs2 <- function(data,
     dplyr::filter(.data = ., !is.na(y)) %>%
     dplyr::mutate(.data = ., x = droplevels(as.factor(x))) %>%
     dplyr::filter(.data = ., !is.na(x))
-
+  
+  valid_N <- nrow(data)
+  missing_N <- original_N - valid_N
+  
   # converting to tibble
   data <- data %>%
     dplyr::as_tibble(x = .)
@@ -390,6 +395,8 @@ PlotXTabs2 <- function(data,
                          * ", p=" * .(ppvalue)
                          * ", " * BF['10']
                          * "=" * .(bf10_results)
+                         * ", N=" *.(valid_N)
+                         * ", missing=" *.(missing_N)
       )
       if (isTRUE(bf.details)) {
         caption <- bquote(~ BF['01']
@@ -407,6 +414,8 @@ PlotXTabs2 <- function(data,
                          * ", p=" * .(ppvalue)
                          * ", " * BF['01']
                          * "=" * .(bf01_results)
+                         * ", N=" *.(valid_N)
+                         * ", missing=" *.(missing_N)
       )
       if (isTRUE(bf.details)) {
         caption <- bquote(~ BF['10']
