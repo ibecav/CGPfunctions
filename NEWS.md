@@ -1,6 +1,8 @@
 # CGPfunctions 0.5.9
 
-* Release 0.5.9 in development January 2020
+* Release 0.5.9 in development March 2020
+  - Added functionality to PlotXTabs2 will be deprecating PlotXtabs next 
+    release
   - Another vignette example for newggslopegraph
   - Added chaid_table() including vignette
   - Added cross2_var_vectors function
