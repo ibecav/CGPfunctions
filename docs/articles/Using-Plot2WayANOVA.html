@@ -103,7 +103,7 @@
       <h1>Using Plot2WayAnova</h1>
                         <h4 class="author">Chuck Powell</h4>
             
-            <h4 class="date">2020-03-02</h4>
+            <h4 class="date">2020-03-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ibecav/CGPfunctions/blob/master/vignettes/Using-Plot2WayANOVA.Rmd"><code>vignettes/Using-Plot2WayANOVA.Rmd</code></a></small>
       <div class="hidden name"><code>Using-Plot2WayANOVA.Rmd</code></div>
@@ -167,26 +167,12 @@
 <span id="cb1-6"><a href="#cb1-6"></a>devtools<span class="op">::</span><span class="kw"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"ibecav/CGPfunctions"</span>)</span></code></pre></div>
 <p>then load the library.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(CGPfunctions)</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="co">#&gt; Registered S3 methods overwritten by 'broom.mixed':</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="co">#&gt;   method         from </span></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt;   augment.lme    broom</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="co">#&gt;   augment.merMod broom</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="co">#&gt;   glance.lme     broom</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="co">#&gt;   glance.merMod  broom</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#&gt;   glance.stanreg broom</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="co">#&gt;   tidy.brmsfit   broom</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="co">#&gt;   tidy.gamlss    broom</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="co">#&gt;   tidy.lme       broom</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="co">#&gt;   tidy.merMod    broom</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="co">#&gt;   tidy.rjags     broom</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="co">#&gt;   tidy.stanfit   broom</span></span>
-<span id="cb2-15"><a href="#cb2-15"></a><span class="co">#&gt;   tidy.stanreg   broom</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a><span class="co">#&gt; Registered S3 methods overwritten by 'lme4':</span></span>
-<span id="cb2-17"><a href="#cb2-17"></a><span class="co">#&gt;   method                          from</span></span>
-<span id="cb2-18"><a href="#cb2-18"></a><span class="co">#&gt;   cooks.distance.influence.merMod car </span></span>
-<span id="cb2-19"><a href="#cb2-19"></a><span class="co">#&gt;   influence.merMod                car </span></span>
-<span id="cb2-20"><a href="#cb2-20"></a><span class="co">#&gt;   dfbeta.influence.merMod         car </span></span>
-<span id="cb2-21"><a href="#cb2-21"></a><span class="co">#&gt;   dfbetas.influence.merMod        car</span></span></code></pre></div>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co">#&gt; Registered S3 methods overwritten by 'lme4':</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="co">#&gt;   method                          from</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt;   cooks.distance.influence.merMod car </span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co">#&gt;   influence.merMod                car </span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="co">#&gt;   dfbeta.influence.merMod         car </span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co">#&gt;   dfbetas.influence.merMod        car</span></span></code></pre></div>
 </div>
 <div id="example-of-using-the-function" class="section level2">
 <h2 class="hasAnchor">
