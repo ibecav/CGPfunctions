@@ -534,6 +534,13 @@ PlotXTabs2 <- function(data,
           )
         )
     }
+  } else {
+    p <-
+      p + ggplot2::theme(
+        axis.text.x = ggplot2::element_text(
+          face = "bold"
+        )
+      )
   }
 
   ### -----  add titles, captions and labels to plot ------
