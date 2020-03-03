@@ -23,6 +23,7 @@
 #'   will have precedence.
 #' @param caption The text for the plot caption. Please note the interaction
 #'   with `bf.details`.
+#' @param plottype one of three options "side", "stack" or "percent"
 #' @param sample.size.label Logical that decides whether sample size information
 #'   should be displayed for each level of the grouping variable `y`
 #'   (Default: `TRUE`).
@@ -127,6 +128,7 @@ PlotXTabs2 <- function(data,
                     title = NULL,
                     subtitle = NULL,
                     caption = NULL,
+                    plottype = "percent",
                     xlab = NULL,
                     ylab = "Percent",
                     legend.title = NULL,
@@ -321,6 +323,32 @@ PlotXTabs2 <- function(data,
   ### -----  start main plot ============================
 
   # plot
+  if (plottype == "side") {
+    p <- ggplot2::ggplot(
+      data = df,
+      mapping = ggplot2::aes(fill = y, y = counts, x = x)
+    ) +
+      ggplot2::geom_bar(
+        stat = "identity",
+        position = "dodge",
+        color = bar.outline.color,
+        na.rm = TRUE
+      ) +
+      # ggplot2::scale_y_continuous(
+      #   labels = scales::label_percent(accuracy = 1.0),
+      #   breaks = seq(from = 0, to = 1, by = 0.10),
+      #   minor_breaks = seq(from = 0.05, to = 0.95, by = 0.10)
+      # ) +
+      ggplot2::geom_label(
+        mapping = ggplot2::aes(label = data.label, group = y),
+        show.legend = FALSE,
+        position = position_dodge(width = .9),
+        size = label.text.size,
+        fill = label.fill.color,
+        alpha = label.fill.alpha,
+        na.rm = TRUE
+      )
+  } else {
   p <- ggplot2::ggplot(
     data = df,
     mapping = ggplot2::aes(fill = y, y = perc, x = x)
@@ -345,6 +373,8 @@ PlotXTabs2 <- function(data,
       alpha = label.fill.alpha,
       na.rm = TRUE
     )
+    
+  }
 
   p <- p +
     ggplot2::theme(
@@ -430,6 +460,15 @@ PlotXTabs2 <- function(data,
   
   ### -----  adding sample size info on x axis -------
   
+  if (plottype == "percent") {
+    y_adjustment <- -0.05
+  } else {
+    y_adjustment <- -0.05 * max(df$counts)
+    if (ylab == "Percent") {
+      ylab <- "Counts"
+    }
+  }
+  
   if (isTRUE(sample.size.label)) {
     p <-
       p +
@@ -437,7 +476,7 @@ PlotXTabs2 <- function(data,
         data = df_n_label,
         mapping = ggplot2::aes(
           x = x,
-          y = -0.05,
+          y = y_adjustment,
           label = N,
           fill = NULL
         ),

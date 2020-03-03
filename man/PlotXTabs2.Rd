@@ -13,6 +13,7 @@ PlotXTabs2(
   title = NULL,
   subtitle = NULL,
   caption = NULL,
+  plottype = "percent",
   xlab = NULL,
   ylab = "Percent",
   legend.title = NULL,
@@ -62,6 +63,8 @@ will have precedence.}
 
 \item{caption}{The text for the plot caption. Please note the interaction
 with `bf.details`.}
+
+\item{plottype}{one of three options "side", "stack" or "percent"}
 
 \item{xlab}{Custom text for the `x` axis label (Default: `NULL`, which
 will cause the `x` axis label to be the `x` variable).}
