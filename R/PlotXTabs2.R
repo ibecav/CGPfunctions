@@ -321,12 +321,14 @@ PlotXTabs2 <- function(data,
   }
 
   ### -----  start main plot ============================
-
+  
   # plot
   if (plottype == "side") {
     p <- ggplot2::ggplot(
       data = df,
-      mapping = ggplot2::aes(fill = y, y = counts, x = x)
+      mapping = ggplot2::aes(fill = y, 
+                             y = counts, 
+                             x = x)
     ) +
       ggplot2::geom_bar(
         stat = "identity",
@@ -334,13 +336,9 @@ PlotXTabs2 <- function(data,
         color = bar.outline.color,
         na.rm = TRUE
       ) +
-      # ggplot2::scale_y_continuous(
-      #   labels = scales::label_percent(accuracy = 1.0),
-      #   breaks = seq(from = 0, to = 1, by = 0.10),
-      #   minor_breaks = seq(from = 0.05, to = 0.95, by = 0.10)
-      # ) +
       ggplot2::geom_label(
-        mapping = ggplot2::aes(label = data.label, group = y),
+        mapping = ggplot2::aes(label = data.label, 
+                               group = y),
         show.legend = FALSE,
         position = position_dodge(width = .9),
         size = label.text.size,
@@ -348,34 +346,62 @@ PlotXTabs2 <- function(data,
         alpha = label.fill.alpha,
         na.rm = TRUE
       )
+  } else if (plottype == "stack")  {
+    p <- ggplot2::ggplot(
+      data = df,
+      mapping = ggplot2::aes(fill = y, 
+                             y = counts, 
+                             x = x)
+    ) +
+      ggplot2::geom_bar(
+        stat = "identity",
+        color = bar.outline.color,
+        na.rm = TRUE
+      ) +
+      ggplot2::geom_label(
+        mapping = ggplot2::aes(label = data.label, 
+                               group = y),
+        show.legend = FALSE,
+        position = position_stack(vjust = 0.5),
+        size = label.text.size,
+        fill = label.fill.color,
+        alpha = label.fill.alpha,
+        na.rm = TRUE
+      )
   } else {
-  p <- ggplot2::ggplot(
-    data = df,
-    mapping = ggplot2::aes(fill = y, y = perc, x = x)
-  ) +
-    ggplot2::geom_bar(
-      stat = "identity",
-      position = "fill",
-      color = bar.outline.color,
-      na.rm = TRUE
+    p <- ggplot2::ggplot(
+      data = df,
+      mapping = ggplot2::aes(fill = y, 
+                             y = perc, 
+                             x = x)
     ) +
-    ggplot2::scale_y_continuous(
-      labels = scales::label_percent(accuracy = 1.0),
-      breaks = seq(from = 0, to = 1, by = 0.10),
-      minor_breaks = seq(from = 0.05, to = 0.95, by = 0.10)
-    ) +
-    ggplot2::geom_label(
-      mapping = ggplot2::aes(label = data.label, group = y),
-      show.legend = FALSE,
-      position = ggplot2::position_fill(vjust = 0.5),
-      size = label.text.size,
-      fill = label.fill.color,
-      alpha = label.fill.alpha,
-      na.rm = TRUE
-    )
-    
+      ggplot2::geom_bar(
+        stat = "identity",
+        position = "fill",
+        color = bar.outline.color,
+        na.rm = TRUE
+      ) +
+      ggplot2::scale_y_continuous(
+        labels = scales::label_percent(accuracy = 1.0),
+        breaks = seq(from = 0, 
+                     to = 1, 
+                     by = 0.10),
+        minor_breaks = seq(from = 0.05, 
+                           to = 0.95, 
+                           by = 0.10)
+      ) +
+      ggplot2::geom_label(
+        mapping = ggplot2::aes(label = data.label, 
+                               group = y),
+        show.legend = FALSE,
+        position = ggplot2::position_fill(vjust = 0.5),
+        size = label.text.size,
+        fill = label.fill.color,
+        alpha = label.fill.alpha,
+        na.rm = TRUE
+      )
   }
-
+  
   p <- p +
     ggplot2::theme(
       panel.grid.major.x = ggplot2::element_blank(),
@@ -464,7 +490,7 @@ PlotXTabs2 <- function(data,
     y_adjustment <- -0.05
   } else {
     y_adjustment <- -0.05 * max(df$counts)
-    if (ylab == "Percent") {
+    if (!is.null(ylab) && ylab == "Percent") {
       ylab <- "Counts"
     }
   }
