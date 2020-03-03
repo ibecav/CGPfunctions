@@ -344,21 +344,22 @@ PlotXTabs2 <- function(data,
       fill = label.fill.color,
       alpha = label.fill.alpha,
       na.rm = TRUE
-    ) +
+    )
+
+  p <- p +
     ggplot2::theme(
       panel.grid.major.x = ggplot2::element_blank(),
       legend.position = legend.position
     ) +
-    ggplot2::guides(fill = ggplot2::guide_legend(title = legend.title))
-
-  p <- p +
+    ggplot2::guides(fill = ggplot2::guide_legend(title = legend.title)
+    ) +
     paletteer::scale_fill_paletteer_d(
-    palette = paste0(package, "::", palette),
-    direction = direction,
-    name = "",
-    labels = unique(legend.labels)
-  )
-
+      palette = paste0(package, "::", palette),
+      direction = direction,
+      name = "",
+      labels = unique(legend.labels)
+    )
+  
   ### -----  chi-square test (with Bayes) for caption and subtitle =============
   
   if (isTRUE(results.subtitle)) {
