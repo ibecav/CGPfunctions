@@ -74,7 +74,7 @@
 #' @import ggplot2
 #'
 #' @importFrom dplyr select group_by summarize n arrange if_else desc
-#' @importFrom dplyr mutate mutate_at mutate_if
+#' @importFrom dplyr mutate mutate_at mutate_if filter_all
 #' @importFrom rlang !! enquo quo_name
 #' @importFrom paletteer scale_fill_paletteer_d
 #' @importFrom tidyr uncount drop_na
@@ -237,12 +237,11 @@ PlotXTabs2 <- function(data,
   ### -----  calculate counts and percents -------
 
   # y and x need to be a factor for this analysis
-  # also drop the unused levels of the factors
+  # also drop the unused levels of the factors and NAs
   data <- data %>%
-    dplyr::mutate(.data = ., y = droplevels(as.factor(y))) %>%
-    dplyr::filter(.data = ., !is.na(y)) %>%
-    dplyr::mutate(.data = ., x = droplevels(as.factor(x))) %>%
-    dplyr::filter(.data = ., !is.na(x))
+    dplyr::mutate_if(.tbl = ., not_a_factor, as.factor) %>%
+    dplyr::mutate_if(.tbl = ., is.factor, droplevels) %>%
+    dplyr::filter_all(.tbl = ., all_vars(!is.na(.)))
   
   valid_N <- nrow(data)
   missing_N <- original_N - valid_N

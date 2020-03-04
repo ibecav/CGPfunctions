@@ -24,3 +24,8 @@ justifyme <- function(x) {
   # return the changed plot
   return(justification)
 }
+
+not_a_factor <- function(x){
+  !is.factor(x)
+}
+
