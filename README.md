@@ -23,6 +23,8 @@ packages and concepts I’m trying to master. Currently contains:
   - `newggslopegraph` which creates a Tufte“esque” slopegraph using
     `ggplot2`
   - `chaid_table` provides tabular summary of `CHAID` `partykit` object
+  - `cross2_var_vectors` a helper function to build lists of “crossed”
+    variables
   - `Mode` which finds the modal value(s) in a vector of data
   - `SeeDist` which wraps around ggplot2 to provide visualizations of
     univariate data.
@@ -59,15 +61,15 @@ Example Plot2WayANOVA
 
 </div>
 
-#### Example [PlotXTabs](https://ibecav.github.io/CGPfunctions/articles/Using-PlotXTabs.html) plot
+#### Example [PlotXTabs2](https://ibecav.github.io/CGPfunctions/articles/Using-PlotXTabs2.html) plot
 
 <div class="figure">
 
-<img src="https://ibecav.github.io/CGPfunctions/articles/Using-PlotXTabs_files/figure-html/vignette1-18.png" alt="Example PlotXTabs plot" width="100%" />
+<img src="https://ibecav.github.io/CGPfunctions/articles/Using-PlotXTabs2_files/figure-html/vignette2-2.png" alt="Example PlotXTabs2 plot" width="100%" />
 
 <p class="caption">
 
-Example PlotXTabs plot
+Example PlotXTabs2 plot
 
 </p>
 
