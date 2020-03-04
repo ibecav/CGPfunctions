@@ -307,11 +307,11 @@ PlotXTabs2 <- function(data,
 
   ### -----  preparing names for legend  ======================
 
-  # reorder the category factor levels to order the legend
-  df$y <- factor(
-    x = df$y,
-    levels = unique(df$y)
-  )
+  # # reorder the category factor levels to order the legend
+  # df$y <- factor(
+  #   x = df$y,
+  #   levels = unique(df$y)
+  # )
 
   # getting labels for all levels of the 'y' variable factor
   if (is.null(labels.legend)) {
@@ -332,7 +332,7 @@ PlotXTabs2 <- function(data,
     ) +
       ggplot2::geom_bar(
         stat = "identity",
-        position = "dodge",
+        position = position_dodge2(reverse = TRUE),
         color = bar.outline.color,
         na.rm = TRUE
       ) +
@@ -340,7 +340,7 @@ PlotXTabs2 <- function(data,
         mapping = ggplot2::aes(label = data.label, 
                                group = y),
         show.legend = FALSE,
-        position = position_dodge(width = .9),
+        position = position_dodge2(width = .9, reverse = TRUE),
         size = label.text.size,
         fill = label.fill.color,
         alpha = label.fill.alpha,
