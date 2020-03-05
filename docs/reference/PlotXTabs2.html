@@ -179,6 +179,7 @@
   <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2</span>,
   <span class='kw'>perc.k</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>bf.details</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>bf.display</span> <span class='kw'>=</span> <span class='st'>"regular"</span>,
   <span class='kw'>sampling.plan</span> <span class='kw'>=</span> <span class='st'>"jointMulti"</span>,
   <span class='kw'>fixed.margin</span> <span class='kw'>=</span> <span class='st'>"rows"</span>,
   <span class='kw'>prior.concentration</span> <span class='kw'>=</span> <span class='fl'>1</span>,
@@ -316,6 +317,12 @@ labels (Default: `0`).</p></td>
       <td><p>Logical that decides whether to display additional 
 information from the Bayes Factor test in the caption (default:`FALSE`). 
 This will take precedence over any text you enter as a `caption`.</p></td>
+    </tr>
+    <tr>
+      <th>bf.display</th>
+      <td><p>Character that determines how the Bayes factor value is
+is displayed.  The default is simply the number rounded to `k`. Other 
+options include "human", "log" and "support".</p></td>
     </tr>
     <tr>
       <th>sampling.plan</th>
