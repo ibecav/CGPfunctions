@@ -70,6 +70,10 @@
 #' @param bf.details Logical that decides whether to display additional 
 #'   information from the Bayes Factor test in the caption (default:`FALSE`). 
 #'   This will take precedence over any text you enter as a `caption`.
+#' @param bf.display Character that determines how the Bayes factor value is
+#'   is displayed.  The default is simply the number rounded to `k`. Other 
+#'   options include "human", "log" and "support".
+#'   
 #'
 #' @import ggplot2
 #'
@@ -145,6 +149,7 @@ PlotXTabs2 <- function(data,
                     k = 2,
                     perc.k = 0,
                     bf.details = FALSE,
+                    bf.display = "regular",
                     sampling.plan = "jointMulti",
                     fixed.margin = "rows",
                     prior.concentration = 1,
@@ -439,6 +444,11 @@ PlotXTabs2 <- function(data,
           fixedMargin = fixed.margin,
           priorConcentration = prior.concentration
         ), onlybf = TRUE)
+    
+    bf_dtext <- bf_display(bf10_results, 
+                           k = k,
+                           display_type = bf.display)
+    
     bf10_results <- round(bf10_results, k)
     bf01_results = round((1 / bf10_results), k)
     
@@ -449,8 +459,8 @@ PlotXTabs2 <- function(data,
                          * ", " * .(effecttype)
                          * "=" * bold(.(effectvalue))
                          * ", p=" * .(ppvalue)
-                         * ", " * BF['10']
-                         * "=" * .(bf10_results)
+                         * ", " * BF['10'] * .(bf_dtext)
+#                         * "=" * .(bf10_results)
                          * ", N=" *.(valid_N)
                          * ", missing=" *.(missing_N)
       )
@@ -468,8 +478,8 @@ PlotXTabs2 <- function(data,
                          * ", " * .(effecttype)
                          * "=" * bold(.(effectvalue))
                          * ", p=" * .(ppvalue)
-                         * ", " * BF['01']
-                         * "=" * .(bf01_results)
+                         * ", " * BF['01'] * .(bf_dtext)
+#                         * "=" * .(bf01_results)
                          * ", N=" *.(valid_N)
                          * ", missing=" *.(missing_N)
       )

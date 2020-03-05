@@ -27,6 +27,10 @@ utils::globalVariables(
     "rawpvalue",
     "statistic",
     "parameter",
+    "support",
+    "logged",
+    "human",
+    "astext",
     "."
   ),
   package = "CGPfunctions",

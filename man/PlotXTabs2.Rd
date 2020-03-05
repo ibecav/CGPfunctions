@@ -30,6 +30,7 @@ PlotXTabs2(
   k = 2,
   perc.k = 0,
   bf.details = FALSE,
+  bf.display = "regular",
   sampling.plan = "jointMulti",
   fixed.margin = "rows",
   prior.concentration = 1,
@@ -115,6 +116,10 @@ labels (Default: `0`).}
 \item{bf.details}{Logical that decides whether to display additional 
 information from the Bayes Factor test in the caption (default:`FALSE`). 
 This will take precedence over any text you enter as a `caption`.}
+
+\item{bf.display}{Character that determines how the Bayes factor value is
+is displayed.  The default is simply the number rounded to `k`. Other 
+options include "human", "log" and "support".}
 
 \item{sampling.plan}{the sampling plan (see details in ?contingencyTableBF).}
 
