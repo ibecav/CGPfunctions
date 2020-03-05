@@ -49,23 +49,23 @@ bf_display <- function(bf = NULL,
       )
     ) %>%
     mutate(logged = case_when(
-      bf < 1 ~ paste(" log(BF01) =", round(log(1 / bf), k)),
-      bf >= 1 ~ paste(" log(BF10) =", round(log(bf), k))
+      bf < 1 ~ paste0(" log(BF01)=", round(log(1 / bf), k)),
+      bf >= 1 ~ paste0(" log(BF10)=", round(log(bf), k))
     )) %>%
     mutate(
       human = case_when(
-        bf < .000001 ~" >= 1,000,000:1",
-        bf < .001 & bf >= .000001 ~ " >= 1,000:1",
-        bf < .01 & bf >= .001 ~ " >= 100 : 1",
-        bf < 1 & bf >= .01 ~ paste(" =", round(1 / bf, k), ":1"),
-        bf >= 1 & bf < 100 ~ paste(" =", round(bf, k), ":1"),
-        bf >= 100 & bf < 1000 ~ " >= 100:1",
-        bf >= 1000 & bf < 1000000 ~ " >= 1,000:1",
-        bf >= 1000000 ~ " >= 1,000,000:1"
+        bf < .000001 ~">= 1,000,000",
+        bf < .001 & bf >= .000001 ~ ">= 1,000",
+        bf < .01 & bf >= .001 ~ ">= 100",
+        bf < 1 & bf >= .01 ~ paste0("=", round(1 / bf, k)),
+        bf >= 1 & bf < 100 ~ paste0("=", round(bf, k)),
+        bf >= 100 & bf < 1000 ~ ">= 100",
+        bf >= 1000 & bf < 1000000 ~ ">= 1,000",
+        bf >= 1000000 ~ ">= 1,000,000"
       )) %>%
     mutate(astext = case_when(
-      bf < 1 ~ paste(" =", round((1 / bf), k)),
-      bf >= 1 ~ paste(" =", round(bf, k))
+      bf < 1 ~ paste0("=", round((1 / bf), k)),
+      bf >= 1 ~ paste0("=", round(bf, k))
     ))
   
   #  return(results)
