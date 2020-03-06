@@ -119,7 +119,7 @@ This will take precedence over any text you enter as a `caption`.}
 
 \item{bf.display}{Character that determines how the Bayes factor value is
 is displayed.  The default is simply the number rounded to `k`. Other 
-options include "human", "log" and "support".}
+options include "sensible", "log" and "support".}
 
 \item{sampling.plan}{the sampling plan (see details in ?contingencyTableBF).}
 

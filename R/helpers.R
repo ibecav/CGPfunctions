@@ -53,15 +53,15 @@ bf_display <- function(bf = NULL,
       bf >= 1 ~ paste0(" log(BF10)=", round(log(bf), k))
     )) %>%
     mutate(
-      human = case_when(
-        bf < .000001 ~">= 1,000,000",
-        bf < .001 & bf >= .000001 ~ ">= 1,000",
-        bf < .01 & bf >= .001 ~ ">= 100",
+      sensible = case_when(
+        bf < .000001 ~">=1,000,000",
+        bf < .001 & bf >= .000001 ~ ">=1,000",
+        bf < .01 & bf >= .001 ~ ">=100",
         bf < 1 & bf >= .01 ~ paste0("=", round(1 / bf, k)),
         bf >= 1 & bf < 100 ~ paste0("=", round(bf, k)),
-        bf >= 100 & bf < 1000 ~ ">= 100",
-        bf >= 1000 & bf < 1000000 ~ ">= 1,000",
-        bf >= 1000000 ~ ">= 1,000,000"
+        bf >= 100 & bf < 1000 ~ ">=100",
+        bf >= 1000 & bf < 1000000 ~ ">=1,000",
+        bf >= 1000000 ~ ">=1,000,000"
       )) %>%
     mutate(astext = case_when(
       bf < 1 ~ paste0("=", round((1 / bf), k)),
@@ -74,8 +74,8 @@ bf_display <- function(bf = NULL,
     return(pull(results, support))
   } else if (display_type == "log") {
     return(pull(results, logged))
-  } else if (display_type == "human") {
-    return(pull(results, human))
+  } else if (display_type == "sensible") {
+    return(pull(results, sensible))
   } else {
     return(pull(results, astext))
   }

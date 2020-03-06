@@ -29,7 +29,7 @@ utils::globalVariables(
     "parameter",
     "support",
     "logged",
-    "human",
+    "sensible",
     "astext",
     "."
   ),

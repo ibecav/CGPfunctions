@@ -72,7 +72,7 @@
 #'   This will take precedence over any text you enter as a `caption`.
 #' @param bf.display Character that determines how the Bayes factor value is
 #'   is displayed.  The default is simply the number rounded to `k`. Other 
-#'   options include "human", "log" and "support".
+#'   options include "sensible", "log" and "support".
 #'   
 #'
 #' @import ggplot2
@@ -460,7 +460,6 @@ PlotXTabs2 <- function(data,
                          * "=" * bold(.(effectvalue))
                          * ", p=" * .(ppvalue)
                          * ", " * BF['10'] * .(bf_dtext)
-#                         * "=" * .(bf10_results)
                          * ", N=" *.(valid_N)
                          * ", missing=" *.(missing_N)
       )
@@ -479,7 +478,6 @@ PlotXTabs2 <- function(data,
                          * "=" * bold(.(effectvalue))
                          * ", p=" * .(ppvalue)
                          * ", " * BF['01'] * .(bf_dtext)
-#                         * "=" * .(bf01_results)
                          * ", N=" *.(valid_N)
                          * ", missing=" *.(missing_N)
       )
