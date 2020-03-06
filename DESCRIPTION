@@ -35,7 +35,6 @@ Imports:
 Suggests:
     BSDA,
     CHAID,
-    devtools,
     ggthemes,
     hrbrthemes,
     janitor,
@@ -43,7 +42,6 @@ Suggests:
     lsr,
     magrittr,
     productplots,
-    pwr,
     rmarkdown,
     stringi,
     tibble,
