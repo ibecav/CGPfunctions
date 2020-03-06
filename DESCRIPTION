@@ -34,7 +34,6 @@ Imports:
     tidyr
 Suggests:
     BSDA,
-    CHAID,
     ggthemes,
     hrbrthemes,
     janitor,
@@ -42,12 +41,12 @@ Suggests:
     lsr,
     magrittr,
     productplots,
+    pwr,
     rmarkdown,
     stringi,
     tibble,
     testthat,
     tidyselect
-Additional_repositories: http://R-Forge.R-project.org
 VignetteBuilder: knitr
 RoxygenNote: 7.0.2
 URL: https://github.com/ibecav/CGPfunctions
