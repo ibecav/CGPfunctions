@@ -381,7 +381,7 @@ PlotXTabs2 <- function(data,
     ) +
       ggplot2::geom_bar(
         stat = "identity",
-        position = "fill",
+        position = ggplot2::position_fill(reverse = TRUE),
         color = bar.outline.color,
         na.rm = TRUE
       ) +
