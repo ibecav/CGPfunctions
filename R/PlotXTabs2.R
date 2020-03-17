@@ -411,7 +411,8 @@ PlotXTabs2 <- function(data,
       panel.grid.major.x = ggplot2::element_blank(),
       legend.position = legend.position
     ) +
-    ggplot2::guides(fill = ggplot2::guide_legend(title = legend.title)
+    ggplot2::guides(fill = ggplot2::guide_legend(title = legend.title, 
+                                                 reverse = TRUE)
     ) +
     paletteer::scale_fill_paletteer_d(
       palette = paste0(package, "::", palette),
