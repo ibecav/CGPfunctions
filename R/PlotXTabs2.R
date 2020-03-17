@@ -319,7 +319,7 @@ PlotXTabs2 <- function(data,
 
   # getting labels for all levels of the 'y' variable factor
   if (is.null(labels.legend)) {
-    legend.labels <- as.character(df$y)
+    legend.labels <- levels(df$y)
   } else if (!missing(labels.legend)) {
     legend.labels <- labels.legend
   }

@@ -4,7 +4,8 @@
 \name{USvoteS}
 \alias{USvoteS}
 \title{U.S. 2000 Election Data (short)}
-\format{A data frame with 1000 observations on the following 6 variables.:
+\format{
+A data frame with 1000 observations on the following 6 variables.:
 \describe{
   \item{vote3}{candidate voted for Gore or Bush}
   \item{gender}{gender, a factor with levels male and female}
@@ -13,7 +14,8 @@
   \item{educr}{status of education, an ordered factor with levels <HS < HS < >HS < College < Post Coll}
   \item{marstat}{status of living situation, a factor with levels married, widowed, divorced or never married}
 
-}}
+}
+}
 \source{
 https://r-forge.r-project.org/R/?group_id=343
 }

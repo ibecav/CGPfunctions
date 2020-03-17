@@ -6,7 +6,7 @@ knitr::opts_chunk$set(
 
 ## ----one, fig.width=7.0, fig.height=5.5, warning=FALSE, message=FALSE---------
 library(CGPfunctions)
-library(CHAID)
+# library(CHAID)
 library(dplyr)
 library(knitr)
 
