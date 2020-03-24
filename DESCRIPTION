@@ -1,6 +1,6 @@
 Package: CGPfunctions
 Title: Powell Miscellaneous Functions for Teaching and Learning Statistics
-Version: 0.5.9
+Version: 0.6.0
 Authors@R: person("Chuck", 
                   "Powell", 
                   email = "ibecav@gmail.com", 
@@ -16,10 +16,11 @@ Imports:
     BayesFactor,
     broom,
     car,
-    DescTools,
+    DescTools (>= 0.99.32),
     dplyr,
     forcats,
-    ggplot2,
+    ggmosaic (>= 0.2.0),
+    ggplot2 (>= 3.3.0),
     ggrepel,
     grid,
     methods,
@@ -27,8 +28,8 @@ Imports:
     partykit,
     purrr,
     rlang,
-    scales,
-    sjstats,
+    scales (>= 1.1.0),
+    sjstats (>= 0.17.9),
     stats,
     stringr,
     tidyr
