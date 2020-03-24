@@ -87,6 +87,8 @@
 #' @importFrom BayesFactor extractBF
 #' @importFrom BayesFactor contingencyTableBF
 #' @importFrom sjstats crosstable_statistics
+#' @importFrom ggmosaic geom_mosaic product
+#' @importFrom scales label_percent
 #'
 #' @author Chuck Powell, Indrajeet Patil
 #'
@@ -323,6 +325,8 @@ PlotXTabs2 <- function(data,
   } else if (!missing(labels.legend)) {
     legend.labels <- labels.legend
   }
+  
+#  return(df)
 
   ### -----  start main plot ============================
   
@@ -372,6 +376,29 @@ PlotXTabs2 <- function(data,
         alpha = label.fill.alpha,
         na.rm = TRUE
       )
+  }  else if (plottype == "mosaic")  {
+    p <- ggplot2::ggplot(data = df) +
+      geom_mosaic(aes(weight = counts, x = product(x), fill = y)) +
+      scale_y_continuous(labels = scales::label_percent(accuracy = 1.0),
+                         breaks = seq(from = 0, 
+                                      to = 1, 
+                                      by = 0.10),
+                         minor_breaks = seq(from = 0.05, 
+                                            to = 0.95, 
+                                            by = 0.10))
+    
+    
+    # ) +
+    # ggplot2::geom_label(
+    #   mapping = ggplot2::aes(label = data.label, 
+    #                          group = y),
+    #   show.legend = FALSE,
+    #   position = position_stack(vjust = 0.5),
+    #   size = label.text.size,
+    #   fill = label.fill.color,
+    #   alpha = label.fill.alpha,
+    #   na.rm = TRUE
+    # )
   } else {
     p <- ggplot2::ggplot(
       data = df,
@@ -494,7 +521,7 @@ PlotXTabs2 <- function(data,
   
   ### -----  adding sample size info on x axis -------
   
-  if (plottype == "percent") {
+  if (plottype == "percent" || plottype == "mosaic") {
     y_adjustment <- -0.05
   } else {
     y_adjustment <- -0.05 * max(df$counts)
@@ -503,22 +530,48 @@ PlotXTabs2 <- function(data,
     }
   }
   
-  if (isTRUE(sample.size.label)) {
-    p <-
-      p +
-      ggplot2::geom_text(
-        data = df_n_label,
-        mapping = ggplot2::aes(
-          x = x,
-          y = y_adjustment,
-          label = N,
-          fill = NULL
-        ),
-        size = 4,
-        na.rm = TRUE
-      )
+  if (plottype != "mosaic") {
+    if (isTRUE(sample.size.label)) {
+      p <-
+        p +
+        ggplot2::geom_text(
+          data = df_n_label,
+          mapping = ggplot2::aes(
+            x = x,
+            y = y_adjustment,
+            label = N,
+            fill = NULL
+          ),
+          size = 4,
+          na.rm = TRUE
+        )
+    }
+  } else {
+    if (isTRUE(sample.size.label)) {
+      XXX <- 
+        ggplot_build(p)$data[[1]] %>% 
+        group_by_at(vars(starts_with("x1__"))) %>% 
+        mutate(NN = sum(.wt)) %>% 
+        mutate(pct = (.wt/NN))
+      
+#      return(XXX)
+      
+      p <-
+        p +
+        ggplot2::geom_text(
+          data = df_n_label,
+          mapping = ggplot2::aes(
+            x = c(0.1685, .454, .786),
+            y = y_adjustment,
+            label = N,
+            fill = NULL
+          ),
+          size = 4,
+          na.rm = TRUE
+        )
+    }
   }
-
+  
   ### -----  if we need to modify `x`-axis orientation ----
   if (!base::missing(x.axis.orientation)) {
     if (x.axis.orientation == "slant") {
