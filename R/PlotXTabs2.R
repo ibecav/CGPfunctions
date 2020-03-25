@@ -387,6 +387,25 @@ PlotXTabs2 <- function(data,
                                             to = 0.95, 
                                             by = 0.10))
     
+    ### ---- Extract mosaic info and calculate cell pcts      
+    mosaicgeominfo <- 
+      ggplot_build(p)$data[[1]] %>% 
+      group_by_at(vars(ends_with("__x"))) %>% 
+      mutate(NN = sum(.wt)) %>% 
+      mutate(pct = (.wt/NN))
+    
+    p <- p + geom_label(data = mosaicgeominfo, 
+                        aes(x = (xmin + xmax)/2, 
+                            y = (ymin + ymax)/2, 
+                            label = scales::percent(pct, 
+                                              accuracy = .1)
+                            ),
+                        size = label.text.size,
+                        fill = label.fill.color,
+                        alpha = label.fill.alpha
+                        )
+    
+    
     
     # ) +
     # ggplot2::geom_label(
@@ -395,8 +414,6 @@ PlotXTabs2 <- function(data,
     #   show.legend = FALSE,
     #   position = position_stack(vjust = 0.5),
     #   size = label.text.size,
-    #   fill = label.fill.color,
-    #   alpha = label.fill.alpha,
     #   na.rm = TRUE
     # )
   } else {
@@ -548,20 +565,21 @@ PlotXTabs2 <- function(data,
     }
   } else {
     if (isTRUE(sample.size.label)) {
-      XXX <- 
-        ggplot_build(p)$data[[1]] %>% 
-        group_by_at(vars(starts_with("x1__"))) %>% 
-        mutate(NN = sum(.wt)) %>% 
-        mutate(pct = (.wt/NN))
+
+      ### ---- Compute mosaic x axis label tick positions      
+      xNlabelpos <- 
+        mosaicgeominfo %>% 
+        distinct(xNlabelpos = ((xmax - xmin)/2) + xmin) %>%
+        pull(xNlabelpos)
       
-#      return(XXX)
+      #      return(xNlabelpos)
       
       p <-
         p +
         ggplot2::geom_text(
           data = df_n_label,
           mapping = ggplot2::aes(
-            x = c(0.1685, .454, .786),
+            x = xNlabelpos,
             y = y_adjustment,
             label = N,
             fill = NULL

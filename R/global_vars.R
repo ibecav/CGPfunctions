@@ -3,8 +3,10 @@
 utils::globalVariables(
   names = c(
     ".",
+    ".wt",
     "perc",
     "N",
+    "NN",
     "n",
     "TheMean",
     "TheSEM",
@@ -31,6 +33,11 @@ utils::globalVariables(
     "logged",
     "sensible",
     "astext",
+    "xmin",
+    "xmax",
+    "ymin",
+    "ymax",
+    "pct",
     "."
   ),
   package = "CGPfunctions",
