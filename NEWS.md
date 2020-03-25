@@ -2,7 +2,8 @@
 
 * Release 0.6.0 in cevelopment March 2020
   - Fixed dependency issues with ggplot2, scales, sjstats and added ggmosaic
-  - Adding mosaic plots to PlotXTabs2
+  - Adding mosaic plots to PlotXTabs2 still debugging and waiting on the next version
+    of ggmosaic for some bu fixes
 * Release 0.5.9 deployed to CRAN March 2020
   - Added functionality to PlotXTabs2 will be deprecating PlotXtabs next 
     release
