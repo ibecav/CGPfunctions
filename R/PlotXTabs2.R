@@ -76,6 +76,7 @@
 #'   
 #'
 #' @import ggplot2
+#' @import ggmosaic
 #'
 #' @importFrom dplyr select group_by summarize n arrange if_else desc
 #' @importFrom dplyr mutate mutate_at mutate_if filter_all
@@ -87,7 +88,6 @@
 #' @importFrom BayesFactor extractBF
 #' @importFrom BayesFactor contingencyTableBF
 #' @importFrom sjstats crosstable_statistics
-#' @importFrom ggmosaic geom_mosaic product
 #' @importFrom scales label_percent
 #'
 #' @author Chuck Powell, Indrajeet Patil
@@ -162,30 +162,9 @@ PlotXTabs2 <- function(data,
                     direction = 1,
                     ggplot.component = NULL) {
   
+
   # set default theme 
   ggplot2::theme_set(ggtheme)
-  
-  ### -----  internal function to format p values =====================
-  
-  pvalr <- function(pvals, sig.limit = .001, digits = 3, html = FALSE) {
-
-    roundr <- function(x, digits = 1) {
-      res <- sprintf(paste0('%.', digits, 'f'), x)
-      zzz <- paste0('0.', paste(rep('0', digits), collapse = ''))
-      res[res == paste0('-', zzz)] <- zzz
-      res
-    }
-
-    sapply(pvals, function(x, sig.limit) {
-      if (x < sig.limit)
-        if (html)
-          return(sprintf('&lt; %s', format(sig.limit))) else
-            return(sprintf('< %s', format(sig.limit)))
-      if (x > .1)
-        return(roundr(x, digits = 2)) else
-          return(roundr(x, digits = digits))
-    }, sig.limit = sig.limit)
-  }
   
   ### -----  input checking -----------
 
@@ -201,26 +180,23 @@ PlotXTabs2 <- function(data,
   
   ### -----  x label and legend title  ==============
   # if legend title is not provided, use the variable name for 'y'
-  # argument
   if (is.null(legend.title)) {
     legend.title <- rlang::as_name(rlang::enquo(y))
   }
 
-  # if alternate variable label is not specified, use the variable name for
-  # 'x' argument
+  # if not specified, use the variable name for 'x'
   if (is.null(xlab)) {
     xlab <- rlang::as_name(rlang::enquo(x))
   }
 
   ### -----  create temp local dataframe ====================
-
   # creating a dataframe based on whether counts
   if (base::missing(counts)) {
     data <-
       dplyr::select(
         .data = data,
-        y = !!rlang::enquo(y),
-        x = !!rlang::enquo(x)
+        y = {{ y }},
+        x = {{ x }}
       )
   } else {
     data <-
@@ -230,7 +206,8 @@ PlotXTabs2 <- function(data,
         x = !!rlang::quo_name(rlang::enquo(x)),
         counts = !!rlang::quo_name(rlang::enquo(counts))
       )
-    data <- data %>%
+    data <- 
+      data %>%
       tidyr::uncount(
         data = .,
         weights = counts,
@@ -243,7 +220,7 @@ PlotXTabs2 <- function(data,
 
   ### -----  calculate counts and percents -------
 
-  # y and x need to be a factor for this analysis
+  # y and x need to be a factor or ordered factor
   # also drop the unused levels of the factors and NAs
   data <- data %>%
     dplyr::mutate_if(.tbl = ., not_a_factor, as.factor) %>%
@@ -313,12 +290,6 @@ PlotXTabs2 <- function(data,
 
   ### -----  preparing names for legend  ======================
 
-  # # reorder the category factor levels to order the legend
-  # df$y <- factor(
-  #   x = df$y,
-  #   levels = unique(df$y)
-  # )
-
   # getting labels for all levels of the 'y' variable factor
   if (is.null(labels.legend)) {
     legend.labels <- levels(df$y)
@@ -326,8 +297,6 @@ PlotXTabs2 <- function(data,
     legend.labels <- labels.legend
   }
   
-#  return(df)
-
   ### -----  start main plot ============================
   
   # plot
@@ -377,8 +346,14 @@ PlotXTabs2 <- function(data,
         na.rm = TRUE
       )
   }  else if (plottype == "mosaic")  {
-    p <- ggplot2::ggplot(data = df) +
-      geom_mosaic(aes(weight = counts, x = product(x), fill = y)) +
+
+    p <- 
+      ggplot2::ggplot(data = df) +
+      ggmosaic::geom_mosaic(aes(weight = counts, 
+                                x = ggmosaic::product(x), 
+                                fill = y),
+                            offset = .003,
+                            alpha = 1) +
       scale_y_continuous(labels = scales::label_percent(accuracy = 1.0),
                          breaks = seq(from = 0, 
                                       to = 1, 
@@ -389,7 +364,7 @@ PlotXTabs2 <- function(data,
     
     ### ---- Extract mosaic info and calculate cell pcts      
     mosaicgeominfo <- 
-      ggplot_build(p)$data[[1]] %>% 
+      ggplot2::ggplot_build(p)$data[[1]] %>% 
       group_by_at(vars(ends_with("__x"))) %>% 
       mutate(NN = sum(.wt)) %>% 
       mutate(pct = (.wt/NN))
@@ -405,17 +380,6 @@ PlotXTabs2 <- function(data,
                         alpha = label.fill.alpha
                         )
     
-    
-    
-    # ) +
-    # ggplot2::geom_label(
-    #   mapping = ggplot2::aes(label = data.label, 
-    #                          group = y),
-    #   show.legend = FALSE,
-    #   position = position_stack(vjust = 0.5),
-    #   size = label.text.size,
-    #   na.rm = TRUE
-    # )
   } else {
     p <- ggplot2::ggplot(
       data = df,
@@ -442,7 +406,8 @@ PlotXTabs2 <- function(data,
         mapping = ggplot2::aes(label = data.label, 
                                group = y),
         show.legend = FALSE,
-        position = ggplot2::position_fill(reverse = TRUE, vjust = 0.5),
+        position = ggplot2::position_fill(reverse = TRUE, 
+                                          vjust = 0.5),
         size = label.text.size,
         fill = label.fill.color,
         alpha = label.fill.alpha,
@@ -476,11 +441,7 @@ PlotXTabs2 <- function(data,
     ppvalue <- pvalr(chi.results$p.value)
     effecttype <- chi.results$method
     effectvalue <- round(chi.results$estimate, k)
-    # bubba <- sjstats::cramer(formula = y ~ x,
-    #                          data = data,
-    #                          ci.lvl = conf.level)
-    # return(chi.results)
-    
+
     bf10_results <- 
       BayesFactor::extractBF(
         BayesFactor::contingencyTableBF(
@@ -566,14 +527,12 @@ PlotXTabs2 <- function(data,
   } else {
     if (isTRUE(sample.size.label)) {
 
-      ### ---- Compute mosaic x axis label tick positions      
+      # Compute mosaic x axis label tick positions      
       xNlabelpos <- 
         mosaicgeominfo %>% 
         distinct(xNlabelpos = ((xmax - xmin)/2) + xmin) %>%
         pull(xNlabelpos)
-      
-      #      return(xNlabelpos)
-      
+
       p <-
         p +
         ggplot2::geom_text(
