@@ -333,13 +333,15 @@ PlotXTabs2 <- function(data,
       ggplot2::geom_bar(
         stat = "identity",
         color = bar.outline.color,
-        na.rm = TRUE
+        na.rm = TRUE, 
+        position = position_stack(reverse = TRUE)
       ) +
       ggplot2::geom_label(
         mapping = ggplot2::aes(label = data.label, 
                                group = y),
         show.legend = FALSE,
-        position = position_stack(vjust = 0.5),
+        position = position_stack(vjust = 0.5,
+                                  reverse = TRUE),
         size = label.text.size,
         fill = label.fill.color,
         alpha = label.fill.alpha,
