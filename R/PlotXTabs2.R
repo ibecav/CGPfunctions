@@ -23,7 +23,7 @@
 #'   will have precedence.
 #' @param caption The text for the plot caption. Please note the interaction
 #'   with `bf.details`.
-#' @param plottype one of three options "side", "stack" or "percent"
+#' @param plottype one of four options "side", "stack", "mosaic" or "percent"
 #' @param sample.size.label Logical that decides whether sample size information
 #'   should be displayed for each level of the grouping variable `y`
 #'   (Default: `TRUE`).
