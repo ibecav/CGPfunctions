@@ -1,6 +1,6 @@
 #' Bivariate bar (column) charts with statistical tests
 #' 
-#' Bivariate bar charts for categorical and ordinal data with 
+#' Bivariate bar charts for nominal and ordinal data with 
 #'   (optionally) statistical details included in the plot as a subtitle.
 #'   
 #' @param data A dataframe or tibble containing the `x` and `y` variables.
@@ -73,6 +73,12 @@
 #' @param bf.display Character that determines how the Bayes factor value is
 #'   is displayed.  The default is simply the number rounded to `k`. Other 
 #'   options include "sensible", "log" and "support".
+#' @param mosaic.offset Numeric that decides size of spacing between mosaic 
+#'   blocks (Default: `.003` which is very narrow).  "reasonable" values
+#'   probably lie between .05 and .001
+#' @param mosaic.alpha Numeric that controls the "alpha" level of the mosaic 
+#'   plot blocks (Default: `1` which is essentially no "fading"). Values must
+#'   be in the range 0 to 1 see: `ggplot2::aes_colour_fill_alpha`
 #'   
 #'
 #' @import ggplot2
@@ -118,6 +124,18 @@
 #'   palette = "Pastel1"
 #' )
 #'
+#' # mosaic plot
+#' PlotXTabs2(
+#'   data = mtcars,
+#'   x = vs,
+#'   y =  am, 
+#'   plottype = "mosaic", 
+#'   data.label = "both", 
+#'   mosaic.alpha = .9, 
+#'   bf.display = "support", 
+#'   title = "Motorcars Mosaic Plot VS by AM"
+#' )
+#'   
 #' PlotXTabs2(
 #'   data = as.data.frame(HairEyeColor),
 #'   y = Eye,
@@ -150,6 +168,8 @@ PlotXTabs2 <- function(data,
                     conf.level = 0.95,
                     k = 2,
                     perc.k = 0,
+                    mosaic.offset = .003,
+                    mosaic.alpha = 1,
                     bf.details = FALSE,
                     bf.display = "regular",
                     sampling.plan = "jointMulti",
@@ -354,8 +374,8 @@ PlotXTabs2 <- function(data,
       ggmosaic::geom_mosaic(aes(weight = counts, 
                                 x = ggmosaic::product(x), 
                                 fill = y),
-                            offset = .003,
-                            alpha = 1) +
+                            offset = mosaic.offset,
+                            alpha = mosaic.alpha) +
       scale_y_continuous(labels = scales::label_percent(accuracy = 1.0),
                          breaks = seq(from = 0, 
                                       to = 1, 
@@ -371,11 +391,41 @@ PlotXTabs2 <- function(data,
       mutate(NN = sum(.wt)) %>% 
       mutate(pct = (.wt/NN))
     
+    if (data.label == "percentage") {
+      # only percentage
+      mosaicgeominfo <- mosaicgeominfo %>%
+        dplyr::mutate(
+          .data = .,
+          data.label = paste0(round(x = pct*100, 
+                                    digits = perc.k), 
+                              "%")
+        )
+    } else if (data.label == "counts") {
+      # only raw counts
+      mosaicgeominfo <- mosaicgeominfo %>%
+        dplyr::mutate(
+          .data = .,
+          data.label = paste0("", .wt)
+        )
+    } else if (data.label == "both") {
+      # both raw counts and percentages
+      mosaicgeominfo <- mosaicgeominfo %>%
+        dplyr::mutate(
+          .data = .,
+          data.label = paste0(
+            "",
+            .wt,
+            "\n(",
+            round(x = pct*100, digits = perc.k),
+            "%)"
+          )
+        )
+    }
+    
     p <- p + geom_label(data = mosaicgeominfo, 
                         aes(x = (xmin + xmax)/2, 
                             y = (ymin + ymax)/2, 
-                            label = scales::percent(pct, 
-                                              accuracy = .1)
+                            label = data.label
                             ),
                         size = label.text.size,
                         fill = label.fill.color,
