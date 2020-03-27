@@ -371,11 +371,39 @@ PlotXTabs2 <- function(data,
       mutate(NN = sum(.wt)) %>% 
       mutate(pct = (.wt/NN))
     
+    if (data.label == "percentage") {
+      # only percentage
+      mosaicgeominfo <- mosaicgeominfo %>%
+        dplyr::mutate(
+          .data = .,
+          data.label = paste0(round(x = pct*100, digits = perc.k), "%")
+        )
+    } else if (data.label == "counts") {
+      # only raw counts
+      mosaicgeominfo <- mosaicgeominfo %>%
+        dplyr::mutate(
+          .data = .,
+          data.label = paste0("", .wt)
+        )
+    } else if (data.label == "both") {
+      # both raw counts and percentages
+      mosaicgeominfo <- mosaicgeominfo %>%
+        dplyr::mutate(
+          .data = .,
+          data.label = paste0(
+            "",
+            .wt,
+            "\n(",
+            round(x = pct*100, digits = perc.k),
+            "%)"
+          )
+        )
+    }
+    
     p <- p + geom_label(data = mosaicgeominfo, 
                         aes(x = (xmin + xmax)/2, 
                             y = (ymin + ymax)/2, 
-                            label = scales::percent(pct, 
-                                              accuracy = .1)
+                            label = data.label
                             ),
                         size = label.text.size,
                         fill = label.fill.color,
