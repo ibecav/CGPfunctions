@@ -29,6 +29,8 @@ PlotXTabs2(
   conf.level = 0.95,
   k = 2,
   perc.k = 0,
+  mosaic.offset = 0.003,
+  mosaic.alpha = 1,
   bf.details = FALSE,
   bf.display = "regular",
   sampling.plan = "jointMulti",
@@ -113,6 +115,14 @@ lower and upper confidence intervals (0.95).}
 \item{perc.k}{Numeric that decides number of decimal places for percentage
 labels (Default: `0`).}
 
+\item{mosaic.offset}{Numeric that decides size of spacing between mosaic 
+blocks (Default: `.003` which is very narrow).  "reasonable" values
+probably lie between .05 and .001}
+
+\item{mosaic.alpha}{Numeric that controls the "alpha" level of the mosaic 
+plot blocks (Default: `1` which is essentially no "fading"). Values must
+be in the range 0 to 1 see: `ggplot2::aes_colour_fill_alpha`}
+
 \item{bf.details}{Logical that decides whether to display additional 
 information from the Bayes Factor test in the caption (default:`FALSE`). 
 This will take precedence over any text you enter as a `caption`.}
@@ -146,7 +156,7 @@ If the given function has an argument axes.range.restrict and if it has been set
 to TRUE, the added ggplot component might not work as expected.}
 }
 \description{
-Bivariate bar charts for categorical and ordinal data with 
+Bivariate bar charts for nominal and ordinal data with 
   (optionally) statistical details included in the plot as a subtitle.
 }
 \examples{
