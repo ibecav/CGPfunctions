@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Bivariate bar (column) charts with statistical tests — PlotXTabs2" />
-<meta property="og:description" content="Bivariate bar charts for categorical and ordinal data with 
+<meta property="og:description" content="Bivariate bar charts for nominal and ordinal data with 
   (optionally) statistical details included in the plot as a subtitle." />
 
 
@@ -152,7 +152,7 @@
     </div>
 
     <div class="ref-description">
-    <p>Bivariate bar charts for categorical and ordinal data with 
+    <p>Bivariate bar charts for nominal and ordinal data with 
   (optionally) statistical details included in the plot as a subtitle.</p>
     </div>
 
@@ -181,6 +181,8 @@
   <span class='kw'>conf.level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>,
   <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2</span>,
   <span class='kw'>perc.k</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>mosaic.offset</span> <span class='kw'>=</span> <span class='fl'>0.003</span>,
+  <span class='kw'>mosaic.alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>bf.details</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>bf.display</span> <span class='kw'>=</span> <span class='st'>"regular"</span>,
   <span class='kw'>sampling.plan</span> <span class='kw'>=</span> <span class='st'>"jointMulti"</span>,
@@ -316,6 +318,18 @@ lower and upper confidence intervals (0.95).</p></td>
 labels (Default: `0`).</p></td>
     </tr>
     <tr>
+      <th>mosaic.offset</th>
+      <td><p>Numeric that decides size of spacing between mosaic 
+blocks (Default: `.003` which is very narrow).  "reasonable" values
+probably lie between .05 and .001</p></td>
+    </tr>
+    <tr>
+      <th>mosaic.alpha</th>
+      <td><p>Numeric that controls the "alpha" level of the mosaic 
+plot blocks (Default: `1` which is essentially no "fading"). Values must
+be in the range 0 to 1 see: `ggplot2::aes_colour_fill_alpha`</p></td>
+    </tr>
+    <tr>
       <th>bf.details</th>
       <td><p>Logical that decides whether to display additional 
 information from the Bayes Factor test in the caption (default:`FALSE`). 
@@ -395,12 +409,23 @@ to TRUE, the added ggplot component might not work as expected.</p></td>
   <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"The perenial mtcars example"</span>,
   <span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"Pastel1"</span>
 )</div><div class='img'><img src='PlotXTabs2-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># mosaic plot</span>
+<span class='fu'>PlotXTabs2</span>(
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>,
+  <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>vs</span>,
+  <span class='kw'>y</span> <span class='kw'>=</span>  <span class='no'>am</span>,
+  <span class='kw'>plottype</span> <span class='kw'>=</span> <span class='st'>"mosaic"</span>,
+  <span class='kw'>data.label</span> <span class='kw'>=</span> <span class='st'>"both"</span>,
+  <span class='kw'>mosaic.alpha</span> <span class='kw'>=</span> <span class='fl'>.9</span>,
+  <span class='kw'>bf.display</span> <span class='kw'>=</span> <span class='st'>"support"</span>,
+  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Motorcars Mosaic Plot VS by AM"</span>
+)</div><div class='img'><img src='PlotXTabs2-3.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='fu'>PlotXTabs2</span>(
   <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='no'>HairEyeColor</span>),
   <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>Eye</span>,
   <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>Hair</span>,
   <span class='kw'>counts</span> <span class='kw'>=</span> <span class='no'>Freq</span>
-)</div><div class='img'><img src='PlotXTabs2-3.png' alt='' width='700' height='433' /></div></pre>
+)</div><div class='img'><img src='PlotXTabs2-4.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
