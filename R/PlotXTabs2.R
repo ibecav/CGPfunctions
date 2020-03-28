@@ -124,7 +124,15 @@
 #'   palette = "Pastel1"
 #' )
 #'
-#' # mosaic plot
+#' PlotXTabs2(
+#'   data = as.data.frame(HairEyeColor),
+#'   y = Eye,
+#'   x = Hair,
+#'   counts = Freq
+#' )
+#' 
+#'\dontrun{
+#' # mosaic plot requires ggmosaic 0.2.2 or higher from github
 #' PlotXTabs2(
 #'   data = mtcars,
 #'   x = vs,
@@ -135,13 +143,8 @@
 #'   bf.display = "support", 
 #'   title = "Motorcars Mosaic Plot VS by AM"
 #' )
-#'   
-#' PlotXTabs2(
-#'   data = as.data.frame(HairEyeColor),
-#'   y = Eye,
-#'   x = Hair,
-#'   counts = Freq
-#' )
+#'}
+#'
 #' @export
 
 PlotXTabs2 <- function(data,

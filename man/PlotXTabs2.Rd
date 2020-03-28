@@ -184,6 +184,14 @@ PlotXTabs2(
   palette = "Pastel1"
 )
 
+PlotXTabs2(
+  data = as.data.frame(HairEyeColor),
+  y = Eye,
+  x = Hair,
+  counts = Freq
+)
+
+\dontrun{
 # mosaic plot
 PlotXTabs2(
   data = mtcars,
@@ -195,13 +203,8 @@ PlotXTabs2(
   bf.display = "support", 
   title = "Motorcars Mosaic Plot VS by AM"
 )
-  
-PlotXTabs2(
-  data = as.data.frame(HairEyeColor),
-  y = Eye,
-  x = Hair,
-  counts = Freq
-)
+}
+
 }
 \author{
 Chuck Powell, Indrajeet Patil
