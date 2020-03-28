@@ -192,7 +192,7 @@ PlotXTabs2(
 )
 
 \dontrun{
-# mosaic plot
+# mosaic plot requires ggmosaic 0.2.2 or higher from github
 PlotXTabs2(
   data = mtcars,
   x = vs,
