@@ -165,8 +165,8 @@ chaid_table <- function(chaidobject) {
     select(-method)
   
   split_table$nodeID <- as.integer(split_table$nodeID)
-  split_table$adjustedp <- NA
-  split_table$split.variable <- NA
+  split_table$adjustedp <- NA_real_
+  split_table$split.variable <- NA_character_
   
   for (i in inner_nodes) {
     split_table[split_table$nodeID == i, "adjustedp"] <- 
