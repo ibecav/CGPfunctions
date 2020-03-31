@@ -5,16 +5,23 @@
 \title{See The Distribution}
 \usage{
 SeeDist(
-  qqq,
+  x,
   numbins = 0,
   xlab = NULL,
   var_explain = NULL,
   data.fill.color = "deepskyblue",
-  whatplots = c("d", "b", "h")
+  mean.line.color = "darkgreen",
+  median.line.color = "yellow",
+  mode.line.color = "orange",
+  mean.line.type = "longdash",
+  median.line.type = "dashed",
+  mode.line.type = "dashed",
+  whatplots = c("d", "b", "h"),
+  k = 2
 )
 }
 \arguments{
-\item{qqq}{the data to be visualized must be numeric.}
+\item{x}{the data to be visualized must be numeric.}
 
 \item{numbins}{the number of bins to use for any plots that bin. If nothing is
 specified the function will calculate a rational number using Freedman-Diaconis
@@ -29,8 +36,17 @@ such as "Miles Per Gallon"}
 \item{data.fill.color}{Character string that specifies fill color for our data
 (Default: `deepskyblue`).}
 
+\item{mean.line.color, median.line.color, mode.line.color}{Character string that 
+specifies line color (Default: `darkgreen`, `yellow`, `orange`).}
+
+\item{mean.line.type, median.line.type, mode.line.type}{Character string that 
+specifies line color (Default: `longdash`, `dashed`, `dashed`).}
+
 \item{whatplots}{what type of plots?  The default is whatplots = c("d","b","h")
 for a density, a boxplot, and a histogram}
+
+\item{k}{Number of digits after decimal point (should be an integer)
+(Default: k = 2) for statistical results.}
 }
 \value{
 from 1 to 3 plots depending on what the user specifies as well as a
@@ -38,7 +54,7 @@ from 1 to 3 plots depending on what the user specifies as well as a
 }
 \description{
 This function takes a vector of numeric data and returns one or more ggplot2
-plots that help you visualize the data
+plots that help you visualize the data.
 }
 \section{Warning}{
 

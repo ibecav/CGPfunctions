@@ -1,9 +1,9 @@
 #' See The Distribution
 #'
 #' This function takes a vector of numeric data and returns one or more ggplot2
-#' plots that help you visualize the data
+#' plots that help you visualize the data.
 #'
-#' @param qqq the data to be visualized must be numeric.
+#' @param x the data to be visualized must be numeric.
 #' @param numbins the number of bins to use for any plots that bin. If nothing is
 #'   specified the function will calculate a rational number using Freedman-Diaconis
 #'   via the \code{nclass.FD} function
@@ -11,10 +11,16 @@
 #'   such as "Miles Per Gallon"
 #' @param data.fill.color Character string that specifies fill color for our data
 #'   (Default: `deepskyblue`).
+#' @param mean.line.color,median.line.color,mode.line.color Character string that 
+#'   specifies line color (Default: `darkgreen`, `yellow`, `orange`).
+#' @param mean.line.type,median.line.type,mode.line.type Character string that 
+#'   specifies line color (Default: `longdash`, `dashed`, `dashed`).
 #' @param whatplots what type of plots?  The default is whatplots = c("d","b","h")
 #'   for a density, a boxplot, and a histogram
 #' @param xlab Custom text for the `x` axis label (Default: `NULL`, which
 #'   will cause the `x` axis label to be the `x` variable).
+#' @param k Number of digits after decimal point (should be an integer)
+#'   (Default: k = 2) for statistical results.
 #'
 #' @return from 1 to 3 plots depending on what the user specifies as well as a
 #'   base R summary printed to the console
@@ -22,7 +28,7 @@
 #' @export
 #' @import ggplot2
 #' @importFrom grDevices nclass.FD
-#' @importFrom stats dnorm dt median
+#' @importFrom stats dnorm dt median sd
 #'
 #' @section Warning:
 #'   If the data has more than 3 modal values only the first three of them are plotted.
@@ -38,20 +44,27 @@
 #' SeeDist(iris$Sepal.Length, var_explain = "Sepal Length", whatplots = "d")
 #' @author Chuck Powell
 #'
-SeeDist <- function(qqq, 
+SeeDist <- function(x, 
                     numbins = 0, 
                     xlab = NULL,
                     var_explain = NULL, 
                     data.fill.color = "deepskyblue",
-                    whatplots = c("d", "b", "h")) {
+                    mean.line.color = "darkgreen",
+                    median.line.color = "yellow",
+                    mode.line.color = "orange",
+                    mean.line.type = "longdash",
+                    median.line.type = "dashed",
+                    mode.line.type = "dashed",
+                    whatplots = c("d", "b", "h"),
+                    k = 2) {
 
   theme_set(theme_bw())
   
-  if (!is.numeric(qqq)) {
+  if (!is.numeric(x)) {
     stop("Sorry the data must be numeric")
   }
   
-  x_name <- deparse(substitute(qqq)) # get the variable name
+  x_name <- deparse(substitute(x)) # get the variable name
   
   # if not specified, use the variable name for 'x'
   if (is.null(xlab)) {
@@ -59,35 +72,39 @@ SeeDist <- function(qqq,
   }
   
   my_title <- paste0("Distribution of the variable ", 
-                     deparse(substitute(qqq)), 
+                     deparse(substitute(x)), 
                      " ", var_explain
                     )
   
   
-  if (sum(is.na(qqq)) != 0) {
-    warning("Removing one or more missing values", call. = FALSE)
-    qqq <- qqq[!is.na(qqq)]
+  if (sum(is.na(x)) != 0) {
+    missing_count <- sum(is.na(x))
+    warning(paste("Removing",
+                  missing_count,
+                  "missing values"), 
+            call. = FALSE)
+    x <- x[!is.na(x)]
   }
   
-  meanqqq <- mean(qqq, na.rm = TRUE) # store the mean
-  sdqqq <- sd(qqq, na.rm = TRUE) # store the sd
-  medianqqq <- median(qqq, na.rm = TRUE)
-  modeqqq <- CGPfunctions::Mode(qqq)
+  x_mean <- mean(x, na.rm = TRUE) # store the mean
+  x_sd <- sd(x, na.rm = TRUE) # store the sd
+  x_median <- median(x, na.rm = TRUE)
+  x_mode <- CGPfunctions::Mode(x)
   
-  if (length(modeqqq) >= 4) {
+  if (length(x_mode) >= 4) {
     warning(paste("There are", 
-                  length(modeqqq)), 
+                  length(x_mode)), 
                   " modal values displaying just the first 3", call. = FALSE)
-    modeqqq <- modeqqq[c(1, 2, 3)]
+    x_mode <- x_mode[c(1, 2, 3)]
   }
   
-  Skewqqq <- sum((qqq - mean(qqq, na.rm = TRUE))^3) / 
-                (length(qqq[!is.na(qqq)]) * sd(qqq, na.rm = TRUE)^3)
+  x_skew <- sum((x - mean(x, na.rm = TRUE))^3) / 
+                (length(x[!is.na(x)]) * sd(x, na.rm = TRUE)^3)
   
-  Kurtosisqqq <- sum((qqq - mean(qqq, na.rm = TRUE))^4) / 
-                    (length(qqq[!is.na(qqq)]) * sd(qqq, na.rm = TRUE)^4) - 3
+  x_kurtosis <- sum((x - mean(x, na.rm = TRUE))^4) / 
+                    (length(x[!is.na(x)]) * sd(x, na.rm = TRUE)^4) - 3
   
-  binnumber <- nclass.FD(qqq)
+  binnumber <- nclass.FD(x)
   
   binnumber <- ifelse(numbins == 0, 
                       binnumber, 
@@ -100,7 +117,7 @@ SeeDist <- function(qqq,
              median_x,
              Skew_x,
              Kurtosis_x,
-             k = 2) {
+             k = k) {
       ret_subtitle <- bquote("N =" ~ .(length(x)) * 
                               "," ~ bar(X) ~ "=" ~ .(round(mean_x, k)) * 
                               ", SD =" ~ .(round(sd_x, k)) * 
@@ -111,35 +128,46 @@ SeeDist <- function(qqq,
       )
     }
   
-  my_subtitle <- make_subtitle(qqq,
-                               meanqqq,
-                               sdqqq,
-                               medianqqq,
-                               Skewqqq,
-                               Kurtosisqqq)
+  my_subtitle <- make_subtitle(x,
+                               x_mean,
+                               x_sd,
+                               x_median,
+                               x_skew,
+                               x_kurtosis,
+                               k)
   
+  custom_t_function <- function(x, mu, nu, df, ncp) {
+    dt((x - mu)/nu, df, ncp) / nu
+  }
   
   # build the first plot
   if ("d" %in% tolower(whatplots)) {
     p <- ggplot() +
-      aes(qqq) +
+      aes(x) +
       geom_density(fill = data.fill.color, ) +
       stat_function(fun = dnorm, 
                     color = "red", 
-                    args = list(mean = meanqqq, 
-                                sd = sdqqq)
+                    args = list(mean = x_mean, 
+                                sd = x_sd)
                     ) +
-      geom_vline(xintercept = meanqqq, 
-                 colour = "dark green", 
-                 linetype = "longdash", 
+      stat_function(fun = custom_t_function, 
+                    color = "black",
+                    args = list(mu = x_mean, 
+                              nu = x_sd, 
+                              df = length(x) - 1, 
+                              ncp = 0)
+      ) +
+      geom_vline(xintercept = x_mean, 
+                 colour = mean.line.color, 
+                 linetype = mean.line.type, 
                  size = 1.5) +
-      geom_vline(xintercept = medianqqq, 
-                 colour = "yellow", 
-                 linetype = "dashed", 
+      geom_vline(xintercept = x_median, 
+                 colour = median.line.color, 
+                 linetype = median.line.type, 
                  size = 1.5) +
-      geom_vline(xintercept = modeqqq, 
-                 colour = "orange", 
-                 linetype = "dashed") +
+      geom_vline(xintercept = x_mode, 
+                 colour = mode.line.color, 
+                 linetype = mode.line.type) +
       geom_rug(aes(y = 0)) +
       labs(
         title = my_title,
@@ -147,8 +175,8 @@ SeeDist <- function(qqq,
         x = xlab,
         caption = (bquote(bar(X) ~ " = green, Median = yellow, Mode(s) = orange, Blue = density plot, Red = theoretical normal"))
       ) +
-      xlim(-3 * sd(qqq) + mean(qqq), 
-           +3 * sd(qqq) + mean(qqq)) +
+      xlim(-3 * sd(x) + mean(x), 
+           +3 * sd(x) + mean(x)) +
       theme(
         axis.title.y = element_blank(),
         axis.text.y = element_blank(),
@@ -163,20 +191,23 @@ SeeDist <- function(qqq,
   # build the second plot
   if ("b" %in% tolower(whatplots)) {
     pp <- ggplot() +
-      aes(qqq) +
+      aes(x) +
       labs(
         title = my_title,
         subtitle = my_subtitle,
         y = xlab,
         caption = (bquote(bar(X) ~ " displayed as a red dot, Median as a black line, and outlier(s) as small dark red dots"))
       ) +
+      stat_boxplot(aes(x = "", 
+                       y = x),
+                   geom = "errorbar", width = 0.2) +
       geom_boxplot(aes(x = "", 
-                       y = qqq), 
+                       y = x), 
                    fill = data.fill.color, 
                    outlier.color = "dark red") +
       coord_flip() +
       geom_point(aes(x = "", 
-                     y = meanqqq), 
+                     y = x_mean), 
                  shape = 21, 
                  size = 4, 
                  color = "white", 
@@ -193,7 +224,7 @@ SeeDist <- function(qqq,
   # build the third plot
   if ("h" %in% tolower(whatplots)) {
     ppp <- ggplot() +
-      aes(qqq) +
+      aes(x) +
       labs(
         title = my_title,
         subtitle = my_subtitle,
@@ -204,18 +235,18 @@ SeeDist <- function(qqq,
                      color = "black", 
                      fill = data.fill.color) +
       geom_rug(aes(y = 0)) +
-      geom_vline(xintercept = meanqqq, 
-                 colour = "dark green", 
-                 linetype = "longdash", 
+      geom_vline(xintercept = x_mean, 
+                 colour = mean.line.color, 
+                 linetype = mean.line.type, 
                  size = 1.5) +
-      geom_vline(xintercept = medianqqq, 
-                 colour = "yellow", 
-                 linetype = "dashed", 
+      geom_vline(xintercept = x_median, 
+                 colour = median.line.color, 
+                 linetype = median.line.type, 
                  size = 1.5) +
-      geom_vline(xintercept = modeqqq, 
-                 colour = "orange", 
-                 linetype = "dashed")
+      geom_vline(xintercept = x_mode, 
+                 colour = mode.line.color, 
+                 linetype = mode.line.type)
     print(ppp)
   }
-  return(summary(qqq))
+  return(summary(x))
 } # end function
