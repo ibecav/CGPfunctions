@@ -16,8 +16,22 @@ SeeDist(
   mean.line.type = "longdash",
   median.line.type = "dashed",
   mode.line.type = "dashed",
-  whatplots = c("d", "b", "h"),
-  k = 2
+  mean.line.size = 1.5,
+  median.line.size = 1.5,
+  mean.point.shape = 21,
+  median.point.shape = 23,
+  mean.point.size = 4,
+  median.point.size = 4,
+  zcurve.color = "red",
+  zcurve.type = "twodash",
+  zcurve.size = 1,
+  tcurve.color = "black",
+  tcurve.type = "dotted",
+  tcurve.size = 1,
+  mode.line.size = 1,
+  whatplots = c("d", "b", "h", "v"),
+  k = 2,
+  ggtheme = ggplot2::theme_bw()
 )
 }
 \arguments{
@@ -42,15 +56,41 @@ specifies line color (Default: `darkgreen`, `yellow`, `orange`).}
 \item{mean.line.type, median.line.type, mode.line.type}{Character string that 
 specifies line color (Default: `longdash`, `dashed`, `dashed`).}
 
-\item{whatplots}{what type of plots?  The default is whatplots = c("d","b","h")
-for a density, a boxplot, and a histogram}
+\item{mean.line.size, median.line.size, mode.line.size}{Numeric that 
+specifies line size (Default: `1.5`, `1.5`, `1`).  You can set to `0` to make
+any of the lines "disappear".}
+
+\item{mean.point.shape, median.point.shape}{Integer in 0 - 25 
+specifies shape of mean or median point mark on the violin plot
+(Default: `21`, `23`).}
+
+\item{mean.point.size, median.point.size}{Integer
+specifies size of mean or median point mark on the violin plot
+(Default: `4`). You can set to `0` to make any of the points "disappear".}
+
+\item{zcurve.color, tcurve.color}{Character string that 
+specifies line color (Default: `red`, `black`).}
+
+\item{zcurve.type, tcurve.type}{Character string that 
+specifies line color (Default: `twodash`, `dotted`).}
+
+\item{zcurve.size, tcurve.size}{Numeric that 
+specifies line size (Default: `1`).  You can set to `0` to make
+any of the lines "disappear".}
+
+\item{whatplots}{what type of plots?  The default is whatplots = c("d", "b", "h", "v")
+for a density, a boxplot, a histogram, and a violin plot}
 
 \item{k}{Number of digits after decimal point (should be an integer)
 (Default: k = 2) for statistical results.}
+
+\item{ggtheme}{A function, ggplot2 theme name. Default value is ggplot2::theme_bw().
+Any of the ggplot2 themes, or themes from extension packages are allowed (e.g.,
+hrbrthemes::theme_ipsum(), etc.).}
 }
 \value{
-from 1 to 3 plots depending on what the user specifies as well as a
-  base R summary printed to the console
+from 1 to 4 plots depending on what the user specifies as well as an
+  extensive summary courtesy `DescTools::Desc` printed to the console
 }
 \description{
 This function takes a vector of numeric data and returns one or more ggplot2
