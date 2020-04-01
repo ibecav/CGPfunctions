@@ -4,6 +4,8 @@
   - Fixed dependency issues with ggplot2, scales, sjstats and added ggmosaic
   - Adding mosaic plots to PlotXTabs2 still debugging and waiting on the next version
     of ggmosaic for some bu fixes
+  - Significant upgrades to seedist including lots of customization options and the
+    addition of violin plots.
     
 * Release 0.5.9 deployed to CRAN March 2020
   - Added functionality to PlotXTabs2 will be deprecating PlotXtabs next 
