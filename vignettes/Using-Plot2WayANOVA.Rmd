@@ -281,3 +281,16 @@ Plot2WayANOVA(formula = hwy ~ am * cyl,
 Many thanks to Danielle Navarro and the book * [Learning Statistics with
 R](https://learningstatisticswithr.com/).*
 
+### Leaving Feedback
+If you like CGPfunctions, please consider Filing a GitHub issue by [leaving
+feedback here](https://github.com/ibecav/CGPfunctions/issues), or by contacting
+me at ibecav at gmail.com by email.
+
+I hope you've found this useful. I am always open to comments, corrections and
+suggestions.
+
+Chuck 
+
+### License
+<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+

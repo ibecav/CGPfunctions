@@ -12,7 +12,7 @@
 
 <meta name="author" content="Chuck Powell" />
 
-<meta name="date" content="2020-03-05" />
+<meta name="date" content="2020-04-02" />
 
 <title>Using PlotXTabs</title>
 
@@ -315,7 +315,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">Using PlotXTabs</h1>
 <h4 class="author">Chuck Powell</h4>
-<h4 class="date">2020-03-05</h4>
+<h4 class="date">2020-04-02</h4>
 
 
 
@@ -342,18 +342,23 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 </blockquote>
 <p>We’ll load the library and take a quick look at the structure of the data.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(productplots)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">str</span>(happy)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="co">#&gt; &#39;data.frame&#39;:    51020 obs. of  10 variables:</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="co">#&gt;  $ id     : num  1 2 3 4 5 6 7 8 9 10 ...</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="co">#&gt;  $ happy  : Factor w/ 3 levels &quot;not too happy&quot;,..: 1 1 2 1 2 2 1 1 2 2 ...</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="co">#&gt;  $ year   : num  1972 1972 1972 1972 1972 ...</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="co">#&gt;  $ age    : num  23 70 48 27 61 26 28 27 21 30 ...</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="co">#&gt;  $ sex    : Factor w/ 2 levels &quot;male&quot;,&quot;female&quot;: 2 1 2 2 2 1 1 1 2 2 ...</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="co">#&gt;  $ marital: Factor w/ 5 levels &quot;married&quot;,&quot;never married&quot;,..: 2 1 1 1 1 2 3 2 2 1 ...</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="co">#&gt;  $ degree : Factor w/ 5 levels &quot;lt high school&quot;,..: 4 1 2 4 2 2 2 4 2 2 ...</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="co">#&gt;  $ finrela: Factor w/ 5 levels &quot;far below average&quot;,..: 3 4 3 3 4 4 4 3 3 2 ...</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="co">#&gt;  $ health : Factor w/ 4 levels &quot;poor&quot;,&quot;fair&quot;,..: 3 2 4 3 3 3 4 3 4 2 ...</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="co">#&gt;  $ wtssall: num  0.445 0.889 0.889 0.889 0.889 ...</span></span></code></pre></div>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co">#&gt; </span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co">#&gt; Attaching package: &#39;productplots&#39;</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co">#&gt; The following objects are masked from &#39;package:CGPfunctions&#39;:</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co">#&gt; </span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="co">#&gt;     ddecker, hbar, hspine, mosaic, prodcalc, spine, vbar, vspine</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="kw">str</span>(happy)</span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="co">#&gt; &#39;data.frame&#39;:    51020 obs. of  10 variables:</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="co">#&gt;  $ id     : num  1 2 3 4 5 6 7 8 9 10 ...</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co">#&gt;  $ happy  : Factor w/ 3 levels &quot;not too happy&quot;,..: 1 1 2 1 2 2 1 1 2 2 ...</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="co">#&gt;  $ year   : num  1972 1972 1972 1972 1972 ...</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="co">#&gt;  $ age    : num  23 70 48 27 61 26 28 27 21 30 ...</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="co">#&gt;  $ sex    : Factor w/ 2 levels &quot;male&quot;,&quot;female&quot;: 2 1 2 2 2 1 1 1 2 2 ...</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="co">#&gt;  $ marital: Factor w/ 5 levels &quot;married&quot;,&quot;never married&quot;,..: 2 1 1 1 1 2 3 2 2 1 ...</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="co">#&gt;  $ degree : Factor w/ 5 levels &quot;lt high school&quot;,..: 4 1 2 4 2 2 2 4 2 2 ...</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="co">#&gt;  $ finrela: Factor w/ 5 levels &quot;far below average&quot;,..: 3 4 3 3 4 4 4 3 3 2 ...</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a><span class="co">#&gt;  $ health : Factor w/ 4 levels &quot;poor&quot;,&quot;fair&quot;,..: 3 2 4 3 3 3 4 3 4 2 ...</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a><span class="co">#&gt;  $ wtssall: num  0.445 0.889 0.889 0.889 0.889 ...</span></span></code></pre></div>
 <p>We’ll be focusing on the non numeric variables. I certainly can’t claim to do a detailed analysis here but at least the questions will be fun I hope…</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># who&#39;s happier by gender</span></span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="kw">PlotXTabs</span>(happy,happy,sex)</span>
@@ -429,7 +434,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>Chuck (ibecav at gmail dot com)</p>
 <div id="license" class="section level3">
 <h3>License</h3>
-<p><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="data:image/png;base64,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" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
+<p><a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="data:image/png;base64,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" /></a><br />This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
 <blockquote>
 <p>“He who gives up [code] safety for [code] speed deserves neither.” (<a href="https://twitter.com/hadleywickham/status/504368538874703872">via</a>)</p>
 </blockquote>
