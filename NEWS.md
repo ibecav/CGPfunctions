@@ -1,6 +1,7 @@
 # CGPfunctions 0.6.0
 
 * Release 0.6.0 in development March 2020
+  - Fixed tibble 3.0.0 issue
   - Fixed dependency issues with ggplot2, scales, sjstats and added ggmosaic
   - Adding mosaic plots to PlotXTabs2 still debugging and waiting on the next version
     of ggmosaic for some bu fixes
