@@ -115,17 +115,19 @@ SeeDist <- function(x,
     xlab <- x_name
   }
   
-  if (!is.null(title) && title == "Default") {  
-    my_title <- paste0("Distribution of the variable ", 
-                       deparse(substitute(x)), 
-                       " ", 
-                       var_explain
-                      )
-  } else {
-    my_title <- title
-  }
+  # figure you what binwidth we'll use
+  binnumber <- nclass.FD(x) # default
   
-  desc.output <- DescTools::Desc(x, plotit = FALSE, main = xlab, digits = k)
+  binnumber <- ifelse(numbins == 0, 
+                      binnumber, 
+                      numbins)
+  
+  #### Get descriptives ####
+  
+  desc.output <- DescTools::Desc(x, 
+                                 plotit = FALSE, 
+                                 main = xlab, 
+                                 digits = k)
 
   if (sum(is.na(x)) != 0) {
     missing_count <- sum(is.na(x))
@@ -151,11 +153,17 @@ SeeDist <- function(x,
     x_mode <- x_mode[c(1, 2, 3)]
   }
   
-  binnumber <- nclass.FD(x)
+  #### Title, subtitle and caption ####
   
-  binnumber <- ifelse(numbins == 0, 
-                      binnumber, 
-                      numbins)
+  if (!is.null(title) && title == "Default") {  
+    my_title <- paste0("Distribution of the variable ", 
+                       x_name, 
+                       " ", 
+                       var_explain
+                      )
+  } else {
+    my_title <- title
+  }
   
   make_subtitle <- 
     function(x,
@@ -193,12 +201,15 @@ SeeDist <- function(x,
                       ", z curve is" ~ .(zcurve.color) ~
                       ", t curve is" ~ .(tcurve.color)
                       )
-
+  
+  #### custom function to plot t curve ####
+  
   custom_t_function <- function(x, mu, nu, df, ncp) {
     dt((x - mu)/nu, df, ncp) / nu
   }
   
-  # build the first plot
+  #### build the density plot ####
+  
   if ("d" %in% tolower(whatplots)) {
     p <- ggplot() +
       aes(x) +
@@ -251,7 +262,9 @@ SeeDist <- function(x,
     print(p)
   }
 
-  # build the second plot
+  
+  #### build the boxplot ####
+  
   if ("b" %in% tolower(whatplots)) {
     pp <- ggplot() +
       aes(x) +
@@ -284,7 +297,9 @@ SeeDist <- function(x,
       )
     print(pp)
   }
-  # build the third plot
+  
+  #### build the histogram plot ####
+  
   if ("h" %in% tolower(whatplots)) {
     ppp <- ggplot() +
       aes(x) +
@@ -312,7 +327,9 @@ SeeDist <- function(x,
                  size = mode.line.size)
     print(ppp)
   }
-  # build the second plot
+  
+  #### build the violin plot ####
+  
   if ("v" %in% tolower(whatplots)) {
     pppp <- ggplot() +
       aes(x) +
@@ -350,5 +367,7 @@ SeeDist <- function(x,
       )
     print(pppp)
   }
+  
+  #### return output to console ####
   return(desc.output)
 } # end function
