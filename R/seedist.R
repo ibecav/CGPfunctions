@@ -7,6 +7,9 @@
 #' @param title Optionally replace the default title displayed. title = NULL 
 #'   will remove it entirely. title = "" will provide an empty title but 
 #'   retain the spacing. A sensible default is provided otherwise.
+#' @param subtitle Optionally replace the default subtitle displayed. subtitle = NULL 
+#'   will remove it entirely. subtitle = "" will provide an empty subtitle but 
+#'   retain the spacing. A sensible default is provided otherwise.
 #' @param numbins the number of bins to use for any plots that bin. If nothing is
 #'   specified the function will calculate a rational number using Freedman-Diaconis
 #'   via the \code{nclass.FD} function
@@ -69,6 +72,7 @@
 #'
 SeeDist <- function(x,
                     title = "Default",
+                    subtitle = "Default",
                     numbins = 0, 
                     xlab = NULL,
                     var_explain = NULL, 
@@ -111,7 +115,6 @@ SeeDist <- function(x,
     xlab <- x_name
   }
   
-
   if (!is.null(title) && title == "Default") {  
     my_title <- paste0("Distribution of the variable ", 
                        deparse(substitute(x)), 
@@ -175,14 +178,25 @@ SeeDist <- function(x,
       )
     }
   
-  my_subtitle <- make_subtitle(x,
-                               x_mean,
-                               x_sd,
-                               x_median,
-                               x_skew,
-                               x_kurtosis,
-                               k)
+  if (!is.null(subtitle) && subtitle == "Default") {  
+    my_subtitle <- make_subtitle(x,
+                                 x_mean,
+                                 x_sd,
+                                 x_median,
+                                 x_skew,
+                                 x_kurtosis,
+                                 k)
+  } else {
+    my_subtitle <- subtitle
+  }
   
+  mycaption <- bquote(bar(X) ~ "is" ~ .(mean.line.color) ~ 
+                      ", Median is" ~ .(median.line.color) ~
+                      ", Mode is" ~ .(mode.line.color) ~
+                      ", z curve is" ~ .(zcurve.color) ~
+                      ", t curve is" ~ .(tcurve.color)
+                      )
+
   custom_t_function <- function(x, mu, nu, df, ncp) {
     dt((x - mu)/nu, df, ncp) / nu
   }
@@ -225,7 +239,7 @@ SeeDist <- function(x,
         title = my_title,
         subtitle = my_subtitle,
         x = xlab,
-        caption = (bquote(bar(X) ~ " = green, Median = yellow, Mode(s) = orange, Blue = density plot, Red = theoretical normal"))
+        caption = mycaption
       ) +
       xlim(-3 * sd(x) + mean(x), 
            +3 * sd(x) + mean(x)) +
@@ -248,7 +262,7 @@ SeeDist <- function(x,
         title = my_title,
         subtitle = my_subtitle,
         y = xlab,
-        caption = (bquote(bar(X) ~ " displayed as a red dot, Median as a black line, and outlier(s) as small dark red dots"))
+        caption = mycaption
       ) +
       stat_boxplot(aes(x = "", 
                        y = x),
@@ -257,13 +271,12 @@ SeeDist <- function(x,
       geom_boxplot(aes(x = "", 
                        y = x), 
                    fill = data.fill.color, 
-                   outlier.color = "dark red") +
+                   outlier.color = data.fill.color) +
       coord_flip() +
       geom_point(aes(x = "", 
                      y = x_mean), 
                  shape = mean.point.shape, 
                  size = mean.point.size, 
-#                 color = "white", 
                  fill = mean.line.color) +
       theme(
         axis.title.y = element_blank(),
@@ -282,7 +295,7 @@ SeeDist <- function(x,
         title = my_title,
         subtitle = my_subtitle,
         x = xlab,
-        caption = (bquote(bar(X) ~ " displayed as a green line, Median as a yellow line, and Mode(s) as orange line(s)"))
+        caption = mycaption
       ) +
       geom_histogram(bins = binnumber, 
                      color = "black", 
@@ -310,7 +323,7 @@ SeeDist <- function(x,
         title = my_title,
         subtitle = my_subtitle,
         y = xlab,
-        caption = (bquote(bar(X) ~ " displayed as a red dot, Median as a black diamond, and outlier(s) as small dark red dots"))
+        caption = mycaption
       ) +
       geom_violin(aes(x = "", 
                        y = x), 
@@ -325,13 +338,11 @@ SeeDist <- function(x,
                      y = x_mean), 
                  shape = mean.point.shape, 
                  size = mean.point.size, 
-#                 color = "white", 
                  fill = mean.line.color) +
       geom_point(aes(x = "", 
                      y = x_median), 
                  shape = median.point.shape, 
                  size = median.point.size, 
-#                 color = "white", 
                  fill = median.line.color) +
       theme(
         axis.title.y = element_blank(),

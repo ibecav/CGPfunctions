@@ -7,6 +7,7 @@
 SeeDist(
   x,
   title = "Default",
+  subtitle = "Default",
   numbins = 0,
   xlab = NULL,
   var_explain = NULL,
@@ -40,6 +41,10 @@ SeeDist(
 
 \item{title}{Optionally replace the default title displayed. title = NULL 
 will remove it entirely. title = "" will provide an empty title but 
+retain the spacing. A sensible default is provided otherwise.}
+
+\item{subtitle}{Optionally replace the default subtitle displayed. subtitle = NULL 
+will remove it entirely. subtitle = "" will provide an empty subtitle but 
 retain the spacing. A sensible default is provided otherwise.}
 
 \item{numbins}{the number of bins to use for any plots that bin. If nothing is
