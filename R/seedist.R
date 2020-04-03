@@ -125,6 +125,7 @@ SeeDist <- function(x,
     my_title <- title
   }
   
+  desc.output <- DescTools::Desc(x, plotit = FALSE, main = xlab, digits = k)
 
   if (sum(is.na(x)) != 0) {
     missing_count <- sum(is.na(x))
@@ -135,11 +136,13 @@ SeeDist <- function(x,
     x <- x[!is.na(x)]
   }
   
-  x_mean <- mean(x, na.rm = TRUE) # store the mean
-  x_sd <- sd(x, na.rm = TRUE) # store the sd
-  x_median <- median(x, na.rm = TRUE)
+  x_mean <- desc.output[[1]]$mean
+  x_sd <- desc.output[[1]]$sd
+  x_median <- desc.output[[1]]$quant['median']
   x_mode <- CGPfunctions::Mode(x)
-  
+  x_skew <- desc.output[[1]]$skew
+  x_kurtosis <- desc.output[[1]]$kurt
+    
   if (length(x_mode) >= 4) {
     warning(paste("There are", 
                   length(x_mode)), 
@@ -147,12 +150,6 @@ SeeDist <- function(x,
             call. = FALSE)
     x_mode <- x_mode[c(1, 2, 3)]
   }
-  
-  x_skew <- sum((x - mean(x, na.rm = TRUE))^3) / 
-                (length(x[!is.na(x)]) * sd(x, na.rm = TRUE)^3)
-  
-  x_kurtosis <- sum((x - mean(x, na.rm = TRUE))^4) / 
-                    (length(x[!is.na(x)]) * sd(x, na.rm = TRUE)^4) - 3
   
   binnumber <- nclass.FD(x)
   
@@ -353,6 +350,5 @@ SeeDist <- function(x,
       )
     print(pppp)
   }
-  text.output <- DescTools::Desc(x, plotit = FALSE, main = xlab, digits = k)
-  return(text.output)
+  return(desc.output)
 } # end function
