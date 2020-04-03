@@ -4,6 +4,9 @@
 #' plots that help you visualize the data.
 #'
 #' @param x the data to be visualized must be numeric.
+#' @param title Optionally replace the default title displayed. title = NULL 
+#'   will remove it entirely. title = "" will provide an empty title but 
+#'   retain the spacing. A sensible default is provided otherwise.
 #' @param numbins the number of bins to use for any plots that bin. If nothing is
 #'   specified the function will calculate a rational number using Freedman-Diaconis
 #'   via the \code{nclass.FD} function
@@ -64,7 +67,8 @@
 #' SeeDist(iris$Sepal.Length, var_explain = "Sepal Length", whatplots = "d")
 #' @author Chuck Powell
 #'
-SeeDist <- function(x, 
+SeeDist <- function(x,
+                    title = "Default",
                     numbins = 0, 
                     xlab = NULL,
                     var_explain = NULL, 
@@ -107,12 +111,18 @@ SeeDist <- function(x,
     xlab <- x_name
   }
   
-  my_title <- paste0("Distribution of the variable ", 
-                     deparse(substitute(x)), 
-                     " ", var_explain
-                    )
+
+  if (!is.null(title) && title == "Default") {  
+    my_title <- paste0("Distribution of the variable ", 
+                       deparse(substitute(x)), 
+                       " ", 
+                       var_explain
+                      )
+  } else {
+    my_title <- title
+  }
   
-  
+
   if (sum(is.na(x)) != 0) {
     missing_count <- sum(is.na(x))
     warning(paste("Removing",
@@ -130,7 +140,8 @@ SeeDist <- function(x,
   if (length(x_mode) >= 4) {
     warning(paste("There are", 
                   length(x_mode)), 
-                  " modal values displaying just the first 3", call. = FALSE)
+                  " modal values displaying just the first 3", 
+            call. = FALSE)
     x_mode <- x_mode[c(1, 2, 3)]
   }
   
@@ -196,7 +207,7 @@ SeeDist <- function(x,
                               nu = x_sd, 
                               df = length(x) - 1, 
                               ncp = 0)
-      ) +
+                    ) +
       geom_vline(xintercept = x_mean, 
                  colour = mean.line.color, 
                  linetype = mean.line.type, 
@@ -241,7 +252,8 @@ SeeDist <- function(x,
       ) +
       stat_boxplot(aes(x = "", 
                        y = x),
-                   geom = "errorbar", width = 0.2) +
+                   geom = "errorbar", 
+                   width = 0.2) +
       geom_boxplot(aes(x = "", 
                        y = x), 
                    fill = data.fill.color, 
@@ -249,10 +261,10 @@ SeeDist <- function(x,
       coord_flip() +
       geom_point(aes(x = "", 
                      y = x_mean), 
-                 shape = 21, 
-                 size = 4, 
-                 color = "white", 
-                 fill = "red") +
+                 shape = mean.point.shape, 
+                 size = mean.point.size, 
+#                 color = "white", 
+                 fill = mean.line.color) +
       theme(
         axis.title.y = element_blank(),
         axis.text.y = element_blank(),
@@ -313,13 +325,13 @@ SeeDist <- function(x,
                      y = x_mean), 
                  shape = mean.point.shape, 
                  size = mean.point.size, 
-                 color = "white", 
+#                 color = "white", 
                  fill = mean.line.color) +
       geom_point(aes(x = "", 
                      y = x_median), 
                  shape = median.point.shape, 
                  size = median.point.size, 
-                 color = "white", 
+#                 color = "white", 
                  fill = median.line.color) +
       theme(
         axis.title.y = element_blank(),

@@ -6,6 +6,7 @@
 \usage{
 SeeDist(
   x,
+  title = "Default",
   numbins = 0,
   xlab = NULL,
   var_explain = NULL,
@@ -36,6 +37,10 @@ SeeDist(
 }
 \arguments{
 \item{x}{the data to be visualized must be numeric.}
+
+\item{title}{Optionally replace the default title displayed. title = NULL 
+will remove it entirely. title = "" will provide an empty title but 
+retain the spacing. A sensible default is provided otherwise.}
 
 \item{numbins}{the number of bins to use for any plots that bin. If nothing is
 specified the function will calculate a rational number using Freedman-Diaconis
