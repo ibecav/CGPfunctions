@@ -41,7 +41,12 @@
 
 <meta property="og:title" content="See The Distribution — SeeDist" />
 <meta property="og:description" content="This function takes a vector of numeric data and returns one or more ggplot2
-plots that help you visualize the data." />
+plots that help you visualize the data.  Meant to be a useful wrapper for
+exploring univariate data.  Has a plethora of options including type of
+visualization (histogram, boxplot, density, violin) as well commonly
+desired overplots like mean and median points, z and t curves etc..  Common
+descriptive statistics are provided as a subtitle if desired and sent to the
+cpmsole as well." />
 
 
 
@@ -83,7 +88,7 @@ plots that help you visualize the data." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">CGPfunctions</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
       </span>
     </div>
 
@@ -153,11 +158,18 @@ plots that help you visualize the data." />
 
     <div class="ref-description">
     <p>This function takes a vector of numeric data and returns one or more ggplot2
-plots that help you visualize the data.</p>
+plots that help you visualize the data.  Meant to be a useful wrapper for
+exploring univariate data.  Has a plethora of options including type of
+visualization (histogram, boxplot, density, violin) as well commonly
+desired overplots like mean and median points, z and t curves etc..  Common
+descriptive statistics are provided as a subtitle if desired and sent to the
+cpmsole as well.</p>
     </div>
 
     <pre class="usage"><span class='fu'>SeeDist</span>(
   <span class='no'>x</span>,
+  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Default"</span>,
+  <span class='kw'>subtitle</span> <span class='kw'>=</span> <span class='st'>"Default"</span>,
   <span class='kw'>numbins</span> <span class='kw'>=</span> <span class='fl'>0</span>,
   <span class='kw'>xlab</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>var_explain</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -191,7 +203,19 @@ plots that help you visualize the data.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>the data to be visualized must be numeric.</p></td>
+      <td><p>the data to be visualized. Must be numeric.</p></td>
+    </tr>
+    <tr>
+      <th>title</th>
+      <td><p>Optionally replace the default title displayed. title = NULL 
+will remove it entirely. title = "" will provide an empty title but 
+retain the spacing. A sensible default is provided otherwise.</p></td>
+    </tr>
+    <tr>
+      <th>subtitle</th>
+      <td><p>Optionally replace the default subtitle displayed. subtitle = NULL 
+will remove it entirely. subtitle = "" will provide an empty subtitle but 
+retain the spacing. A sensible default is provided otherwise.</p></td>
     </tr>
     <tr>
       <th>numbins</th>
@@ -207,12 +231,12 @@ will cause the `x` axis label to be the `x` variable).</p></td>
     <tr>
       <th>var_explain</th>
       <td><p>additional contextual information about the variable as a string
-such as "Miles Per Gallon"</p></td>
+such as "Miles Per Gallon" which is appended to the default title information.</p></td>
     </tr>
     <tr>
       <th>data.fill.color</th>
-      <td><p>Character string that specifies fill color for our data
-(Default: `deepskyblue`).</p></td>
+      <td><p>Character string that specifies fill color for the main data
+area (Default: `deepskyblue`).</p></td>
     </tr>
     <tr>
       <th>mean.line.color, median.line.color, mode.line.color</th>
@@ -260,8 +284,8 @@ any of the lines "disappear".</p></td>
     </tr>
     <tr>
       <th>whatplots</th>
-      <td><p>what type of plots?  The default is whatplots = c("d", "b", "h", "v")
-for a density, a boxplot, a histogram, and a violin plot</p></td>
+      <td><p>what type of plots?  The default is whatplots = c("d", "b", 
+"h", "v") for a density, a boxplot, a histogram, and a violin plot</p></td>
     </tr>
     <tr>
       <th>k</th>
