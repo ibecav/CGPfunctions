@@ -1,16 +1,29 @@
 #' See The Distribution
 #'
 #' This function takes a vector of numeric data and returns one or more ggplot2
-#' plots that help you visualize the data.
+#' plots that help you visualize the data.  Meant to be a useful wrapper for
+#' exploring univariate data.  Has a plethora of options including type of
+#' visualization (histogram, boxplot, density, violin) as well commonly
+#' desired overplots like mean and median points, z and t curves etc..  Common
+#' descriptive statistics are provided as a subtitle if desired and sent to the
+#' cpmsole as well. 
 #'
-#' @param x the data to be visualized must be numeric.
+#' @param x the data to be visualized. Must be numeric.
+#' @param title Optionally replace the default title displayed. title = NULL 
+#'   will remove it entirely. title = "" will provide an empty title but 
+#'   retain the spacing. A sensible default is provided otherwise.
+#' @param subtitle Optionally replace the default subtitle displayed. subtitle = NULL 
+#'   will remove it entirely. subtitle = "" will provide an empty subtitle but 
+#'   retain the spacing. A sensible default is provided otherwise.
+#' @param whatplots what type of plots?  The default is whatplots = c("d", "b", 
+#'   "h", "v") for a density, a boxplot, a histogram, and a violin plot
 #' @param numbins the number of bins to use for any plots that bin. If nothing is
 #'   specified the function will calculate a rational number using Freedman-Diaconis
 #'   via the \code{nclass.FD} function
 #' @param var_explain additional contextual information about the variable as a string
-#'   such as "Miles Per Gallon"
-#' @param data.fill.color Character string that specifies fill color for our data
-#'   (Default: `deepskyblue`).
+#'   such as "Miles Per Gallon" which is appended to the default title information.
+#' @param data.fill.color Character string that specifies fill color for the main data
+#'   area (Default: `deepskyblue`).
 #' @param mean.line.color,median.line.color,mode.line.color Character string that 
 #'   specifies line color (Default: `darkgreen`, `yellow`, `orange`).
 #' @param mean.line.type,median.line.type,mode.line.type Character string that 
@@ -31,8 +44,6 @@
 #' @param zcurve.size,tcurve.size Numeric that 
 #'   specifies line size (Default: `1`).  You can set to `0` to make
 #'   any of the lines "disappear".
-#' @param whatplots what type of plots?  The default is whatplots = c("d", "b", "h", "v")
-#'   for a density, a boxplot, a histogram, and a violin plot
 #' @param xlab Custom text for the `x` axis label (Default: `NULL`, which
 #'   will cause the `x` axis label to be the `x` variable).
 #' @param k Number of digits after decimal point (should be an integer)
@@ -64,7 +75,9 @@
 #' SeeDist(iris$Sepal.Length, var_explain = "Sepal Length", whatplots = "d")
 #' @author Chuck Powell
 #'
-SeeDist <- function(x, 
+SeeDist <- function(x,
+                    title = "Default",
+                    subtitle = "Default",
                     numbins = 0, 
                     xlab = NULL,
                     var_explain = NULL, 
@@ -93,6 +106,8 @@ SeeDist <- function(x,
                     ggtheme = ggplot2::theme_bw()
                     ) {
 
+  #### Basic setup ####
+  
   # set default theme 
   ggplot2::theme_set(ggtheme)
   
@@ -102,17 +117,25 @@ SeeDist <- function(x,
   
   x_name <- deparse(substitute(x)) # get the variable name
   
-  # if not specified, use the variable name for 'x'
+  # if not specified, use the variable name for x axis
   if (is.null(xlab)) {
     xlab <- x_name
   }
   
-  my_title <- paste0("Distribution of the variable ", 
-                     deparse(substitute(x)), 
-                     " ", var_explain
-                    )
+  # figure you what binwidth we'll use
+  binnumber <- nclass.FD(x) # default
   
+  binnumber <- ifelse(numbins == 0, 
+                      binnumber, 
+                      numbins)
   
+  #### Get descriptives ####
+  
+  desc.output <- DescTools::Desc(x, 
+                                 plotit = FALSE, 
+                                 main = xlab, 
+                                 digits = k)
+
   if (sum(is.na(x)) != 0) {
     missing_count <- sum(is.na(x))
     warning(paste("Removing",
@@ -122,29 +145,32 @@ SeeDist <- function(x,
     x <- x[!is.na(x)]
   }
   
-  x_mean <- mean(x, na.rm = TRUE) # store the mean
-  x_sd <- sd(x, na.rm = TRUE) # store the sd
-  x_median <- median(x, na.rm = TRUE)
+  x_mean <- desc.output[[1]]$mean
+  x_sd <- desc.output[[1]]$sd
+  x_median <- desc.output[[1]]$quant['median']
   x_mode <- CGPfunctions::Mode(x)
-  
+  x_skew <- desc.output[[1]]$skew
+  x_kurtosis <- desc.output[[1]]$kurt
+    
   if (length(x_mode) >= 4) {
     warning(paste("There are", 
                   length(x_mode)), 
-                  " modal values displaying just the first 3", call. = FALSE)
+                  " modal values displaying just the first 3", 
+            call. = FALSE)
     x_mode <- x_mode[c(1, 2, 3)]
   }
   
-  x_skew <- sum((x - mean(x, na.rm = TRUE))^3) / 
-                (length(x[!is.na(x)]) * sd(x, na.rm = TRUE)^3)
+  #### Title, subtitle and caption ####
   
-  x_kurtosis <- sum((x - mean(x, na.rm = TRUE))^4) / 
-                    (length(x[!is.na(x)]) * sd(x, na.rm = TRUE)^4) - 3
-  
-  binnumber <- nclass.FD(x)
-  
-  binnumber <- ifelse(numbins == 0, 
-                      binnumber, 
-                      numbins)
+  if (!is.null(title) && title == "Default") {  
+    my_title <- paste0("Distribution of the variable ", 
+                       x_name, 
+                       " ", 
+                       var_explain
+                      )
+  } else {
+    my_title <- title
+  }
   
   make_subtitle <- 
     function(x,
@@ -164,19 +190,33 @@ SeeDist <- function(x,
       )
     }
   
-  my_subtitle <- make_subtitle(x,
-                               x_mean,
-                               x_sd,
-                               x_median,
-                               x_skew,
-                               x_kurtosis,
-                               k)
+  if (!is.null(subtitle) && subtitle == "Default") {  
+    my_subtitle <- make_subtitle(x,
+                                 x_mean,
+                                 x_sd,
+                                 x_median,
+                                 x_skew,
+                                 x_kurtosis,
+                                 k)
+  } else {
+    my_subtitle <- subtitle
+  }
+  
+  mycaption <- bquote(bar(X) ~ "is" ~ .(mean.line.color) ~ 
+                      ", Median is" ~ .(median.line.color) ~
+                      ", Mode is" ~ .(mode.line.color) ~
+                      ", z curve is" ~ .(zcurve.color) ~
+                      ", t curve is" ~ .(tcurve.color)
+                      )
+  
+  #### custom function to plot t curve ####
   
   custom_t_function <- function(x, mu, nu, df, ncp) {
     dt((x - mu)/nu, df, ncp) / nu
   }
   
-  # build the first plot
+  #### build the density plot ####
+  
   if ("d" %in% tolower(whatplots)) {
     p <- ggplot() +
       aes(x) +
@@ -196,7 +236,7 @@ SeeDist <- function(x,
                               nu = x_sd, 
                               df = length(x) - 1, 
                               ncp = 0)
-      ) +
+                    ) +
       geom_vline(xintercept = x_mean, 
                  colour = mean.line.color, 
                  linetype = mean.line.type, 
@@ -214,7 +254,7 @@ SeeDist <- function(x,
         title = my_title,
         subtitle = my_subtitle,
         x = xlab,
-        caption = (bquote(bar(X) ~ " = green, Median = yellow, Mode(s) = orange, Blue = density plot, Red = theoretical normal"))
+        caption = mycaption
       ) +
       xlim(-3 * sd(x) + mean(x), 
            +3 * sd(x) + mean(x)) +
@@ -229,7 +269,9 @@ SeeDist <- function(x,
     print(p)
   }
 
-  # build the second plot
+  
+  #### build the boxplot ####
+  
   if ("b" %in% tolower(whatplots)) {
     pp <- ggplot() +
       aes(x) +
@@ -237,22 +279,22 @@ SeeDist <- function(x,
         title = my_title,
         subtitle = my_subtitle,
         y = xlab,
-        caption = (bquote(bar(X) ~ " displayed as a red dot, Median as a black line, and outlier(s) as small dark red dots"))
+        caption = mycaption
       ) +
       stat_boxplot(aes(x = "", 
                        y = x),
-                   geom = "errorbar", width = 0.2) +
+                   geom = "errorbar", 
+                   width = 0.2) +
       geom_boxplot(aes(x = "", 
                        y = x), 
                    fill = data.fill.color, 
-                   outlier.color = "dark red") +
+                   outlier.color = data.fill.color) +
       coord_flip() +
       geom_point(aes(x = "", 
                      y = x_mean), 
-                 shape = 21, 
-                 size = 4, 
-                 color = "white", 
-                 fill = "red") +
+                 shape = mean.point.shape, 
+                 size = mean.point.size, 
+                 fill = mean.line.color) +
       theme(
         axis.title.y = element_blank(),
         axis.text.y = element_blank(),
@@ -262,7 +304,9 @@ SeeDist <- function(x,
       )
     print(pp)
   }
-  # build the third plot
+  
+  #### build the histogram plot ####
+  
   if ("h" %in% tolower(whatplots)) {
     ppp <- ggplot() +
       aes(x) +
@@ -270,7 +314,7 @@ SeeDist <- function(x,
         title = my_title,
         subtitle = my_subtitle,
         x = xlab,
-        caption = (bquote(bar(X) ~ " displayed as a green line, Median as a yellow line, and Mode(s) as orange line(s)"))
+        caption = mycaption
       ) +
       geom_histogram(bins = binnumber, 
                      color = "black", 
@@ -290,7 +334,9 @@ SeeDist <- function(x,
                  size = mode.line.size)
     print(ppp)
   }
-  # build the second plot
+  
+  #### build the violin plot ####
+  
   if ("v" %in% tolower(whatplots)) {
     pppp <- ggplot() +
       aes(x) +
@@ -298,7 +344,7 @@ SeeDist <- function(x,
         title = my_title,
         subtitle = my_subtitle,
         y = xlab,
-        caption = (bquote(bar(X) ~ " displayed as a red dot, Median as a black diamond, and outlier(s) as small dark red dots"))
+        caption = mycaption
       ) +
       geom_violin(aes(x = "", 
                        y = x), 
@@ -313,13 +359,11 @@ SeeDist <- function(x,
                      y = x_mean), 
                  shape = mean.point.shape, 
                  size = mean.point.size, 
-                 color = "white", 
                  fill = mean.line.color) +
       geom_point(aes(x = "", 
                      y = x_median), 
                  shape = median.point.shape, 
                  size = median.point.size, 
-                 color = "white", 
                  fill = median.line.color) +
       theme(
         axis.title.y = element_blank(),
@@ -330,6 +374,7 @@ SeeDist <- function(x,
       )
     print(pppp)
   }
-  text.output <- DescTools::Desc(x, plotit = FALSE, main = xlab, digits = k)
-  return(text.output)
+  
+  #### return output to console ####
+  return(desc.output)
 } # end function

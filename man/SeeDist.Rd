@@ -6,6 +6,8 @@
 \usage{
 SeeDist(
   x,
+  title = "Default",
+  subtitle = "Default",
   numbins = 0,
   xlab = NULL,
   var_explain = NULL,
@@ -35,7 +37,15 @@ SeeDist(
 )
 }
 \arguments{
-\item{x}{the data to be visualized must be numeric.}
+\item{x}{the data to be visualized. Must be numeric.}
+
+\item{title}{Optionally replace the default title displayed. title = NULL 
+will remove it entirely. title = "" will provide an empty title but 
+retain the spacing. A sensible default is provided otherwise.}
+
+\item{subtitle}{Optionally replace the default subtitle displayed. subtitle = NULL 
+will remove it entirely. subtitle = "" will provide an empty subtitle but 
+retain the spacing. A sensible default is provided otherwise.}
 
 \item{numbins}{the number of bins to use for any plots that bin. If nothing is
 specified the function will calculate a rational number using Freedman-Diaconis
@@ -45,10 +55,10 @@ via the \code{nclass.FD} function}
 will cause the `x` axis label to be the `x` variable).}
 
 \item{var_explain}{additional contextual information about the variable as a string
-such as "Miles Per Gallon"}
+such as "Miles Per Gallon" which is appended to the default title information.}
 
-\item{data.fill.color}{Character string that specifies fill color for our data
-(Default: `deepskyblue`).}
+\item{data.fill.color}{Character string that specifies fill color for the main data
+area (Default: `deepskyblue`).}
 
 \item{mean.line.color, median.line.color, mode.line.color}{Character string that 
 specifies line color (Default: `darkgreen`, `yellow`, `orange`).}
@@ -78,8 +88,8 @@ specifies line color (Default: `twodash`, `dotted`).}
 specifies line size (Default: `1`).  You can set to `0` to make
 any of the lines "disappear".}
 
-\item{whatplots}{what type of plots?  The default is whatplots = c("d", "b", "h", "v")
-for a density, a boxplot, a histogram, and a violin plot}
+\item{whatplots}{what type of plots?  The default is whatplots = c("d", "b", 
+"h", "v") for a density, a boxplot, a histogram, and a violin plot}
 
 \item{k}{Number of digits after decimal point (should be an integer)
 (Default: k = 2) for statistical results.}
@@ -94,7 +104,12 @@ from 1 to 4 plots depending on what the user specifies as well as an
 }
 \description{
 This function takes a vector of numeric data and returns one or more ggplot2
-plots that help you visualize the data.
+plots that help you visualize the data.  Meant to be a useful wrapper for
+exploring univariate data.  Has a plethora of options including type of
+visualization (histogram, boxplot, density, violin) as well commonly
+desired overplots like mean and median points, z and t curves etc..  Common
+descriptive statistics are provided as a subtitle if desired and sent to the
+cpmsole as well.
 }
 \section{Warning}{
 
