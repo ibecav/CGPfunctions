@@ -35,6 +35,8 @@ SeeDist(
   k = 2,
   add_jitter = TRUE,
   add_rug = TRUE,
+  xlim_left = NULL,
+  xlim_right = NULL,
   ggtheme = ggplot2::theme_bw()
 )
 }
@@ -101,6 +103,12 @@ ponts are added to violin plot.}
 
 \item{add_rug}{Logical (Default: `TRUE`) controls whether "rug" data
 points are added to density plot and histogram.}
+
+\item{xlim_left, xlim_right}{Logical. For density plots can be used to 
+override the default which is 3 std deviations left and right of
+the mean of x. Useful for theoretical reasons like horsepower < 0
+or when `ggplot2` warns you that it has removed rows containing
+non-finite values (stat_density).}
 
 \item{ggtheme}{A function, ggplot2 theme name. Default value is ggplot2::theme_bw().
 Any of the ggplot2 themes, or themes from extension packages are allowed (e.g.,

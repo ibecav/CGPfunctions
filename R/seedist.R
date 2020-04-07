@@ -52,6 +52,11 @@
 #'   ponts are added to violin plot.
 #' @param add_rug Logical (Default: `TRUE`) controls whether "rug" data
 #'   points are added to density plot and histogram.
+#' @param xlim_left,xlim_right Logical. For density plots can be used to 
+#'   override the default which is 3 std deviations left and right of
+#'   the mean of x. Useful for theoretical reasons like horsepower < 0
+#'   or when `ggplot2` warns you that it has removed rows containing
+#'   non-finite values (stat_density).
 #' @param ggtheme A function, ggplot2 theme name. Default value is ggplot2::theme_bw().
 #'   Any of the ggplot2 themes, or themes from extension packages are allowed (e.g.,
 #'   hrbrthemes::theme_ipsum(), etc.).
@@ -109,6 +114,8 @@ SeeDist <- function(x,
                     k = 2,
                     add_jitter = TRUE,
                     add_rug = TRUE,
+                    xlim_left = NULL,
+                    xlim_right = NULL,
                     ggtheme = ggplot2::theme_bw()
                     ) {
 
@@ -134,27 +141,6 @@ SeeDist <- function(x,
   binnumber <- ifelse(numbins == 0, 
                       binnumber, 
                       numbins)
-  
-  
-  my_jitter_geom <- list()
-  if (add_jitter) {
-    my_jitter_geom <- list(
-      geom_jitter(aes(x = "", 
-                      y = x),
-                  width = 0.05, 
-                  height = 0,
-                  alpha = .5)
-    )
-  }
-  
-  my_rug_geom <- list()
-  if (add_rug) {
-    my_rug_geom <- list(
-      geom_rug(aes(y = 0),
-               sides = "b")
-    )
-  }
-  
   
   #### Get descriptives ####
   
@@ -185,6 +171,34 @@ SeeDist <- function(x,
                   " modal values displaying just the first 3", 
             call. = FALSE)
     x_mode <- x_mode[c(1, 2, 3)]
+  }
+  
+  #### Custom geoms ####
+  
+  my_jitter_geom <- list()
+  if (add_jitter) {
+    my_jitter_geom <- list(
+      geom_jitter(aes(x = "", 
+                      y = x),
+                  width = 0.05, 
+                  height = 0,
+                  alpha = .5)
+    )
+  }
+  
+  my_rug_geom <- list()
+  if (add_rug) {
+    my_rug_geom <- list(
+      geom_rug(aes(y = 0),
+               sides = "b")
+    )
+  }
+  
+  if (is.null(xlim_left)) {
+    xlim_left <- -3 * x_sd + x_mean
+  }
+  if (is.null(xlim_right)) {
+    xlim_right <- +3 * x_sd + x_mean
   }
   
   #### Title, subtitle and caption ####
@@ -283,8 +297,8 @@ SeeDist <- function(x,
         x = xlab,
         caption = mycaption
       ) +
-      xlim(-3 * x_sd + x_mean, 
-           +3 * x_sd + x_mean) +
+      xlim(xlim_left, 
+           xlim_right) +
       theme(
         axis.title.y = element_blank(),
         axis.text.y = element_blank(),
