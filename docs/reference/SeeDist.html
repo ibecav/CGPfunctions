@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>See The Distribution — SeeDist • CGPfunctions</title>
+<title>SeeDist -- See The Distribution — SeeDist • CGPfunctions</title>
 
 
 <!-- jquery -->
@@ -39,14 +39,14 @@
 
 
 
-<meta property="og:title" content="See The Distribution — SeeDist" />
+<meta property="og:title" content="SeeDist -- See The Distribution — SeeDist" />
 <meta property="og:description" content="This function takes a vector of numeric data and returns one or more ggplot2
 plots that help you visualize the data.  Meant to be a useful wrapper for
 exploring univariate data.  Has a plethora of options including type of
-visualization (histogram, boxplot, density, violin) as well commonly
+visualization (histogram, boxplot, density, violin) as well as commonly
 desired overplots like mean and median points, z and t curves etc..  Common
 descriptive statistics are provided as a subtitle if desired and sent to the
-cpmsole as well." />
+console as well." />
 
 
 
@@ -151,7 +151,7 @@ cpmsole as well." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>See The Distribution</h1>
+    <h1>SeeDist -- See The Distribution</h1>
     <small class="dont-index">Source: <a href='https://github.com/ibecav/CGPfunctions/blob/master/R/seedist.R'><code>R/seedist.R</code></a></small>
     <div class="hidden name"><code>SeeDist.Rd</code></div>
     </div>
@@ -160,10 +160,10 @@ cpmsole as well." />
     <p>This function takes a vector of numeric data and returns one or more ggplot2
 plots that help you visualize the data.  Meant to be a useful wrapper for
 exploring univariate data.  Has a plethora of options including type of
-visualization (histogram, boxplot, density, violin) as well commonly
+visualization (histogram, boxplot, density, violin) as well as commonly
 desired overplots like mean and median points, z and t curves etc..  Common
 descriptive statistics are provided as a subtitle if desired and sent to the
-cpmsole as well.</p>
+console as well.</p>
     </div>
 
     <pre class="usage"><span class='fu'>SeeDist</span>(
@@ -195,6 +195,10 @@ cpmsole as well.</p>
   <span class='kw'>mode.line.size</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>whatplots</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"d"</span>, <span class='st'>"b"</span>, <span class='st'>"h"</span>, <span class='st'>"v"</span>),
   <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+  <span class='kw'>add_jitter</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>add_rug</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>xlim_left</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>xlim_right</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>ggtheme</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span>()
 )</pre>
 
@@ -291,6 +295,24 @@ any of the lines "disappear".</p></td>
       <th>k</th>
       <td><p>Number of digits after decimal point (should be an integer)
 (Default: k = 2) for statistical results.</p></td>
+    </tr>
+    <tr>
+      <th>add_jitter</th>
+      <td><p>Logical (Default: `TRUE`) controls whether jittered data
+ponts are added to violin plot.</p></td>
+    </tr>
+    <tr>
+      <th>add_rug</th>
+      <td><p>Logical (Default: `TRUE`) controls whether "rug" data
+points are added to density plot and histogram.</p></td>
+    </tr>
+    <tr>
+      <th>xlim_left, xlim_right</th>
+      <td><p>Logical. For density plots can be used to 
+override the default which is 3 std deviations left and right of
+the mean of x. Useful for theoretical reasons like horsepower &lt; 0
+or when `ggplot2` warns you that it has removed rows containing
+non-finite values (stat_density).</p></td>
     </tr>
     <tr>
       <th>ggtheme</th>

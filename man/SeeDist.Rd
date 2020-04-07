@@ -2,7 +2,7 @@
 % Please edit documentation in R/seedist.R
 \name{SeeDist}
 \alias{SeeDist}
-\title{See The Distribution}
+\title{SeeDist -- See The Distribution}
 \usage{
 SeeDist(
   x,
@@ -33,6 +33,10 @@ SeeDist(
   mode.line.size = 1,
   whatplots = c("d", "b", "h", "v"),
   k = 2,
+  add_jitter = TRUE,
+  add_rug = TRUE,
+  xlim_left = NULL,
+  xlim_right = NULL,
   ggtheme = ggplot2::theme_bw()
 )
 }
@@ -94,6 +98,18 @@ any of the lines "disappear".}
 \item{k}{Number of digits after decimal point (should be an integer)
 (Default: k = 2) for statistical results.}
 
+\item{add_jitter}{Logical (Default: `TRUE`) controls whether jittered data
+ponts are added to violin plot.}
+
+\item{add_rug}{Logical (Default: `TRUE`) controls whether "rug" data
+points are added to density plot and histogram.}
+
+\item{xlim_left, xlim_right}{Logical. For density plots can be used to 
+override the default which is 3 std deviations left and right of
+the mean of x. Useful for theoretical reasons like horsepower < 0
+or when `ggplot2` warns you that it has removed rows containing
+non-finite values (stat_density).}
+
 \item{ggtheme}{A function, ggplot2 theme name. Default value is ggplot2::theme_bw().
 Any of the ggplot2 themes, or themes from extension packages are allowed (e.g.,
 hrbrthemes::theme_ipsum(), etc.).}
@@ -106,10 +122,10 @@ from 1 to 4 plots depending on what the user specifies as well as an
 This function takes a vector of numeric data and returns one or more ggplot2
 plots that help you visualize the data.  Meant to be a useful wrapper for
 exploring univariate data.  Has a plethora of options including type of
-visualization (histogram, boxplot, density, violin) as well commonly
+visualization (histogram, boxplot, density, violin) as well as commonly
 desired overplots like mean and median points, z and t curves etc..  Common
 descriptive statistics are provided as a subtitle if desired and sent to the
-cpmsole as well.
+console as well.
 }
 \section{Warning}{
 
