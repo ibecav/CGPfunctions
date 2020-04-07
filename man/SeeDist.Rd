@@ -2,7 +2,7 @@
 % Please edit documentation in R/seedist.R
 \name{SeeDist}
 \alias{SeeDist}
-\title{See The Distribution}
+\title{SeeDist -- See The Distribution}
 \usage{
 SeeDist(
   x,
@@ -106,10 +106,10 @@ from 1 to 4 plots depending on what the user specifies as well as an
 This function takes a vector of numeric data and returns one or more ggplot2
 plots that help you visualize the data.  Meant to be a useful wrapper for
 exploring univariate data.  Has a plethora of options including type of
-visualization (histogram, boxplot, density, violin) as well commonly
+visualization (histogram, boxplot, density, violin) as well as commonly
 desired overplots like mean and median points, z and t curves etc..  Common
 descriptive statistics are provided as a subtitle if desired and sent to the
-cpmsole as well.
+console as well.
 }
 \section{Warning}{
 

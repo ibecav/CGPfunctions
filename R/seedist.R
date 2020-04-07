@@ -1,12 +1,12 @@
-#' See The Distribution
+#' SeeDist -- See The Distribution
 #'
 #' This function takes a vector of numeric data and returns one or more ggplot2
 #' plots that help you visualize the data.  Meant to be a useful wrapper for
 #' exploring univariate data.  Has a plethora of options including type of
-#' visualization (histogram, boxplot, density, violin) as well commonly
+#' visualization (histogram, boxplot, density, violin) as well as commonly
 #' desired overplots like mean and median points, z and t curves etc..  Common
 #' descriptive statistics are provided as a subtitle if desired and sent to the
-#' cpmsole as well. 
+#' console as well. 
 #'
 #' @param x the data to be visualized. Must be numeric.
 #' @param title Optionally replace the default title displayed. title = NULL 
@@ -249,7 +249,8 @@ SeeDist <- function(x,
                  colour = mode.line.color, 
                  linetype = mode.line.type,
                  size = mode.line.size) +
-      geom_rug(aes(y = 0)) +
+      geom_rug(aes(y = 0),
+               sides = "b") +
       labs(
         title = my_title,
         subtitle = my_subtitle,
@@ -319,7 +320,8 @@ SeeDist <- function(x,
       geom_histogram(bins = binnumber, 
                      color = "black", 
                      fill = data.fill.color) +
-      geom_rug(aes(y = 0)) +
+      geom_rug(aes(y = 0),
+               sides = "b") +
       geom_vline(xintercept = x_mean, 
                  colour = mean.line.color, 
                  linetype = mean.line.type, 
