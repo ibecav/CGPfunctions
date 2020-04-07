@@ -33,6 +33,8 @@ SeeDist(
   mode.line.size = 1,
   whatplots = c("d", "b", "h", "v"),
   k = 2,
+  add_jitter = TRUE,
+  add_rug = TRUE,
   ggtheme = ggplot2::theme_bw()
 )
 }
@@ -93,6 +95,12 @@ any of the lines "disappear".}
 
 \item{k}{Number of digits after decimal point (should be an integer)
 (Default: k = 2) for statistical results.}
+
+\item{add_jitter}{Logical (Default: `TRUE`) controls whether jittered data
+ponts are added to violin plot.}
+
+\item{add_rug}{Logical (Default: `TRUE`) controls whether "rug" data
+points are added to density plot and histogram.}
 
 \item{ggtheme}{A function, ggplot2 theme name. Default value is ggplot2::theme_bw().
 Any of the ggplot2 themes, or themes from extension packages are allowed (e.g.,

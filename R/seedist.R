@@ -48,6 +48,10 @@
 #'   will cause the `x` axis label to be the `x` variable).
 #' @param k Number of digits after decimal point (should be an integer)
 #'   (Default: k = 2) for statistical results.
+#' @param add_jitter Logical (Default: `TRUE`) controls whether jittered data
+#'   ponts are added to violin plot.
+#' @param add_rug Logical (Default: `TRUE`) controls whether "rug" data
+#'   points are added to density plot and histogram.
 #' @param ggtheme A function, ggplot2 theme name. Default value is ggplot2::theme_bw().
 #'   Any of the ggplot2 themes, or themes from extension packages are allowed (e.g.,
 #'   hrbrthemes::theme_ipsum(), etc.).
@@ -103,6 +107,8 @@ SeeDist <- function(x,
                     mode.line.size = 1,
                     whatplots = c("d", "b", "h", "v"),
                     k = 2,
+                    add_jitter = TRUE,
+                    add_rug = TRUE,
                     ggtheme = ggplot2::theme_bw()
                     ) {
 
@@ -128,6 +134,27 @@ SeeDist <- function(x,
   binnumber <- ifelse(numbins == 0, 
                       binnumber, 
                       numbins)
+  
+  
+  my_jitter_geom <- list()
+  if (add_jitter) {
+    my_jitter_geom <- list(
+      geom_jitter(aes(x = "", 
+                      y = x),
+                  width = 0.05, 
+                  height = 0,
+                  alpha = .5)
+    )
+  }
+  
+  my_rug_geom <- list()
+  if (add_rug) {
+    my_rug_geom <- list(
+      geom_rug(aes(y = 0),
+               sides = "b")
+    )
+  }
+  
   
   #### Get descriptives ####
   
@@ -249,16 +276,15 @@ SeeDist <- function(x,
                  colour = mode.line.color, 
                  linetype = mode.line.type,
                  size = mode.line.size) +
-      geom_rug(aes(y = 0),
-               sides = "b") +
+      my_rug_geom +
       labs(
         title = my_title,
         subtitle = my_subtitle,
         x = xlab,
         caption = mycaption
       ) +
-      xlim(-3 * sd(x) + mean(x), 
-           +3 * sd(x) + mean(x)) +
+      xlim(-3 * x_sd + x_mean, 
+           +3 * x_sd + x_mean) +
       theme(
         axis.title.y = element_blank(),
         axis.text.y = element_blank(),
@@ -320,8 +346,7 @@ SeeDist <- function(x,
       geom_histogram(bins = binnumber, 
                      color = "black", 
                      fill = data.fill.color) +
-      geom_rug(aes(y = 0),
-               sides = "b") +
+      my_rug_geom +
       geom_vline(xintercept = x_mean, 
                  colour = mean.line.color, 
                  linetype = mean.line.type, 
@@ -338,7 +363,7 @@ SeeDist <- function(x,
   }
   
   #### build the violin plot ####
-  
+    
   if ("v" %in% tolower(whatplots)) {
     pppp <- ggplot() +
       aes(x) +
@@ -351,11 +376,7 @@ SeeDist <- function(x,
       geom_violin(aes(x = "", 
                        y = x), 
                    fill = data.fill.color) +
-      geom_jitter(aes(x = "", 
-                      y = x),
-                  width = 0.05, 
-                  height = 0,
-                  alpha = .5) +
+      my_jitter_geom +
       coord_flip() +
       geom_point(aes(x = "", 
                      y = x_mean), 
