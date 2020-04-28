@@ -1,6 +1,11 @@
-# CGPfunctions 0.6.0
+# CGPfunctions 0.6.1
 
-* Release 0.6.0 in development March 2020
+* Release 0.6.1 in development April 2020
+  - Builds locally with R 4.0.0 
+  - Mosaic plots in PlotXTabs2 waiting on the next version
+    of ggmosaic for some bug fixes before it can get in CRAN version
+
+* Release 0.6.0 submitted and accepted by CRAN 2 April 2020
   - Fixed tibble 3.0.0 issue
   - Fixed dependency issues with ggplot2, scales, sjstats and added ggmosaic
   - Adding mosaic plots to PlotXTabs2 still debugging and waiting on the next version
