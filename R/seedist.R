@@ -259,7 +259,7 @@ SeeDist <- function(x,
   #### build the density plot ####
   
   if ("d" %in% tolower(whatplots)) {
-    p <- ggplot() +
+    p <- ggplot(data.frame(x)) +
       aes(x) +
       geom_density(fill = data.fill.color, ) +
       stat_function(fun = dnorm, 
@@ -314,7 +314,7 @@ SeeDist <- function(x,
   #### build the boxplot ####
   
   if ("b" %in% tolower(whatplots)) {
-    pp <- ggplot() +
+    pp <- ggplot(data.frame(x)) +
       aes(x) +
       labs(
         title = my_title,
@@ -349,7 +349,7 @@ SeeDist <- function(x,
   #### build the histogram plot ####
   
   if ("h" %in% tolower(whatplots)) {
-    ppp <- ggplot() +
+    ppp <- ggplot(data.frame(x)) +
       aes(x) +
       labs(
         title = my_title,
@@ -379,7 +379,7 @@ SeeDist <- function(x,
   #### build the violin plot ####
     
   if ("v" %in% tolower(whatplots)) {
-    pppp <- ggplot() +
+    pppp <- ggplot(data.frame(x)) +
       aes(x) +
       labs(
         title = my_title,
