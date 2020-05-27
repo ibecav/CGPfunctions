@@ -52,6 +52,7 @@ bf_display <- function(bf = NULL,
       bf < 1 ~ paste0(" log(BF01)=", round(log(1 / bf), k)),
       bf >= 1 ~ paste0(" log(BF10)=", round(log(bf), k))
     )) %>%
+    mutate(xyz = numbr::num_order_to_word(bf)) %>%
     mutate(
       sensible = case_when(
         bf < .000001 ~">=1,000,000",
@@ -74,6 +75,8 @@ bf_display <- function(bf = NULL,
     return(pull(results, support))
   } else if (display_type == "log") {
     return(pull(results, logged))
+  } else if (display_type == "xyz") {
+    return(pull(results, xyz))
   } else if (display_type == "sensible") {
     return(pull(results, sensible))
   } else {
