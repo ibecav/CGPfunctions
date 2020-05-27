@@ -29,6 +29,14 @@ not_a_factor <- function(x){
   !is.factor(x)
 }
 
+#' @title Choose display type for BF formatting.
+#' @name bf_display
+#' @author Chuck Powell
+#'
+#' @param x A numeric vector containing one or more BF values.
+#' @return a formatted character string.
+#'
+
 bf_display <- function(bf = NULL,
                        display_type = "bf",
                        k = 2) {
@@ -51,32 +59,20 @@ bf_display <- function(bf = NULL,
     mutate(logged = case_when(
       bf < 1 ~ paste0(" log(BF01)=", round(log(1 / bf), k)),
       bf >= 1 ~ paste0(" log(BF10)=", round(log(bf), k))
-    )) %>%
-    mutate(xyz = numbr::num_order_to_word(bf)) %>%
-    mutate(
-      sensible = case_when(
-        bf < .000001 ~">=1,000,000",
-        bf < .001 & bf >= .000001 ~ ">=1,000",
-        bf < .01 & bf >= .001 ~ ">=100",
-        bf < 1 & bf >= .01 ~ paste0("=", round(1 / bf, k)),
-        bf >= 1 & bf < 100 ~ paste0("=", round(bf, k)),
-        bf >= 100 & bf < 1000 ~ ">=100",
-        bf >= 1000 & bf < 1000000 ~ ">=1,000",
-        bf >= 1000000 ~ ">=1,000,000"
-      )) %>%
+          )) %>%
+    mutate(sensible = case_when(
+      bf < 1 ~ paste0(" is ", numbr::num_order_to_word(1 / bf)$name, " to 1"),
+      bf >= 1 ~ paste0(" is ", numbr::num_order_to_word(bf)$name, " to 1")
+          )) %>%
     mutate(astext = case_when(
       bf < 1 ~ paste0("=", round((1 / bf), k)),
       bf >= 1 ~ paste0("=", round(bf, k))
     ))
   
-  #  return(results)
-  
   if (display_type == "support") {
     return(pull(results, support))
   } else if (display_type == "log") {
     return(pull(results, logged))
-  } else if (display_type == "xyz") {
-    return(pull(results, xyz))
   } else if (display_type == "sensible") {
     return(pull(results, sensible))
   } else {
