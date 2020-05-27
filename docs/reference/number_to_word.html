@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • CGPfunctions</title>
+<title>Convert a vector of numbers to large-number word representation — number_to_word • CGPfunctions</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,11 @@
 
 
 
-<meta property="og:title" content="Articles" />
+<meta property="og:title" content="Convert a vector of numbers to large-number word representation — number_to_word" />
+<meta property="og:description" content="Converts a vector of numbers to a character string approximation
+  using the &quot;short scale&quot; version of large number names. e.g. 312e6 returns
+  as '300 million.' Simultaneously returns a numeric representation of the
+  approximation." />
 
 
 
@@ -68,7 +72,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-article-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -144,26 +148,42 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Articles</h1>
+    <h1>Convert a vector of numbers to large-number word representation</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ibecav/CGPfunctions/blob/master/R/helpers.R'><code>R/helpers.R</code></a></small>
+    <div class="hidden name"><code>number_to_word.Rd</code></div>
     </div>
 
-    <div class="section ">
-      <h3>All vignettes</h3>
-      <p class="section-desc"></p>
-
-      <dl>
-        <dt><a href="Using-Plot2WayANOVA.html">Using Plot2WayAnova</a></dt>
-        <dd></dt>
-        <dt><a href="Using-PlotXTabs.html">Using PlotXTabs</a></dt>
-        <dd></dt>
-        <dt><a href="Using-PlotXTabs2.html">Using PlotXTabs2</a></dt>
-        <dd></dt>
-        <dt><a href="Using-chaid_table.html">Using chaid_table</a></dt>
-        <dd></dt>
-        <dt><a href="Using-newggslopegraph.html">Using newggslopegraph</a></dt>
-        <dd></dt>
-      </dl>
+    <div class="ref-description">
+    <p>Converts a vector of numbers to a character string approximation
+  using the "short scale" version of large number names. e.g. 312e6 returns
+  as '300 million.' Simultaneously returns a numeric representation of the
+  approximation.</p>
     </div>
+
+    <pre class="usage"><span class='fu'>number_to_word</span>(<span class='no'>x</span>, <span class='kw'>nsmall</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>A vector of numbers to convert.</p></td>
+    </tr>
+    <tr>
+      <th>nsmall</th>
+      <td><p>Optional. An integer number of digits to include to the right of the the leading digit</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A string representation of the number</p>
+
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
