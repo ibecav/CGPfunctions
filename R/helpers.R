@@ -33,7 +33,10 @@ not_a_factor <- function(x){
 #' @name bf_display
 #' @author Chuck Powell
 #'
-#' @param x A numeric vector containing one or more BF values.
+#' @param bf A numeric vector containing one or more BF values.
+#' @param display_type A string containing which option one of
+#'   "support", "logged", or "sensible".
+#' @param k A numeric for the number of rounded digits.
 #' @return a formatted character string.
 #'
 

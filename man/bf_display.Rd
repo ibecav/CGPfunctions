@@ -7,7 +7,12 @@
 bf_display(bf = NULL, display_type = "bf", k = 2)
 }
 \arguments{
-\item{x}{A numeric vector containing one or more BF values.}
+\item{bf}{A numeric vector containing one or more BF values.}
+
+\item{display_type}{A string containing which option one of
+"support", "logged", or "sensible".}
+
+\item{k}{A numeric for the number of rounded digits.}
 }
 \value{
 a formatted character string.
