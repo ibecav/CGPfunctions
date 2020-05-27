@@ -1,9 +1,11 @@
 # CGPfunctions 0.6.1
 
-* Release 0.6.1 in development April 2020
+* Release 0.6.1 in development April 2020 CRAN release for late May
   - Builds locally with R 4.0.0 
   - Mosaic plots in PlotXTabs2 waiting on the next version
     of ggmosaic for some bug fixes before it can get in CRAN version
+  - Changes in advance of ggplot2 3.3.1 release ggplot(data.frame(x))
+  - numbr for BF results
 
 * Release 0.6.0 submitted and accepted by CRAN 2 April 2020
   - Fixed tibble 3.0.0 issue
