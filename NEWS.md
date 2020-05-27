@@ -1,6 +1,6 @@
 # CGPfunctions 0.6.1
 
-* Release 0.6.1 in development April 2020 CRAN release for late May
+* Release 0.6.1 in development April 2020 CRAN release sumitted May 27
   - Builds locally with R 4.0.0 
   - Mosaic plots in PlotXTabs2 waiting on the next version
     of ggmosaic for some bug fixes before it can get in CRAN version
