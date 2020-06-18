@@ -8,6 +8,7 @@ Plot2WayANOVA(formula,
                dataframe = NULL,
                confidence=.95,
                plottype = "line",
+               errorbar.display = "CI",
                xlab = NULL,
                ylab = NULL,
                title = NULL,
@@ -42,6 +43,10 @@ possible.}
 \item{confidence}{what confidence level for confidence intervals}
 
 \item{plottype}{bar or line (quoted)}
+
+\item{errorbar.display}{default "CI" (confidence interval), which type of
+errorbar should be displayed around the mean point? Other options
+include "SEM" (standard error of the mean) and "SD" (standard dev).}
 
 \item{xlab, ylab}{Labels for `x` and `y` axis variables. If `NULL` (default),
 variable names for `x` and `y` will be used.}

@@ -42,6 +42,7 @@
 #'                dataframe = NULL,
 #'                confidence=.95,
 #'                plottype = "line",
+#'                errorbar.display = "CI",
 #'                xlab = NULL,
 #'                ylab = NULL,
 #'                title = NULL,
@@ -71,6 +72,9 @@
 #' @param dataframe a dataframe or an object that can be coerced to a dataframe
 #' @param confidence what confidence level for confidence intervals
 #' @param plottype bar or line (quoted)
+#' @param errorbar.display default "CI" (confidence interval), which type of
+#'   errorbar should be displayed around the mean point? Other options
+#'   include "SEM" (standard error of the mean) and "SD" (standard dev).
 #' @param PlotSave a logical indicating whether the user wants to save the plot
 #'  as a png file
 #' @param xlab,ylab Labels for `x` and `y` axis variables. If `NULL` (default),
@@ -167,7 +171,7 @@
 #' @import rlang
 #' @importFrom methods is
 #' @importFrom stats anova aov lm pf qt replications sd symnum residuals shapiro.test
-#' @importFrom dplyr as_tibble
+#' @importFrom dplyr as_tibble case_when
 #' @importFrom car leveneTest Anova
 #' @importFrom sjstats anova_stats
 #' @importFrom broom glance
@@ -178,6 +182,7 @@ Plot2WayANOVA <- function(formula,
                           dataframe = NULL,
                           confidence = .95,
                           plottype = "line",
+                          errorbar.display = "CI",
                           xlab = NULL,
                           ylab = NULL,
                           title = NULL,
@@ -337,11 +342,27 @@ Plot2WayANOVA <- function(formula,
       TheSD = sd(!!sym(depvar), na.rm = TRUE),
       TheSEM = sd(!!sym(depvar), na.rm = TRUE) / sqrt(n()),
       CIMuliplier = qt(confidence / 2 + .5, n() - 1),
-      LowerBound = TheMean - TheSEM * CIMuliplier,
-      UpperBound = TheMean + TheSEM * CIMuliplier,
+      LowerBoundCI = TheMean - TheSEM * CIMuliplier,
+      UpperBoundCI = TheMean + TheSEM * CIMuliplier,
+      LowerBoundSEM = TheMean - TheSEM,
+      UpperBoundSEM = TheMean + TheSEM,
+      LowerBoundSD = TheMean - TheSD,
+      UpperBoundSD = TheMean + TheSD,
       N = n()
+    ) %>%
+    mutate(
+      LowerBound = case_when(
+        errorbar.display == "SD" ~ LowerBoundSD,
+        errorbar.display == "SEM" ~ LowerBoundSEM,
+        errorbar.display == "CI" ~ LowerBoundCI,
+        TRUE ~ LowerBoundCI),
+      UpperBound = case_when(
+        errorbar.display == "SD" ~ UpperBoundSD,
+        errorbar.display == "SEM" ~ UpperBoundSEM,
+        errorbar.display == "CI" ~ UpperBoundCI,
+        TRUE ~ UpperBoundCI)
     )
-
+  
   # -------- Run tests and procedures ----------------
 
   # run analysis of variance
@@ -380,11 +401,16 @@ Plot2WayANOVA <- function(formula,
   cipercent <- round(confidence * 100, 2)
   # if `title` is not provided, use this generic
   if (is.null(title)) {
-    title <- bquote(
-      "Group means with" ~ .(cipercent) * "% confidence intervals"
-    )
+    if (errorbar.display == "CI") {
+      title <- bquote(
+        "Group means with" ~ .(cipercent) * "% confidence intervals")
+    } else if (errorbar.display == "SEM") {
+      title <- "Group means with standard error of the mean"
+    } else if (errorbar.display == "SD") {
+      title <- "Group means with standard deviation"
+    }
   }
-
+  
   # compute CI's for R squared using Olkin and Finn's approximation
   denominator <- (nrow(dataframe)^2 - 1) * (3 + nrow(dataframe))
   numerator <- (4 * model_summary$r.squared) * ((1 - model_summary$r.squared)^2) * (nrow(dataframe) - 2 - 1)^2

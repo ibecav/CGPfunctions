@@ -10,6 +10,7 @@ utils::globalVariables(
     "n",
     "TheMean",
     "TheSEM",
+    "TheSD",
     "CIMuliplier",
     "LowerBound",
     "UpperBound",
