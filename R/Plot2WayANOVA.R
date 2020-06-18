@@ -101,6 +101,16 @@
 #'   (Default: `"scheffe"`).
 #' @param show.dots Logical that decides whether the individual data points
 #'   are displayed (Default: `FALSE`).
+#' @param package Name of package from which the palette is desired as string
+#'   or symbol.
+#' @param palette Name of palette as string or symbol.
+#' @param ggtheme A function, ggplot2 theme name. Default value is ggplot2::theme_bw().
+#'   Any of the ggplot2 themes, or themes from extension packages are allowed (e.g.,
+#'   hrbrthemes::theme_ipsum(), etc.).
+#' @param ggplot.component A ggplot component to be added to the plot prepared by
+#'   ggstatsplot. Default is NULL. The argument should be entered as a function.
+#'   If the given function has an argument axes.range.restrict and if it has been set
+#'   to TRUE, the added ggplot component might not work as expected.
 #' @return A list with 5 elements which is returned invisibly. These items
 #'   are always sent to the console for display but for user convenience
 #'   the function also returns a named list with the following items
@@ -180,13 +190,20 @@ Plot2WayANOVA <- function(formula,
                           overlay.type = NULL,
                           posthoc.method = "scheffe",
                           show.dots = FALSE,
-                          PlotSave = FALSE) {
+                          PlotSave = FALSE,
+                          ggtheme = ggplot2::theme_bw(),
+                          package = "RColorBrewer",
+                          palette = "Dark2",
+                          direction = 1,
+                          ggplot.component = NULL) {
 
   # -------- error checking ----------------
   if (!requireNamespace("ggplot2")) {
     stop("Can't continue can't load ggplot2")
   }
-  theme_set(theme_bw())
+  # set default theme 
+  ggplot2::theme_set(ggtheme)
+  
   if (!requireNamespace("dplyr")) {
     stop("Can't continue can't load dplyr")
   }

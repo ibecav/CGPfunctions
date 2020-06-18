@@ -88,6 +88,20 @@ are displayed (Default: `FALSE`).}
 
 \item{PlotSave}{a logical indicating whether the user wants to save the plot
 as a png file}
+
+\item{ggtheme}{A function, ggplot2 theme name. Default value is ggplot2::theme_bw().
+Any of the ggplot2 themes, or themes from extension packages are allowed (e.g.,
+hrbrthemes::theme_ipsum(), etc.).}
+
+\item{package}{Name of package from which the palette is desired as string
+or symbol.}
+
+\item{palette}{Name of palette as string or symbol.}
+
+\item{ggplot.component}{A ggplot component to be added to the plot prepared by
+ggstatsplot. Default is NULL. The argument should be entered as a function.
+If the given function has an argument axes.range.restrict and if it has been set
+to TRUE, the added ggplot component might not work as expected.}
 }
 \value{
 A list with 5 elements which is returned invisibly. These items
