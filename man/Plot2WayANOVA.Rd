@@ -25,7 +25,11 @@ Plot2WayANOVA(formula,
                overlay.type = NULL,
                posthoc.method = "scheffe",
                show.dots = FALSE,
-               PlotSave = FALSE)
+               PlotSave = FALSE,
+               ggtheme = ggplot2::theme_bw(),
+               package = "RColorBrewer",
+               palette = "Dark2",
+               ggplot.component = NULL)
 }
 \arguments{
 \item{formula}{a formula with a numeric dependent (outcome) variable,
@@ -98,8 +102,8 @@ or symbol.}
 
 \item{palette}{Name of palette as string or symbol.}
 
-\item{ggplot.component}{A ggplot component to be added to the plot prepared by
-ggstatsplot. Default is NULL. The argument should be entered as a function.
+\item{ggplot.component}{A ggplot component to be added to the plot prepared.
+The default is NULL. The argument should be entered as a function.
 If the given function has an argument axes.range.restrict and if it has been set
 to TRUE, the added ggplot component might not work as expected.}
 }
@@ -182,7 +186,8 @@ Plot2WayANOVA(
   mean.shape = 20,
   mean.size = 5,
   mean.label.size = 5,
-  show.dots = TRUE
+  show.dots = TRUE,
+  ggplot.component = theme(axis.text.x = element_text(size=13, color="darkred"))
 )
 }
 \references{

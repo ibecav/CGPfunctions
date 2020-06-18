@@ -59,7 +59,11 @@
 #'                overlay.type = NULL,
 #'                posthoc.method = "scheffe",
 #'                show.dots = FALSE,
-#'                PlotSave = FALSE)
+#'                PlotSave = FALSE,
+#'                ggtheme = ggplot2::theme_bw(),
+#'                package = "RColorBrewer",
+#'                palette = "Dark2",
+#'                ggplot.component = NULL)
 #' @param formula a formula with a numeric dependent (outcome) variable,
 #'   and two independent (predictor) variables e.g. \code{mpg ~ am * vs}.
 #'   The independent variables are coerced to factors (with warning) if
@@ -107,8 +111,8 @@
 #' @param ggtheme A function, ggplot2 theme name. Default value is ggplot2::theme_bw().
 #'   Any of the ggplot2 themes, or themes from extension packages are allowed (e.g.,
 #'   hrbrthemes::theme_ipsum(), etc.).
-#' @param ggplot.component A ggplot component to be added to the plot prepared by
-#'   ggstatsplot. Default is NULL. The argument should be entered as a function.
+#' @param ggplot.component A ggplot component to be added to the plot prepared.
+#'   The default is NULL. The argument should be entered as a function.
 #'   If the given function has an argument axes.range.restrict and if it has been set
 #'   to TRUE, the added ggplot component might not work as expected.
 #' @return A list with 5 elements which is returned invisibly. These items
@@ -155,7 +159,8 @@
 #'   mean.shape = 20,
 #'   mean.size = 5,
 #'   mean.label.size = 5,
-#'   show.dots = TRUE
+#'   show.dots = TRUE,
+#'   ggplot.component = theme(axis.text.x = element_text(size=13, color="darkred"))
 #' )
 #' @importFrom dplyr group_by summarise %>% n select filter
 #' @import ggplot2
@@ -194,7 +199,6 @@ Plot2WayANOVA <- function(formula,
                           ggtheme = ggplot2::theme_bw(),
                           package = "RColorBrewer",
                           palette = "Dark2",
-                          direction = 1,
                           ggplot.component = NULL) {
 
   # -------- error checking ----------------
@@ -628,8 +632,11 @@ Plot2WayANOVA <- function(formula,
     print(SWTest)
   }
   
-  # -------- Print the plot itself ----------------
-
+  ### -----  adding optional ggplot.component ----------
+  p <- p + ggplot.component
+  
+  #### -------- Print the plot itself ----------------
+  
   message("\nInteraction graph plotted...")
   print(p)
 
