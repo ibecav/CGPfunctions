@@ -1,4 +1,7 @@
-# CGPfunctions 0.6.1
+# CGPfunctions 0.6.2
+
+* Release 0.6.2 in development June 2020 CRAN release ???
+  - Planned enhancements to Plot2WayANOVA
 
 * Release 0.6.1 in development April 2020 CRAN release sumitted May 27
   - Builds locally with R 4.0.0 
