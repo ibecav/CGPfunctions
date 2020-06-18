@@ -82,7 +82,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">CGPfunctions</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.2</span>
       </span>
     </div>
 
@@ -172,21 +172,21 @@ was produced by `CHAID::chaid` see simple example below.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>CGPfunctions</span>)
-<span class='fu'>chaid_table</span>(<span class='no'>chaidUS</span>)</div><div class='output co'>#&gt; # A tibble: 9 x 15
+<span class='fu'>chaid_table</span>(<span class='no'>chaidUS</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 9 x 15</span><span>
 #&gt;   nodeID parent NodeN  Gore  Bush ruletext split.variable chisq    df adjustedp
-#&gt;    &lt;int&gt;  &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt;
-#&gt; 1      1     NA   961   495   466 &lt;NA&gt;     marstat         32.3     1   9.03e-8
-#&gt; 2      2      1   560   245   315 marstat… educr           12.9     1   1.33e-3
-#&gt; 3      3      2   311   157   154 marstat… &lt;NA&gt;            NA      NA  NA      
-#&gt; 4      4      2   249    88   161 marstat… &lt;NA&gt;            NA      NA  NA      
-#&gt; 5      5      1   401   250   151 marstat… gender          11.5     1   6.79e-4
-#&gt; 6      6      5   159    83    76 marstat… &lt;NA&gt;            NA      NA  NA      
-#&gt; 7      7      5   242   167    75 marstat… ager            10.0     1   7.84e-3
-#&gt; 8      8      7   127    99    28 marstat… &lt;NA&gt;            NA      NA  NA      
-#&gt; 9      9      7   115    68    47 marstat… &lt;NA&gt;            NA      NA  NA      
-#&gt; # … with 5 more variables: rawpvalue &lt;dbl&gt;, splitrule &lt;chr&gt;, split1 &lt;chr&gt;,
-#&gt; #   split2 &lt;chr&gt;, split3 &lt;chr&gt;</div><div class='input'>
-</div></pre>
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>      1     </span><span style='color: #BB0000;'>NA</span><span>   961   495   466 </span><span style='color: #BB0000;'>NA</span><span>       marstat         32.3     1   9.03</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-8</span><span>
+#&gt; </span><span style='color: #555555;'>2</span><span>      2      1   560   245   315 marstat… educr           12.9     1   1.33</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-3</span><span>
+#&gt; </span><span style='color: #555555;'>3</span><span>      3      2   311   157   154 marstat… </span><span style='color: #BB0000;'>NA</span><span>              </span><span style='color: #BB0000;'>NA</span><span>      </span><span style='color: #BB0000;'>NA</span><span>  </span><span style='color: #BB0000;'>NA</span><span>   </span><span style='color: #555555;'> </span><span>  
+#&gt; </span><span style='color: #555555;'>4</span><span>      4      2   249    88   161 marstat… </span><span style='color: #BB0000;'>NA</span><span>              </span><span style='color: #BB0000;'>NA</span><span>      </span><span style='color: #BB0000;'>NA</span><span>  </span><span style='color: #BB0000;'>NA</span><span>   </span><span style='color: #555555;'> </span><span>  
+#&gt; </span><span style='color: #555555;'>5</span><span>      5      1   401   250   151 marstat… gender          11.5     1   6.79</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-4</span><span>
+#&gt; </span><span style='color: #555555;'>6</span><span>      6      5   159    83    76 marstat… </span><span style='color: #BB0000;'>NA</span><span>              </span><span style='color: #BB0000;'>NA</span><span>      </span><span style='color: #BB0000;'>NA</span><span>  </span><span style='color: #BB0000;'>NA</span><span>   </span><span style='color: #555555;'> </span><span>  
+#&gt; </span><span style='color: #555555;'>7</span><span>      7      5   242   167    75 marstat… ager            10.0     1   7.84</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-3</span><span>
+#&gt; </span><span style='color: #555555;'>8</span><span>      8      7   127    99    28 marstat… </span><span style='color: #BB0000;'>NA</span><span>              </span><span style='color: #BB0000;'>NA</span><span>      </span><span style='color: #BB0000;'>NA</span><span>  </span><span style='color: #BB0000;'>NA</span><span>   </span><span style='color: #555555;'> </span><span>  
+#&gt; </span><span style='color: #555555;'>9</span><span>      9      7   115    68    47 marstat… </span><span style='color: #BB0000;'>NA</span><span>              </span><span style='color: #BB0000;'>NA</span><span>      </span><span style='color: #BB0000;'>NA</span><span>  </span><span style='color: #BB0000;'>NA</span><span>   </span><span style='color: #555555;'> </span><span>  
+#&gt; </span><span style='color: #555555;'># … with 5 more variables: rawpvalue </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, splitrule </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, split1 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   split2 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, split3 </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span></div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

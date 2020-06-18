@@ -1,5 +1,10 @@
-# CGPfunctions 0.6.1
+# CGPfunctions 0.6.2
 
+* Release 0.6.2 in development June 2020 CRAN release ???
+  - Planned enhancements to Plot2WayANOVA
+  - Implemented `ggtheme` so user can choose their theme
+  - Implemented `ggplot.component` so user can add arbitary ggplot formatting
+  
 * Release 0.6.1 in development April 2020 CRAN release sumitted May 27
   - Builds locally with R 4.0.0 
   - Mosaic plots in PlotXTabs2 waiting on the next version
