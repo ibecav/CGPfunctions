@@ -142,30 +142,10 @@
 #'   overlay.type = "box",
 #'   mean.label = TRUE
 #' )
-#' Plot2WayANOVA(mpg ~ am * vs, mtcars, confidence = .99)
-#'
-#' # Create a new dataset
-#' library(dplyr)
+#' 
 #' library(ggplot2)
-#' library(stringi)
-#' newmpg <- mpg %>%
-#'   filter(cyl != 5) %>%
-#'   mutate(am = stringi::stri_extract(trans, regex = "auto|manual"))
-#' Plot2WayANOVA(
-#'   formula = hwy ~ am * cyl,
-#'   dataframe = newmpg,
-#'   ylab = "Highway mileage",
-#'   xlab = "Transmission type",
-#'   plottype = "line",
-#'   offset.style = "wide",
-#'   overlay.type = "box",
-#'   mean.label = TRUE,
-#'   mean.shape = 20,
-#'   mean.size = 5,
-#'   mean.label.size = 5,
-#'   show.dots = TRUE,
-#'   ggplot.component = theme(axis.text.x = element_text(size=13, color="darkred"))
-#' )
+#' Plot2WayANOVA(mpg ~ am * vs, mtcars, confidence = .99,
+#'   ggplot.component = theme(axis.text.x = element_text(size=13, color="darkred")))
 #' @importFrom dplyr group_by summarise %>% n select filter
 #' @import ggplot2
 #' @import rlang
