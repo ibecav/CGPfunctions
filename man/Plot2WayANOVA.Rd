@@ -141,7 +141,7 @@ Details about how the function works in order of steps taken.
    means, confidence intervals, and group sizes.
 \item Use \code{\link[stats]{aov}} function to execute an Analysis of
   Variance (ANOVA)
-\item Use \code{\link[sjstats]{anova_stats}} to calculate eta squared
+\item Use \code{sjstats::anova_stats} to calculate eta squared
   and omega squared values per factor. If the design is unbalanced warn
   the user and use Type II sums of squares
 \item Produce a standard ANOVA table with additional columns

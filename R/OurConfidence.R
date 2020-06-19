@@ -14,7 +14,7 @@
 #' @return A ggplot2 object
 #' @export
 #' @importFrom stats qnorm rnorm
-#' @seealso \code{stats::qnorm}, \code{\link[stats]{rnorm}}, \code{BSDA::CIsim}
+#' @seealso \code{stats::qnorm}, \code{stats::rnorm}, \code{BSDA::CIsim}
 #'
 #' @author Chuck Powell
 #'
