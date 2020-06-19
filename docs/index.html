@@ -104,16 +104,13 @@
 <div id="overview" class="section level3">
 <h3 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h3>
-<p>A package that includes functions that I find useful for teaching statistics as well as actually practicing the art. They typically are not “new” methods but rather wrappers around either base R or other packages and concepts I’m trying to master. Currently contains:</p>
+<p>A package that includes functions that I find useful for teaching statistics as well as actually practicing the art. They typically are not “new” methods but rather wrappers around either base R or <code>tidyverse</code> packages. Currently contains the following major user oriented functions:</p>
 <ul>
 <li>
 <code>Plot2WayANOVA</code> which as the name implies conducts a 2 way ANOVA and plots the results using <code>ggplot2</code>
 </li>
 <li>
-<code>PlotXTabs</code> which as the name implies plots cross tabulated variables using <code>ggplot2</code>
-</li>
-<li>
-<code>PlotXTabs2</code> which wraps around ggplot2 to provide Bivariate bar charts for categorical and ordinal data.</li>
+<code>PlotXTabs2</code> which wraps around <code>ggplot2</code> to provide Bivariate bar charts for categorical and ordinal data.</li>
 <li>
 <code>newggslopegraph</code> which creates a Tufte“esque” slopegraph using <code>ggplot2</code>
 </li>
@@ -122,9 +119,7 @@
 <li>
 <code>cross2_var_vectors</code> a helper function to build lists of “crossed” variables</li>
 <li>
-<code>Mode</code> which finds the modal value(s) in a vector of data</li>
-<li>
-<code>SeeDist</code> which wraps around ggplot2 to provide visualizations of univariate data.</li>
+<code>SeeDist</code> which wraps around <code>ggplot2</code> to provide visualizations of univariate data.</li>
 <li>
 <code>OurConf</code> is a simulation function that helps you learn about confidence intervals</li>
 </ul>
@@ -137,7 +132,9 @@
 
 <span class="co"># Or the development version from GitHub</span>
 <span class="co"># install.packages("devtools")</span>
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"ibecav/CGPfunctions"</span>)</pre></div>
+<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"ibecav/CGPfunctions"</span>,
+                         <span class="kw">build_vignettes</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
+                         <span class="kw">upgrade</span> <span class="kw">=</span> <span class="st">"ask"</span>)</pre></div>
 </div>
 <div id="usage" class="section level3">
 <h3 class="hasAnchor">

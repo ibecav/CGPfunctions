@@ -8,6 +8,8 @@ utils::globalVariables(
     "N",
     "NN",
     "n",
+    "samplenumb",
+    "correct",
     "TheMean",
     "TheSEM",
     "TheSD",

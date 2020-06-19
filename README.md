@@ -11,22 +11,20 @@ Status](https://travis-ci.org/ibecav/CGPfunctions.svg?branch=master)](https://tr
 
 A package that includes functions that I find useful for teaching
 statistics as well as actually practicing the art. They typically are
-not “new” methods but rather wrappers around either base R or other
-packages and concepts I’m trying to master. Currently contains:
+not “new” methods but rather wrappers around either base R or
+`tidyverse` packages. Currently contains the following major user
+oriented functions:
 
   - `Plot2WayANOVA` which as the name implies conducts a 2 way ANOVA and
     plots the results using `ggplot2`
-  - `PlotXTabs` which as the name implies plots cross tabulated
-    variables using `ggplot2`
-  - `PlotXTabs2` which wraps around ggplot2 to provide Bivariate bar
+  - `PlotXTabs2` which wraps around `ggplot2` to provide Bivariate bar
     charts for categorical and ordinal data.
   - `newggslopegraph` which creates a Tufte“esque” slopegraph using
     `ggplot2`
   - `chaid_table` provides tabular summary of `CHAID` `partykit` object
   - `cross2_var_vectors` a helper function to build lists of “crossed”
     variables
-  - `Mode` which finds the modal value(s) in a vector of data
-  - `SeeDist` which wraps around ggplot2 to provide visualizations of
+  - `SeeDist` which wraps around `ggplot2` to provide visualizations of
     univariate data.
   - `OurConf` is a simulation function that helps you learn about
     confidence intervals
@@ -39,7 +37,9 @@ install.packages("CGPfunctions")
 
 # Or the development version from GitHub
 # install.packages("devtools")
-devtools::install_github("ibecav/CGPfunctions")
+devtools::install_github("ibecav/CGPfunctions", 
+                         build_vignettes = TRUE,
+                         upgrade = "ask")
 ```
 
 ### Usage

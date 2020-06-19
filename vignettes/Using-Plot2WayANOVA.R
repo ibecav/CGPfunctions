@@ -27,7 +27,9 @@ Plot2WayANOVA(formula = mpg ~ cyl * am,
               ylab = "Miles per gallon",
               mean.label = TRUE,
               mean.shape = 22,
-              posthoc.method = "lsd")
+              posthoc.method = "lsd",
+              errorbar.display = "SEM"
+              )
 
 ## ----Plot2WayANOVA3, echo=TRUE, fig.height=4, fig.width=7, message=FALSE, warning=FALSE----
 # Create a new dataset
@@ -48,5 +50,9 @@ Plot2WayANOVA(formula = hwy ~ am * cyl,
               mean.shape = 20, 
               mean.size = 3, 
               mean.label.size = 3,
-              show.dots = TRUE)
+              show.dots = TRUE,
+              errorbar.display = "SD",
+              ggtheme = ggplot2::theme_minimal(),
+              ggplot.component = theme(axis.text.x = element_text(size=14, color="darkblue"))
+              )
 

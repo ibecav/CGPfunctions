@@ -109,15 +109,16 @@ or symbol.}
 
 \item{ggplot.component}{A ggplot component to be added to the plot prepared.
 The default is NULL. The argument should be entered as a function.
-If the given function has an argument axes.range.restrict and if it has been set
-to TRUE, the added ggplot component might not work as expected.}
+for example to change the size and color of the x axis text you use:
+`ggplot.component = theme(axis.text.x = element_text(size=13, color="darkred"))`
+depending on what theme is in use the ggplot component might not work as expected.}
 }
 \value{
 A list with 5 elements which is returned invisibly. These items
   are always sent to the console for display but for user convenience
   the function also returns a named list with the following items
   in case the user desires to save them or further process them -
-  \code{$ANOVATable},\code{$ModelSummary}, \code{$MeansTable},
+  \code{$ANOVATable}, \code{$ModelSummary}, \code{$MeansTable},
   \code{$PosthocTable}, \code{$BFTest}, and \code{$SWTest}.
   The plot is always sent to the default plot device
 }
