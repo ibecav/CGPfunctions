@@ -5,11 +5,9 @@
 
 ## R CMD check results
 
- 
-── R CMD check results ───────────────────────────────── CGPfunctions 0.6.1 ────
-Duration: 2m 4.3s
+── R CMD check results ───────────────────────────────── CGPfunctions 0.6.2 ────
+Duration: 2m 5.5s
 
 0 errors ✓ | 0 warnings ✓ | 0 notes ✓
 
 R CMD check succeeded
-

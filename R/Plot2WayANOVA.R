@@ -131,7 +131,7 @@
 #'
 #' @author Chuck Powell
 #' @seealso \code{\link[stats]{aov}}, \code{\link[car]{leveneTest}},
-#' \code{\link[sjstats]{anova_stats}}, \code{\link[stats]{replications}},
+#' \code{sjstats::anova_stats}, \code{\link[stats]{replications}},
 #' \code{\link[stats]{shapiro.test}}
 #' @examples
 #'
@@ -144,8 +144,11 @@
 #' )
 #' 
 #' library(ggplot2)
-#' Plot2WayANOVA(mpg ~ am * vs, mtcars, confidence = .99,
+#' Plot2WayANOVA(mpg ~ am * vs, 
+#'   mtcars, 
+#'   confidence = .99,
 #'   ggplot.component = theme(axis.text.x = element_text(size=13, color="darkred")))
+#'   
 #' @importFrom dplyr group_by summarise %>% n select filter
 #' @import ggplot2
 #' @import rlang
