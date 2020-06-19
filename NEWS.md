@@ -4,6 +4,8 @@
   - Planned enhancements to Plot2WayANOVA
   - Implemented `ggtheme` so user can choose their theme
   - Implemented `ggplot.component` so user can add arbitary ggplot formatting
+  - Corrected doco to fix failing links under devel https://github.com/r-lib/roxygen2/issues/707
+  - Tested against ggplot2 version 3.3.2
   
 * Release 0.6.1 in development April 2020 CRAN release sumitted May 27
   - Builds locally with R 4.0.0 

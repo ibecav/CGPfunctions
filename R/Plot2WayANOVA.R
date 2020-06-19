@@ -18,7 +18,7 @@
 #'    means, confidence intervals, and group sizes.
 #' \item Use \code{\link[stats]{aov}} function to execute an Analysis of
 #'   Variance (ANOVA)
-#' \item Use \code{\link[sjstats]{anova_stats}} to calculate eta squared
+#' \item Use \code{sjstats::anova_stats} to calculate eta squared
 #'   and omega squared values per factor. If the design is unbalanced warn
 #'   the user and use Type II sums of squares
 #' \item Produce a standard ANOVA table with additional columns
@@ -131,7 +131,7 @@
 #'
 #' @author Chuck Powell
 #' @seealso \code{\link[stats]{aov}}, \code{\link[car]{leveneTest}},
-#' \code{\link[sjstats]{anova_stats}}, \code{\link[stats]{replications}},
+#' \code{sjstats::anova_stats}, \code{\link[stats]{replications}},
 #' \code{\link[stats]{shapiro.test}}
 #' @examples
 #'
@@ -144,8 +144,11 @@
 #' )
 #' 
 #' library(ggplot2)
-#' Plot2WayANOVA(mpg ~ am * vs, mtcars, confidence = .99,
+#' Plot2WayANOVA(mpg ~ am * vs, 
+#'   mtcars, 
+#'   confidence = .99,
 #'   ggplot.component = theme(axis.text.x = element_text(size=13, color="darkred")))
+#'   
 #' @importFrom dplyr group_by summarise %>% n select filter
 #' @import ggplot2
 #' @import rlang
