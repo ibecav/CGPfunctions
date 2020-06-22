@@ -22,7 +22,6 @@ Imports:
     ggmosaic,
     ggplot2 (>= 3.3.0),
     ggrepel,
-    grid,
     methods,
     paletteer,
     partykit,
