@@ -455,10 +455,12 @@ Plot2WayANOVA <- function(formula,
         data = dataframe,
         mapping = aes(
           x = !!sym(iv1),
-          y = !!sym(depvar)
+          y = !!sym(depvar),
+          shape = !!sym(iv2)
         ),
         alpha = .4,
-        position = position_dodge(dot.dodge)
+        position = position_dodge(dot.dodge),
+        show.legend = TRUE
       )
   }
 
@@ -488,6 +490,7 @@ Plot2WayANOVA <- function(formula,
         position = position_dodge(ci.dodge)
         ) +
         geom_line(
+          aes_string(linetype = iv2),
           size = interact.line.size,
           position = position_dodge(mean.dodge)
         ) +
