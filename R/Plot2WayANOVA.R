@@ -386,26 +386,34 @@ Plot2WayANOVA <- function(formula,
   }
   
   # compute CI's for R squared using Olkin and Finn's approximation
-  denominator <- (nrow(dataframe)^2 - 1) * (3 + nrow(dataframe))
-  numerator <- (4 * model_summary$r.squared) * ((1 - model_summary$r.squared)^2) * (nrow(dataframe) - 2 - 1)^2
-  ser2 <- sqrt(numerator / denominator)
-  tvalue <- qt((1 - confidence) / 2, nrow(dataframe) - 3)
-  limit1 <- model_summary$r.squared - tvalue * ser2
-  limit2 <- model_summary$r.squared + tvalue * ser2
-  ULr2 <- max(limit1, limit2)
-  LLr2 <- min(limit1, limit2)
+  # denominator <- (nrow(dataframe)^2 - 1) * (3 + nrow(dataframe))
+  # numerator <- (4 * model_summary$r.squared) * ((1 - model_summary$r.squared)^2) * (nrow(dataframe) - 2 - 1)^2
+  # ser2 <- sqrt(numerator / denominator)
+  # tvalue <- qt((1 - confidence) / 2, nrow(dataframe) - 3)
+  # limit1 <- model_summary$r.squared - tvalue * ser2
+  # limit2 <- model_summary$r.squared + tvalue * ser2
+  # ULr2 <- max(limit1, limit2)
+  # LLr2 <- min(limit1, limit2)
 
   # make pretty labels
-  rsquared <- round(model_summary$r.squared, 3)
-  cilower <- round(LLr2, 3)
-  ciupper <- round(ULr2, 3)
+  # rsquared <- round(model_summary$r.squared, 3)
+  # cilower <- round(LLr2, 3)
+  # ciupper <- round(ULr2, 3)
   AICnumber <- round(model_summary$AIC, 1)
   BICnumber <- round(model_summary$BIC, 1)
+  eta2iv1 <- WithETA[1, 7]
+  eta2iv2 <- WithETA[2, 7]
+  eta2interaction <- WithETA[3, 7]
+  
 
   # if `subtitle` is not provided, use this generic
   if (is.null(subtitle)) {
     subtitle <- bquote(
-      "R squared =" ~ .(rsquared) * ", CI [" ~ .(cilower) * ", " ~ .(ciupper) * " ], AIC =" ~ .(AICnumber) * ", BIC =" ~ .(BICnumber)
+       eta^2 * " (" * .(iv1) *  ") =" ~ .(eta2iv1) * 
+       ", " * eta^2 * " (" * .(iv2) *  ") =" ~ .(eta2iv2) * 
+       ", " * eta^2 * " (interaction) =" ~ .(eta2interaction) * 
+         ", AIC =" ~ .(AICnumber) * ", BIC =" ~ .(BICnumber)
+#      "AIC =" ~ .(AICnumber) * ", BIC =" ~ .(BICnumber)
     )
   }
 
@@ -600,11 +608,9 @@ Plot2WayANOVA <- function(formula,
     message(paste0(
       "\n\t\t\t\t--- WARNING! ---\n",
       "\t\tYou have an unbalanced design. Using Type II sum of 
-              squares, to calculate factor effect sizes eta and omega.
-              The R Squared reported is for the overall model but your 
-              two factors account for ", rsquaredx, " of the type II sum of 
-              squares, as opposed to the ", rsquared, " reported below for 
-              overall model fit!\n"
+            squares, to calculate factor effect sizes eta and omega.
+            Your two factors account for ", rsquaredx, " of the type II sum of 
+            squares.\n"
     ))
   }
   else {

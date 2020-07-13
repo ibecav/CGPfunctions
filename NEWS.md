@@ -1,11 +1,13 @@
 # CGPfunctions 0.6.2
 
-* Release 0.6.2 in development June 2020 CRAN release ???
+* Release 0.6.2 in development July 2020 CRAN release ???
   - Planned enhancements to Plot2WayANOVA
   - Implemented `ggtheme` so user can choose their theme
   - Implemented `ggplot.component` so user can add arbitary ggplot formatting
   - Corrected doco to fix failing links under devel https://github.com/r-lib/roxygen2/issues/707
   - Tested against ggplot2 version 3.3.2
+  - Uexpected consequences of broom upgrade breaks Plot2WayANOVA now reporting eta squared versus r squared
+  - tibble 3.0.2 introduces a silly warning about dots fixed in 3.0.3
   
 * Release 0.6.1 in development April 2020 CRAN release sumitted May 27
   - Builds locally with R 4.0.0 
