@@ -1,6 +1,6 @@
 # CGPfunctions 0.6.2
 
-* Release 0.6.2 in development July 2020 CRAN release ???
+* Release 0.6.2 in development July 2020 CRAN submission July 16
   - Planned enhancements to Plot2WayANOVA
   - Implemented `ggtheme` so user can choose their theme
   - Implemented `ggplot.component` so user can add arbitary ggplot formatting
