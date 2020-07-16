@@ -25,6 +25,10 @@ justifyme <- function(x) {
   return(justification)
 }
 
+#' Test whether a vector or df column is not of type factor
+#' @param x an integer
+#' @keywords internal
+#' @NoRd
 not_a_factor <- function(x){
   !is.factor(x)
 }
@@ -85,7 +89,11 @@ bf_display <- function(bf = NULL,
 }
 
 
-### -----  internal function to format p values =====================
+#### -----  internal function to format p values ----- ####
+#' Internal function to format p values
+#' @param pvals a vector of p values
+#' @keywords internal
+#' @NoRd
 
 pvalr <- function(pvals, sig.limit = .001, digits = 3, html = FALSE) {
   
@@ -117,6 +125,7 @@ pvalr <- function(pvals, sig.limit = .001, digits = 3, html = FALSE) {
 #' @param x A vector of numbers to convert.
 #' @param nsmall Optional. An integer number of digits to include to the right of the the leading digit
 #' @return A string representation of the number
+#' @keywords internal
 
 number_to_word <- function(x, nsmall = 0) {
   # provide the short scale version (used in American English)
@@ -186,6 +195,7 @@ number_to_word <- function(x, nsmall = 0) {
 #' @author Tom Hopper
 #' @param x (required) numeric. A number.
 #' @return the exponent of the scientific notation representation of the number \code{x}
+#' @keywords internal
 #'  
 
 exponent <- function(x) {
