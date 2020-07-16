@@ -1,4 +1,4 @@
-pandoc: 2.9.2.1
+pandoc: '2.10'
 pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
@@ -7,7 +7,7 @@ articles:
   Using-PlotXTabs2: Using-PlotXTabs2.html
   Using-chaid_table: Using-chaid_table.html
   Using-newggslopegraph: Using-newggslopegraph.html
-last_built: 2020-07-13T19:56Z
+last_built: 2020-07-16T13:00Z
 urls:
   reference: http://ibecav.github.io/CGPfunctions/reference
   article: http://ibecav.github.io/CGPfunctions/articles
