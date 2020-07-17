@@ -41,7 +41,20 @@ utils::globalVariables(
     "ymin",
     "ymax",
     "pct",
-    "."
+    ".",
+    "alias",
+    "coef",
+    "coefficients",
+    "deviance",
+    "df.residual",
+    "makeHypothesis",
+    "model.frame",
+    "model.matrix",
+    "model.response",
+    "pchisq", 
+    "setNames", 
+    "terms", 
+    "vcov"
   ),
   package = "CGPfunctions",
   add = FALSE

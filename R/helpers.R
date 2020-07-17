@@ -28,7 +28,7 @@ justifyme <- function(x) {
 #' Test whether a vector or df column is not of type factor
 #' @param x an integer
 #' @keywords internal
-#' @NoRd
+#' @noRd
 not_a_factor <- function(x){
   !is.factor(x)
 }
@@ -93,8 +93,7 @@ bf_display <- function(bf = NULL,
 #' Internal function to format p values
 #' @param pvals a vector of p values
 #' @keywords internal
-#' @NoRd
-
+#' @noRd
 pvalr <- function(pvals, sig.limit = .001, digits = 3, html = FALSE) {
   
   roundr <- function(x, digits = 1) {

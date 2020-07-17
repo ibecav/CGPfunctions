@@ -15,7 +15,6 @@ LazyData: true
 Imports:
     BayesFactor,
     broom,
-    car,
     DescTools (>= 0.99.32),
     dplyr,
     forcats,

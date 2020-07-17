@@ -153,11 +153,9 @@
 #' @import ggplot2
 #' @import rlang
 #' @importFrom methods is
-#' @importFrom stats anova aov lm pf qt replications sd symnum residuals shapiro.test
+#' @importFrom stats anova aov lm pf qt replications sd symnum residuals shapiro.test AIC BIC
 #' @importFrom dplyr as_tibble case_when group_by summarise %>% n select filter
-#' @importFrom car leveneTest Anova
 #' @importFrom sjstats anova_stats
-#' @importFrom broom glance
 #' @importFrom DescTools PostHocTest
 #' @export
 #'
@@ -342,13 +340,14 @@ Plot2WayANOVA <- function(formula,
   # run analysis of variance
   MyAOV <- aov(formula, dataframe)
   # force to Type 2 sums of squares
-  MyAOVt2 <- car::Anova(MyAOV, type = 2)
+  MyAOVt2 <- aovtype2(MyAOV)
   # get more detailed information including effect sizes
   WithETA <- sjstats::anova_stats(MyAOVt2)
   # creating model summary dataframe
-  model_summary <- broom::glance(MyAOV)
+#  model_summary <- broom::glance(MyAOV)
   # Run Brown-Forsythe
-  BFTest <- car::leveneTest(MyAOV)
+#  BFTest <- leveneTest.aov(MyAOV)
+  BFTest <- leveneTest.formula(formula, dataframe)
   # Grab the residuals and run Shapiro-Wilk
   MyAOV_residuals <- residuals(object = MyAOV)
   if (nrow(dataframe) < 5000){
@@ -399,8 +398,8 @@ Plot2WayANOVA <- function(formula,
   # rsquared <- round(model_summary$r.squared, 3)
   # cilower <- round(LLr2, 3)
   # ciupper <- round(ULr2, 3)
-  AICnumber <- round(model_summary$AIC, 1)
-  BICnumber <- round(model_summary$BIC, 1)
+  AICnumber <- round(stats::AIC(MyAOV), 1)
+  BICnumber <- round(stats::BIC(MyAOV), 1)
   eta2iv1 <- WithETA[1, 7]
   eta2iv2 <- WithETA[2, 7]
   eta2interaction <- WithETA[3, 7]
@@ -620,8 +619,8 @@ Plot2WayANOVA <- function(formula,
 
   # -------- Print tests and tables ----------------
 
-  message("\nMeasures of overall model fit\n")
-  print(model_summary)
+  # message("\nMeasures of overall model fit\n")
+  # print(model_summary)
   message("\nTable of group means\n")
   print(newdata)
   message("\nPost hoc tests for all effects that were significant\n")
@@ -653,7 +652,7 @@ Plot2WayANOVA <- function(formula,
 
   whattoreturn <- list(
     ANOVATable = WithETA,
-    ModelSummary = model_summary,
+    # ModelSummary = model_summary,
     MeansTable = newdata,
     PosthocTable = posthocresults,
     BFTest = BFTest,
