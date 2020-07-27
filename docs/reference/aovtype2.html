@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>U.S. 2000 Election Data (short) — USvoteS • CGPfunctions</title>
+<title>Anova Tables for Type 2 sums of squares — aovtype2 • CGPfunctions</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,10 @@
 
 
 
-<meta property="og:title" content="U.S. 2000 Election Data (short) — USvoteS" />
-<meta property="og:description" content="Data from a post-election survey following the year 2000 U.S. 
-   presidential elections.  This is a subset from package `CHAID`." />
+<meta property="og:title" content="Anova Tables for Type 2 sums of squares — aovtype2" />
+<meta property="og:description" content="Calculates and displays type-II analysis-of-variance tables for model objects 
+produced by aov. This is a vastly reduced version of the Anova function from
+package car" />
 
 
 
@@ -146,36 +147,64 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>U.S. 2000 Election Data (short)</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ibecav/CGPfunctions/blob/master/R/data.R'><code>R/data.R</code></a></small>
-    <div class="hidden name"><code>USvoteS.Rd</code></div>
+    <h1>Anova Tables for Type 2 sums of squares</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ibecav/CGPfunctions/blob/master/R/aovtype2.R'><code>R/aovtype2.R</code></a></small>
+    <div class="hidden name"><code>aovtype2.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Data from a post-election survey following the year 2000 U.S. 
-   presidential elections.  This is a subset from package `CHAID`.</p>
+    <p>Calculates and displays type-II analysis-of-variance tables for model objects 
+produced by aov. This is a vastly reduced version of the Anova function from
+package car</p>
     </div>
 
-    <pre class="usage"><span class='no'>USvoteS</span></pre>
+    <pre class="usage"><span class='fu'>aovtype2</span>(<span class='no'>mod</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>mod</th>
+      <td><p>aov model object from base R.</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame with 1000 observations on the following 6 variables.:</p><dl'>
-  <dt>vote3</dt><dd><p>candidate voted for Gore or Bush</p></dd>
-  <dt>gender</dt><dd><p>gender, a factor with levels male and female</p></dd>
-  <dt>ager</dt><dd><p>age group, an ordered factor with levels 18-24 &lt; 25-34 &lt; 35-44 &lt; 45-54 &lt; 55-64 &lt; 65+</p></dd>
-  <dt>empstat</dt><dd><p>status of employment, a factor with levels yes, no or retired</p></dd>
-  <dt>educr</dt><dd><p>status of education, an ordered factor with levels &lt;HS &lt; HS &lt; &gt;HS &lt; College &lt; Post Coll</p></dd>
-  <dt>marstat</dt><dd><p>status of living situation, a factor with levels married, widowed, divorced or never married</p></dd>
+    <p>An object of class "anova", which usually is printed.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
+    <p>Details about how the function works in order of steps taken.
+Type-II tests are invariant with respect to (full-rank) contrast coding.
+Type-II tests are calculated according to the principle of marginality, 
+testing each term after all others, except ignoring the term's higher-order
+relatives.  This definition of Type-II tests corresponds to the tests 
+produced by SAS for analysis-of-variance models, where all of the 
+predictors are factors, but not more generally (i.e., when there are 
+quantitative predictors).</p>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-</dl>
+    <p>: Fox, J. (2016) Applied Regression Analysis and Generalized Linear Models, Third Edition. Sage.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
+    <div class='dont-index'><p><code><a href='https://rdrr.io/r/stats/aov.html'>aov</a></code></p></div>
 
-    <p>https://r-forge.r-project.org/R/?group_id=343</p>
-
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='no'>mtcars</span>$<span class='no'>cyl</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='no'>mtcars</span>$<span class='no'>cyl</span>)
+<span class='no'>mtcars</span>$<span class='no'>am</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='no'>mtcars</span>$<span class='no'>am</span>)
+<span class='no'>mod</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/aov.html'>aov</a></span>(<span class='no'>hp</span> ~ <span class='no'>cyl</span> * <span class='no'>am</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>)
+<span class='fu'>aovtype2</span>(<span class='no'>mod</span>)</div><div class='output co'>#&gt; Anova Table (Type II tests)
+#&gt; 
+#&gt; Response: hp
+#&gt;           Sum Sq Df F value    Pr(&gt;F)    
+#&gt; cyl       102729  2 60.1644 1.759e-10 ***
+#&gt; am          7318  1  8.5716  0.007009 ** 
+#&gt; cyl:am     12181  2  7.1341  0.003390 ** 
+#&gt; Residuals  22197 26                      
+#&gt; ---
+#&gt; Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</div><div class='input'>  
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
