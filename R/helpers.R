@@ -219,3 +219,32 @@ exponent <- function(x) {
   }
 }
 
+#' @title Brown-Forsythe Test for Homogeneity of Variance using median
+#' @name BrownForsytheTest
+#' @author J. Fox, Chuck Powell
+#'
+#' @param formula A fully crossed anova formula.
+#' @param data A datafram containing the data.
+#' @return a table containing the results.
+#'
+#' @keywords internal
+## moved from Rcmdr 13 July 2004
+## levene.test.default function slightly modified and generalized from Brian Ripley via R-help
+## the original generic version was contributed by Derek Ogle
+## last modified 2019-02-01 by J. Fox 
+## simplified and moved into package July 2020
+
+BrownForsytheTest <- function(formula, data) {
+  mf <- model.frame(formula, data)
+  y <- mf[,1]
+  group <- interaction(mf[,2:dim(mf)[2]])
+  valid <- complete.cases(y, group)
+  meds <- tapply(y[valid], group[valid], median)
+  resp <- abs(y - meds[group])
+  table <- anova(lm(resp ~ group))[, c(1, 4, 5)]
+  rownames(table)[2] <- " "
+  attr(table, "heading") <- paste("Brown-Forsythe Test for Homogeneity of Variance using median", sep="")
+  table
+}
+
+

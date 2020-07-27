@@ -183,7 +183,7 @@ Plot2WayANOVA(mpg ~ am * vs,
 : ANOVA: Delacre, Leys, Mora, & Lakens, *PsyArXiv*, 2018
 }
 \seealso{
-\code{\link[stats]{aov}}, \code{\link[car]{leveneTest}},
+\code{\link[stats]{aov}}, \code{\link{BrownForsytheTest}},
 \code{sjstats::anova_stats}, \code{\link[stats]{replications}},
 \code{\link[stats]{shapiro.test}}
 }

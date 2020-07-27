@@ -131,7 +131,7 @@
 #' @references: ANOVA: Delacre, Leys, Mora, & Lakens, *PsyArXiv*, 2018
 #'
 #' @author Chuck Powell
-#' @seealso \code{\link[stats]{aov}}, \code{\link[car]{leveneTest}},
+#' @seealso \code{\link[stats]{aov}}, \code{\link{BrownForsytheTest}},
 #' \code{sjstats::anova_stats}, \code{\link[stats]{replications}},
 #' \code{\link[stats]{shapiro.test}}
 #' @examples
@@ -347,7 +347,7 @@ Plot2WayANOVA <- function(formula,
 #  model_summary <- broom::glance(MyAOV)
   # Run Brown-Forsythe
 #  BFTest <- leveneTest.aov(MyAOV)
-  BFTest <- leveneTest.formula(formula, dataframe)
+  BFTest <- BrownForsytheTest(formula, dataframe)
   # Grab the residuals and run Shapiro-Wilk
   MyAOV_residuals <- residuals(object = MyAOV)
   if (nrow(dataframe) < 5000){
