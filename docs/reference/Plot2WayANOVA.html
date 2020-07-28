@@ -86,7 +86,7 @@ variance.  Users can also choose to save the plot out as a png file." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">CGPfunctions</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.3</span>
       </span>
     </div>
 
@@ -185,7 +185,7 @@ variance.  Users can also choose to save the plot out as a png file.</p>
                <span class='kw'>posthoc.method</span> <span class='kw'>=</span> <span class='st'>"scheffe"</span>,
                <span class='kw'>show.dots</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
                <span class='kw'>PlotSave</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-               <span class='kw'>ggtheme</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span>(),
+               <span class='kw'>ggtheme</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/ggtheme.html'>theme_bw</a></span>(),
                <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"RColorBrewer"</span>,
                <span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"Dark2"</span>,
                <span class='kw'>ggplot.component</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
@@ -353,8 +353,8 @@ depending on what theme is in use the ggplot component might not work as expecte
 <li><p>Produce a standard ANOVA table with additional columns</p></li>
 <li><p>Use the <code><a href='https://rdrr.io/pkg/DescTools/man/PostHocTest.html'>PostHocTest</a></code> for producing a table
   of post hoc comparisons for all effects that were significant</p></li>
-<li><p>Use the <code><a href='https://rdrr.io/pkg/car/man/leveneTest.html'>leveneTest</a></code> for testing Homogeneity
-  of Variance assumption with Brown-Forsythe</p></li>
+<li><p>Testing Homogeneity
+  of Variance assumption with Brown-Forsythe test</p></li>
 <li><p>Use the <code><a href='https://rdrr.io/pkg/DescTools/man/PostHocTest.html'>PostHocTest</a></code> for conducting
   post hoc tests for effects that were significant</p></li>
 <li><p>Use the <code><a href='https://rdrr.io/r/stats/shapiro.test.html'>shapiro.test</a></code> for testing normality
@@ -371,7 +371,7 @@ depending on what theme is in use the ggplot component might not work as expecte
     <p>: ANOVA: Delacre, Leys, Mora, &amp; Lakens, *PsyArXiv*, 2018</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://rdrr.io/r/stats/aov.html'>aov</a></code>, <code><a href='https://rdrr.io/pkg/car/man/leveneTest.html'>leveneTest</a></code>,
+    <div class='dont-index'><p><code><a href='https://rdrr.io/r/stats/aov.html'>aov</a></code>, <code><a href='BrownForsytheTest.html'>BrownForsytheTest</a></code>,
 <code><a href='https://rdrr.io/pkg/sjstats/man/eta_sq.html'>sjstats::anova_stats</a></code>, <code><a href='https://rdrr.io/r/stats/replications.html'>replications</a></code>,
 <code><a href='https://rdrr.io/r/stats/shapiro.test.html'>shapiro.test</a></code></p></div>
 
@@ -394,11 +394,7 @@ depending on what theme is in use the ggplot component might not work as expecte
 #&gt; cyl      0.571           0.598     0.578    1.382 1.000
 #&gt; am:cyl   0.009           0.023     0.009    0.326 0.298
 #&gt; ...4        NA              NA        NA       NA    NA</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Measures of overall model fit</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 5</span><span>
-#&gt;   logLik   AIC   BIC deviance  nobs
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>  -</span><span style='color: #BB0000;'>77.6</span><span>  169.  179.     239.    32</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Table of group means</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 15</span><span>
+#&gt; <span class='message'>Table of group means</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 6 x 15</span><span>
 #&gt; </span><span style='color: #555555;'># Groups:   am [2]</span><span>
 #&gt;   am    cyl   TheMean TheSD TheSEM CIMuliplier LowerBoundCI UpperBoundCI
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;fct&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
@@ -424,7 +420,7 @@ depending on what theme is in use the ggplot component might not work as expecte
 #&gt; ---
 #&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #&gt; </div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Testing Homogeneity of Variance with Brown-Forsythe </span></div><div class='output co'>#&gt; <span class='message'>   *** Possible violation of the assumption ***</span></div><div class='output co'>#&gt; Levene's Test for Homogeneity of Variance (center = median)
+#&gt; <span class='message'>Testing Homogeneity of Variance with Brown-Forsythe </span></div><div class='output co'>#&gt; <span class='message'>   *** Possible violation of the assumption ***</span></div><div class='output co'>#&gt; Brown-Forsythe Test for Homogeneity of Variance using median
 #&gt;       Df F value  Pr(&gt;F)  
 #&gt; group  5   2.736 0.04086 *
 #&gt;       26                  
@@ -458,10 +454,6 @@ depending on what theme is in use the ggplot component might not work as expecte
 #&gt; cyl      0.571           0.598     0.578    1.382 1.000
 #&gt; am:cyl   0.009           0.023     0.009    0.326 0.298
 #&gt; ...4        NA              NA        NA       NA    NA</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Measures of overall model fit</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 5</span><span>
-#&gt;   logLik   AIC   BIC deviance  nobs
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>  -</span><span style='color: #BB0000;'>77.6</span><span>  169.  179.     239.    32</div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Table of group means</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 15</span><span>
 #&gt; </span><span style='color: #555555;'># Groups:   am [2]</span><span>
 #&gt;   am    cyl   TheMean TheSD TheSEM CIMuliplier LowerBoundCI UpperBoundCI
@@ -488,7 +480,7 @@ depending on what theme is in use the ggplot component might not work as expecte
 #&gt; ---
 #&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #&gt; </div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Testing Homogeneity of Variance with Brown-Forsythe </span></div><div class='output co'>#&gt; <span class='message'>   *** Possible violation of the assumption ***</span></div><div class='output co'>#&gt; Levene's Test for Homogeneity of Variance (center = median)
+#&gt; <span class='message'>Testing Homogeneity of Variance with Brown-Forsythe </span></div><div class='output co'>#&gt; <span class='message'>   *** Possible violation of the assumption ***</span></div><div class='output co'>#&gt; Brown-Forsythe Test for Homogeneity of Variance using median
 #&gt;       Df F value  Pr(&gt;F)  
 #&gt; group  5   2.736 0.04086 *
 #&gt;       26                  
@@ -505,7 +497,7 @@ depending on what theme is in use the ggplot component might not work as expecte
 <span class='fu'>Plot2WayANOVA</span>(<span class='no'>mpg</span> ~ <span class='no'>am</span> * <span class='no'>vs</span>,
   <span class='no'>mtcars</span>,
   <span class='kw'>confidence</span> <span class='kw'>=</span> <span class='fl'>.99</span>,
-  <span class='kw'>ggplot.component</span> <span class='kw'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span>(<span class='kw'>axis.text.x</span> <span class='kw'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span>(<span class='kw'>size</span><span class='kw'>=</span><span class='fl'>13</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"darkred"</span>)))</div><div class='output co'>#&gt; <span class='message'></span>
+  <span class='kw'>ggplot.component</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/theme.html'>theme</a></span>(<span class='kw'>axis.text.x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/element.html'>element_text</a></span>(<span class='kw'>size</span><span class='kw'>=</span><span class='fl'>13</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"darkred"</span>)))</div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Converting am to a factor --- check your results</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Converting vs to a factor --- check your results</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>				--- WARNING! ---</span>
@@ -522,10 +514,6 @@ depending on what theme is in use the ggplot component might not work as expecte
 #&gt; vs      0.352           0.480     0.356    1.043 1.000
 #&gt; am:vs   0.004           0.010     0.004    0.218 0.211
 #&gt; ...4       NA              NA        NA       NA    NA</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Measures of overall model fit</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 5</span><span>
-#&gt;   logLik   AIC   BIC deviance  nobs
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>  -</span><span style='color: #BB0000;'>83.1</span><span>  176.  184.     337.    32</div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Table of group means</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 15</span><span>
 #&gt; </span><span style='color: #555555;'># Groups:   am [2]</span><span>
 #&gt;   am    vs    TheMean TheSD TheSEM CIMuliplier LowerBoundCI UpperBoundCI
@@ -552,7 +540,7 @@ depending on what theme is in use the ggplot component might not work as expecte
 #&gt; ---
 #&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 #&gt; </div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Testing Homogeneity of Variance with Brown-Forsythe </span></div><div class='output co'>#&gt; Levene's Test for Homogeneity of Variance (center = median)
+#&gt; <span class='message'>Testing Homogeneity of Variance with Brown-Forsythe </span></div><div class='output co'>#&gt; Brown-Forsythe Test for Homogeneity of Variance using median
 #&gt;       Df F value Pr(&gt;F)
 #&gt; group  3  0.8809 0.4629
 #&gt;       28               </div><div class='output co'>#&gt; <span class='message'></span>

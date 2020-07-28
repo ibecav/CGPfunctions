@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">CGPfunctions</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.3</span>
       </span>
     </div>
 
@@ -103,7 +103,7 @@
       <h1 data-toc-skip>Using Plot2WayAnova</h1>
                         <h4 class="author">Chuck Powell</h4>
             
-            <h4 class="date">2020-07-16</h4>
+            <h4 class="date">2020-07-28</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ibecav/CGPfunctions/blob/master/vignettes/Using-Plot2WayANOVA.Rmd"><code>vignettes/Using-Plot2WayANOVA.Rmd</code></a></small>
       <div class="hidden name"><code>Using-Plot2WayANOVA.Rmd</code></div>
@@ -168,13 +168,7 @@
 <span class="co"># install.packages("devtools")</span>
 <span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"ibecav/CGPfunctions"</span>)</pre></body></html></div>
 <p>then load the library.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">CGPfunctions</span>)
-<span class="co">#&gt; Registered S3 methods overwritten by 'lme4':</span>
-<span class="co">#&gt;   method                          from</span>
-<span class="co">#&gt;   cooks.distance.influence.merMod car </span>
-<span class="co">#&gt;   influence.merMod                car </span>
-<span class="co">#&gt;   dfbeta.influence.merMod         car </span>
-<span class="co">#&gt;   dfbetas.influence.merMod        car</span></pre></body></html></div>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">CGPfunctions</span>)</pre></body></html></div>
 </div>
 <div id="example-of-using-the-function" class="section level2">
 <h2 class="hasAnchor">
@@ -201,12 +195,6 @@
 <span class="co">#&gt; cyl      0.571           0.598     0.578    1.382 1.000</span>
 <span class="co">#&gt; am:cyl   0.009           0.023     0.009    0.326 0.298</span>
 <span class="co">#&gt; ...4        NA              NA        NA       NA    NA</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Measures of overall model fit</span>
-<span class="co">#&gt; # A tibble: 1 x 5</span>
-<span class="co">#&gt;   logLik   AIC   BIC deviance  nobs</span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;</span>
-<span class="co">#&gt; 1  -77.6  169.  179.     239.    32</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Table of group means</span>
 <span class="co">#&gt; # A tibble: 6 x 15</span>
@@ -239,7 +227,7 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Testing Homogeneity of Variance with Brown-Forsythe</span>
 <span class="co">#&gt;    *** Possible violation of the assumption ***</span>
-<span class="co">#&gt; Levene's Test for Homogeneity of Variance (center = median)</span>
+<span class="co">#&gt; Brown-Forsythe Test for Homogeneity of Variance using median</span>
 <span class="co">#&gt;       Df F value  Pr(&gt;F)  </span>
 <span class="co">#&gt; group  5   2.736 0.04086 *</span>
 <span class="co">#&gt;       26                  </span>
@@ -303,10 +291,6 @@
 <span class="co">#&gt; am       0.036           0.086     0.036    0.392 0.515</span>
 <span class="co">#&gt; cyl:am   0.009           0.023     0.009    0.326 0.298</span>
 <span class="co">#&gt; ...4        NA              NA        NA       NA    NA</span>
-<span class="co">#&gt; # A tibble: 1 x 5</span>
-<span class="co">#&gt;   logLik   AIC   BIC deviance  nobs</span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;</span>
-<span class="co">#&gt; 1  -77.6  169.  179.     239.    32</span>
 <span class="co">#&gt; # A tibble: 6 x 15</span>
 <span class="co">#&gt; # Groups:   cyl [3]</span>
 <span class="co">#&gt;   cyl   am    TheMean TheSD TheSEM CIMuliplier LowerBoundCI UpperBoundCI</span>
@@ -333,7 +317,7 @@
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Levene's Test for Homogeneity of Variance (center = median)</span>
+<span class="co">#&gt; Brown-Forsythe Test for Homogeneity of Variance using median</span>
 <span class="co">#&gt;       Df F value  Pr(&gt;F)  </span>
 <span class="co">#&gt; group  5   2.736 0.04086 *</span>
 <span class="co">#&gt;       26                  </span>
@@ -381,8 +365,8 @@
               <span class="kw">mean.label.size</span> <span class="kw">=</span> <span class="fl">3</span>,
               <span class="kw">show.dots</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
               <span class="kw">errorbar.display</span> <span class="kw">=</span> <span class="st">"SD"</span>,
-              <span class="kw">ggtheme</span> <span class="kw">=</span> <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>(),
-              <span class="kw">ggplot.component</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="kw">axis.text.x</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>(<span class="kw">size</span><span class="kw">=</span><span class="fl">14</span>, <span class="kw">color</span><span class="kw">=</span><span class="st">"darkblue"</span>))
+              <span class="kw">ggtheme</span> <span class="kw">=</span> <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggtheme.html">theme_minimal</a></span>(),
+              <span class="kw">ggplot.component</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/theme.html">theme</a></span>(<span class="kw">axis.text.x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/element.html">element_text</a></span>(<span class="kw">size</span><span class="kw">=</span><span class="fl">14</span>, <span class="kw">color</span><span class="kw">=</span><span class="st">"darkblue"</span>))
               )
 <span class="co">#&gt;             term    sumsq   meansq  df statistic p.value etasq partial.etasq</span>
 <span class="co">#&gt; am            am   33.447   33.447   1     2.235   0.136 0.004         0.010</span>
@@ -394,10 +378,6 @@
 <span class="co">#&gt; cyl      0.542           0.544     0.543    1.111 1.000</span>
 <span class="co">#&gt; am:cyl   0.001           0.003     0.001    0.109 0.289</span>
 <span class="co">#&gt; ...4        NA              NA        NA       NA    NA</span>
-<span class="co">#&gt; # A tibble: 1 x 5</span>
-<span class="co">#&gt;   logLik   AIC   BIC deviance  nobs</span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;</span>
-<span class="co">#&gt; 1  -634. 1283. 1307.    3351.   230</span>
 <span class="co">#&gt; # A tibble: 6 x 15</span>
 <span class="co">#&gt; # Groups:   am [2]</span>
 <span class="co">#&gt;   am    cyl   TheMean TheSD TheSEM CIMuliplier LowerBoundCI UpperBoundCI</span>
@@ -424,7 +404,7 @@
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Levene's Test for Homogeneity of Variance (center = median)</span>
+<span class="co">#&gt; Brown-Forsythe Test for Homogeneity of Variance using median</span>
 <span class="co">#&gt;        Df F value  Pr(&gt;F)  </span>
 <span class="co">#&gt; group   5   1.946 0.08778 .</span>
 <span class="co">#&gt;       224                  </span>

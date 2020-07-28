@@ -148,8 +148,8 @@ Details about how the function works in order of steps taken.
 \item Produce a standard ANOVA table with additional columns
 \item Use the \code{\link[DescTools]{PostHocTest}} for producing a table
   of post hoc comparisons for all effects that were significant
-\item Use the \code{\link[car]{leveneTest}} for testing Homogeneity
-  of Variance assumption with Brown-Forsythe
+\item Testing Homogeneity
+  of Variance assumption with Brown-Forsythe test
 \item Use the \code{\link[DescTools]{PostHocTest}} for conducting
   post hoc tests for effects that were significant
 \item Use the \code{\link[stats]{shapiro.test}} for testing normality
@@ -183,7 +183,7 @@ Plot2WayANOVA(mpg ~ am * vs,
 : ANOVA: Delacre, Leys, Mora, & Lakens, *PsyArXiv*, 2018
 }
 \seealso{
-\code{\link[stats]{aov}}, \code{\link[car]{leveneTest}},
+\code{\link[stats]{aov}}, \code{\link{BrownForsytheTest}},
 \code{sjstats::anova_stats}, \code{\link[stats]{replications}},
 \code{\link[stats]{shapiro.test}}
 }

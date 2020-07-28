@@ -23,3 +23,4 @@ Converts a vector of numbers to a character string approximation
 \author{
 Tom Hopper
 }
+\keyword{internal}

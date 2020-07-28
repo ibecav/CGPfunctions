@@ -1,6 +1,6 @@
 Package: CGPfunctions
 Title: Powell Miscellaneous Functions for Teaching and Learning Statistics
-Version: 0.6.2
+Version: 0.6.3
 Authors@R: person("Chuck", 
                   "Powell", 
                   email = "ibecav@gmail.com", 
@@ -14,8 +14,6 @@ Encoding: UTF-8
 LazyData: true
 Imports:
     BayesFactor,
-    broom,
-    car,
     DescTools (>= 0.99.32),
     dplyr,
     forcats,

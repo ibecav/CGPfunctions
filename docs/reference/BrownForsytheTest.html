@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>U.S. 2000 Election Data (short) — USvoteS • CGPfunctions</title>
+<title>Brown-Forsythe Test for Homogeneity of Variance using median — BrownForsytheTest • CGPfunctions</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,8 @@
 
 
 
-<meta property="og:title" content="U.S. 2000 Election Data (short) — USvoteS" />
-<meta property="og:description" content="Data from a post-election survey following the year 2000 U.S. 
-   presidential elections.  This is a subset from package `CHAID`." />
+<meta property="og:title" content="Brown-Forsythe Test for Homogeneity of Variance using median — BrownForsytheTest" />
+<meta property="og:description" content="Brown-Forsythe Test for Homogeneity of Variance using median" />
 
 
 
@@ -146,35 +145,33 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>U.S. 2000 Election Data (short)</h1>
-    <small class="dont-index">Source: <a href='https://github.com/ibecav/CGPfunctions/blob/master/R/data.R'><code>R/data.R</code></a></small>
-    <div class="hidden name"><code>USvoteS.Rd</code></div>
+    <h1>Brown-Forsythe Test for Homogeneity of Variance using median</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ibecav/CGPfunctions/blob/master/R/helpers.R'><code>R/helpers.R</code></a></small>
+    <div class="hidden name"><code>BrownForsytheTest.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Data from a post-election survey following the year 2000 U.S. 
-   presidential elections.  This is a subset from package `CHAID`.</p>
+    <p>Brown-Forsythe Test for Homogeneity of Variance using median</p>
     </div>
 
-    <pre class="usage"><span class='no'>USvoteS</span></pre>
+    <pre class="usage"><span class='fu'>BrownForsytheTest</span>(<span class='no'>formula</span>, <span class='no'>data</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>formula</th>
+      <td><p>A fully crossed anova formula.</p></td>
+    </tr>
+    <tr>
+      <th>data</th>
+      <td><p>A datafram containing the data.</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame with 1000 observations on the following 6 variables.:</p><dl'>
-  <dt>vote3</dt><dd><p>candidate voted for Gore or Bush</p></dd>
-  <dt>gender</dt><dd><p>gender, a factor with levels male and female</p></dd>
-  <dt>ager</dt><dd><p>age group, an ordered factor with levels 18-24 &lt; 25-34 &lt; 35-44 &lt; 45-54 &lt; 55-64 &lt; 65+</p></dd>
-  <dt>empstat</dt><dd><p>status of employment, a factor with levels yes, no or retired</p></dd>
-  <dt>educr</dt><dd><p>status of education, an ordered factor with levels &lt;HS &lt; HS &lt; &gt;HS &lt; College &lt; Post Coll</p></dd>
-  <dt>marstat</dt><dd><p>status of living situation, a factor with levels married, widowed, divorced or never married</p></dd>
-
-
-</dl>
-
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
-
-    <p>https://r-forge.r-project.org/R/?group_id=343</p>
+    <p>a table containing the results.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

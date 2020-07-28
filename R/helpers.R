@@ -25,6 +25,10 @@ justifyme <- function(x) {
   return(justification)
 }
 
+#' Test whether a vector or df column is not of type factor
+#' @param x an integer
+#' @keywords internal
+#' @noRd
 not_a_factor <- function(x){
   !is.factor(x)
 }
@@ -85,8 +89,11 @@ bf_display <- function(bf = NULL,
 }
 
 
-### -----  internal function to format p values =====================
-
+#### -----  internal function to format p values ----- ####
+#' Internal function to format p values
+#' @param pvals a vector of p values
+#' @keywords internal
+#' @noRd
 pvalr <- function(pvals, sig.limit = .001, digits = 3, html = FALSE) {
   
   roundr <- function(x, digits = 1) {
@@ -117,6 +124,7 @@ pvalr <- function(pvals, sig.limit = .001, digits = 3, html = FALSE) {
 #' @param x A vector of numbers to convert.
 #' @param nsmall Optional. An integer number of digits to include to the right of the the leading digit
 #' @return A string representation of the number
+#' @keywords internal
 
 number_to_word <- function(x, nsmall = 0) {
   # provide the short scale version (used in American English)
@@ -186,6 +194,7 @@ number_to_word <- function(x, nsmall = 0) {
 #' @author Tom Hopper
 #' @param x (required) numeric. A number.
 #' @return the exponent of the scientific notation representation of the number \code{x}
+#' @keywords internal
 #'  
 
 exponent <- function(x) {
@@ -209,4 +218,103 @@ exponent <- function(x) {
     stop("The numeric vector x must be supplied. e.g. exponent(x = 5753).")
   }
 }
+
+#' @title Brown-Forsythe Test for Homogeneity of Variance using median
+#' @name BrownForsytheTest
+#' @author J. Fox, Chuck Powell
+#'
+#' @param formula A fully crossed anova formula.
+#' @param data A datafram containing the data.
+#' @return a table containing the results.
+#'
+#' @keywords internal
+## moved from Rcmdr 13 July 2004
+## levene.test.default function slightly modified and generalized from Brian Ripley via R-help
+## the original generic version was contributed by Derek Ogle
+## last modified 2019-02-01 by J. Fox 
+## simplified and moved into package July 2020
+
+BrownForsytheTest <- function(formula, data) {
+  mf <- model.frame(formula, data)
+  y <- mf[,1]
+  group <- interaction(mf[,2:dim(mf)[2]])
+  valid <- complete.cases(y, group)
+  meds <- tapply(y[valid], group[valid], median)
+  resp <- abs(y - meds[group])
+  table <- anova(lm(resp ~ group))[, c(1, 4, 5)]
+  rownames(table)[2] <- " "
+  attr(table, "heading") <- paste("Brown-Forsythe Test for Homogeneity of Variance using median", sep="")
+  table
+}
+
+#' @title Tidy Tables for htest objects
+#' @name newbroom
+#'
+#' @description Produces tidy tibbles of results from htest objects.  
+#' This is a vastly reduced version of the tidy.htest function from
+#' package broom
+#'
+#' @usage newbroom(x)
+#' @param x An `htest` object, such as those created by [stats::cor.test()],
+#'   [stats::t.test()], [stats::wilcox.test()], [stats::chisq.test()], etc.
+#' @return An object of class "tibble". 
+#'
+#' @examples
+#'
+#' chit <- chisq.test(xtabs(Freq ~ Sex + Class, data = as.data.frame(Titanic)))
+#' CGPfunctions:::newbroom(chit)
+#' @seealso [stats::t.test()], [stats::oneway.test()]
+#'   [stats::wilcox.test()], [stats::chisq.test()]
+#' @keywords internal
+newbroom <- function(x) {
+  
+  ret <- x[c("estimate", "statistic", "p.value", "parameter")]
+  
+  # estimate may have multiple values
+  if (length(ret$estimate) > 1) {
+    names(ret$estimate) <- paste0("estimate", seq_along(ret$estimate))
+    ret <- c(ret$estimate, ret)
+    ret$estimate <- NULL
+    
+    # special case: in a t-test, estimate = estimate1 - estimate2
+    if (x$method %in% c("Welch Two Sample t-test", " Two Sample t-test")) {
+      ret <- c(estimate = ret$estimate1 - ret$estimate2, ret)
+    }
+  }
+  
+  
+  # parameter may have multiple values as well, such as oneway.test
+  if (length(x$parameter) > 1) {
+    ret$parameter <- NULL
+    if (is.null(names(x$parameter))) {
+      warning("Multiple unnamed parameters in hypothesis test; dropping them")
+    } else {
+      message(
+        "Multiple parameters; naming those columns ",
+        paste(make.names(names(x$parameter)), collapse = ", ")
+      )
+      # rename num df to num.df and denom df to denom.df
+      np <- names(x$parameter)
+      np <- stringr::str_replace(np, "num df", "num.df")
+      np <- stringr::str_replace(np, "denom df", "den.df")
+      names(x$parameter) <- np
+      ret <- append(ret, x$parameter, after = 1)
+    }
+  }
+  
+  ret <- purrr::compact(ret)
+  if (!is.null(x$conf.int)) {
+    ret <- c(ret, conf.low = x$conf.int[1], conf.high = x$conf.int[2])
+  }
+  if (!is.null(x$method)) {
+    ret <- c(ret, method = as.character(x$method))
+  }
+  if (!is.null(x$alternative)) {
+    ret <- c(ret, alternative = as.character(x$alternative))
+  }
+  
+  as_tibble(ret)
+}
+
+
 
