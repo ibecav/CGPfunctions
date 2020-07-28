@@ -247,4 +247,74 @@ BrownForsytheTest <- function(formula, data) {
   table
 }
 
+#' @title Tidy Tables for htest objects
+#' @name newbroom
+#'
+#' @description Produces tidy tibbles of results from htest objects.  
+#' This is a vastly reduced version of the tidy.htest function from
+#' package broom
+#'
+#' @usage newbroom(x)
+#' @param x An `htest` object, such as those created by [stats::cor.test()],
+#'   [stats::t.test()], [stats::wilcox.test()], [stats::chisq.test()], etc.
+#' @return An object of class "tibble". 
+#'
+#' @examples
+#'
+#' chit <- chisq.test(xtabs(Freq ~ Sex + Class, data = as.data.frame(Titanic)))
+#' CGPfunctions:::newbroom(chit)
+#' @seealso [stats::t.test()], [stats::oneway.test()]
+#'   [stats::wilcox.test()], [stats::chisq.test()]
+#' @keywords internal
+newbroom <- function(x) {
+  
+  ret <- x[c("estimate", "statistic", "p.value", "parameter")]
+  
+  # estimate may have multiple values
+  if (length(ret$estimate) > 1) {
+    names(ret$estimate) <- paste0("estimate", seq_along(ret$estimate))
+    ret <- c(ret$estimate, ret)
+    ret$estimate <- NULL
+    
+    # special case: in a t-test, estimate = estimate1 - estimate2
+    if (x$method %in% c("Welch Two Sample t-test", " Two Sample t-test")) {
+      ret <- c(estimate = ret$estimate1 - ret$estimate2, ret)
+    }
+  }
+  
+  
+  # parameter may have multiple values as well, such as oneway.test
+  if (length(x$parameter) > 1) {
+    ret$parameter <- NULL
+    if (is.null(names(x$parameter))) {
+      warning("Multiple unnamed parameters in hypothesis test; dropping them")
+    } else {
+      message(
+        "Multiple parameters; naming those columns ",
+        paste(make.names(names(x$parameter)), collapse = ", ")
+      )
+      # rename num df to num.df and denom df to denom.df
+      np <- names(x$parameter)
+      np <- stringr::str_replace(np, "num df", "num.df")
+      np <- stringr::str_replace(np, "denom df", "den.df")
+      names(x$parameter) <- np
+      ret <- append(ret, x$parameter, after = 1)
+    }
+  }
+  
+  ret <- purrr::compact(ret)
+  if (!is.null(x$conf.int)) {
+    ret <- c(ret, conf.low = x$conf.int[1], conf.high = x$conf.int[2])
+  }
+  if (!is.null(x$method)) {
+    ret <- c(ret, method = as.character(x$method))
+  }
+  if (!is.null(x$alternative)) {
+    ret <- c(ret, alternative = as.character(x$alternative))
+  }
+  
+  as_tibble(ret)
+}
+
+
 

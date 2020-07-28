@@ -1,7 +1,7 @@
 # CGPfunctions 0.6.3
 
 * Release 0.6.3 in development July 2020 CRAN submission ????
-  - Eliminated dependency on car package
+  - Eliminated dependency on car package and broom package. Great packages but I only need a couple of functions and they have a lot of dependencies
   - tibble 3.0.2 introduces a silly warning about dots fixed in 3.0.3
 
 * Release 0.6.2 in development July 2020 CRAN submission July 16

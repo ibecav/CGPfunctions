@@ -14,7 +14,6 @@ Encoding: UTF-8
 LazyData: true
 Imports:
     BayesFactor,
-    broom,
     DescTools (>= 0.99.32),
     dplyr,
     forcats,

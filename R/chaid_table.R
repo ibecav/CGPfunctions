@@ -157,7 +157,7 @@ chaid_table <- function(chaidobject) {
         filter(parent == .x) %>%
         select(levels(original_df$outcome)) %>%
         chisq.test(correct = FALSE) %>%
-        broom::tidy(), .id = "nodeID") %>%
+        newbroom(), .id = "nodeID") %>%
     rename(
       chisq = statistic,
       rawpvalue = p.value,
