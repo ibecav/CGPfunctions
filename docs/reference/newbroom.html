@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • CGPfunctions</title>
+<title>Tidy Tables for htest objects — newbroom • CGPfunctions</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,10 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="Tidy Tables for htest objects — newbroom" />
+<meta property="og:description" content="Produces tidy tibbles of results from htest objects.  
+This is a vastly reduced version of the tidy.htest function from
+package broom" />
 
 
 
@@ -68,7 +71,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -144,143 +147,50 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/ibecav/CGPfunctions/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+    <h1>Tidy Tables for htest objects</h1>
+    <small class="dont-index">Source: <a href='https://github.com/ibecav/CGPfunctions/blob/master/R/helpers.R'><code>R/helpers.R</code></a></small>
+    <div class="hidden name"><code>newbroom.Rd</code></div>
     </div>
 
-    <div id="cgpfunctions-063" class="section level1">
-<h1 class="page-header" data-toc-text="0.6.3">
-<a href="#cgpfunctions-063" class="anchor"></a>CGPfunctions 0.6.3<small> Unreleased </small>
-</h1>
-<ul>
-<li>
-<p>Release 0.6.3 in development July 2020 CRAN submission ????</p>
-<ul>
-<li>Eliminated dependency on car package and broom package. Great packages but I only need a couple of functions and they have a lot of dependencies</li>
-<li>tibble 3.0.2 introduces a silly warning about dots fixed in 3.0.3</li>
-</ul>
-</li>
-<li>
-<p>Release 0.6.2 in development July 2020 CRAN submission July 16</p>
-<ul>
-<li>Planned enhancements to Plot2WayANOVA</li>
-<li>Implemented <code>ggtheme</code> so user can choose their theme</li>
-<li>Implemented <code>ggplot.component</code> so user can add arbitary ggplot formatting</li>
-<li>Corrected doco to fix failing links under devel <a href="https://github.com/r-lib/roxygen2/issues/707" class="uri">https://github.com/r-lib/roxygen2/issues/707</a>
-</li>
-<li>Tested against ggplot2 version 3.3.2</li>
-<li>Uexpected consequences of broom upgrade breaks Plot2WayANOVA now reporting eta squared versus r squared</li>
-<li>tibble 3.0.2 introduces a silly warning about dots fixed in 3.0.3</li>
-</ul>
-</li>
-<li>
-<p>Release 0.6.1 in development April 2020 CRAN release sumitted May 27</p>
-<ul>
-<li>Builds locally with R 4.0.0</li>
-<li>Mosaic plots in PlotXTabs2 waiting on the next version of ggmosaic for some bug fixes before it can get in CRAN version</li>
-<li>Changes in advance of ggplot2 3.3.1 release ggplot(data.frame(x))</li>
-<li>numbr for BF results</li>
-</ul>
-</li>
-<li>
-<p>Release 0.6.0 submitted and accepted by CRAN 2 April 2020</p>
-<ul>
-<li>Fixed tibble 3.0.0 issue</li>
-<li>Fixed dependency issues with ggplot2, scales, sjstats and added ggmosaic</li>
-<li>Adding mosaic plots to PlotXTabs2 still debugging and waiting on the next version of ggmosaic for some bu fixes</li>
-<li>Significant upgrades to seedist including lots of customization options and the addition of violin plots.</li>
-</ul>
-</li>
-<li>
-<p>Release 0.5.9 deployed to CRAN March 2020</p>
-<ul>
-<li>Added functionality to PlotXTabs2 will be deprecating PlotXtabs next release</li>
-<li>Another vignette example for newggslopegraph</li>
-<li>Added chaid_table() including vignette</li>
-<li>Added cross2_var_vectors function</li>
-<li>Requiring R &gt;= 3.6.0 to support DescTools</li>
-<li>Cleaned up dependencies</li>
-<li>Corrected overly aggresive error checking in newggslopegraph</li>
-<li>Remove deprecated neweta()</li>
-</ul>
-</li>
-<li>
-<p>Release 0.5.8 feature release 20 June 2019</p>
-<ul>
-<li>Updated newslopegraph to add aditional formatting options</li>
-<li>Added support for selected themes from ggthemes</li>
-<li>Updating github web pages</li>
-</ul>
-</li>
-<li>
-<p>Release 0.5.7 feature release 12 June 2019</p>
-<ul>
-<li>Updated newslopegraph to add aditional formatting options</li>
-</ul>
-</li>
-<li>
-<p>Release 0.5.4 hotfix release 8 April 2019</p>
-<ul>
-<li>Updated Plot2WayANOVA to remedy an error when there were zero significant effects and post hoc tests failed</li>
-</ul>
-</li>
-<li>
-<p>Release 0.5.3 stable release 3 April 2019</p>
-<ul>
-<li>Updated vignette for Plot2WayANOVA</li>
-<li>Major improvements and features added to Plot2WayANOVA</li>
-</ul>
-</li>
-<li>
-<p>Release 0.5.2 accepted by CRAN 22 March 2019</p>
-<ul>
-<li>Hotfix to Plot2WayANOVA</li>
-<li>Minor improvements and features added to Plot2WayANOVA</li>
-</ul>
-</li>
-<li>
-<p>v0.5.1 in development on 21 March 2019</p>
-<ul>
-<li>Minor improvements and features added to Plot2WayANOVA</li>
-</ul>
-</li>
-<li>
-<p>Release 0.5.0 released on CRAN 21 March 2019</p>
-<ul>
-<li>Major improvements and features added to Plot2WayANOVA</li>
-<li>Deprecated function neweta</li>
-</ul>
-</li>
-<li><p>Release 0.4 published on CRAN 13 June 2018</p></li>
-<li>
-<p>Release 0.4 published on Github 11 June 2018</p>
-<ul>
-<li>Changed version # to .4</li>
-<li>Added new function newggslopegraph</li>
-</ul>
-</li>
-<li>
-<p>Release 0.3.1 (hotfix) published on Github 25 April 2018</p>
-<ul>
-<li>Changed version # to 3.1</li>
-<li>Added percent scales to percent plot using the scales package which necessitated changes in DESCRIPTION and NAMESPACE</li>
-<li>Added some code to keep track of missing values that are omitted in calculations and plotting</li>
-<li>Creating the ggtitle with a bquote seemed to be creating issues with both performance and also creating intermittent errors if the title was long. Replaced bquote with sprintf and while I was at it changed how it presents</li>
-<li>Rebuilt vignettes and doco as needed to show the changes</li>
-</ul>
-</li>
-<li><p>Release 0.3 published on CRAN</p></li>
-<li><p>Release 0.1</p></li>
-</ul>
-</div>
-  </div>
+    <div class="ref-description">
+    <p>Produces tidy tibbles of results from htest objects.  
+This is a vastly reduced version of the tidy.htest function from
+package broom</p>
+    </div>
 
+    <pre class="usage"><span class='fu'>newbroom</span>(<span class='no'>x</span>)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>An `htest` object, such as those created by [stats::cor.test()],
+[stats::t.test()], [stats::wilcox.test()], [stats::chisq.test()], etc.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>An object of class "tibble".</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>[stats::t.test()], [stats::oneway.test()]
+  [stats::wilcox.test()], [stats::chisq.test()]</p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='no'>chit</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/chisq.test.html'>chisq.test</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/xtabs.html'>xtabs</a></span>(<span class='no'>Freq</span> ~ <span class='no'>Sex</span> + <span class='no'>Class</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='no'>Titanic</span>)))
+<span class='kw pkg'>CGPfunctions</span><span class='kw ns'>:::</span><span class='fu'>newbroom</span>(<span class='no'>chit</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 4</span><span>
+#&gt;   statistic  p.value parameter method                    
+#&gt;       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                     
+#&gt; </span><span style='color: #555555;'>1</span><span>      350. 1.56</span><span style='color: #555555;'>e</span><span style='color: #BB0000;'>-75</span><span>         3 Pearson's Chi-squared test</div></span></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
-
 </div>
 
 
