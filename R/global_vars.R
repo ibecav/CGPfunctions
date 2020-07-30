@@ -54,7 +54,10 @@ utils::globalVariables(
     "pchisq", 
     "setNames", 
     "terms", 
-    "vcov"
+    "vcov",
+    "model",
+    "error",
+    "bf"
   ),
   package = "CGPfunctions",
   add = FALSE

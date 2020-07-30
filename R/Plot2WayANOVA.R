@@ -157,6 +157,7 @@
 #' @importFrom dplyr as_tibble case_when group_by summarise %>% n select filter
 #' @importFrom sjstats anova_stats
 #' @importFrom DescTools PostHocTest
+#' @importFrom BayesFactor anovaBF
 #' @export
 #'
 Plot2WayANOVA <- function(formula,
@@ -343,10 +344,7 @@ Plot2WayANOVA <- function(formula,
   MyAOVt2 <- aovtype2(MyAOV)
   # get more detailed information including effect sizes
   WithETA <- sjstats::anova_stats(MyAOVt2)
-  # creating model summary dataframe
-#  model_summary <- broom::glance(MyAOV)
   # Run Brown-Forsythe
-#  BFTest <- leveneTest.aov(MyAOV)
   BFTest <- BrownForsytheTest(formula, dataframe)
   # Grab the residuals and run Shapiro-Wilk
   MyAOV_residuals <- residuals(object = MyAOV)
@@ -356,7 +354,7 @@ Plot2WayANOVA <- function(formula,
     SWTest <- NULL
   }
 
-  # Grab on the effects that were significant in omnibuds test
+  # Grab the effects that were significant in omnibuds test
   sigfactors <- filter(WithETA, p.value <= 1 - confidence) %>% select(term)
   if (nrow(sigfactors) > 0) {
     posthocresults <- PostHocTest(MyAOV,
@@ -367,6 +365,19 @@ Plot2WayANOVA <- function(formula,
   } else {
     posthocresults <- "No signfiicant effects"
   }
+  
+  bf_models <- BayesFactor::anovaBF(formula = formula, 
+                                    data = dataframe, 
+                                    progress = FALSE)
+  bf_models <- 
+    as_tibble(bf_models, rownames = "model") %>%
+    select(model:error) %>% 
+    arrange(desc(bf)) %>%
+    mutate(support = bf_display(bf = bf, display_type = "support")) %>%
+    mutate(margin_of_error = error) %>%
+    select(-error)
+  
+  # return(bf_models)
 
   # -------- save the common plot items as a list to be used ---------
 
@@ -374,30 +385,20 @@ Plot2WayANOVA <- function(formula,
   cipercent <- round(confidence * 100, 2)
   # if `title` is not provided, use this generic
   if (is.null(title)) {
+    title <- paste("Interaction plot ", deparse(formula, width.cutoff = 80), collapse="")
     if (errorbar.display == "CI") {
-      title <- bquote(
-        "Group means with" ~ .(cipercent) * "% confidence intervals")
+      title <- bquote(.(title) * " with" ~ .(cipercent) * "% conf ints")
     } else if (errorbar.display == "SEM") {
-      title <- "Group means with standard error of the mean"
+      title <- bquote(.(title) * " with standard error of the mean")
     } else if (errorbar.display == "SD") {
-      title <- "Group means with standard deviation"
+      title <- bquote(.(title) * " with standard deviations")
+    } else {
+      title <- title
     }
   }
   
-  # compute CI's for R squared using Olkin and Finn's approximation
-  # denominator <- (nrow(dataframe)^2 - 1) * (3 + nrow(dataframe))
-  # numerator <- (4 * model_summary$r.squared) * ((1 - model_summary$r.squared)^2) * (nrow(dataframe) - 2 - 1)^2
-  # ser2 <- sqrt(numerator / denominator)
-  # tvalue <- qt((1 - confidence) / 2, nrow(dataframe) - 3)
-  # limit1 <- model_summary$r.squared - tvalue * ser2
-  # limit2 <- model_summary$r.squared + tvalue * ser2
-  # ULr2 <- max(limit1, limit2)
-  # LLr2 <- min(limit1, limit2)
 
   # make pretty labels
-  # rsquared <- round(model_summary$r.squared, 3)
-  # cilower <- round(LLr2, 3)
-  # ciupper <- round(ULr2, 3)
   AICnumber <- round(stats::AIC(MyAOV), 1)
   BICnumber <- round(stats::BIC(MyAOV), 1)
   eta2iv1 <- WithETA[1, 7]
@@ -473,43 +474,68 @@ Plot2WayANOVA <- function(formula,
 
   # -------- switch for bar versus line plot ---------
 
-  switch(plottype,
-    bar =
-      p <- p +
-        geom_bar(
-          stat = "identity",
-          position = "dodge"
-        ) +
-        geom_errorbar(aes(ymin = LowerBound, ymax = UpperBound),
-          width = .5,
-          size = ci.line.size,
-          position = position_dodge(0.9),
-          show.legend = FALSE
-        ),
-    line =
-      p <- p +
-        geom_errorbar(aes(
-          ymin = LowerBound,
-          ymax = UpperBound
-        ),
-        width = .2,
-        size = ci.line.size,
-        position = position_dodge(ci.dodge)
-        ) +
-        geom_line(
-          aes_string(linetype = iv2),
-          size = interact.line.size,
-          position = position_dodge(mean.dodge)
-        ) +
-        geom_point(aes(y = TheMean),
-          shape = mean.shape,
-          size = mean.size,
-          color = mean.color,
-          alpha = 1,
-          position = position_dodge(mean.dodge)
-        )
-  )
-
+  if (errorbar.display != "none") {
+    switch(plottype,
+           bar =
+             p <- p +
+             geom_bar(
+               stat = "identity",
+               position = "dodge"
+             ) +
+             geom_errorbar(aes(ymin = LowerBound, ymax = UpperBound),
+                           width = .5,
+                           size = ci.line.size,
+                           position = position_dodge(0.9),
+                           show.legend = FALSE
+             ),
+           line =
+             p <- p +
+             geom_errorbar(aes(
+               ymin = LowerBound,
+               ymax = UpperBound
+             ),
+             width = .2,
+             size = ci.line.size,
+             position = position_dodge(ci.dodge)
+             ) +
+             geom_line(
+               aes_string(linetype = iv2),
+               size = interact.line.size,
+               position = position_dodge(mean.dodge)
+             ) +
+             geom_point(aes(y = TheMean),
+                        shape = mean.shape,
+                        size = mean.size,
+                        color = mean.color,
+                        alpha = 1,
+                        position = position_dodge(mean.dodge)
+             )
+    )
+  } else {
+    switch(plottype,
+           bar =
+             p <- p +
+             geom_bar(
+               stat = "identity",
+               position = "dodge"
+             ),
+           line =
+             p <- p +
+             geom_line(
+               aes_string(linetype = iv2),
+               size = interact.line.size,
+               position = position_dodge(mean.dodge)
+             ) +
+             geom_point(aes(y = TheMean),
+                        shape = mean.shape,
+                        size = mean.size,
+                        color = mean.color,
+                        alpha = 1,
+                        position = position_dodge(mean.dodge)
+             )
+    )
+  }
+  
   # -------- Add box or violin if needed ---------
 
   if (!is.null(overlay.type)) {
@@ -638,6 +664,8 @@ Plot2WayANOVA <- function(formula,
     }
     print(SWTest)
   }
+  message("\nBayesian analysis of models in order\n")
+  print(bf_models)
   
   ### -----  adding optional ggplot.component ----------
   p <- p + ggplot.component
@@ -656,7 +684,8 @@ Plot2WayANOVA <- function(formula,
     MeansTable = newdata,
     PosthocTable = posthocresults,
     BFTest = BFTest,
-    SWTest = SWTest
+    SWTest = SWTest,
+    Bayesian_models = bf_models
   )
   if (PlotSave) {
     ggsave(potentialfname, device = "png")

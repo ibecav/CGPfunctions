@@ -185,7 +185,7 @@ variance.  Users can also choose to save the plot out as a png file.</p>
                <span class='kw'>posthoc.method</span> <span class='kw'>=</span> <span class='st'>"scheffe"</span>,
                <span class='kw'>show.dots</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
                <span class='kw'>PlotSave</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-               <span class='kw'>ggtheme</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/ggtheme.html'>theme_bw</a></span>(),
+               <span class='kw'>ggtheme</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span>(),
                <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"RColorBrewer"</span>,
                <span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"Dark2"</span>,
                <span class='kw'>ggplot.component</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
@@ -432,6 +432,13 @@ depending on what theme is in use the ggplot component might not work as expecte
 #&gt; data:  MyAOV_residuals
 #&gt; W = 0.96277, p-value = 0.3263
 #&gt; </div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Bayesian analysis of models in order</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 4</span><span>
+#&gt;   model                    bf support                        margin_of_error
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> am + cyl          4</span><span style='text-decoration: underline;'>228</span><span>908.  </span><span style='color: #555555;'>"</span><span> data support is extreme</span><span style='color: #555555;'>"</span><span>        0.012</span><span style='text-decoration: underline;'>4</span><span>      
+#&gt; </span><span style='color: #555555;'>2</span><span> am + cyl + am:cyl 3</span><span style='text-decoration: underline;'>083</span><span>523.  </span><span style='color: #555555;'>"</span><span> data support is extreme</span><span style='color: #555555;'>"</span><span>        0.022</span><span style='text-decoration: underline;'>4</span><span>      
+#&gt; </span><span style='color: #555555;'>3</span><span> cyl               2</span><span style='text-decoration: underline;'>274</span><span>206.  </span><span style='color: #555555;'>"</span><span> data support is extreme</span><span style='color: #555555;'>"</span><span>        0.000</span><span style='text-decoration: underline;'>000</span><span>012</span><span style='text-decoration: underline;'>7</span><span>
+#&gt; </span><span style='color: #555555;'>4</span><span> am                     86.6 </span><span style='color: #555555;'>"</span><span> data support is very strong</span><span style='color: #555555;'>"</span><span>    0.000</span><span style='text-decoration: underline;'>000</span><span>217 </div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Interaction graph plotted...</span></div><div class='img'><img src='Plot2WayANOVA-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>Plot2WayANOVA</span>(<span class='no'>mpg</span> ~ <span class='no'>am</span> * <span class='no'>cyl</span>,
   <span class='no'>mtcars</span>,
   <span class='kw'>plottype</span> <span class='kw'>=</span> <span class='st'>"line"</span>,
@@ -492,12 +499,19 @@ depending on what theme is in use the ggplot component might not work as expecte
 #&gt; data:  MyAOV_residuals
 #&gt; W = 0.96277, p-value = 0.3263
 #&gt; </div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Bayesian analysis of models in order</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 4</span><span>
+#&gt;   model                    bf support                        margin_of_error
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> am + cyl          4</span><span style='text-decoration: underline;'>187</span><span>558.  </span><span style='color: #555555;'>"</span><span> data support is extreme</span><span style='color: #555555;'>"</span><span>        0.010</span><span style='text-decoration: underline;'>6</span><span>      
+#&gt; </span><span style='color: #555555;'>2</span><span> am + cyl + am:cyl 3</span><span style='text-decoration: underline;'>113</span><span>288.  </span><span style='color: #555555;'>"</span><span> data support is extreme</span><span style='color: #555555;'>"</span><span>        0.026</span><span style='text-decoration: underline;'>3</span><span>      
+#&gt; </span><span style='color: #555555;'>3</span><span> cyl               2</span><span style='text-decoration: underline;'>274</span><span>206.  </span><span style='color: #555555;'>"</span><span> data support is extreme</span><span style='color: #555555;'>"</span><span>        0.000</span><span style='text-decoration: underline;'>000</span><span>012</span><span style='text-decoration: underline;'>7</span><span>
+#&gt; </span><span style='color: #555555;'>4</span><span> am                     86.6 </span><span style='color: #555555;'>"</span><span> data support is very strong</span><span style='color: #555555;'>"</span><span>    0.000</span><span style='text-decoration: underline;'>000</span><span>217 </div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Interaction graph plotted...</span></div><div class='img'><img src='Plot2WayANOVA-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
 <span class='fu'>Plot2WayANOVA</span>(<span class='no'>mpg</span> ~ <span class='no'>am</span> * <span class='no'>vs</span>,
   <span class='no'>mtcars</span>,
   <span class='kw'>confidence</span> <span class='kw'>=</span> <span class='fl'>.99</span>,
-  <span class='kw'>ggplot.component</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/theme.html'>theme</a></span>(<span class='kw'>axis.text.x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/ggplot2/man/element.html'>element_text</a></span>(<span class='kw'>size</span><span class='kw'>=</span><span class='fl'>13</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"darkred"</span>)))</div><div class='output co'>#&gt; <span class='message'></span>
+  <span class='kw'>ggplot.component</span> <span class='kw'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span>(<span class='kw'>axis.text.x</span> <span class='kw'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span>(<span class='kw'>size</span><span class='kw'>=</span><span class='fl'>13</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"darkred"</span>)))</div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Converting am to a factor --- check your results</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Converting vs to a factor --- check your results</span></div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>				--- WARNING! ---</span>
@@ -550,6 +564,13 @@ depending on what theme is in use the ggplot component might not work as expecte
 #&gt; data:  MyAOV_residuals
 #&gt; W = 0.97845, p-value = 0.7535
 #&gt; </div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Bayesian analysis of models in order</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 4 x 4</span><span>
+#&gt;   model                 bf support                        margin_of_error
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> am + vs         </span><span style='text-decoration: underline;'>200</span><span>567.  </span><span style='color: #555555;'>"</span><span> data support is extreme</span><span style='color: #555555;'>"</span><span>       0.015</span><span style='text-decoration: underline;'>3</span><span>       
+#&gt; </span><span style='color: #555555;'>2</span><span> am + vs + am:vs </span><span style='text-decoration: underline;'>123</span><span>044.  </span><span style='color: #555555;'>"</span><span> data support is extreme</span><span style='color: #555555;'>"</span><span>       0.014</span><span style='text-decoration: underline;'>0</span><span>       
+#&gt; </span><span style='color: #555555;'>3</span><span> vs                 529.  </span><span style='color: #555555;'>"</span><span> data support is extreme</span><span style='color: #555555;'>"</span><span>       0.000</span><span style='text-decoration: underline;'>000</span><span>009</span><span style='text-decoration: underline;'>01</span><span>
+#&gt; </span><span style='color: #555555;'>4</span><span> am                  86.6 </span><span style='color: #555555;'>"</span><span> data support is very strong</span><span style='color: #555555;'>"</span><span>   0.000</span><span style='text-decoration: underline;'>000</span><span>217  </div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Interaction graph plotted...</span></div><div class='img'><img src='Plot2WayANOVA-3.png' alt='' width='700' height='433' /></div><div class='input'>  
 </div></span></pre>
   </div>

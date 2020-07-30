@@ -103,7 +103,7 @@
       <h1 data-toc-skip>Using Plot2WayAnova</h1>
                         <h4 class="author">Chuck Powell</h4>
             
-            <h4 class="date">2020-07-28</h4>
+            <h4 class="date">2020-07-30</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ibecav/CGPfunctions/blob/master/vignettes/Using-Plot2WayANOVA.Rmd"><code>vignettes/Using-Plot2WayANOVA.Rmd</code></a></small>
       <div class="hidden name"><code>Using-Plot2WayANOVA.Rmd</code></div>
@@ -241,6 +241,15 @@
 <span class="co">#&gt; data:  MyAOV_residuals</span>
 <span class="co">#&gt; W = 0.96277, p-value = 0.3263</span>
 <span class="co">#&gt; </span>
+<span class="co">#&gt; Bayesian analysis of models in order</span>
+<span class="co">#&gt; # A tibble: 4 x 4</span>
+<span class="co">#&gt;   model                    bf support                        margin_of_error</span>
+<span class="co">#&gt;   &lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt;                                    &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 am + cyl          4522321.  " data support is extreme"        0.0129      </span>
+<span class="co">#&gt; 2 am + cyl + am:cyl 3081667.  " data support is extreme"        0.0204      </span>
+<span class="co">#&gt; 3 cyl               2274206.  " data support is extreme"        0.0000000127</span>
+<span class="co">#&gt; 4 am                     86.6 " data support is very strong"    0.000000217</span>
+<span class="co">#&gt; </span>
 <span class="co">#&gt; Interaction graph plotted...</span></pre></body></html></div>
 <p><img src="Using-Plot2WayANOVA_files/figure-html/Plot2WayANOVA-1.png" width="672"></p>
 <p>In the console you’ll receive a series of messages chronicling your progress and any diagnostic information. In this case <code>am</code> and <code>cyl</code> are being coerced to factors and you’re being prompted to make sure that’s what is intended.</p>
@@ -327,7 +336,15 @@
 <span class="co">#&gt;  Shapiro-Wilk normality test</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; data:  MyAOV_residuals</span>
-<span class="co">#&gt; W = 0.96277, p-value = 0.3263</span></pre></body></html></div>
+<span class="co">#&gt; W = 0.96277, p-value = 0.3263</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; # A tibble: 4 x 4</span>
+<span class="co">#&gt;   model                    bf support                        margin_of_error</span>
+<span class="co">#&gt;   &lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt;                                    &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 cyl + am          4285488.  " data support is extreme"        0.0208      </span>
+<span class="co">#&gt; 2 cyl + am + cyl:am 3004362.  " data support is extreme"        0.0142      </span>
+<span class="co">#&gt; 3 cyl               2274206.  " data support is extreme"        0.0000000127</span>
+<span class="co">#&gt; 4 am                     86.6 " data support is very strong"    0.000000217</span></pre></body></html></div>
 <p><img src="Using-Plot2WayANOVA_files/figure-html/Plot2WayANOVA2-1.png" width="672"></p>
 <p><strong>Please don’t fail to notice how liberal Fisher’s LSD is compared to Scheffe especially given we’ve demanded more confidence </strong></p>
 </div>
@@ -365,8 +382,8 @@
               <span class="kw">mean.label.size</span> <span class="kw">=</span> <span class="fl">3</span>,
               <span class="kw">show.dots</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
               <span class="kw">errorbar.display</span> <span class="kw">=</span> <span class="st">"SD"</span>,
-              <span class="kw">ggtheme</span> <span class="kw">=</span> <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggtheme.html">theme_minimal</a></span>(),
-              <span class="kw">ggplot.component</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/theme.html">theme</a></span>(<span class="kw">axis.text.x</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/element.html">element_text</a></span>(<span class="kw">size</span><span class="kw">=</span><span class="fl">14</span>, <span class="kw">color</span><span class="kw">=</span><span class="st">"darkblue"</span>))
+              <span class="kw">ggtheme</span> <span class="kw">=</span> <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>(),
+              <span class="kw">ggplot.component</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="kw">axis.text.x</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>(<span class="kw">size</span><span class="kw">=</span><span class="fl">14</span>, <span class="kw">color</span><span class="kw">=</span><span class="st">"darkblue"</span>))
               )
 <span class="co">#&gt;             term    sumsq   meansq  df statistic p.value etasq partial.etasq</span>
 <span class="co">#&gt; am            am   33.447   33.447   1     2.235   0.136 0.004         0.010</span>
@@ -414,7 +431,15 @@
 <span class="co">#&gt;  Shapiro-Wilk normality test</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; data:  MyAOV_residuals</span>
-<span class="co">#&gt; W = 0.97548, p-value = 0.0005039</span></pre></body></html></div>
+<span class="co">#&gt; W = 0.97548, p-value = 0.0005039</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; # A tibble: 4 x 4</span>
+<span class="co">#&gt;   model                  bf support                    margin_of_error</span>
+<span class="co">#&gt;   &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt;                                &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 cyl               8.86e39 " data support is extreme" 0.0000000685   </span>
+<span class="co">#&gt; 2 am + cyl          4.16e39 " data support is extreme" 0.0175         </span>
+<span class="co">#&gt; 3 am + cyl + am:cyl 1.22e39 " data support is extreme" 0.0150         </span>
+<span class="co">#&gt; 4 am                7.89e 2 " data support is extreme" 0.0000000000581</span></pre></body></html></div>
 <p><img src="Using-Plot2WayANOVA_files/figure-html/Plot2WayANOVA3-1.png" width="672"></p>
 </div>
 </div>
