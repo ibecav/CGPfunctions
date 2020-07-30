@@ -372,7 +372,10 @@ Plot2WayANOVA <- function(formula,
   bf_models <- 
     as_tibble(bf_models, rownames = "model") %>%
     select(model:error) %>% 
-    arrange(desc(bf))
+    arrange(desc(bf)) %>%
+    mutate(support = bf_display(bf = bf, display_type = "support")) %>%
+    mutate(margin_of_error = error) %>%
+    select(-error)
   
   # return(bf_models)
 
@@ -661,7 +664,7 @@ Plot2WayANOVA <- function(formula,
     }
     print(SWTest)
   }
-  message("\nBayesian analysis of models\n")
+  message("\nBayesian analysis of models in order\n")
   print(bf_models)
   
   ### -----  adding optional ggplot.component ----------
