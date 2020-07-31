@@ -103,7 +103,7 @@
       <h1 data-toc-skip>Using Plot2WayAnova</h1>
                         <h4 class="author">Chuck Powell</h4>
             
-            <h4 class="date">2020-07-30</h4>
+            <h4 class="date">2020-07-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ibecav/CGPfunctions/blob/master/vignettes/Using-Plot2WayANOVA.Rmd"><code>vignettes/Using-Plot2WayANOVA.Rmd</code></a></small>
       <div class="hidden name"><code>Using-Plot2WayANOVA.Rmd</code></div>
@@ -181,6 +181,18 @@
 <span class="co">#&gt; Converting cyl to a factor --- check your results</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;              --- WARNING! ---</span>
+<span class="co">#&gt;      You have one or more cells with less than 3 observations.</span>
+<span class="co">#&gt; # A tibble: 6 x 3</span>
+<span class="co">#&gt;   am    cyl   count</span>
+<span class="co">#&gt;   &lt;fct&gt; &lt;fct&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 0     4         3</span>
+<span class="co">#&gt; 2 0     6         4</span>
+<span class="co">#&gt; 3 0     8        12</span>
+<span class="co">#&gt; 4 1     4         8</span>
+<span class="co">#&gt; 5 1     6         3</span>
+<span class="co">#&gt; 6 1     8         2</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;              --- WARNING! ---</span>
 <span class="co">#&gt;      You have an unbalanced design. Using Type II sum of </span>
 <span class="co">#&gt;             squares, to calculate factor effect sizes eta and omega.</span>
 <span class="co">#&gt;             Your two factors account for 0.684 of the type II sum of </span>
@@ -245,8 +257,8 @@
 <span class="co">#&gt; # A tibble: 4 x 4</span>
 <span class="co">#&gt;   model                    bf support                        margin_of_error</span>
 <span class="co">#&gt;   &lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt;                                    &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 am + cyl          4522321.  " data support is extreme"        0.0129      </span>
-<span class="co">#&gt; 2 am + cyl + am:cyl 3081667.  " data support is extreme"        0.0204      </span>
+<span class="co">#&gt; 1 am + cyl          4341807.  " data support is extreme"        0.0214      </span>
+<span class="co">#&gt; 2 am + cyl + am:cyl 3075065.  " data support is extreme"        0.0314      </span>
 <span class="co">#&gt; 3 cyl               2274206.  " data support is extreme"        0.0000000127</span>
 <span class="co">#&gt; 4 am                     86.6 " data support is very strong"    0.000000217</span>
 <span class="co">#&gt; </span>
@@ -290,6 +302,15 @@
               <span class="kw">posthoc.method</span> <span class="kw">=</span> <span class="st">"lsd"</span>,
               <span class="kw">errorbar.display</span> <span class="kw">=</span> <span class="st">"SEM"</span>
               )
+<span class="co">#&gt; # A tibble: 6 x 3</span>
+<span class="co">#&gt;   cyl   am    count</span>
+<span class="co">#&gt;   &lt;fct&gt; &lt;fct&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 4     0         3</span>
+<span class="co">#&gt; 2 4     1         8</span>
+<span class="co">#&gt; 3 6     0         4</span>
+<span class="co">#&gt; 4 6     1         3</span>
+<span class="co">#&gt; 5 8     0        12</span>
+<span class="co">#&gt; 6 8     1         2</span>
 <span class="co">#&gt;             term   sumsq  meansq df statistic p.value etasq partial.etasq</span>
 <span class="co">#&gt; cyl          cyl 456.401 228.200  2    24.819   0.000 0.602         0.656</span>
 <span class="co">#&gt; am            am  36.767  36.767  1     3.999   0.056 0.049         0.133</span>
@@ -341,8 +362,8 @@
 <span class="co">#&gt; # A tibble: 4 x 4</span>
 <span class="co">#&gt;   model                    bf support                        margin_of_error</span>
 <span class="co">#&gt;   &lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt;                                    &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 cyl + am          4285488.  " data support is extreme"        0.0208      </span>
-<span class="co">#&gt; 2 cyl + am + cyl:am 3004362.  " data support is extreme"        0.0142      </span>
+<span class="co">#&gt; 1 cyl + am          4327176.  " data support is extreme"        0.0180      </span>
+<span class="co">#&gt; 2 cyl + am + cyl:am 3179346.  " data support is extreme"        0.0160      </span>
 <span class="co">#&gt; 3 cyl               2274206.  " data support is extreme"        0.0000000127</span>
 <span class="co">#&gt; 4 am                     86.6 " data support is very strong"    0.000000217</span></pre></body></html></div>
 <p><img src="Using-Plot2WayANOVA_files/figure-html/Plot2WayANOVA2-1.png" width="672"></p>

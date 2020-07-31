@@ -75,6 +75,7 @@
 #' @param errorbar.display default "CI" (confidence interval), which type of
 #'   errorbar should be displayed around the mean point? Other options
 #'   include "SEM" (standard error of the mean) and "SD" (standard dev).
+#'   "none" removes it entirely much like \code{\link[stats]{interaction.plot}}
 #' @param PlotSave a logical indicating whether the user wants to save the plot
 #'  as a png file
 #' @param xlab,ylab Labels for `x` and `y` axis variables. If `NULL` (default),
@@ -133,7 +134,7 @@
 #' @author Chuck Powell
 #' @seealso \code{\link[stats]{aov}}, \code{\link{BrownForsytheTest}},
 #' \code{sjstats::anova_stats}, \code{\link[stats]{replications}},
-#' \code{\link[stats]{shapiro.test}}
+#' \code{\link[stats]{shapiro.test}}, \code{\link[stats]{interaction.plot}}
 #' @examples
 #'
 #' Plot2WayANOVA(mpg ~ am * cyl, mtcars, plottype = "line")
@@ -158,6 +159,7 @@
 #' @importFrom sjstats anova_stats
 #' @importFrom DescTools PostHocTest
 #' @importFrom BayesFactor anovaBF
+#' @importFrom tidyr complete
 #' @export
 #'
 Plot2WayANOVA <- function(formula,
@@ -305,7 +307,30 @@ Plot2WayANOVA <- function(formula,
     warning(paste(sum(missing)), " case(s) removed because of missing data")
   }
   dataframe <- dataframe[!missing, ]
-
+  
+  # -------- Check cell counts ----------------
+  
+  checkcells <- 
+    dataframe %>%
+    group_by(!!sym(iv1), !!sym(iv2)) %>%
+    summarize(count = n()) %>%
+    ungroup() %>%
+    complete(!!sym(iv1), !!sym(iv2), fill = list(count = 0))
+  
+  if (any(checkcells$count == 0)) {
+    print(checkcells)
+    stop(paste0(
+      "\n--- MAJOR Problem! ---\n",
+      "You have one or more cells with ZERO observations.\n"
+    ))
+  } else if (any(checkcells$count <= 2)){
+    message(paste0(
+      "\n\t\t\t\t--- WARNING! ---\n",
+      "\t\tYou have one or more cells with less than 3 observations.\n"
+    ))
+    print(checkcells)
+  }
+  
   # -------- Build summary dataframe ----------------
 
   newdata <- dataframe %>%
@@ -627,8 +652,8 @@ Plot2WayANOVA <- function(formula,
   }
 
   # -------- Warn user of unbalanced design ----------------
-
-  if (is.list(replications(formula, dataframe))) {
+  
+  if (!all(checkcells$count == checkcells$count[1])) {
     rsquaredx <- round(1 - (MyAOVt2$`Sum Sq`[4] / sum(MyAOVt2$`Sum Sq`[1:4])), 3)
     message(paste0(
       "\n\t\t\t\t--- WARNING! ---\n",
@@ -641,6 +666,8 @@ Plot2WayANOVA <- function(formula,
   else {
     message("\nYou have a balanced design. \n")
   }
+  
+#  return(checkcells)
   print(WithETA)
 
   # -------- Print tests and tables ----------------
@@ -667,10 +694,10 @@ Plot2WayANOVA <- function(formula,
   message("\nBayesian analysis of models in order\n")
   print(bf_models)
   
-  ### -----  adding optional ggplot.component ----------
+  # -------- adding optional ggplot.component ----------
   p <- p + ggplot.component
   
-  #### -------- Print the plot itself ----------------
+  # -------- Print the plot itself ----------------
   
   message("\nInteraction graph plotted...")
   print(p)
