@@ -46,7 +46,8 @@ possible.}
 
 \item{errorbar.display}{default "CI" (confidence interval), which type of
 errorbar should be displayed around the mean point? Other options
-include "SEM" (standard error of the mean) and "SD" (standard dev).}
+include "SEM" (standard error of the mean) and "SD" (standard dev).
+"none" removes it entirely much like \code{\link[stats]{interaction.plot}}}
 
 \item{xlab, ylab}{Labels for `x` and `y` axis variables. If `NULL` (default),
 variable names for `x` and `y` will be used.}
@@ -185,7 +186,7 @@ Plot2WayANOVA(mpg ~ am * vs,
 \seealso{
 \code{\link[stats]{aov}}, \code{\link{BrownForsytheTest}},
 \code{sjstats::anova_stats}, \code{\link[stats]{replications}},
-\code{\link[stats]{shapiro.test}}
+\code{\link[stats]{shapiro.test}}, \code{\link[stats]{interaction.plot}}
 }
 \author{
 Chuck Powell
