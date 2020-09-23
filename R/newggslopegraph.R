@@ -20,6 +20,10 @@
 #' when the measurements are not too disparate.
 #' @param Grouping a column inside the dataframe that will be used to group and
 #' distinguish measurements.
+#' @param Data.label an optional column inside the dataframe that will be used
+#'   as the label for the data points plotted.  Can be complex strings and
+#'   have `NA` values but must be of class `chr`.  By default `Measurement` is
+#'   converted to `chr` and used.
 #' @param Title Optionally the title to be displayed. Title = NULL will remove it
 #' entirely. Title = "" will provide an empty title but retain the spacing.
 #' @param SubTitle Optionally the sub-title to be displayed.  SubTitle = NULL
@@ -143,30 +147,34 @@
 #'   DataLabelPadding = .2,
 #'   DataLabelLineSize = .5
 #' )
-newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
-                            Title = "No title given",
-                            SubTitle = "No subtitle given",
-                            Caption = "No caption given",
-                            XTextSize = 12,
-                            YTextSize = 3,
-                            TitleTextSize = 14,
-                            SubTitleTextSize = 10,
-                            CaptionTextSize = 8,
-                            TitleJustify = "left",
-                            SubTitleJustify = "left",
-                            CaptionJustify = "right",
-                            LineThickness = 1,
-                            LineColor = "ByGroup",
-                            DataTextSize = 2.5,
-                            DataTextColor = "black",
-                            DataLabelPadding = 0.05,
-                            DataLabelLineSize = 0,
-                            DataLabelFillColor = "white",
-                            WiderLabels = FALSE,
-                            ReverseYAxis = FALSE,
-                            ReverseXAxis = FALSE,
-                            RemoveMissing = TRUE,
-                            ThemeChoice = "bw") {
+newggslopegraph <- function(dataframe,
+                        Times,
+                        Measurement,
+                        Grouping,
+                        Data.label = NULL,
+                        Title = "No title given",
+                        SubTitle = "No subtitle given",
+                        Caption = "No caption given",
+                        XTextSize = 12,
+                        YTextSize = 3,
+                        TitleTextSize = 14,
+                        SubTitleTextSize = 10,
+                        CaptionTextSize = 8,
+                        TitleJustify = "left",
+                        SubTitleJustify = "left",
+                        CaptionJustify = "right",
+                        LineThickness = 1,
+                        LineColor = "ByGroup",
+                        DataTextSize = 2.5,
+                        DataTextColor = "black",
+                        DataLabelPadding = 0.05,
+                        DataLabelLineSize = 0,
+                        DataLabelFillColor = "white",
+                        WiderLabels = FALSE,
+                        ReverseYAxis = FALSE,
+                        ReverseXAxis = FALSE,
+                        RemoveMissing = TRUE,
+                        ThemeChoice = "bw") {
 
   # ---------------- theme selection ----------------------------
 
@@ -227,10 +235,6 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
 
   # ---------------- input checking ----------------------------
 
-  NTimes <- deparse(substitute(Times)) # name of Times variable
-  NMeasurement <- deparse(substitute(Measurement)) # name of Measurement variable
-  NGrouping <- deparse(substitute(Grouping)) # name of Grouping variable
-
   # error checking and setup
   if (length(match.call()) <= 4) {
     stop("Not enough arguments passed requires a dataframe, plus at least three variables")
@@ -239,11 +243,23 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
   if (!hasArg(dataframe)) {
     stop("You didn't specify a dataframe to use", call. = FALSE)
   }
+
+  NTimes <- deparse(substitute(Times)) # name of Times variable
+  NMeasurement <- deparse(substitute(Measurement)) # name of Measurement variable
+  NGrouping <- deparse(substitute(Grouping)) # name of Grouping variable
+
+  if(is.null(argList$Data.label)) {
+    NData.label <- deparse(substitute(Measurement))
+    Data.label <- argList$Measurement
+  } else {
+    NData.label <- deparse(substitute(Data.label))
+    #     Data.label <- argList$Data.label
+  }
+
   Ndataframe <- argList$dataframe # name of dataframe
   if (!is(dataframe, "data.frame")) {
     stop(paste0("'", Ndataframe, "' does not appear to be a data frame"))
   }
-
   if (!NTimes %in% names(dataframe)) {
     stop(paste0("'", NTimes, "' is not the name of a variable in the dataframe"), call. = FALSE)
   }
@@ -255,6 +271,9 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
   }
   if (!NGrouping %in% names(dataframe)) {
     stop(paste0("'", NGrouping, "' is not the name of a variable in the dataframe"), call. = FALSE)
+  }
+  if (!NData.label %in% names(dataframe)) {
+    stop(paste0("'", NData.label, "' is not the name of a variable in the dataframe"), call. = FALSE)
   }
   if (anyNA(dataframe[[NGrouping]])) {
     stop(paste0("'", NGrouping, "' can not have missing data please remove those rows!"), call. = FALSE)
@@ -273,6 +292,11 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
     }
   }
 
+  Times <- enquo(Times)
+  Measurement <- enquo(Measurement)
+  Grouping <- enquo(Grouping)
+  Data.label <- enquo(Data.label)
+
   # ---------------- handle some special options ----------------------------
 
   if (ReverseXAxis) {
@@ -288,10 +312,6 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
     MySpecial <- c(MySpecial, scale_y_reverse())
   }
 
-  Times <- enquo(Times)
-  Measurement <- enquo(Measurement)
-  Grouping <- enquo(Grouping)
-
   if (length(LineColor) > 1) {
     if (length(LineColor) < length(unique(dataframe[[NGrouping]]))) {
       message(paste0("\nYou gave me ", length(LineColor), " colors I'm recycling colors because you have ", length(unique(dataframe[[NGrouping]])), " ", NGrouping, "s\n"))
@@ -306,7 +326,7 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
     }
   }
 
-  # complex logic to sort out missing values if any
+  # logic to sort out missing values if any
   if (anyNA(dataframe[[NMeasurement]])) { # are there any missing
     if (RemoveMissing) { # which way should we handle them
       dataframe <- dataframe %>%
@@ -351,17 +371,17 @@ newggslopegraph <- function(dataframe, Times, Measurement, Grouping,
       direction = "y"
     ) +
     # data point labels
-    geom_label(aes_(label = Measurement),
-      size = DataTextSize,
-      # label.padding controls fill padding
-      label.padding = unit(DataLabelPadding, "lines"),
-      # label.size controls width of line around label box
-      # 0 = no box line
-      label.size = DataLabelLineSize,
-      # color = text color of label
-      color = DataTextColor,
-      # fill background color for data label
-      fill = DataLabelFillColor
+    geom_label(aes_string(label = NData.label),
+               size = DataTextSize,
+               # label.padding controls fill padding
+               label.padding = unit(DataLabelPadding, "lines"),
+               # label.size controls width of line around label box
+               # 0 = no box line
+               label.size = DataLabelLineSize,
+               # color = text color of label
+               color = DataTextColor,
+               # fill background color for data label
+               fill = DataLabelFillColor
     ) +
     MySpecial +
     labs(
