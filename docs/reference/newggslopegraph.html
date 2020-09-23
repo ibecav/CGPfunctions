@@ -163,33 +163,34 @@ Makes the required adjustments to the ggplot2 parameters and returns the plot.</
     </div>
 
     <pre class="usage"><span class='fu'>newggslopegraph</span>(
-  <span class='no'>dataframe</span>,
-  <span class='no'>Times</span>,
-  <span class='no'>Measurement</span>,
-  <span class='no'>Grouping</span>,
-  <span class='kw'>Title</span> <span class='kw'>=</span> <span class='st'>"No title given"</span>,
-  <span class='kw'>SubTitle</span> <span class='kw'>=</span> <span class='st'>"No subtitle given"</span>,
-  <span class='kw'>Caption</span> <span class='kw'>=</span> <span class='st'>"No caption given"</span>,
-  <span class='kw'>XTextSize</span> <span class='kw'>=</span> <span class='fl'>12</span>,
-  <span class='kw'>YTextSize</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>TitleTextSize</span> <span class='kw'>=</span> <span class='fl'>14</span>,
-  <span class='kw'>SubTitleTextSize</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>CaptionTextSize</span> <span class='kw'>=</span> <span class='fl'>8</span>,
-  <span class='kw'>TitleJustify</span> <span class='kw'>=</span> <span class='st'>"left"</span>,
-  <span class='kw'>SubTitleJustify</span> <span class='kw'>=</span> <span class='st'>"left"</span>,
-  <span class='kw'>CaptionJustify</span> <span class='kw'>=</span> <span class='st'>"right"</span>,
-  <span class='kw'>LineThickness</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='st'>"ByGroup"</span>,
-  <span class='kw'>DataTextSize</span> <span class='kw'>=</span> <span class='fl'>2.5</span>,
-  <span class='kw'>DataTextColor</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
-  <span class='kw'>DataLabelPadding</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
-  <span class='kw'>DataLabelLineSize</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>DataLabelFillColor</span> <span class='kw'>=</span> <span class='st'>"white"</span>,
-  <span class='kw'>WiderLabels</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>ReverseYAxis</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>ReverseXAxis</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>RemoveMissing</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>ThemeChoice</span> <span class='kw'>=</span> <span class='st'>"bw"</span>
+  <span class='kw'>dataframe</span>,
+  <span class='kw'>Times</span>,
+  <span class='kw'>Measurement</span>,
+  <span class='kw'>Grouping</span>,
+  Data.label = <span class='kw'>NULL</span>,
+  Title = <span class='st'>"No title given"</span>,
+  SubTitle = <span class='st'>"No subtitle given"</span>,
+  Caption = <span class='st'>"No caption given"</span>,
+  XTextSize = <span class='fl'>12</span>,
+  YTextSize = <span class='fl'>3</span>,
+  TitleTextSize = <span class='fl'>14</span>,
+  SubTitleTextSize = <span class='fl'>10</span>,
+  CaptionTextSize = <span class='fl'>8</span>,
+  TitleJustify = <span class='st'>"left"</span>,
+  SubTitleJustify = <span class='st'>"left"</span>,
+  CaptionJustify = <span class='st'>"right"</span>,
+  LineThickness = <span class='fl'>1</span>,
+  LineColor = <span class='st'>"ByGroup"</span>,
+  DataTextSize = <span class='fl'>2.5</span>,
+  DataTextColor = <span class='st'>"black"</span>,
+  DataLabelPadding = <span class='fl'>0.05</span>,
+  DataLabelLineSize = <span class='fl'>0</span>,
+  DataLabelFillColor = <span class='st'>"white"</span>,
+  WiderLabels = <span class='fl'>FALSE</span>,
+  ReverseYAxis = <span class='fl'>FALSE</span>,
+  ReverseXAxis = <span class='fl'>FALSE</span>,
+  RemoveMissing = <span class='fl'>TRUE</span>,
+  ThemeChoice = <span class='st'>"bw"</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -220,6 +221,13 @@ when the measurements are not too disparate.</p></td>
       <th>Grouping</th>
       <td><p>a column inside the dataframe that will be used to group and
 distinguish measurements.</p></td>
+    </tr>
+    <tr>
+      <th>Data.label</th>
+      <td><p>an optional column inside the dataframe that will be used
+as the label for the data points plotted.  Can be complex strings and
+have `NA` values but must be of class `chr`.  By default `Measurement` is
+converted to `chr` and used.</p></td>
     </tr>
     <tr>
       <th>Title</th>
@@ -368,47 +376,55 @@ and <b>"tufte"</b>.</p></td>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='newcancer.html'>newcancer</a></code> and  <code><a href='newgdp.html'>newgdp</a></code></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Chuck Powell</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># the minimum command to generate a plot</span>
-<span class='fu'>newggslopegraph</span>(<span class='no'>newcancer</span>, <span class='no'>Year</span>, <span class='no'>Survival</span>, <span class='no'>Type</span>)</div><div class='img'><img src='newggslopegraph-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>newggslopegraph</span>(<span class='kw'>newcancer</span>, <span class='kw'>Year</span>, <span class='kw'>Survival</span>, <span class='kw'>Type</span>)
+</div><div class='img'><img src='newggslopegraph-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># adding a title which is always recommended</span>
-<span class='fu'>newggslopegraph</span>(<span class='no'>newcancer</span>, <span class='no'>Year</span>, <span class='no'>Survival</span>, <span class='no'>Type</span>,
-  <span class='kw'>Title</span> <span class='kw'>=</span> <span class='st'>"Estimates of Percent Survival Rates"</span>,
-  <span class='kw'>SubTitle</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>Caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</div><div class='img'><img src='newggslopegraph-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>newggslopegraph</span>(<span class='kw'>newcancer</span>, <span class='kw'>Year</span>, <span class='kw'>Survival</span>, <span class='kw'>Type</span>,
+  Title = <span class='st'>"Estimates of Percent Survival Rates"</span>,
+  SubTitle = <span class='kw'>NULL</span>,
+  Caption = <span class='kw'>NULL</span>
+)
+</div><div class='img'><img src='newggslopegraph-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># simple formatting changes</span>
-<span class='fu'>newggslopegraph</span>(<span class='no'>newcancer</span>, <span class='no'>Year</span>, <span class='no'>Survival</span>, <span class='no'>Type</span>,
-  <span class='kw'>Title</span> <span class='kw'>=</span> <span class='st'>"Estimates of Percent Survival Rates"</span>,
-  <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='st'>"darkgray"</span>,
-  <span class='kw'>LineThickness</span> <span class='kw'>=</span> <span class='fl'>.5</span>,
-  <span class='kw'>SubTitle</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>Caption</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</div><div class='img'><img src='newggslopegraph-3.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>newggslopegraph</span>(<span class='kw'>newcancer</span>, <span class='kw'>Year</span>, <span class='kw'>Survival</span>, <span class='kw'>Type</span>,
+  Title = <span class='st'>"Estimates of Percent Survival Rates"</span>,
+  LineColor = <span class='st'>"darkgray"</span>,
+  LineThickness = <span class='fl'>.5</span>,
+  SubTitle = <span class='kw'>NULL</span>,
+  Caption = <span class='kw'>NULL</span>
+)
+</div><div class='img'><img src='newggslopegraph-3.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># complex formatting with recycling and wider labels see vignette for more examples</span>
-<span class='fu'>newggslopegraph</span>(<span class='no'>newcancer</span>, <span class='no'>Year</span>, <span class='no'>Survival</span>, <span class='no'>Type</span>,
-  <span class='kw'>Title</span> <span class='kw'>=</span> <span class='st'>"Estimates of Percent Survival Rates"</span>,
-  <span class='kw'>SubTitle</span> <span class='kw'>=</span> <span class='st'>"Based on: Edward Tufte, Beautiful Evidence, 174, 176."</span>,
-  <span class='kw'>Caption</span> <span class='kw'>=</span> <span class='st'>"https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0003nk"</span>,
-  <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"black"</span>, <span class='st'>"red"</span>, <span class='st'>"grey"</span>),
-  <span class='kw'>LineThickness</span> <span class='kw'>=</span> <span class='fl'>.5</span>,
-  <span class='kw'>WiderLabels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</div><div class='output co'>#&gt; <span class='message'></span>
+<span class='fu'>newggslopegraph</span>(<span class='kw'>newcancer</span>, <span class='kw'>Year</span>, <span class='kw'>Survival</span>, <span class='kw'>Type</span>,
+  Title = <span class='st'>"Estimates of Percent Survival Rates"</span>,
+  SubTitle = <span class='st'>"Based on: Edward Tufte, Beautiful Evidence, 174, 176."</span>,
+  Caption = <span class='st'>"https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0003nk"</span>,
+  LineColor = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"black"</span>, <span class='st'>"red"</span>, <span class='st'>"grey"</span>),
+  LineThickness = <span class='fl'>.5</span>,
+  WiderLabels = <span class='fl'>TRUE</span>
+)
+</div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>You gave me 3 colors I'm recycling colors because you have 24 Types</span></div><div class='img'><img src='newggslopegraph-4.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># not a great example but demonstrating functionality</span>
-<span class='no'>newgdp</span>$<span class='no'>rGDP</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>newgdp</span>$<span class='no'>GDP</span>)
+<span class='kw'>newgdp</span><span class='op'>$</span><span class='kw'>rGDP</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='kw'>newgdp</span><span class='op'>$</span><span class='kw'>GDP</span>)
 
-<span class='fu'>newggslopegraph</span>(<span class='no'>newgdp</span>,
-  <span class='no'>Year</span>,
-  <span class='no'>rGDP</span>,
-  <span class='no'>Country</span>,
-  <span class='kw'>LineColor</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"grey"</span>, <span class='fl'>3</span>), <span class='st'>"red"</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"grey"</span>, <span class='fl'>11</span>)),
-  <span class='kw'>DataTextSize</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>DataLabelFillColor</span> <span class='kw'>=</span> <span class='st'>"gray"</span>,
-  <span class='kw'>DataLabelPadding</span> <span class='kw'>=</span> <span class='fl'>.2</span>,
-  <span class='kw'>DataLabelLineSize</span> <span class='kw'>=</span> <span class='fl'>.5</span>
-)</div><div class='img'><img src='newggslopegraph-5.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>newggslopegraph</span>(<span class='kw'>newgdp</span>,
+  <span class='kw'>Year</span>,
+  <span class='kw'>rGDP</span>,
+  <span class='kw'>Country</span>,
+  LineColor = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"grey"</span>, <span class='fl'>3</span>), <span class='st'>"red"</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"grey"</span>, <span class='fl'>11</span>)),
+  DataTextSize = <span class='fl'>3</span>,
+  DataLabelFillColor = <span class='st'>"gray"</span>,
+  DataLabelPadding = <span class='fl'>.2</span>,
+  DataLabelLineSize = <span class='fl'>.5</span>
+)
+</div><div class='img'><img src='newggslopegraph-5.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -424,7 +440,7 @@ and <b>"tufte"</b>.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

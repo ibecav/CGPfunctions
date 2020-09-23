@@ -154,7 +154,7 @@
     <p>Cross two vectors of variable names from a dataframe</p>
     </div>
 
-    <pre class="usage"><span class='fu'>cross2_var_vectors</span>(<span class='no'>data</span>, <span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>cross2_var_vectors</span>(<span class='kw'>data</span>, <span class='kw'>x</span>, <span class='kw'>y</span>, verbose = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -179,9 +179,13 @@ output to the screen</p></td>
 
     <p>a list with two sublists `lista` and `listb`. Very handy for
   feeding the lists to `purrr` for further processing.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Chuck Powell</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>cross2_var_vectors</span>(<span class='no'>mtcars</span>, <span class='fl'>9</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>10</span>:<span class='fl'>11</span>))</div><div class='output co'>#&gt; $lista
+    <pre class="examples"><div class='input'><span class='fu'>cross2_var_vectors</span>(<span class='kw'>mtcars</span>, <span class='fl'>9</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>10</span><span class='op'>:</span><span class='fl'>11</span>))
+</div><div class='output co'>#&gt; $lista
 #&gt; $lista[[1]]
 #&gt; [1] "cyl"
 #&gt; 
@@ -202,7 +206,8 @@ output to the screen</p></td>
 #&gt; $listb[[3]]
 #&gt; [1] "am"
 #&gt; 
-#&gt; </div><div class='input'><span class='fu'>cross2_var_vectors</span>(<span class='no'>mtcars</span>, <span class='st'>"am"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"cyl"</span>, <span class='st'>"gear"</span>, <span class='st'>"carb"</span>))</div><div class='output co'>#&gt; $lista
+#&gt; </div><div class='input'><span class='fu'>cross2_var_vectors</span>(<span class='kw'>mtcars</span>, <span class='st'>"am"</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"cyl"</span>, <span class='st'>"gear"</span>, <span class='st'>"carb"</span>))
+</div><div class='output co'>#&gt; $lista
 #&gt; $lista[[1]]
 #&gt; [1] "cyl"
 #&gt; 
@@ -223,9 +228,10 @@ output to the screen</p></td>
 #&gt; $listb[[3]]
 #&gt; [1] "am"
 #&gt; 
-#&gt; </div><div class='input'><span class='no'>x2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"am"</span>, <span class='st'>"carb"</span>)
-<span class='no'>y2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"vs"</span>, <span class='st'>"cyl"</span>, <span class='st'>"gear"</span>)
-<span class='fu'>cross2_var_vectors</span>(<span class='no'>mtcars</span>, <span class='no'>x2</span>, <span class='no'>y2</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; Pair 1 lista = vs listb = am
+#&gt; </div><div class='input'><span class='kw'>x2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"am"</span>, <span class='st'>"carb"</span>)
+<span class='kw'>y2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"vs"</span>, <span class='st'>"cyl"</span>, <span class='st'>"gear"</span>)
+<span class='fu'>cross2_var_vectors</span>(<span class='kw'>mtcars</span>, <span class='kw'>x2</span>, <span class='kw'>y2</span>, verbose = <span class='fl'>TRUE</span>)
+</div><div class='output co'>#&gt; Pair 1 lista = vs listb = am
 #&gt; Pair 2 lista = cyl listb = am
 #&gt; Pair 3 lista = gear listb = am
 #&gt; Pair 4 lista = vs listb = carb
@@ -270,28 +276,30 @@ output to the screen</p></td>
 #&gt; [1] "carb"
 #&gt; 
 #&gt; </div><div class='input'>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>variables_list</span> <span class='kw'>&lt;-</span> <span class='fu'>cross2_var_vectors</span>(<span class='no'>mtcars</span>, <span class='no'>x2</span>, <span class='no'>y2</span>)
-<span class='no'>mytitles</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>stringr</span><span class='kw ns'>::</span><span class='fu'><a href='https://stringr.tidyverse.org/reference/str_c.html'>str_c</a></span>(
-  <span class='kw pkg'>stringr</span><span class='kw ns'>::</span><span class='fu'><a href='https://stringr.tidyverse.org/reference/case.html'>str_to_title</a></span>(<span class='no'>variables_list</span>$<span class='no'>listb</span>),
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>variables_list</span> <span class='op'>&lt;-</span> <span class='fu'>cross2_var_vectors</span>(<span class='kw'>mtcars</span>, <span class='kw'>x2</span>, <span class='kw'>y2</span>)
+<span class='kw'>mytitles</span> <span class='op'>&lt;-</span> <span class='kw'>stringr</span>::<span class='fu'><a href='https://stringr.tidyverse.org/reference/str_c.html'>str_c</a></span>(
+  <span class='kw'>stringr</span>::<span class='fu'><a href='https://stringr.tidyverse.org/reference/case.html'>str_to_title</a></span>(<span class='kw'>variables_list</span><span class='op'>$</span><span class='kw'>listb</span>),
   <span class='st'>" by "</span>,
-  <span class='kw pkg'>stringr</span><span class='kw ns'>::</span><span class='fu'><a href='https://stringr.tidyverse.org/reference/case.html'>str_to_title</a></span>(<span class='no'>variables_list</span>$<span class='no'>lista</span>),
+  <span class='kw'>stringr</span>::<span class='fu'><a href='https://stringr.tidyverse.org/reference/case.html'>str_to_title</a></span>(<span class='kw'>variables_list</span><span class='op'>$</span><span class='kw'>lista</span>),
   <span class='st'>" in mtcars data"</span>
   )
-<span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map2.html'>pmap</a></span>(
-<span class='kw'>.l</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-   <span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>variables_list</span><span class='kw'>[[</span><span class='fl'>1</span>]], <span class='co'># variables_list$lista</span>
-   <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>variables_list</span><span class='kw'>[[</span><span class='fl'>2</span>]], <span class='co'># variables_list$listb</span>
-   <span class='kw'>title</span> <span class='kw'>=</span> <span class='no'>mytitles</span>
+<span class='kw'>purrr</span>::<span class='fu'><a href='https://purrr.tidyverse.org/reference/map2.html'>pmap</a></span>(
+.l = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
+   x = <span class='kw'>variables_list</span>[[<span class='fl'>1</span>]], <span class='co'># variables_list$lista</span>
+   y = <span class='kw'>variables_list</span>[[<span class='fl'>2</span>]], <span class='co'># variables_list$listb</span>
+   title = <span class='kw'>mytitles</span>
 ),
-<span class='kw'>.f</span> <span class='kw'>=</span> <span class='kw pkg'>CGPfunctions</span><span class='kw ns'>::</span><span class='no'><a href='PlotXTabs2.html'>PlotXTabs2</a></span>,
-<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>,
-<span class='kw'>ylab</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-<span class='kw'>perc.k</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-<span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"Set2"</span>
+.f = <span class='kw'>CGPfunctions</span>::<span class='kw'><a href='PlotXTabs2.html'>PlotXTabs2</a></span>,
+data = <span class='kw'>mtcars</span>,
+ylab = <span class='kw'>NULL</span>,
+perc.k = <span class='fl'>1</span>,
+palette = <span class='st'>"Set2"</span>
 )
 
-}</div></pre>
+}
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -307,7 +315,7 @@ output to the screen</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
