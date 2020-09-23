@@ -9,6 +9,7 @@ newggslopegraph(
   Times,
   Measurement,
   Grouping,
+  Data.label = NULL,
   Title = "No title given",
   SubTitle = "No subtitle given",
   Caption = "No caption given",
@@ -52,6 +53,11 @@ when the measurements are not too disparate.}
 
 \item{Grouping}{a column inside the dataframe that will be used to group and
 distinguish measurements.}
+
+\item{Data.label}{an optional column inside the dataframe that will be used
+as the label for the data points plotted.  Can be complex strings and
+have `NA` values but must be of class `chr`.  By default `Measurement` is
+converted to `chr` and used.}
 
 \item{Title}{Optionally the title to be displayed. Title = NULL will remove it
 entirely. Title = "" will provide an empty title but retain the spacing.}

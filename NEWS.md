@@ -7,6 +7,7 @@
   - Better checking for cell counts of zero or less than 3
   - Now possible to plot without errorbars
   - Updated title to be more informative 
+  - Added better data labelling to newggslopegraph
 
 * Release 0.6.2 in development July 2020 CRAN submission July 16
   - Planned enhancements to Plot2WayANOVA

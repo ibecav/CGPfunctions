@@ -97,13 +97,13 @@
 
       
 
-      </header><script src="Using-Plot2WayANOVA_files/header-attrs-2.3/header-attrs.js"></script><div class="row">
+      </header><script src="Using-Plot2WayANOVA_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Using Plot2WayAnova</h1>
                         <h4 class="author">Chuck Powell</h4>
             
-            <h4 class="date">2020-07-31</h4>
+            <h4 class="date">2020-09-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ibecav/CGPfunctions/blob/master/vignettes/Using-Plot2WayANOVA.Rmd"><code>vignettes/Using-Plot2WayANOVA.Rmd</code></a></small>
       <div class="hidden name"><code>Using-Plot2WayANOVA.Rmd</code></div>
@@ -161,20 +161,25 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co"># Install from CRAN</span>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="co"># Install from CRAN</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"CGPfunctions"</span>)
 
 <span class="co"># Or the development version from GitHub</span>
 <span class="co"># install.packages("devtools")</span>
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"ibecav/CGPfunctions"</span>)</pre></body></html></div>
+<span class="kw">devtools</span>::<span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"ibecav/CGPfunctions"</span>)
+</pre></div>
 <p>then load the library.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">CGPfunctions</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/ibecav/CGPfunctions">CGPfunctions</a></span>)
+</pre></div>
 </div>
 <div id="example-of-using-the-function" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example-of-using-the-function" class="anchor"></a>Example of using the function</h2>
 <p>The only two required parameters are a formula and a dataframe (like) object. If we run the function in its simplest form here’s what we get.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/Plot2WayANOVA.html">Plot2WayANOVA</a></span>(<span class="kw">formula</span> <span class="kw">=</span> <span class="no">mpg</span> ~ <span class="no">am</span> * <span class="no">cyl</span>, <span class="kw">dataframe</span> <span class="kw">=</span> <span class="no">mtcars</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="../reference/Plot2WayANOVA.html">Plot2WayANOVA</a></span>(formula = <span class="kw">mpg</span> <span class="op">~</span> <span class="kw">am</span> <span class="op">*</span> <span class="kw">cyl</span>, dataframe = <span class="kw">mtcars</span>)
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Converting am to a factor --- check your results</span>
 <span class="co">#&gt; </span>
@@ -257,12 +262,13 @@
 <span class="co">#&gt; # A tibble: 4 x 4</span>
 <span class="co">#&gt;   model                    bf support                        margin_of_error</span>
 <span class="co">#&gt;   &lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt;                                    &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 am + cyl          4341807.  " data support is extreme"        0.0214      </span>
-<span class="co">#&gt; 2 am + cyl + am:cyl 3075065.  " data support is extreme"        0.0314      </span>
+<span class="co">#&gt; 1 am + cyl          4287851.  " data support is extreme"        0.0117      </span>
+<span class="co">#&gt; 2 am + cyl + am:cyl 3155724.  " data support is extreme"        0.0266      </span>
 <span class="co">#&gt; 3 cyl               2274206.  " data support is extreme"        0.0000000127</span>
 <span class="co">#&gt; 4 am                     86.6 " data support is very strong"    0.000000217</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Interaction graph plotted...</span></pre></body></html></div>
+<span class="co">#&gt; Interaction graph plotted...</span>
+</pre></div>
 <p><img src="Using-Plot2WayANOVA_files/figure-html/Plot2WayANOVA-1.png" width="672"></p>
 <p>In the console you’ll receive a series of messages chronicling your progress and any diagnostic information. In this case <code>am</code> and <code>cyl</code> are being coerced to factors and you’re being prompted to make sure that’s what is intended.</p>
 <p>Next you receive a warning because you have a very unbalanced design. There are only two 8 cylinder cars with a manual transmission and twelve 8 cylinder cars with automatics. Whereas there are eight 4 cylinders with manual and only three that are automatics. Imbalance in our design worries us for two reasons. One is that it causes a lack of statistical power and creates some math challenges in deciding how to divide up the sums of the squared differences. This data set causes the more troublesome worry. Are the number of cylinders and manual versus automatic related systematically which would call our whole design into question. Make sure you can answer questions about which is at work here, or make sure you have a balanced design.</p>
@@ -291,16 +297,17 @@
 <li>Change the plotted shape for the group mean to a square not a diamond</li>
 <li>Change our post hoc test method to something less conservative than Scheffe</li>
 </ol>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/Plot2WayANOVA.html">Plot2WayANOVA</a></span>(<span class="kw">formula</span> <span class="kw">=</span> <span class="no">mpg</span> ~ <span class="no">cyl</span> * <span class="no">am</span>,
-              <span class="kw">dataframe</span> <span class="kw">=</span> <span class="no">mtcars</span>,
-              <span class="kw">confidence</span> <span class="kw">=</span> <span class="fl">.99</span>,
-              <span class="kw">title</span> <span class="kw">=</span> <span class="st">"MPG by cylinders and type transmission"</span>,
-              <span class="kw">xlab</span> <span class="kw">=</span> <span class="st">"Cylinders"</span>,
-              <span class="kw">ylab</span> <span class="kw">=</span> <span class="st">"Miles per gallon"</span>,
-              <span class="kw">mean.label</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-              <span class="kw">mean.shape</span> <span class="kw">=</span> <span class="fl">22</span>,
-              <span class="kw">posthoc.method</span> <span class="kw">=</span> <span class="st">"lsd"</span>,
-              <span class="kw">errorbar.display</span> <span class="kw">=</span> <span class="st">"SEM"</span>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="../reference/Plot2WayANOVA.html">Plot2WayANOVA</a></span>(formula = <span class="kw">mpg</span> <span class="op">~</span> <span class="kw">cyl</span> <span class="op">*</span> <span class="kw">am</span>, 
+              dataframe = <span class="kw">mtcars</span>,
+              confidence = <span class="fl">.99</span>,
+              title = <span class="st">"MPG by cylinders and type transmission"</span>,
+              xlab = <span class="st">"Cylinders"</span>,
+              ylab = <span class="st">"Miles per gallon"</span>,
+              mean.label = <span class="fl">TRUE</span>,
+              mean.shape = <span class="fl">22</span>,
+              posthoc.method = <span class="st">"lsd"</span>,
+              errorbar.display = <span class="st">"SEM"</span>
               )
 <span class="co">#&gt; # A tibble: 6 x 3</span>
 <span class="co">#&gt;   cyl   am    count</span>
@@ -362,10 +369,11 @@
 <span class="co">#&gt; # A tibble: 4 x 4</span>
 <span class="co">#&gt;   model                    bf support                        margin_of_error</span>
 <span class="co">#&gt;   &lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt;                                    &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 cyl + am          4327176.  " data support is extreme"        0.0180      </span>
-<span class="co">#&gt; 2 cyl + am + cyl:am 3179346.  " data support is extreme"        0.0160      </span>
+<span class="co">#&gt; 1 cyl + am          4482020.  " data support is extreme"        0.0221      </span>
+<span class="co">#&gt; 2 cyl + am + cyl:am 3112710.  " data support is extreme"        0.0205      </span>
 <span class="co">#&gt; 3 cyl               2274206.  " data support is extreme"        0.0000000127</span>
-<span class="co">#&gt; 4 am                     86.6 " data support is very strong"    0.000000217</span></pre></body></html></div>
+<span class="co">#&gt; 4 am                     86.6 " data support is very strong"    0.000000217</span>
+</pre></div>
 <p><img src="Using-Plot2WayANOVA_files/figure-html/Plot2WayANOVA2-1.png" width="672"></p>
 <p><strong>Please don’t fail to notice how liberal Fisher’s LSD is compared to Scheffe especially given we’ve demanded more confidence </strong></p>
 </div>
@@ -383,28 +391,29 @@
 <li>
 <strong>New</strong> custom text for the factor labels (bigger and blue)</li>
 </ol>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co"># Create a new dataset</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">stringi</span>)
-<span class="no">newmpg</span> <span class="kw">&lt;-</span> <span class="no">mpg</span> <span class="kw">%&gt;%</span>
-          <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">cyl</span> <span class="kw">!=</span> <span class="fl">5</span>) <span class="kw">%&gt;%</span>
-          <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">am</span> <span class="kw">=</span> <span class="kw pkg">stringi</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/stringi/man/stri_extract.html">stri_extract</a></span>(<span class="no">trans</span>, <span class="kw">regex</span> <span class="kw">=</span> <span class="st">"auto|manual"</span>))
-<span class="fu"><a href="../reference/Plot2WayANOVA.html">Plot2WayANOVA</a></span>(<span class="kw">formula</span> <span class="kw">=</span> <span class="no">hwy</span> ~ <span class="no">am</span> * <span class="no">cyl</span>,
-              <span class="kw">dataframe</span> <span class="kw">=</span> <span class="no">newmpg</span>,
-              <span class="kw">ylab</span> <span class="kw">=</span> <span class="st">"Highway mileage"</span>,
-              <span class="kw">xlab</span> <span class="kw">=</span> <span class="st">"Transmission type"</span>,
-              <span class="kw">plottype</span> <span class="kw">=</span> <span class="st">"line"</span>,
-              <span class="kw">offset.style</span> <span class="kw">=</span> <span class="st">"wide"</span>,
-              <span class="kw">overlay.type</span> <span class="kw">=</span> <span class="st">"box"</span>,
-              <span class="kw">mean.label</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-              <span class="kw">mean.shape</span> <span class="kw">=</span> <span class="fl">20</span>,
-              <span class="kw">mean.size</span> <span class="kw">=</span> <span class="fl">3</span>,
-              <span class="kw">mean.label.size</span> <span class="kw">=</span> <span class="fl">3</span>,
-              <span class="kw">show.dots</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-              <span class="kw">errorbar.display</span> <span class="kw">=</span> <span class="st">"SD"</span>,
-              <span class="kw">ggtheme</span> <span class="kw">=</span> <span class="kw pkg">ggplot2</span><span class="kw ns">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>(),
-              <span class="kw">ggplot.component</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="kw">axis.text.x</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>(<span class="kw">size</span><span class="kw">=</span><span class="fl">14</span>, <span class="kw">color</span><span class="kw">=</span><span class="st">"darkblue"</span>))
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="co"># Create a new dataset</span>
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://dplyr.tidyverse.org">dplyr</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://stringi.gagolewski.com">stringi</a></span>)
+<span class="kw">newmpg</span> <span class="op">&lt;-</span> <span class="kw">mpg</span> <span class="op">%&gt;%</span> 
+          <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="kw">cyl</span> != <span class="fl">5</span>) <span class="op">%&gt;%</span> 
+          <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(am = <span class="kw">stringi</span>::<span class="fu"><a href="https://rdrr.io/pkg/stringi/man/stri_extract.html">stri_extract</a></span>(<span class="kw">trans</span>, regex = <span class="st">"auto|manual"</span>))
+<span class="fu"><a href="../reference/Plot2WayANOVA.html">Plot2WayANOVA</a></span>(formula = <span class="kw">hwy</span> <span class="op">~</span> <span class="kw">am</span> <span class="op">*</span> <span class="kw">cyl</span>,
+              dataframe = <span class="kw">newmpg</span>,
+              ylab = <span class="st">"Highway mileage"</span>,
+              xlab = <span class="st">"Transmission type"</span>,
+              plottype = <span class="st">"line"</span>,
+              offset.style = <span class="st">"wide"</span>,
+              overlay.type = <span class="st">"box"</span>,
+              mean.label = <span class="fl">TRUE</span>, 
+              mean.shape = <span class="fl">20</span>, 
+              mean.size = <span class="fl">3</span>, 
+              mean.label.size = <span class="fl">3</span>,
+              show.dots = <span class="fl">TRUE</span>,
+              errorbar.display = <span class="st">"SD"</span>,
+              ggtheme = <span class="kw">ggplot2</span>::<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span>(),
+              ggplot.component = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(axis.text.x = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>(size=<span class="fl">14</span>, color=<span class="st">"darkblue"</span>))
               )
 <span class="co">#&gt;             term    sumsq   meansq  df statistic p.value etasq partial.etasq</span>
 <span class="co">#&gt; am            am   33.447   33.447   1     2.235   0.136 0.004         0.010</span>
@@ -460,7 +469,8 @@
 <span class="co">#&gt; 1 cyl               8.86e39 " data support is extreme" 0.0000000685   </span>
 <span class="co">#&gt; 2 am + cyl          4.16e39 " data support is extreme" 0.0175         </span>
 <span class="co">#&gt; 3 am + cyl + am:cyl 1.22e39 " data support is extreme" 0.0150         </span>
-<span class="co">#&gt; 4 am                7.89e 2 " data support is extreme" 0.0000000000581</span></pre></body></html></div>
+<span class="co">#&gt; 4 am                7.89e 2 " data support is extreme" 0.0000000000581</span>
+</pre></div>
 <p><img src="Using-Plot2WayANOVA_files/figure-html/Plot2WayANOVA3-1.png" width="672"></p>
 </div>
 </div>
@@ -498,7 +508,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
