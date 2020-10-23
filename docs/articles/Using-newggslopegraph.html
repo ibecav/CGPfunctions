@@ -97,13 +97,14 @@
 
       
 
-      </header><script src="Using-newggslopegraph_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="Using-newggslopegraph_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="Using-newggslopegraph_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="Using-newggslopegraph_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Using newggslopegraph</h1>
                         <h4 class="author">Chuck Powell</h4>
             
-            <h4 class="date">2020-09-23</h4>
+            <h4 class="date">2020-10-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ibecav/CGPfunctions/blob/master/vignettes/Using-newggslopegraph.Rmd"><code>vignettes/Using-newggslopegraph.Rmd</code></a></small>
       <div class="hidden name"><code>Using-newggslopegraph.Rmd</code></div>
@@ -120,20 +121,19 @@
 <a href="#installation-and-setup" class="anchor"></a>Installation and setup</h2>
 <p>Long term I’ll try and ensure the version on <code>CRAN</code> is well maintained but for now you’re better served by grabbing the current version from GITHUB.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw">knitr</span>::<span class="kw"><a href="https://rdrr.io/pkg/knitr/man/opts_chunk.html">opts_chunk</a></span><span class="op">$</span><span class="fu">set</span>(
-  collapse = <span class="fl">TRUE</span>,
-  comment = <span class="st">"#&gt;"</span>
-)
+<span class="fu">knitr</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/knitr/man/opts_chunk.html">opts_chunk</a></span><span class="op">$</span><span class="fu">set</span><span class="op">(</span>
+  collapse <span class="op">=</span> <span class="cn">TRUE</span>,
+  comment <span class="op">=</span> <span class="st">"#&gt;"</span>
+<span class="op">)</span>
 <span class="co"># Install from CRAN</span>
 <span class="co"># install.packages("CGPfunctions")</span>
 
 <span class="co"># Or the development version from GitHub</span>
 <span class="co"># install.packages("devtools")</span>
 <span class="co"># devtools::install_github("ibecav/CGPfunctions")</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/ibecav/CGPfunctions">CGPfunctions</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://tidyr.tidyverse.org">tidyr</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://dplyr.tidyverse.org">dplyr</a></span>)
-</pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ibecav/CGPfunctions">CGPfunctions</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></pre></div>
 <pre><code>## 
 ## Attaching package: 'dplyr'</code></pre>
 <pre><code>## The following objects are masked from 'package:stats':
@@ -148,20 +148,18 @@
 <a href="#simple-examples" class="anchor"></a>Simple examples</h2>
 <p>If you’re unfamiliar with slopegraphs or just want to see what the display is all about the dataset I’ve provided can get you started in one line</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span>(<span class="kw">newcancer</span>,<span class="kw">Year</span>,<span class="kw">Survival</span>,<span class="kw">Type</span>)
-</pre></div>
+<span class="fu"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span><span class="op">(</span><span class="va">newcancer</span>,<span class="va">Year</span>,<span class="va">Survival</span>,<span class="va">Type</span><span class="op">)</span></pre></div>
 <p><img src="Using-newggslopegraph_files/figure-html/ggslope1-1.png" width="672"></p>
 <p>Optionally you can provide important label information through <code>Title</code>, <code>Subtitle</code>, and <code>Caption</code> arguments. You can suppress them all together by setting them <code>= NULL</code> but since I think they are very important the default is to gently remind you, that you have not provided any information. Let’s provide a title and sub-title but skip the caption.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="fu"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span>(dataframe = <span class="kw">newcancer</span>,
-                Times = <span class="kw">Year</span>,
-                Measurement = <span class="kw">Survival</span>,
-                Grouping = <span class="kw">Type</span>,
-                Title = <span class="st">"Estimates of Percent Survival Rates"</span>,
-                SubTitle = <span class="st">"Based on: Edward Tufte, Beautiful Evidence, 174, 176."</span>,
-                Caption = <span class="kw">NULL</span>
-                )
-</pre></div>
+<span class="fu"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span><span class="op">(</span>dataframe <span class="op">=</span> <span class="va">newcancer</span>,
+                Times <span class="op">=</span> <span class="va">Year</span>,
+                Measurement <span class="op">=</span> <span class="va">Survival</span>,
+                Grouping <span class="op">=</span> <span class="va">Type</span>,
+                Title <span class="op">=</span> <span class="st">"Estimates of Percent Survival Rates"</span>,
+                SubTitle <span class="op">=</span> <span class="st">"Based on: Edward Tufte, Beautiful Evidence, 174, 176."</span>,
+                Caption <span class="op">=</span> <span class="cn">NULL</span>
+                <span class="op">)</span></pre></div>
 <p><img src="Using-newggslopegraph_files/figure-html/ggslope2-1.png" width="672"></p>
 </div>
 <div id="how-it-all-works" class="section level2">
@@ -188,48 +186,45 @@
 </blockquote>
 <p><code>moredata$Date</code> is the hypothetical polling date as a factor (in this case <code>character</code> would work equally well). <code>moredata$Party</code> is the various political parties and <code>moredata$Pct</code> is the percentage of the vote they are estimated to have.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="kw">moredata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/structure.html">structure</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(Date = <span class="fu"><a href="https://rdrr.io/r/base/structure.html">structure</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1L</span>, <span class="fl">1L</span>, <span class="fl">1L</span>, <span class="fl">1L</span>, <span class="fl">1L</span>, <span class="fl">2L</span>, <span class="fl">2L</span>, <span class="fl">2L</span>, <span class="fl">2L</span>, <span class="fl">2L</span>, <span class="fl">3L</span>, <span class="fl">3L</span>, <span class="fl">3L</span>, <span class="fl">3L</span>, <span class="fl">3L</span>), 
-                                            .Label = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"11-May-18"</span>, <span class="st">"18-May-18"</span>, <span class="st">"25-May-18"</span>), 
-                                            class = <span class="st">"factor"</span>), 
-                           Party = <span class="fu"><a href="https://rdrr.io/r/base/structure.html">structure</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">5L</span>, <span class="fl">3L</span>, <span class="fl">2L</span>, <span class="fl">1L</span>, <span class="fl">4L</span>, <span class="fl">5L</span>, <span class="fl">3L</span>, <span class="fl">2L</span>, <span class="fl">1L</span>, <span class="fl">4L</span>, <span class="fl">5L</span>, <span class="fl">3L</span>, <span class="fl">2L</span>, <span class="fl">1L</span>, <span class="fl">4L</span>), 
-                                             .Label = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Green"</span>, <span class="st">"Liberal"</span>, <span class="st">"NDP"</span>, <span class="st">"Others"</span>, <span class="st">"PC"</span>), 
-                                             class = <span class="st">"factor"</span>), 
-                           Pct = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">42.3</span>, <span class="fl">28.4</span>, <span class="fl">22.1</span>, <span class="fl">5.4</span>, <span class="fl">1.8</span>, <span class="fl">41.9</span>, <span class="fl">29.3</span>, <span class="fl">22.3</span>, <span class="fl">5</span>, <span class="fl">1.4</span>, <span class="fl">41.9</span>, <span class="fl">26.8</span>, <span class="fl">26.8</span>, <span class="fl">5</span>, <span class="fl">1.4</span>)), 
-                      class = <span class="st">"data.frame"</span>, 
-                      row.names = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">NA</span>, <span class="op">-</span><span class="fl">15L</span>))
+<span class="va">moredata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/structure.html">structure</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>Date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/structure.html">structure</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1L</span>, <span class="fl">1L</span>, <span class="fl">1L</span>, <span class="fl">1L</span>, <span class="fl">1L</span>, <span class="fl">2L</span>, <span class="fl">2L</span>, <span class="fl">2L</span>, <span class="fl">2L</span>, <span class="fl">2L</span>, <span class="fl">3L</span>, <span class="fl">3L</span>, <span class="fl">3L</span>, <span class="fl">3L</span>, <span class="fl">3L</span><span class="op">)</span>, 
+                                            .Label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"11-May-18"</span>, <span class="st">"18-May-18"</span>, <span class="st">"25-May-18"</span><span class="op">)</span>, 
+                                            class <span class="op">=</span> <span class="st">"factor"</span><span class="op">)</span>, 
+                           Party <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/structure.html">structure</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5L</span>, <span class="fl">3L</span>, <span class="fl">2L</span>, <span class="fl">1L</span>, <span class="fl">4L</span>, <span class="fl">5L</span>, <span class="fl">3L</span>, <span class="fl">2L</span>, <span class="fl">1L</span>, <span class="fl">4L</span>, <span class="fl">5L</span>, <span class="fl">3L</span>, <span class="fl">2L</span>, <span class="fl">1L</span>, <span class="fl">4L</span><span class="op">)</span>, 
+                                             .Label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Green"</span>, <span class="st">"Liberal"</span>, <span class="st">"NDP"</span>, <span class="st">"Others"</span>, <span class="st">"PC"</span><span class="op">)</span>, 
+                                             class <span class="op">=</span> <span class="st">"factor"</span><span class="op">)</span>, 
+                           Pct <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">42.3</span>, <span class="fl">28.4</span>, <span class="fl">22.1</span>, <span class="fl">5.4</span>, <span class="fl">1.8</span>, <span class="fl">41.9</span>, <span class="fl">29.3</span>, <span class="fl">22.3</span>, <span class="fl">5</span>, <span class="fl">1.4</span>, <span class="fl">41.9</span>, <span class="fl">26.8</span>, <span class="fl">26.8</span>, <span class="fl">5</span>, <span class="fl">1.4</span><span class="op">)</span><span class="op">)</span>, 
+                      class <span class="op">=</span> <span class="st">"data.frame"</span>, 
+                      row.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="op">-</span><span class="fl">15L</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#tail(moredata)</span>
-<span class="fu"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span>(<span class="kw">moredata</span>,<span class="kw">Date</span>,<span class="kw">Pct</span>,<span class="kw">Party</span>, Title = <span class="st">"Notional data"</span>, SubTitle = <span class="kw">NULL</span>, Caption = <span class="kw">NULL</span>)
+<span class="fu"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span><span class="op">(</span><span class="va">moredata</span>,<span class="va">Date</span>,<span class="va">Pct</span>,<span class="va">Party</span>, Title <span class="op">=</span> <span class="st">"Notional data"</span>, SubTitle <span class="op">=</span> <span class="cn">NULL</span>, Caption <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Converting 'Date' to an ordered factor</span>
-</pre></div>
+<span class="co">#&gt; Converting 'Date' to an ordered factor</span></pre></div>
 <p><img src="Using-newggslopegraph_files/figure-html/ggslope3-1.png" width="480"></p>
 <p>There are a plethora of formatting options. See <code><a href="../reference/newggslopegraph.html">?newggslopegraph</a></code> for all of them. Here’s a few.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="fu"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span>(<span class="kw">moredata</span>, <span class="kw">Date</span>, <span class="kw">Pct</span>, <span class="kw">Party</span>, 
-                Title = <span class="st">"Notional data"</span>, 
-                SubTitle = <span class="st">"none"</span>, 
-                Caption = <span class="st">"imaginary"</span>,
-                LineColor = <span class="st">"gray"</span>, 
-                LineThickness = <span class="fl">.5</span>,
-                YTextSize = <span class="fl">4</span>
-                )
+<span class="fu"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span><span class="op">(</span><span class="va">moredata</span>, <span class="va">Date</span>, <span class="va">Pct</span>, <span class="va">Party</span>, 
+                Title <span class="op">=</span> <span class="st">"Notional data"</span>, 
+                SubTitle <span class="op">=</span> <span class="st">"none"</span>, 
+                Caption <span class="op">=</span> <span class="st">"imaginary"</span>,
+                LineColor <span class="op">=</span> <span class="st">"gray"</span>, 
+                LineThickness <span class="op">=</span> <span class="fl">.5</span>,
+                YTextSize <span class="op">=</span> <span class="fl">4</span>
+                <span class="op">)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Converting 'Date' to an ordered factor</span>
-</pre></div>
+<span class="co">#&gt; Converting 'Date' to an ordered factor</span></pre></div>
 <p><img src="Using-newggslopegraph_files/figure-html/ggslope4-1.png" width="480"></p>
 <p>The most complex is <code>LineColor</code> where you can do the following if you want to highlight the difference between the Liberal and NDP parties while making the other three less prominent…</p>
 <div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="fu"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span>(<span class="kw">moredata</span>, <span class="kw">Date</span>, <span class="kw">Pct</span>, <span class="kw">Party</span>, 
-                Title = <span class="st">"Notional data"</span>, 
-                SubTitle = <span class="st">"none"</span>, 
-                Caption = <span class="st">"imaginary"</span>,
-                LineColor = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Green"</span> = <span class="st">"gray"</span>, <span class="st">"Liberal"</span> = <span class="st">"green"</span>, <span class="st">"NDP"</span> = <span class="st">"red"</span>, <span class="st">"Others"</span> = <span class="st">"gray"</span>, <span class="st">"PC"</span> = <span class="st">"gray"</span>), 
-                LineThickness = <span class="fl">.5</span>,
-                YTextSize = <span class="fl">4</span>
-                )
+<span class="fu"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span><span class="op">(</span><span class="va">moredata</span>, <span class="va">Date</span>, <span class="va">Pct</span>, <span class="va">Party</span>, 
+                Title <span class="op">=</span> <span class="st">"Notional data"</span>, 
+                SubTitle <span class="op">=</span> <span class="st">"none"</span>, 
+                Caption <span class="op">=</span> <span class="st">"imaginary"</span>,
+                LineColor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Green"</span> <span class="op">=</span> <span class="st">"gray"</span>, <span class="st">"Liberal"</span> <span class="op">=</span> <span class="st">"green"</span>, <span class="st">"NDP"</span> <span class="op">=</span> <span class="st">"red"</span>, <span class="st">"Others"</span> <span class="op">=</span> <span class="st">"gray"</span>, <span class="st">"PC"</span> <span class="op">=</span> <span class="st">"gray"</span><span class="op">)</span>, 
+                LineThickness <span class="op">=</span> <span class="fl">.5</span>,
+                YTextSize <span class="op">=</span> <span class="fl">4</span>
+                <span class="op">)</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Converting 'Date' to an ordered factor</span>
-</pre></div>
+<span class="co">#&gt; Converting 'Date' to an ordered factor</span></pre></div>
 <p><img src="Using-newggslopegraph_files/figure-html/ggslope5-1.png" width="480"></p>
 </div>
 <div id="slopegraph-best-practices" class="section level2">
@@ -249,54 +244,52 @@
 <a href="#one-last-set-of-data" class="anchor"></a>One last set of data</h2>
 <p>Also from Tufte, this is data about a select group of countries Gross Domestic Product (GDP). I’ll use it to show you a tricky way to highlight certain countries without making a named vector with <code>LineColor = c(rep("gray",3), "red", rep("gray",3), "red", rep("gray",10))</code> the excess vector entries are silently dropped… The bottom line is that <code>LineColor</code> is simply a character vector that you can fill any way you choose.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="fu"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span>(<span class="kw">newgdp</span>, 
-                <span class="kw">Year</span>, 
-                <span class="kw">GDP</span>, 
-                <span class="kw">Country</span>, 
-                Title = <span class="st">"Gross GDP"</span>, 
-                SubTitle = <span class="kw">NULL</span>, 
-                Caption = <span class="kw">NULL</span>,
-                LineThickness = <span class="fl">.5</span>,
-                YTextSize = <span class="fl">4</span>,
-                LineColor = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"gray"</span>,<span class="fl">3</span>), <span class="st">"red"</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"gray"</span>,<span class="fl">3</span>), <span class="st">"red"</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"gray"</span>,<span class="fl">10</span>))
-                )
-</pre></div>
+<span class="fu"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span><span class="op">(</span><span class="va">newgdp</span>, 
+                <span class="va">Year</span>, 
+                <span class="va">GDP</span>, 
+                <span class="va">Country</span>, 
+                Title <span class="op">=</span> <span class="st">"Gross GDP"</span>, 
+                SubTitle <span class="op">=</span> <span class="cn">NULL</span>, 
+                Caption <span class="op">=</span> <span class="cn">NULL</span>,
+                LineThickness <span class="op">=</span> <span class="fl">.5</span>,
+                YTextSize <span class="op">=</span> <span class="fl">4</span>,
+                LineColor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"gray"</span>,<span class="fl">3</span><span class="op">)</span>, <span class="st">"red"</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"gray"</span>,<span class="fl">3</span><span class="op">)</span>, <span class="st">"red"</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"gray"</span>,<span class="fl">10</span><span class="op">)</span><span class="op">)</span>
+                <span class="op">)</span></pre></div>
 <p><img src="Using-newggslopegraph_files/figure-html/ggslope6-1.png" width="576"></p>
 <p>Finally, let me take a moment about crowding and labeling. I’ve made every effort to try and deconflict the labels on the left and right axis (in this example the <code>Country</code>) and that should work automatically as you resize your plot dimensions. ** pro tip - if you use <code>RStudio</code> you can press the <code>zoom</code> icon and then use the rescaling of the window to see best choices **.</p>
 <p>But the numbers (<code>GDP</code>) are a different matter and there’s no easy way to ensure separation in a case like this data. There’s a decent total spread from 57.4 to 20.7 and some really close measurements like France, Belgium, and Germany on the right side. My suggestion is in a case like this one you create a new column in your dataframe with two significant places. So specifically it would be <code>newgdp$rGDP &lt;- signif(newgdp$GDP, 2)</code>. In my testing, at least, I’ve found this helps without creating inaccuracy and not causing you to try and “stretch” vertically to disambiguate the numbers. This time I’ll also use <code>LineColor</code> to highlight how Canada, Finland and Belgium fare from 1970 to 1979.</p>
 <p>Then to demonstrate how flexible <code>LineColor</code> really is I’ll use some <code>tidyverse</code> tools to build a named list of countries and colors. The country’s line color will be determined by whether the difference between 1979 is positive, near neutral or negative.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit">
-<span class="kw">newgdp</span><span class="op">$</span><span class="kw">rGDP</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">signif</a></span>(<span class="kw">newgdp</span><span class="op">$</span><span class="kw">GDP</span>, <span class="fl">2</span>)
-<span class="fu"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span>(<span class="kw">newgdp</span>, 
-                <span class="kw">Year</span>, 
-                <span class="kw">rGDP</span>, 
-                <span class="kw">Country</span>, 
-                Title = <span class="st">"Gross GDP"</span>, 
-                SubTitle = <span class="kw">NULL</span>, 
-                Caption = <span class="kw">NULL</span>,
-                LineThickness = <span class="fl">.5</span>,
-                YTextSize = <span class="fl">4</span>,
-                LineColor = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"gray"</span>,<span class="fl">6</span>), <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"red"</span>,<span class="fl">2</span>), <span class="st">"red"</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="st">"gray"</span>,<span class="fl">10</span>))
-                )
-</pre></div>
+<span class="va">newgdp</span><span class="op">$</span><span class="va">rGDP</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">signif</a></span><span class="op">(</span><span class="va">newgdp</span><span class="op">$</span><span class="va">GDP</span>, <span class="fl">2</span><span class="op">)</span>
+<span class="fu"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span><span class="op">(</span><span class="va">newgdp</span>, 
+                <span class="va">Year</span>, 
+                <span class="va">rGDP</span>, 
+                <span class="va">Country</span>, 
+                Title <span class="op">=</span> <span class="st">"Gross GDP"</span>, 
+                SubTitle <span class="op">=</span> <span class="cn">NULL</span>, 
+                Caption <span class="op">=</span> <span class="cn">NULL</span>,
+                LineThickness <span class="op">=</span> <span class="fl">.5</span>,
+                YTextSize <span class="op">=</span> <span class="fl">4</span>,
+                LineColor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"gray"</span>,<span class="fl">6</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"red"</span>,<span class="fl">2</span><span class="op">)</span>, <span class="st">"red"</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"gray"</span>,<span class="fl">10</span><span class="op">)</span><span class="op">)</span>
+                <span class="op">)</span></pre></div>
 <p><img src="Using-newggslopegraph_files/figure-html/ggslope7-1.png" width="576"></p>
 <div class="sourceCode" id="cb12"><pre class="downlit">
 
-<span class="kw">custom_colors</span> <span class="op">&lt;-</span> <span class="kw">tidyr</span>::<span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span>(<span class="kw">newgdp</span>, 
-                   id_cols = <span class="kw">Country</span>, 
-                   names_from = <span class="kw">Year</span>, 
-                   values_from = <span class="kw">GDP</span>) <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(difference = <span class="kw">Year1979</span> <span class="op">-</span> <span class="kw">Year1970</span>) <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(trend = <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span>(
-    <span class="kw">difference</span> <span class="op">&gt;=</span> <span class="fl">2</span> <span class="op">~</span> <span class="st">"green"</span>,
-    <span class="kw">difference</span> <span class="op">&lt;=</span> <span class="op">-</span><span class="fl">1</span> <span class="op">~</span> <span class="st">"red"</span>,
-    <span class="fl">TRUE</span> <span class="op">~</span> <span class="st">"gray"</span>
-    )
-  ) <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="kw">Country</span>, <span class="kw">trend</span>) <span class="op">%&gt;%</span>
-  <span class="kw">tibble</span>::<span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html">deframe</a></span>()
+<span class="va">custom_colors</span> <span class="op">&lt;-</span> <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span><span class="va">newgdp</span>, 
+                   id_cols <span class="op">=</span> <span class="va">Country</span>, 
+                   names_from <span class="op">=</span> <span class="va">Year</span>, 
+                   values_from <span class="op">=</span> <span class="va">GDP</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>difference <span class="op">=</span> <span class="va">Year1979</span> <span class="op">-</span> <span class="va">Year1970</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>trend <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span>
+    <span class="va">difference</span> <span class="op">&gt;=</span> <span class="fl">2</span> <span class="op">~</span> <span class="st">"green"</span>,
+    <span class="va">difference</span> <span class="op">&lt;=</span> <span class="op">-</span><span class="fl">1</span> <span class="op">~</span> <span class="st">"red"</span>,
+    <span class="cn">TRUE</span> <span class="op">~</span> <span class="st">"gray"</span>
+    <span class="op">)</span>
+  <span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Country</span>, <span class="va">trend</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html">deframe</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="kw">custom_colors</span>
+<span class="va">custom_colors</span>
 <span class="co">#&gt;      Sweden Netherlands      Norway     Britain      France     Germany </span>
 <span class="co">#&gt;     "green"     "green"     "green"       "red"     "green"     "green" </span>
 <span class="co">#&gt;     Belgium      Canada     Finland       Italy          US      Greece </span>
@@ -304,18 +297,17 @@
 <span class="co">#&gt; Switzerland       Spain       Japan </span>
 <span class="co">#&gt;     "green"     "green"     "green"</span>
 
-<span class="fu"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span>(<span class="kw">newgdp</span>, 
-                <span class="kw">Year</span>, 
-                <span class="kw">rGDP</span>, 
-                <span class="kw">Country</span>, 
-                Title = <span class="st">"Gross GDP"</span>, 
-                SubTitle = <span class="kw">NULL</span>, 
-                Caption = <span class="kw">NULL</span>,
-                LineThickness = <span class="fl">.5</span>,
-                YTextSize = <span class="fl">4</span>,
-                LineColor = <span class="kw">custom_colors</span>
-)
-</pre></div>
+<span class="fu"><a href="../reference/newggslopegraph.html">newggslopegraph</a></span><span class="op">(</span><span class="va">newgdp</span>, 
+                <span class="va">Year</span>, 
+                <span class="va">rGDP</span>, 
+                <span class="va">Country</span>, 
+                Title <span class="op">=</span> <span class="st">"Gross GDP"</span>, 
+                SubTitle <span class="op">=</span> <span class="cn">NULL</span>, 
+                Caption <span class="op">=</span> <span class="cn">NULL</span>,
+                LineThickness <span class="op">=</span> <span class="fl">.5</span>,
+                YTextSize <span class="op">=</span> <span class="fl">4</span>,
+                LineColor <span class="op">=</span> <span class="va">custom_colors</span>
+<span class="op">)</span></pre></div>
 <p><img src="Using-newggslopegraph_files/figure-html/ggslope7-2.png" width="576"></p>
 <div id="leaving-feedback" class="section level3">
 <h3 class="hasAnchor">

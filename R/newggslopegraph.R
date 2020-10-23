@@ -350,12 +350,15 @@ newggslopegraph <- function(dataframe,
       aes_(label = Grouping),
       hjust = "left",
       box.padding = 0.10,
+      point.padding = 0.10,
       segment.color = "gray",
       segment.alpha = 0.6,
       fontface = "bold",
       size = YTextSize,
       nudge_x = -1.95,
-      direction = "y"
+      direction = "y",
+      force = .5,
+      max.iter = 3000
     ) +
     # right side y axis labels
     geom_text_repel(
@@ -363,12 +366,15 @@ newggslopegraph <- function(dataframe,
       aes_(label = Grouping),
       hjust = "right",
       box.padding = 0.10,
+      point.padding = 0.10,
       segment.color = "gray",
       segment.alpha = 0.6,
       fontface = "bold",
       size = YTextSize,
       nudge_x = 1.95,
-      direction = "y"
+      direction = "y",
+      force = .5,
+      max.iter = 3000
     ) +
     # data point labels
     geom_label(aes_string(label = NData.label),
