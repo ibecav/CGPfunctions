@@ -97,13 +97,14 @@
 
       
 
-      </header><script src="Using-PlotXTabs2_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="Using-PlotXTabs2_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="Using-PlotXTabs2_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="Using-PlotXTabs2_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Using PlotXTabs2</h1>
                         <h4 class="author">Chuck Powell</h4>
             
-            <h4 class="date">2020-09-23</h4>
+            <h4 class="date">2020-10-23</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ibecav/CGPfunctions/blob/master/vignettes/Using-PlotXTabs2.Rmd"><code>vignettes/Using-PlotXTabs2.Rmd</code></a></small>
       <div class="hidden name"><code>Using-PlotXTabs2.Rmd</code></div>
@@ -117,12 +118,11 @@
 <p>It provides visually appealing and sensibly labelled charts quickly and efficiently. It does some basic error checking and allows the user some choice as to exact style without having to know any underlying syntax or semantics.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="co"># simplest possible call with the defaults</span>
-<span class="fu"><a href="../reference/PlotXTabs2.html">PlotXTabs2</a></span>(
-  data = <span class="kw">mtcars</span>,
-  y = <span class="kw">am</span>,
-  x =  <span class="kw">cyl</span>
-)  
-</pre></div>
+<span class="fu"><a href="../reference/PlotXTabs2.html">PlotXTabs2</a></span><span class="op">(</span>
+  data <span class="op">=</span> <span class="va">mtcars</span>,
+  y <span class="op">=</span> <span class="va">am</span>,
+  x <span class="op">=</span>  <span class="va">cyl</span>
+<span class="op">)</span>  </pre></div>
 <p><img src="Using-PlotXTabs2_files/figure-html/simple-1.png" width="672"></p>
 <div id="important-considerations" class="section level2">
 <h2 class="hasAnchor">
@@ -135,22 +135,21 @@
 <p>To demonstrate just a few…</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="co"># more complex call</span>
-<span class="fu"><a href="../reference/PlotXTabs2.html">PlotXTabs2</a></span>(
-  data = <span class="kw">datasets</span>::<span class="kw"><a href="https://rdrr.io/r/datasets/mtcars.html">mtcars</a></span>,
-  y = <span class="kw">am</span>,
-  x = <span class="kw">cyl</span>,
-  bf.details = <span class="fl">TRUE</span>,
-  xlab = <span class="st">"Number of cylinders"</span>,
-  ylab = <span class="kw">NULL</span>,
-  data.label = <span class="st">"both"</span>,
-  label.fill.alpha = <span class="fl">.3</span>,
-  labels.legend = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"0 = Manual"</span>, <span class="st">"1 = Automatic"</span>),
-  legend.title = <span class="st">"Transmission Type"</span>,
-  legend.position = <span class="st">"left"</span>,
-  title = <span class="st">"The perenial mtcars example"</span>,
-  palette = <span class="st">"Pastel1"</span>
-)
-</pre></div>
+<span class="fu"><a href="../reference/PlotXTabs2.html">PlotXTabs2</a></span><span class="op">(</span>
+  data <span class="op">=</span> <span class="fu">datasets</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/datasets/mtcars.html">mtcars</a></span>,
+  y <span class="op">=</span> <span class="va">am</span>,
+  x <span class="op">=</span> <span class="va">cyl</span>,
+  bf.details <span class="op">=</span> <span class="cn">TRUE</span>,
+  xlab <span class="op">=</span> <span class="st">"Number of cylinders"</span>,
+  ylab <span class="op">=</span> <span class="cn">NULL</span>,
+  data.label <span class="op">=</span> <span class="st">"both"</span>,
+  label.fill.alpha <span class="op">=</span> <span class="fl">.3</span>,
+  labels.legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"0 = Manual"</span>, <span class="st">"1 = Automatic"</span><span class="op">)</span>,
+  legend.title <span class="op">=</span> <span class="st">"Transmission Type"</span>,
+  legend.position <span class="op">=</span> <span class="st">"left"</span>,
+  title <span class="op">=</span> <span class="st">"The perenial mtcars example"</span>,
+  palette <span class="op">=</span> <span class="st">"Pastel1"</span>
+<span class="op">)</span></pre></div>
 <p><img src="Using-PlotXTabs2_files/figure-html/simple2-1.png" width="672"></p>
 </div>
 <div id="example-scenario-what-makes-us-happy" class="section level2">
@@ -163,7 +162,7 @@
 </blockquote>
 <p>We’ll load the library and take a quick look at the structure of the data.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://dplyr.tidyverse.org">dplyr</a></span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'dplyr'</span>
 <span class="co">#&gt; The following objects are masked from 'package:stats':</span>
@@ -172,10 +171,10 @@
 <span class="co">#&gt; The following objects are masked from 'package:base':</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     intersect, setdiff, setequal, union</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://purrr.tidyverse.org">purrr</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/hadley/productplots">productplots</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://tidyselect.r-lib.org">tidyselect</a></span>) 
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="kw">happy</span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://purrr.tidyverse.org">purrr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/hadley/productplots">productplots</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyselect.r-lib.org">tidyselect</a></span><span class="op">)</span> 
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">happy</span><span class="op">)</span>
 <span class="co">#&gt; 'data.frame':    51020 obs. of  10 variables:</span>
 <span class="co">#&gt;  $ id     : num  1 2 3 4 5 6 7 8 9 10 ...</span>
 <span class="co">#&gt;  $ happy  : Factor w/ 3 levels "not too happy",..: 1 1 2 1 2 2 1 1 2 2 ...</span>
@@ -186,48 +185,45 @@
 <span class="co">#&gt;  $ degree : Factor w/ 5 levels "lt high school",..: 4 1 2 4 2 2 2 4 2 2 ...</span>
 <span class="co">#&gt;  $ finrela: Factor w/ 5 levels "far below average",..: 3 4 3 3 4 4 4 3 3 2 ...</span>
 <span class="co">#&gt;  $ health : Factor w/ 4 levels "poor","fair",..: 3 2 4 3 3 3 4 3 4 2 ...</span>
-<span class="co">#&gt;  $ wtssall: num  0.445 0.889 0.889 0.889 0.889 ...</span>
-</pre></div>
+<span class="co">#&gt;  $ wtssall: num  0.445 0.889 0.889 0.889 0.889 ...</span></pre></div>
 <p>We’ll be focusing on the non numeric variables. I certainly can’t claim to do a detailed analysis here but at least the questions will be fun I hope… Here’s the shortest possible call.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
 <span class="co"># who's happier by gender</span>
-<span class="fu"><a href="../reference/PlotXTabs2.html">PlotXTabs2</a></span>(<span class="kw">happy</span>,<span class="kw">happy</span>,<span class="kw">sex</span>)
-</pre></div>
+<span class="fu"><a href="../reference/PlotXTabs2.html">PlotXTabs2</a></span><span class="op">(</span><span class="va">happy</span>,<span class="va">happy</span>,<span class="va">sex</span><span class="op">)</span></pre></div>
 <p><img src="Using-PlotXTabs2_files/figure-html/vignette1-1.png" width="672"></p>
 <p>That’s useful, especially when you consider the variety of formatting options, but far more useful in my work flows when we make use of <code>purrr</code> <code>map</code> operators. Let’s imagine a scenario where we want to see how happiness is related to all the other <code>factor</code> (categorical - be they nomainal or ordinal) variables in our dataset. For each of them (<code>sex</code>, <code>marital</code>, <code>degree</code>, <code>finrela</code> and <code>health</code>) we want to plot consistent graphs and have the same information available. Rather than the tedium of cutting and pasting five times and then changing the variable name let’s let <code>purrr</code> handles as much of the workflow as possible.</p>
 <p>Using a simple set of <code>dplyr</code> verbs we’ll create a simple list of the variables we are interested in. Technically it’s a vector but <code>purrr</code> will coerce it to a list. Since I dislike plots without titles we can also create a vector of titles by prepending “Happiness by” to the capitalized variable name.</p>
 <p>After checking our handiwork in creating the vectors we can then feed them to <code>purrr:map2</code>. We could conceivably have used any <code>map</code> depending on complexity. Just for a little “twist” we’ll actually use the <code>myvariables</code> list twice. Once as the variable name for the x variable and then again after capitalizing it as the X axis label.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="kw">myvariables</span> <span class="op">&lt;-</span> <span class="kw">happy</span> <span class="op">%&gt;%</span> 
-                <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select_all.html">select_if</a></span>(<span class="kw">is.factor</span>)  <span class="op">%&gt;%</span> 
-                <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="op">-</span><span class="kw">happy</span>) <span class="op">%&gt;%</span> 
-                <span class="kw">names</span>
-<span class="kw">mytitles</span> <span class="op">&lt;-</span> <span class="kw">stringr</span>::<span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span>(<span class="st">"Happiness by "</span>, 
-                           <span class="kw">stringr</span>::<span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html">str_to_title</a></span>(<span class="kw">myvariables</span>), 
-                           <span class="st">" status"</span>)
+<span class="va">myvariables</span> <span class="op">&lt;-</span> <span class="va">happy</span> <span class="op">%&gt;%</span> 
+                <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select_all.html">select_if</a></span><span class="op">(</span><span class="va">is.factor</span><span class="op">)</span>  <span class="op">%&gt;%</span> 
+                <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">happy</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+                <span class="va">names</span>
+<span class="va">mytitles</span> <span class="op">&lt;-</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html">str_c</a></span><span class="op">(</span><span class="st">"Happiness by "</span>, 
+                           <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html">str_to_title</a></span><span class="op">(</span><span class="va">myvariables</span><span class="op">)</span>, 
+                           <span class="st">" status"</span><span class="op">)</span>
 
-<span class="kw">myvariables</span>
+<span class="va">myvariables</span>
 <span class="co">#&gt; [1] "sex"     "marital" "degree"  "finrela" "health"</span>
-<span class="kw">mytitles</span>
+<span class="va">mytitles</span>
 <span class="co">#&gt; [1] "Happiness by Sex status"     "Happiness by Marital status"</span>
 <span class="co">#&gt; [3] "Happiness by Degree status"  "Happiness by Finrela status"</span>
 <span class="co">#&gt; [5] "Happiness by Health status"</span>
 
-<span class="kw">purrr</span>::<span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html">map2</a></span>(.x = <span class="kw">myvariables</span>,
-            .y = <span class="kw">mytitles</span>,
-            .f =  <span class="op">~</span> <span class="fu"><a href="../reference/PlotXTabs2.html">PlotXTabs2</a></span>(x = <span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html">all_of</a></span>(<span class="kw">.x</span>),
-                               title = <span class="kw">.y</span>,
-                               data = <span class="kw">happy</span>,
-                               y = <span class="kw">happy</span>,
-                               legend.title = <span class="st">"Rating"</span>,
-                               xlab = <span class="kw">stringr</span>::<span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html">str_to_title</a></span>(<span class="kw">.x</span>),
-                               ylab = <span class="kw">NULL</span>,
-                               perc.k = <span class="fl">1</span>,
-                               palette = <span class="st">"Set2"</span>
-                               )
-            )
-<span class="co">#&gt; [[1]]</span>
-</pre></div>
+<span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html">map2</a></span><span class="op">(</span>.x <span class="op">=</span> <span class="va">myvariables</span>,
+            .y <span class="op">=</span> <span class="va">mytitles</span>,
+            .f <span class="op">=</span>  <span class="op">~</span> <span class="fu"><a href="../reference/PlotXTabs2.html">PlotXTabs2</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html">all_of</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>,
+                               title <span class="op">=</span> <span class="va">.y</span>,
+                               data <span class="op">=</span> <span class="va">happy</span>,
+                               y <span class="op">=</span> <span class="va">happy</span>,
+                               legend.title <span class="op">=</span> <span class="st">"Rating"</span>,
+                               xlab <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html">str_to_title</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span>,
+                               ylab <span class="op">=</span> <span class="cn">NULL</span>,
+                               perc.k <span class="op">=</span> <span class="fl">1</span>,
+                               palette <span class="op">=</span> <span class="st">"Set2"</span>
+                               <span class="op">)</span>
+            <span class="op">)</span>
+<span class="co">#&gt; [[1]]</span></pre></div>
 <p><img src="Using-PlotXTabs2_files/figure-html/vignette2-1.png" width="672"></p>
 <pre><code>#&gt; 
 #&gt; [[2]]</code></pre>

@@ -166,41 +166,41 @@ descriptive statistics are provided as a subtitle if desired and sent to the
 console as well.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>SeeDist</span>(
-  <span class='kw'>x</span>,
-  title = <span class='st'>"Default"</span>,
-  subtitle = <span class='st'>"Default"</span>,
-  numbins = <span class='fl'>0</span>,
-  xlab = <span class='kw'>NULL</span>,
-  var_explain = <span class='kw'>NULL</span>,
-  data.fill.color = <span class='st'>"deepskyblue"</span>,
-  mean.line.color = <span class='st'>"darkgreen"</span>,
-  median.line.color = <span class='st'>"yellow"</span>,
-  mode.line.color = <span class='st'>"orange"</span>,
-  mean.line.type = <span class='st'>"longdash"</span>,
-  median.line.type = <span class='st'>"dashed"</span>,
-  mode.line.type = <span class='st'>"dashed"</span>,
-  mean.line.size = <span class='fl'>1.5</span>,
-  median.line.size = <span class='fl'>1.5</span>,
-  mean.point.shape = <span class='fl'>21</span>,
-  median.point.shape = <span class='fl'>23</span>,
-  mean.point.size = <span class='fl'>4</span>,
-  median.point.size = <span class='fl'>4</span>,
-  zcurve.color = <span class='st'>"red"</span>,
-  zcurve.type = <span class='st'>"twodash"</span>,
-  zcurve.size = <span class='fl'>1</span>,
-  tcurve.color = <span class='st'>"black"</span>,
-  tcurve.type = <span class='st'>"dotted"</span>,
-  tcurve.size = <span class='fl'>1</span>,
-  mode.line.size = <span class='fl'>1</span>,
-  whatplots = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"d"</span>, <span class='st'>"b"</span>, <span class='st'>"h"</span>, <span class='st'>"v"</span>),
-  k = <span class='fl'>2</span>,
-  add_jitter = <span class='fl'>TRUE</span>,
-  add_rug = <span class='fl'>TRUE</span>,
-  xlim_left = <span class='kw'>NULL</span>,
-  xlim_right = <span class='kw'>NULL</span>,
-  ggtheme = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span>()
-)</pre>
+    <pre class="usage"><span class='fu'>SeeDist</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  title <span class='op'>=</span> <span class='st'>"Default"</span>,
+  subtitle <span class='op'>=</span> <span class='st'>"Default"</span>,
+  numbins <span class='op'>=</span> <span class='fl'>0</span>,
+  xlab <span class='op'>=</span> <span class='cn'>NULL</span>,
+  var_explain <span class='op'>=</span> <span class='cn'>NULL</span>,
+  data.fill.color <span class='op'>=</span> <span class='st'>"deepskyblue"</span>,
+  mean.line.color <span class='op'>=</span> <span class='st'>"darkgreen"</span>,
+  median.line.color <span class='op'>=</span> <span class='st'>"yellow"</span>,
+  mode.line.color <span class='op'>=</span> <span class='st'>"orange"</span>,
+  mean.line.type <span class='op'>=</span> <span class='st'>"longdash"</span>,
+  median.line.type <span class='op'>=</span> <span class='st'>"dashed"</span>,
+  mode.line.type <span class='op'>=</span> <span class='st'>"dashed"</span>,
+  mean.line.size <span class='op'>=</span> <span class='fl'>1.5</span>,
+  median.line.size <span class='op'>=</span> <span class='fl'>1.5</span>,
+  mean.point.shape <span class='op'>=</span> <span class='fl'>21</span>,
+  median.point.shape <span class='op'>=</span> <span class='fl'>23</span>,
+  mean.point.size <span class='op'>=</span> <span class='fl'>4</span>,
+  median.point.size <span class='op'>=</span> <span class='fl'>4</span>,
+  zcurve.color <span class='op'>=</span> <span class='st'>"red"</span>,
+  zcurve.type <span class='op'>=</span> <span class='st'>"twodash"</span>,
+  zcurve.size <span class='op'>=</span> <span class='fl'>1</span>,
+  tcurve.color <span class='op'>=</span> <span class='st'>"black"</span>,
+  tcurve.type <span class='op'>=</span> <span class='st'>"dotted"</span>,
+  tcurve.size <span class='op'>=</span> <span class='fl'>1</span>,
+  mode.line.size <span class='op'>=</span> <span class='fl'>1</span>,
+  whatplots <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"d"</span>, <span class='st'>"b"</span>, <span class='st'>"h"</span>, <span class='st'>"v"</span><span class='op'>)</span>,
+  k <span class='op'>=</span> <span class='fl'>2</span>,
+  add_jitter <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  add_rug <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  xlim_left <span class='op'>=</span> <span class='cn'>NULL</span>,
+  xlim_right <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ggtheme <span class='op'>=</span> <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -341,7 +341,7 @@ hrbrthemes::theme_ipsum(), etc.).</p></td>
     <p>Chuck Powell</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>SeeDist</span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>, mean = <span class='fl'>100</span>, sd = <span class='fl'>20</span>), numbins = <span class='fl'>15</span>, var_explain = <span class='st'>"A Random Sample"</span>)
+    <pre class="examples"><div class='input'><span class='fu'>SeeDist</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span>, mean <span class='op'>=</span> <span class='fl'>100</span>, sd <span class='op'>=</span> <span class='fl'>20</span><span class='op'>)</span>, numbins <span class='op'>=</span> <span class='fl'>15</span>, var_explain <span class='op'>=</span> <span class='st'>"A Random Sample"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='warning'>Warning: There are 100 modal values displaying just the first 3</span></div><div class='img'><img src='SeeDist-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='SeeDist-2.png' alt='' width='700' height='433' /></div><div class='img'><img src='SeeDist-3.png' alt='' width='700' height='433' /></div><div class='img'><img src='SeeDist-4.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; ------------------------------------------------------------------------------ 
 #&gt; <span style='font-weight: bold;'>rnorm(100, mean = 100, sd = 20)</span><span>
 #&gt; 
@@ -359,7 +359,7 @@ hrbrthemes::theme_ipsum(), etc.).</p></td>
 #&gt; highest: 136.79, 137.16, 140.87, 144.11, 159.43
 #&gt; 
 #&gt; </span><span style='color: #808080;'>' 95%-CI (classic)</span><span>
-#&gt; </div><div class='input'><span class='fu'>SeeDist</span>(<span class='kw'>mtcars</span><span class='op'>$</span><span class='kw'>hp</span>, var_explain = <span class='st'>"Horsepower"</span>, whatplots = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"d"</span>, <span class='st'>"b"</span>))
+#&gt; </div><div class='input'><span class='fu'>SeeDist</span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>$</span><span class='va'>hp</span>, var_explain <span class='op'>=</span> <span class='st'>"Horsepower"</span>, whatplots <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"d"</span>, <span class='st'>"b"</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='img'><img src='SeeDist-5.png' alt='' width='700' height='433' /></div><div class='img'><img src='SeeDist-6.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; ------------------------------------------------------------------------------ 
 #&gt; </span><span style='font-weight: bold;'>mtcars$hp</span><span>
 #&gt; 
@@ -377,7 +377,7 @@ hrbrthemes::theme_ipsum(), etc.).</p></td>
 #&gt; highest: 215.00, 230.00, 245.00 (2), 264.00, 335.00
 #&gt; 
 #&gt; </span><span style='color: #808080;'>' 95%-CI (classic)</span><span>
-#&gt; </div><div class='input'><span class='fu'>SeeDist</span>(<span class='kw'>iris</span><span class='op'>$</span><span class='kw'>Sepal.Length</span>, var_explain = <span class='st'>"Sepal Length"</span>, whatplots = <span class='st'>"d"</span>)
+#&gt; </div><div class='input'><span class='fu'>SeeDist</span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Sepal.Length</span>, var_explain <span class='op'>=</span> <span class='st'>"Sepal Length"</span>, whatplots <span class='op'>=</span> <span class='st'>"d"</span><span class='op'>)</span>
 </div><div class='img'><img src='SeeDist-7.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; ------------------------------------------------------------------------------ 
 #&gt; </span><span style='font-weight: bold;'>iris$Sepal.Length</span><span>
 #&gt; 
