@@ -1,3 +1,7 @@
+## Second Resubmission
+
+Dear CRAN maintainers sorry about the extra trouble for some reason my changes to README.rmd didn't propagate to README.md.  Fixed now
+
 ## Resubmission
 
 Corrected the following
