@@ -104,7 +104,7 @@
       <h1 data-toc-skip>Using Plot2WayAnova</h1>
                         <h4 class="author">Chuck Powell</h4>
             
-            <h4 class="date">2020-10-23</h4>
+            <h4 class="date">2020-11-12</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ibecav/CGPfunctions/blob/master/vignettes/Using-Plot2WayANOVA.Rmd"><code>vignettes/Using-Plot2WayANOVA.Rmd</code></a></small>
       <div class="hidden name"><code>Using-Plot2WayANOVA.Rmd</code></div>
@@ -162,23 +162,23 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co"># Install from CRAN</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Install from CRAN</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"CGPfunctions"</span><span class="op">)</span>
 
 <span class="co"># Or the development version from GitHub</span>
 <span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"ibecav/CGPfunctions"</span><span class="op">)</span></pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"ibecav/CGPfunctions"</span><span class="op">)</span></code></pre></div>
 <p>then load the library.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ibecav/CGPfunctions">CGPfunctions</a></span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ibecav/CGPfunctions">CGPfunctions</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div id="example-of-using-the-function" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example-of-using-the-function" class="anchor"></a>Example of using the function</h2>
 <p>The only two required parameters are a formula and a dataframe (like) object. If we run the function in its simplest form here’s what we get.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="../reference/Plot2WayANOVA.html">Plot2WayANOVA</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">mpg</span> <span class="op">~</span> <span class="va">am</span> <span class="op">*</span> <span class="va">cyl</span>, dataframe <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/Plot2WayANOVA.html">Plot2WayANOVA</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">mpg</span> <span class="op">~</span> <span class="va">am</span> <span class="op">*</span> <span class="va">cyl</span>, dataframe <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Converting am to a factor --- check your results</span>
 <span class="co">#&gt; </span>
@@ -261,12 +261,12 @@
 <span class="co">#&gt; # A tibble: 4 x 4</span>
 <span class="co">#&gt;   model                    bf support                        margin_of_error</span>
 <span class="co">#&gt;   &lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt;                                    &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 am + cyl          4514258.  " data support is extreme"        0.0234      </span>
-<span class="co">#&gt; 2 am + cyl + am:cyl 3069173.  " data support is extreme"        0.0195      </span>
+<span class="co">#&gt; 1 am + cyl          4222695.  " data support is extreme"        0.0119      </span>
+<span class="co">#&gt; 2 am + cyl + am:cyl 3455820.  " data support is extreme"        0.117       </span>
 <span class="co">#&gt; 3 cyl               2274206.  " data support is extreme"        0.0000000127</span>
 <span class="co">#&gt; 4 am                     86.6 " data support is very strong"    0.000000217</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Interaction graph plotted...</span></pre></div>
+<span class="co">#&gt; Interaction graph plotted...</span></code></pre></div>
 <p><img src="Using-Plot2WayANOVA_files/figure-html/Plot2WayANOVA-1.png" width="672"></p>
 <p>In the console you’ll receive a series of messages chronicling your progress and any diagnostic information. In this case <code>am</code> and <code>cyl</code> are being coerced to factors and you’re being prompted to make sure that’s what is intended.</p>
 <p>Next you receive a warning because you have a very unbalanced design. There are only two 8 cylinder cars with a manual transmission and twelve 8 cylinder cars with automatics. Whereas there are eight 4 cylinders with manual and only three that are automatics. Imbalance in our design worries us for two reasons. One is that it causes a lack of statistical power and creates some math challenges in deciding how to divide up the sums of the squared differences. This data set causes the more troublesome worry. Are the number of cylinders and manual versus automatic related systematically which would call our whole design into question. Make sure you can answer questions about which is at work here, or make sure you have a balanced design.</p>
@@ -295,8 +295,8 @@
 <li>Change the plotted shape for the group mean to a square not a diamond</li>
 <li>Change our post hoc test method to something less conservative than Scheffe</li>
 </ol>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="../reference/Plot2WayANOVA.html">Plot2WayANOVA</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">mpg</span> <span class="op">~</span> <span class="va">cyl</span> <span class="op">*</span> <span class="va">am</span>, 
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/Plot2WayANOVA.html">Plot2WayANOVA</a></span><span class="op">(</span>formula <span class="op">=</span> <span class="va">mpg</span> <span class="op">~</span> <span class="va">cyl</span> <span class="op">*</span> <span class="va">am</span>, 
               dataframe <span class="op">=</span> <span class="va">mtcars</span>,
               confidence <span class="op">=</span> <span class="fl">.99</span>,
               title <span class="op">=</span> <span class="st">"MPG by cylinders and type transmission"</span>,
@@ -367,10 +367,10 @@
 <span class="co">#&gt; # A tibble: 4 x 4</span>
 <span class="co">#&gt;   model                    bf support                        margin_of_error</span>
 <span class="co">#&gt;   &lt;chr&gt;                 &lt;dbl&gt; &lt;chr&gt;                                    &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 cyl + am          4451981.  " data support is extreme"        0.0305      </span>
-<span class="co">#&gt; 2 cyl + am + cyl:am 3308963.  " data support is extreme"        0.0544      </span>
+<span class="co">#&gt; 1 cyl + am          4279126.  " data support is extreme"        0.0123      </span>
+<span class="co">#&gt; 2 cyl + am + cyl:am 3224601.  " data support is extreme"        0.0440      </span>
 <span class="co">#&gt; 3 cyl               2274206.  " data support is extreme"        0.0000000127</span>
-<span class="co">#&gt; 4 am                     86.6 " data support is very strong"    0.000000217</span></pre></div>
+<span class="co">#&gt; 4 am                     86.6 " data support is very strong"    0.000000217</span></code></pre></div>
 <p><img src="Using-Plot2WayANOVA_files/figure-html/Plot2WayANOVA2-1.png" width="672"></p>
 <p><strong>Please don’t fail to notice how liberal Fisher’s LSD is compared to Scheffe especially given we’ve demanded more confidence </strong></p>
 </div>
@@ -388,8 +388,8 @@
 <li>
 <strong>New</strong> custom text for the factor labels (bigger and blue)</li>
 </ol>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="co"># Create a new dataset</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Create a new dataset</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://stringi.gagolewski.com/">stringi</a></span><span class="op">)</span>
@@ -466,7 +466,7 @@
 <span class="co">#&gt; 1 cyl               8.86e39 " data support is extreme" 0.0000000685   </span>
 <span class="co">#&gt; 2 am + cyl          4.16e39 " data support is extreme" 0.0175         </span>
 <span class="co">#&gt; 3 am + cyl + am:cyl 1.22e39 " data support is extreme" 0.0150         </span>
-<span class="co">#&gt; 4 am                7.89e 2 " data support is extreme" 0.0000000000581</span></pre></div>
+<span class="co">#&gt; 4 am                7.89e 2 " data support is extreme" 0.0000000000581</span></code></pre></div>
 <p><img src="Using-Plot2WayANOVA_files/figure-html/Plot2WayANOVA3-1.png" width="672"></p>
 </div>
 </div>

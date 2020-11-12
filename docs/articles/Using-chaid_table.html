@@ -104,7 +104,7 @@
       <h1 data-toc-skip>Using chaid_table</h1>
                         <h4 class="author">Chuck Powell</h4>
             
-            <h4 class="date">2020-10-23</h4>
+            <h4 class="date">2020-11-12</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ibecav/CGPfunctions/blob/master/vignettes/Using-chaid_table.Rmd"><code>vignettes/Using-chaid_table.Rmd</code></a></small>
       <div class="hidden name"><code>Using-chaid_table.Rmd</code></div>
@@ -114,16 +114,16 @@
     
     
 <p><strong>Chi-square automatic interaction detection (CHAID)</strong> is a decision tree technique, based on adjusted significance testing (Bonferroni testing). The technique was developed in South Africa and was published in 1980 by Gordon V. Kass, who had completed a PhD thesis on this topic. <a href="https://en.wikipedia.org/wiki/Chi-square_automatic_interaction_detection">Wikipedia</a></p>
-<p>I’ve <a href="https://ibecav.netlify.com/tags/chaid/">written a few blog posts</a> about using this venerable technique. The default output using <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> and <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> is sparse, elegant and useful as is, and can be adjusted in many ways that <a href="https://ibecav.github.io/chaidtutor1/">I have documented here</a>.</p>
+<p>I’ve <a href="https://ibecav.netlify.app/tags/chaid/">written a few blog posts</a> about using this venerable technique. The default output using <code><a href="https://rdrr.io/r/base/print.html">print()</a></code> and <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> is sparse, elegant and useful as is, and can be adjusted in many ways that <a href="https://ibecav.github.io/chaidtutor1/">I have documented here</a>.</p>
 <p>The code chunk below is taken straight from the example in the help page for <code><a href="https://rdrr.io/pkg/CHAID/man/chaid.html">CHAID::chaid</a></code></p>
 <blockquote>
 <p>The dataset is based on data from a post-election survey on persons who voted for either Bush or Gore in the 2000 U.S. election. The specific variables are related to the publication of Magidson and Vermunt (2005).</p>
 </blockquote>
 <blockquote>
-<p>Further information (and datasets) about the 2000 U.S. election and other National Election Studies is available on the American National Election Studies Web site (<a href="https://www.electionstudies.org/" class="uri">https://www.electionstudies.org/</a>).</p>
+<p>Further information (and datasets) about the 2000 U.S. election and other National Election Studies is available on the American National Election Studies Web site (<a href="https://electionstudies.org/" class="uri">https://electionstudies.org/</a>).</p>
 </blockquote>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ibecav/CGPfunctions">CGPfunctions</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ibecav/CGPfunctions">CGPfunctions</a></span><span class="op">)</span>
 <span class="co"># library(CHAID)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span>
@@ -152,7 +152,7 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Number of inner nodes:    4</span>
 <span class="co">#&gt; Number of terminal nodes: 5</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">chaidUS</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">chaidUS</span><span class="op">)</span></code></pre></div>
 <p><img src="Using-chaid_table_files/figure-html/one-1.png" width="672"></p>
 <div id="getting-more-detailed" class="section level2">
 <h2 class="hasAnchor">
@@ -165,8 +165,8 @@
 <li><p>It would also be nice to have easy access to the results of the <span class="math inline">\(\chi^2\)</span> tests that are the inherent workhorse of CHAID. We know that <code>marstat</code> was selected as the first split by virtue of having the smallest <code>p value</code> after a Bonferroni adjustment, but what were the results?</p></li>
 </ol>
 <p><code>chaid_table</code> attempts to provide much more granular information in a tibble and also make it possible for you to derive even more nuanced questions through piping operations. The simplest call is just to feed it the name of the object after it has been processed by <code>CHAID</code>. That object will be of class “constparty” “party”.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="co"># simplest use --- chaidUS is included in the package</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># simplest use --- chaidUS is included in the package</span>
 <span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">chaidUS</span><span class="op">)</span>
 <span class="co">#&gt; [1] "constparty" "party"</span>
 
@@ -186,17 +186,17 @@
 <span class="co">#&gt; # … with 5 more variables: rawpvalue &lt;dbl&gt;, splitrule &lt;chr&gt;, split1 &lt;chr&gt;,</span>
 <span class="co">#&gt; #   split2 &lt;chr&gt;, split3 &lt;chr&gt;</span>
 
-<span class="va">mychaidtable</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/chaid_table.html">chaid_table</a></span><span class="op">(</span><span class="va">chaidUS</span><span class="op">)</span></pre></div>
+<span class="va">mychaidtable</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/chaid_table.html">chaid_table</a></span><span class="op">(</span><span class="va">chaidUS</span><span class="op">)</span></code></pre></div>
 <p>I debated the wisdom of providing tables as output in the manner I found most useful and aesthetically pleasing but in the end decided to simply provide the tibble and let the user decide what and how to format.</p>
 </div>
 <div id="example-uses" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example-uses" class="anchor"></a>Example uses</h2>
 <p>Some easy examples using <code>kable</code> and <code>dplyr</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="va">mychaidtable</span> <span class="op">%&gt;%</span> 
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">mychaidtable</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">nodeID</span><span class="op">:</span><span class="va">ruletext</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></pre></div>
+  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="4%">
@@ -289,14 +289,14 @@
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
 <span class="co"># Just node #2 show percentage</span>
 <span class="va">mychaidtable</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">nodeID</span><span class="op">:</span><span class="va">ruletext</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">nodeID</span> <span class="op">==</span> <span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>pctBush <span class="op">=</span> <span class="va">Bush</span><span class="op">/</span><span class="va">NodeN</span> <span class="op">*</span> <span class="fl">100</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></pre></div>
+  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="right">nodeID</th>
@@ -317,13 +317,13 @@
 <td align="right">56.2</td>
 </tr></tbody>
 </table>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
 <span class="co"># Just the children of node #5</span>
 <span class="va">mychaidtable</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">nodeID</span><span class="op">:</span><span class="va">ruletext</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">parent</span> <span class="op">==</span> <span class="fl">5</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></pre></div>
+  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="6%">
@@ -360,13 +360,13 @@
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
 <span class="co"># stats for all splits including raw (unadjusted) p value</span>
 <span class="va">mychaidtable</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">nodeID</span>, <span class="va">NodeN</span>, <span class="va">split.variable</span><span class="op">:</span><span class="va">rawpvalue</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">split.variable</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></pre></div>
+  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="right">nodeID</th>

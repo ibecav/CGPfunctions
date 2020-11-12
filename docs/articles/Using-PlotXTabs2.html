@@ -104,7 +104,7 @@
       <h1 data-toc-skip>Using PlotXTabs2</h1>
                         <h4 class="author">Chuck Powell</h4>
             
-            <h4 class="date">2020-10-23</h4>
+            <h4 class="date">2020-11-12</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/ibecav/CGPfunctions/blob/master/vignettes/Using-PlotXTabs2.Rmd"><code>vignettes/Using-PlotXTabs2.Rmd</code></a></small>
       <div class="hidden name"><code>Using-PlotXTabs2.Rmd</code></div>
@@ -116,13 +116,13 @@
 <p>Like <code>PlotXTabs</code> this function is designed to automate and make efficient a relatively common task in some branches of science. The task of cross tabulating and displaying certain nominal and ordinal variables. It makes use of the <code>tidyverse</code> and to achieve those ends and is optimized to work with <code>purrr</code>.</p>
 <p>Imagine that you want to take two of the <code>mtcars</code> variables, for example <code>am</code> and <code>cyl</code>, and conduct a cross tabulation, get some basic statistics about whether they are “independent” and then plot it. Since it’s the sort of thing I’m likely to do often seemed like a good candidate for a function. The function should allow us to efficiently repeat across more than two variables at a time. It would be very tedious to execute the command 25 times if I had 1 dependent variables and 25 independent variables.</p>
 <p>It provides visually appealing and sensibly labelled charts quickly and efficiently. It does some basic error checking and allows the user some choice as to exact style without having to know any underlying syntax or semantics.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co"># simplest possible call with the defaults</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># simplest possible call with the defaults</span>
 <span class="fu"><a href="../reference/PlotXTabs2.html">PlotXTabs2</a></span><span class="op">(</span>
   data <span class="op">=</span> <span class="va">mtcars</span>,
   y <span class="op">=</span> <span class="va">am</span>,
   x <span class="op">=</span>  <span class="va">cyl</span>
-<span class="op">)</span>  </pre></div>
+<span class="op">)</span>  </code></pre></div>
 <p><img src="Using-PlotXTabs2_files/figure-html/simple-1.png" width="672"></p>
 <div id="important-considerations" class="section level2">
 <h2 class="hasAnchor">
@@ -133,8 +133,8 @@
 <li><p>Thanks to <code>ggstatsplot</code> there are a plethora of formatting options.</p></li>
 </ol>
 <p>To demonstrate just a few…</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="co"># more complex call</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># more complex call</span>
 <span class="fu"><a href="../reference/PlotXTabs2.html">PlotXTabs2</a></span><span class="op">(</span>
   data <span class="op">=</span> <span class="fu">datasets</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/datasets/mtcars.html">mtcars</a></span>,
   y <span class="op">=</span> <span class="va">am</span>,
@@ -149,7 +149,7 @@
   legend.position <span class="op">=</span> <span class="st">"left"</span>,
   title <span class="op">=</span> <span class="st">"The perenial mtcars example"</span>,
   palette <span class="op">=</span> <span class="st">"Pastel1"</span>
-<span class="op">)</span></pre></div>
+<span class="op">)</span></code></pre></div>
 <p><img src="Using-PlotXTabs2_files/figure-html/simple2-1.png" width="672"></p>
 </div>
 <div id="example-scenario-what-makes-us-happy" class="section level2">
@@ -161,8 +161,8 @@
 <p>The data is a small sample of variables related to happiness from the general social survey (GSS). The GSS is a yearly cross-sectional survey of Americans, run from 1976. We combine data for 25 years to yield 51,020 observations, and of the over 5,000 variables, we select nine related to happiness.</p>
 </blockquote>
 <p>We’ll load the library and take a quick look at the structure of the data.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'dplyr'</span>
 <span class="co">#&gt; The following objects are masked from 'package:stats':</span>
@@ -185,17 +185,17 @@
 <span class="co">#&gt;  $ degree : Factor w/ 5 levels "lt high school",..: 4 1 2 4 2 2 2 4 2 2 ...</span>
 <span class="co">#&gt;  $ finrela: Factor w/ 5 levels "far below average",..: 3 4 3 3 4 4 4 3 3 2 ...</span>
 <span class="co">#&gt;  $ health : Factor w/ 4 levels "poor","fair",..: 3 2 4 3 3 3 4 3 4 2 ...</span>
-<span class="co">#&gt;  $ wtssall: num  0.445 0.889 0.889 0.889 0.889 ...</span></pre></div>
+<span class="co">#&gt;  $ wtssall: num  0.445 0.889 0.889 0.889 0.889 ...</span></code></pre></div>
 <p>We’ll be focusing on the non numeric variables. I certainly can’t claim to do a detailed analysis here but at least the questions will be fun I hope… Here’s the shortest possible call.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="co"># who's happier by gender</span>
-<span class="fu"><a href="../reference/PlotXTabs2.html">PlotXTabs2</a></span><span class="op">(</span><span class="va">happy</span>,<span class="va">happy</span>,<span class="va">sex</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># who's happier by gender</span>
+<span class="fu"><a href="../reference/PlotXTabs2.html">PlotXTabs2</a></span><span class="op">(</span><span class="va">happy</span>,<span class="va">happy</span>,<span class="va">sex</span><span class="op">)</span></code></pre></div>
 <p><img src="Using-PlotXTabs2_files/figure-html/vignette1-1.png" width="672"></p>
 <p>That’s useful, especially when you consider the variety of formatting options, but far more useful in my work flows when we make use of <code>purrr</code> <code>map</code> operators. Let’s imagine a scenario where we want to see how happiness is related to all the other <code>factor</code> (categorical - be they nomainal or ordinal) variables in our dataset. For each of them (<code>sex</code>, <code>marital</code>, <code>degree</code>, <code>finrela</code> and <code>health</code>) we want to plot consistent graphs and have the same information available. Rather than the tedium of cutting and pasting five times and then changing the variable name let’s let <code>purrr</code> handles as much of the workflow as possible.</p>
 <p>Using a simple set of <code>dplyr</code> verbs we’ll create a simple list of the variables we are interested in. Technically it’s a vector but <code>purrr</code> will coerce it to a list. Since I dislike plots without titles we can also create a vector of titles by prepending “Happiness by” to the capitalized variable name.</p>
 <p>After checking our handiwork in creating the vectors we can then feed them to <code>purrr:map2</code>. We could conceivably have used any <code>map</code> depending on complexity. Just for a little “twist” we’ll actually use the <code>myvariables</code> list twice. Once as the variable name for the x variable and then again after capitalizing it as the X axis label.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="va">myvariables</span> <span class="op">&lt;-</span> <span class="va">happy</span> <span class="op">%&gt;%</span> 
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">myvariables</span> <span class="op">&lt;-</span> <span class="va">happy</span> <span class="op">%&gt;%</span> 
                 <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select_all.html">select_if</a></span><span class="op">(</span><span class="va">is.factor</span><span class="op">)</span>  <span class="op">%&gt;%</span> 
                 <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">happy</span><span class="op">)</span> <span class="op">%&gt;%</span> 
                 <span class="va">names</span>
@@ -223,7 +223,7 @@
                                palette <span class="op">=</span> <span class="st">"Set2"</span>
                                <span class="op">)</span>
             <span class="op">)</span>
-<span class="co">#&gt; [[1]]</span></pre></div>
+<span class="co">#&gt; [[1]]</span></code></pre></div>
 <p><img src="Using-PlotXTabs2_files/figure-html/vignette2-1.png" width="672"></p>
 <pre><code>#&gt; 
 #&gt; [[2]]</code></pre>
