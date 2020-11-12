@@ -21,7 +21,7 @@ technique, based on adjusted significance testing (Bonferroni testing). The
 technique was developed in South Africa and was published in 1980 by Gordon V.
 Kass, who had completed a PhD thesis on this topic. [Wikipedia](https://en.wikipedia.org/wiki/Chi-square_automatic_interaction_detection) 
 
-I've [written a few blog posts](https://ibecav.netlify.com/tags/chaid/) about
+I've [written a few blog posts](https://ibecav.netlify.app/tags/chaid/) about
 using this venerable technique. The default output using `print()` and `plot()`
 is sparse, elegant and useful as is, and can be adjusted in many ways that [I
 have documented here](https://ibecav.github.io/chaidtutor1/).
@@ -31,7 +31,7 @@ The code chunk below is taken straight from the example in the help page for
 
 > The dataset is based on data from a post-election survey on persons who voted for either Bush or Gore in the 2000 U.S. election. The specific variables are related to the publication of Magidson and Vermunt (2005).
 
-> Further information (and datasets) about the 2000 U.S. election and other National Election Studies is available on the American National Election Studies Web site (https://www.electionstudies.org/).
+> Further information (and datasets) about the 2000 U.S. election and other National Election Studies is available on the American National Election Studies Web site (https://electionstudies.org/).
 
 
 ```{r one, fig.width=7.0, fig.height=5.5, warning=FALSE, message=FALSE}
