@@ -5,7 +5,7 @@
 Version](https://www.r-pkg.org/badges/version/CGPfunctions)](https://CRAN.R-project.org/package=CGPfunctions)
 [![Build
 Status](https://travis-ci.org/ibecav/CGPfunctions.svg?branch=master)](https://travis-ci.org/ibecav/CGPfunctions)
-[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/CGPfunctions)](http://cranlogs.r-pkg.org/badges/grand-total/CGPfunctions)
+[![Downloads]( https://cranlogs.r-pkg.org:443/badges/grand-total/CGPfunctions)]( https://cranlogs.r-pkg.org:443/badges/grand-total/CGPfunctions)
 
 ### Overview
 
@@ -45,7 +45,7 @@ devtools::install_github("ibecav/CGPfunctions",
 ### Usage
 
 [Online documentation and vignettes are located
-here](https://ibecav.github.io/CGPfunctions).
+here](https://ibecav.github.io/CGPfunctions/).
 
 #### Example [Plot2WayANOVA](https://ibecav.github.io/CGPfunctions/articles/Using-Plot2WayANOVA.html) plot
 
